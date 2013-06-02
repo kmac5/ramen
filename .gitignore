@@ -1,0 +1,6 @@
+CMakeLists.txt.user*
+/build
+/backup
+/reference
+*.pyc
+

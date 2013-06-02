@@ -1,0 +1,12 @@
+#!/bin/sh
+dirname=`dirname $0`
+
+# setup builtin python
+PATH=$dirname/../python/bin:$PATH
+export PYTHONHOME=$dirname/../python/
+
+#Adjust LD_LIBRARY_PATH
+LD_LIBRARY_PATH=$dirname/../lib
+export LD_LIBRARY_PATH
+
+$dirname/ramen.bin $*

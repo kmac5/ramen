@@ -1,0 +1,27 @@
+
+	Ramen Install
+	-------------
+
+		Dependencies
+		------------
+
+			- boost: any recent version
+			- intel tbb: any recent version
+			- loki: http://loki-lib.sourceforge.net/ (soon to be removed)
+			- Adobe source libraries: https://github.com/est77/asl
+			- yaml-cpp 0.3.0
+			- Qt 4.7 or 4.8
+			- glew
+			- openexr 1.7
+			- jpeg, png and tiff libraries.
+			- CImg (header only)
+			- OpenImageIO
+			- OpenColorIO
+			- Antigrain geometry: version 2.4, http://www.antigrain.com/
+			- Eigen: header only
+			- Freetype
+			- ZLib
+			- SeExpr: https://github.com/wdas/SeExpr
+			- Python 2.X
+			- PySide, matching Qt & Python versions
+			- IECore: header only, soon to be removed.

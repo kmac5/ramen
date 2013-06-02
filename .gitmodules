@@ -1,0 +1,3 @@
+[submodule "goole_testing_libs"]
+	path = goole_testing_libs
+	url = https://github.com/est77/google_testing_libs.git

@@ -1,0 +1,41 @@
+
+	Ramen TODO
+	----------
+
+		Bugs
+		----
+
+			- Fix roto + motion blur bug.
+
+
+		Devel
+		-----
+
+			- Improve testing code.
+
+			- Hierarchical nodes.
+			- Make composition, a subclass of world_node_t.
+			- Move all graph related editing code to a new class.
+
+		Refactor
+		--------
+
+			- Finish adding licenses to source files.
+
+			- Remove unused code.
+			- Reorganize code, in general.
+
+			- Remove IECore, replace Cineon and Dpx code for OpenImageIO implementations.
+
+			- Merge graph related improvements & dependency graph from Ramen2.
+
+			- Replace floats by doubles in params & anim curves.
+			- Replace boost flyweight by adobe::name_t.
+
+			- Switch to planar images & use ispc for image processing.
+			- Merge TVL1 & blockmatching optical flow code.
+			- Port the bayesian matting exe to a ramen node.
+			- Merge the auto-stabilizer node from 1.5.
+
+			- Rewrite Python bindings, completely.
+			- Rethink the UI.

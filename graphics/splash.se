@@ -1,0 +1,12 @@
+$steps = 11;
+$uu = floor( $u * $steps) / $steps;
+
+$vmask =  [$v, $v, $v] ^ 0.45;
+$umask = [$u, $u, $u] ^ 0.7; 
+
+$lum = cellnoise( [$u, $v / ( $w / $h), 0] * 44) / 3 * $umask * $vmask;
+
+$col = hsltorgb( [$uu, 0.95, 0.45 - $lum]);
+$col
+
+
