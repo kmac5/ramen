@@ -10,6 +10,6 @@ namespace ramen
 
 class document_t;
 
-} // namespace
+} // ramen
 
 #endif

@@ -38,6 +38,7 @@ void preferences_t::set_defaults()
 
 void preferences_t::load()
 {
+    /*
 	// TODO: load pick distance
 	
     boost::filesystem::path p = app().system().preferences_path() / "preferences.yaml";
@@ -71,10 +72,12 @@ void preferences_t::load()
         set_defaults();
         save();
     }
+    */
 }
 
 void preferences_t::save()
 {
+    /*
     boost::filesystem::path p = app().system().preferences_path() / "preferences.yaml";
     boost::filesystem::ofstream ofs( p);
 
@@ -102,6 +105,7 @@ void preferences_t::save()
     ofs << out.c_str();
 	std::flush( ofs);
     ofs.close();
+    */
 }
 
 void preferences_t::set_default_format( const image::format_t& format)

@@ -17,9 +17,6 @@
 
 #include<ramen/anim/util.hpp>
 
-#include<ramen/serialization/yaml_node.hpp>
-#include<ramen/serialization/yaml_oarchive.hpp>
-
 namespace ramen
 {
 namespace anim
@@ -269,7 +266,7 @@ std::string float_curve_t::str() const
     return s.str();
 }
 
-// serialization
+/*
 void float_curve_t::read( const serialization::yaml_node_t& in)
 {
 	std::string s;
@@ -302,6 +299,7 @@ void float_curve_t::write( serialization::yaml_oarchive_t& out) const
 
 	out.end_map();
 }
+*/
 
 } // namespace
 } // namespace

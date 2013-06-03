@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
-
-#include<ramen/python/python.hpp>
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/image/format.hpp>
 
@@ -110,6 +110,7 @@ std::ostream& operator<<( std::ostream& os, const format_t& f)
     return os;
 }
 
+/*
 void operator>>( const YAML::Node& in, format_t& f)
 {
     in[0] >> f.width;
@@ -124,6 +125,7 @@ YAML::Emitter& operator<<( YAML::Emitter& out, const format_t& f)
 	out << YAML::EndSeq;
     return out;
 }
+*/
 
-} // namespace
-} // namespace
+} // image
+} // ramen

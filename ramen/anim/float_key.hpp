@@ -11,8 +11,6 @@
 
 #include<boost/array.hpp>
 
-#include<ramen/serialization/archive_fwd.hpp>
-
 namespace ramen
 {
 namespace anim
@@ -67,9 +65,6 @@ public:
 
 	void str( std::stringstream& s) const;
 
-	void read( const serialization::yaml_node_t& in);
-	void write( serialization::yaml_oarchive_t& out) const;
-
 private:
 
     value_type value_;
@@ -78,7 +73,7 @@ private:
     boost::array<value_type,4> coeffs_;
 };
 
-} // namespace
-} // namespace
+} // anim
+} // ramen
 
 #endif

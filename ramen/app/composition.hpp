@@ -5,7 +5,7 @@
 #ifndef RAMEN_COMPOSITION_HPP
 #define	RAMEN_COMPOSITION_HPP
 
-#include<ramen/python/python.hpp>
+#include<ramen/config.hpp>
 
 #include<vector>
 #include<utility>
@@ -21,9 +21,6 @@
 #include<ramen/render/context.hpp>
 
 #include<ramen/image/format.hpp>
-
-#include<ramen/serialization/archive_fwd.hpp>
-#include<ramen/serialization/yaml.hpp>
 
 namespace ramen
 {
@@ -171,21 +168,10 @@ public:
     // serialization
 	void load_from_file( const boost::filesystem::path& p);
 	
-	void read( serialization::yaml_iarchive_t& in);
-	void write( serialization::yaml_oarchive_t& out) const;
-
 private:
-	
-	void read_nodes( serialization::yaml_iarchive_t& in);
-	void read_node( const serialization::yaml_node_t& node);
-	
+		
 	std::auto_ptr<node_t> create_node( const std::string& id, const std::pair<int,int>& version);
 	std::auto_ptr<node_t> create_unknown_node( const std::string& id, const std::pair<int, int>& version);
-
-	void read_edges( const serialization::yaml_iarchive_t& in);
-	void read_edge( const serialization::yaml_node_t& node);
-	
-    void write_edge( serialization::yaml_oarchive_t& out, const edge_t& e) const;
 
     boost::filesystem::path composition_dir_;
 
@@ -204,6 +190,6 @@ private:
 	std::vector<std::pair<std::string, std::string> > ocio_context_pairs_;
 };
 
-} // namespace
+} // ramen
 
 #endif

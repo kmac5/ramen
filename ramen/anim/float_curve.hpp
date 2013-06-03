@@ -87,9 +87,6 @@ public:
 
     std::string str() const;
 
-	void read( const serialization::yaml_node_t& in);
-	void write( serialization::yaml_oarchive_t& out) const;
-
 private:
 
     value_type do_evaluate( time_type time) const;
@@ -100,7 +97,7 @@ private:
 	mutable value_type offset_, scale_;
 };
 
-} // namespace
-} // namespace
+} // anim
+} // ramen
 
 #endif

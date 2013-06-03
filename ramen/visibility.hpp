@@ -1,4 +1,6 @@
 // Copyright (c) 2011 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_VISIBILITY_HPP
 #define RAMEN_VISIBILITY_HPP
@@ -14,7 +16,7 @@
     #define RAMEN_PRIVATE
 #endif
 
-#ifdef RAMEN_MAKING_DSO
+#ifdef ramen_EXPORTS
     #define RAMEN_API RAMEN_EXPORT
 #else
     #define RAMEN_API RAMEN_IMPORT

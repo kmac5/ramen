@@ -4,9 +4,6 @@
 
 #include<ramen/anim/float_key.hpp>
 
-#include<ramen/serialization/yaml_node.hpp>
-#include<ramen/serialization/yaml_oarchive.hpp>
-
 namespace ramen
 {
 namespace anim
@@ -196,6 +193,7 @@ void float_key_t::str( std::stringstream& s) const
 		<< "," << v0_auto_tangent() << "," << v1_auto_tangent();
 }
 
+/*
 void float_key_t::read( const serialization::yaml_node_t& in)
 {
 	set_v0_auto_tangent( tangent_linear);
@@ -235,6 +233,7 @@ void float_key_t::write( serialization::yaml_oarchive_t& out) const
         out << auto_tangent_to_string( v1_auto_tangent());
     out.end_seq();
 }
+*/
 
-} // namespace
-} // namespace
+} // anim
+} // ramen

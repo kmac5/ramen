@@ -11,8 +11,8 @@
 #include<boost/filesystem/operations.hpp>
 #include<boost/range/algorithm/for_each.hpp>
 
-#include<adobe/algorithm/count.hpp>
-#include<adobe/algorithm/find.hpp>
+//#include<adobe/algorithm/count.hpp>
+//#include<adobe/algorithm/find.hpp>
 
 #include<ramen/app/application.hpp>
 
@@ -22,9 +22,6 @@
 #include<ramen/nodes/image_node.hpp>
 
 #include<ramen/params/composite_param.hpp>
-
-#include<ramen/serialization/yaml_iarchive.hpp>
-#include<ramen/serialization/yaml_oarchive.hpp>
 
 #include<iostream>
 
@@ -339,6 +336,7 @@ boost::filesystem::path composition_t::absolute_to_relative( const boost::filesy
 // serialization
 void composition_t::load_from_file( const boost::filesystem::path& p)
 {
+    /*
 	RAMEN_ASSERT( p.is_absolute());
 	
     boost::filesystem::ifstream ifs( p, serialization::yaml_iarchive_t::file_open_mode());
@@ -352,9 +350,11 @@ void composition_t::load_from_file( const boost::filesystem::path& p)
 		throw std::runtime_error( std::string( "Couldn't open input file ") + filesystem::file_string( p));
 		
 	set_composition_dir( p.parent_path());
-	read( *in);	
+    read( *in);
+    */
 }
 
+/*
 void composition_t::read( serialization::yaml_iarchive_t& in)
 {
 	in.get_optional_value( "start_frame", start_frame_);
@@ -449,6 +449,7 @@ void composition_t::read_node( const serialization::yaml_node_t& node)
 		node.error_stream() << "Error reading node\n";
 	}
 }
+*/
 
 std::auto_ptr<node_t> composition_t::create_node( const std::string& id, const std::pair<int,int>& version)
 {
@@ -482,6 +483,7 @@ std::auto_ptr<node_t> composition_t::create_unknown_node( const std::string& id,
     return std::auto_ptr<node_t>();
 }
 
+/*
 void composition_t::read_edges( const serialization::yaml_iarchive_t& in)
 {
 	serialization::yaml_node_t node = in.get_node( "edges");
@@ -570,5 +572,6 @@ void composition_t::write_edge( serialization::yaml_oarchive_t& out, const edge_
         out << e.src->name() << e.dst->name() << e.port;
     out.end_seq();
 }
+*/
 
-} // namespace
+} // ramen

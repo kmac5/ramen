@@ -7,8 +7,6 @@
 
 #include<ramen/app/document_fwd.hpp>
 
-#include<ramen/python/python.hpp>
-
 #include<memory>
 
 #include<boost/noncopyable.hpp>
@@ -17,8 +15,6 @@
 
 #include<ramen/undo/stack_fwd.hpp>
 
-#include<ramen/serialization/archive_fwd.hpp>
-
 namespace ramen
 {
 
@@ -26,7 +22,7 @@ namespace ramen
 \ingroup app
 \brief Document class.
 */
-class document_t : boost::noncopyable
+class RAMEN_API document_t : boost::noncopyable
 {
 public:
 
@@ -44,9 +40,6 @@ public:
     boost::filesystem::path file() const { return file_;}
     void set_file( const boost::filesystem::path& p);
 
-	void load( serialization::yaml_iarchive_t& in);
-	void save( serialization::yaml_oarchive_t& out) const;
-
     // composition
     composition_t& composition()                { return comp_;}
     const composition_t& composition() const	{ return comp_;}
@@ -59,6 +52,6 @@ private:
     boost::filesystem::path file_;
 };
 
-} // namespace
+} // ramen
 
 #endif

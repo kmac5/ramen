@@ -5,8 +5,6 @@
 #ifndef RAMEN_PREFERENCES_HPP
 #define RAMEN_PREFERENCES_HPP
 
-#include<ramen/python/python.hpp>
-
 #include<vector>
 #include<string>
 
@@ -19,8 +17,6 @@
 #include<ramen/filesystem/path.hpp>
 
 #include<ramen/image/format.hpp>
-
-#include<ramen/serialization/yaml.hpp>
 
 namespace ramen
 {
@@ -70,6 +66,7 @@ private:
 
     void load();
 
+    /*
     template<class T>
     bool get_value( const YAML::Node& doc, const std::string& key, T& value)
     {
@@ -81,6 +78,7 @@ private:
 
         return false;
     }
+    */
 
     image::format_t default_format_;
     int frame_rate_;
@@ -90,6 +88,6 @@ private:
 	int pick_distance_;
 };
 
-} // namespace
+} // ramen
 
 #endif

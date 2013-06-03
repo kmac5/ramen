@@ -10,6 +10,6 @@ namespace ramen
 
 class application_t;
 
-} // namespace
+} // ramen
 
 #endif

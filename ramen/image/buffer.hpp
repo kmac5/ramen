@@ -7,8 +7,6 @@
 
 #include<ramen/config.hpp>
 
-#include<ramen/python/python.hpp>
-
 #include<boost/shared_array.hpp>
 #include<boost/cstdint.hpp>
 
@@ -90,7 +88,7 @@ private:
 	bool use_disk_cache_;
 };
 
-} // namespace
-} // namespace
+} // image
+} // ramen
 
 #endif

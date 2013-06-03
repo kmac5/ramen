@@ -5,6 +5,8 @@
 #ifndef RAMEN_IMAGE_FORMAT_HPP
 #define RAMEN_IMAGE_FORMAT_HPP
 
+#include<ramen/config.hpp>
+
 #include<vector>
 #include<string>
 #include<utility>
@@ -13,14 +15,12 @@
 
 #include<ramen/filesystem/path.hpp>
 
-#include<ramen/serialization/yaml.hpp>
-
 namespace ramen
 {
 namespace image
 {
 
-struct format_t
+struct RAMEN_API format_t
 {
     format_t();
     format_t( int w, int h, float asp = 1.0f);
@@ -55,10 +55,7 @@ private:
 
 std::ostream& operator<<( std::ostream& os, const format_t& f);
 
-void operator>>( const YAML::Node& in, format_t& f);
-YAML::Emitter& operator<<( YAML::Emitter& out, const format_t& f);
-
-} // namespace
-} // namespace
+} // image
+} // ramen
 
 #endif
