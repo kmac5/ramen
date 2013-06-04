@@ -4,8 +4,6 @@
 
 #include<ramen/GL/gl.hpp>
 
-#include<glog/logging.h>
-
 #include<ramen/assert.hpp>
 
 namespace ramen
@@ -32,11 +30,13 @@ void check_gl_errors()
 
 		if( err != GL_NO_ERROR)
 		{
+            /*
             DLOG( FATAL) << "OpenGL error: " << err << "\n" <<
                             "inside begin block = " << inside_begin_block() << "\n" <<
                             "current texture unit = " << current_texture_unit << "\n" <<
                             "current texture = " << current_texture << "\n" <<
                             "push / pop num = " << num_push_matrix << "\n";
+            */
 		}
 	#endif
 }

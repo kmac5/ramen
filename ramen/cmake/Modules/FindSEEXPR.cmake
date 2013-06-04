@@ -1,0 +1,28 @@
+# - Find SEEXPR
+# Find SEEXPR headers and libraries.
+#
+#  SEEXPR_INCLUDE_DIRS - where to find SEEXPR uncludes.
+#  SEEXPR_LIBRARIES    - List of libraries when using SEEXPR.
+#  SEEXPR_FOUND        - True if SEEXPR found.
+
+# Look for the header file.
+FIND_PATH( SEEXPR_INCLUDE_DIR NAMES SeExpression.h)
+
+# Look for the library.
+FIND_LIBRARY( SEEXPR_LIBRARY NAMES SeExpr)
+
+# handle the QUIETLY and REQUIRED arguments and set SEEXPR_FOUND to TRUE if
+# all listed variables are TRUE
+INCLUDE( FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS( SEEXPR DEFAULT_MSG SEEXPR_LIBRARY SEEXPR_INCLUDE_DIR)
+
+# Copy the results to the output variables.
+IF( SEEXPR_FOUND)
+	SET( SEEXPR_LIBRARIES ${SEEXPR_LIBRARY})
+	SET( SEEXPR_INCLUDE_DIRS ${SEEXPR_INCLUDE_DIR})
+ELSE( SEEXPR_FOUND)
+	SET( SEEXPR_LIBRARIES)
+	SET( SEEXPR_INCLUDE_DIRS)
+ENDIF( SEEXPR_FOUND)
+
+MARK_AS_ADVANCED( SEEXPR_INCLUDE_DIR SEEXPR_LIBRARY)
