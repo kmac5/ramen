@@ -45,7 +45,7 @@ void percentile_filter_node_t::get_expand_radius( int& hradius, int& vradius) co
 
 void percentile_filter_node_t::do_process( const render::context_t& context)
 {
-    Imath::Box2i area( Imath::intersect( input_as<image_node_t>()->defined(), defined()));
+    Imath::Box2i area( ImathExt::intersect( input_as<image_node_t>()->defined(), defined()));
 
     if( area.isEmpty())
 		return;

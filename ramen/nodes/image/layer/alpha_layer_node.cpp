@@ -72,7 +72,7 @@ void alpha_layer_node_t::do_calc_bounds( const render::context_t& context)
         case comp_mult:
         case comp_min:
         case comp_mix:
-            bbox = Imath::intersect( input_as<image_node_t>( 0)->bounds(), input_as<image_node_t>( 1)->bounds());
+            bbox = ImathExt::intersect( input_as<image_node_t>( 0)->bounds(), input_as<image_node_t>( 1)->bounds());
         break;
 
         case comp_sub:
@@ -106,7 +106,7 @@ void alpha_layer_node_t::do_process( const render::context_t& context)
     image_node_t *bg = input_as<image_node_t>( 0);
     image_node_t *fg = input_as<image_node_t>( 1);
 
-    Imath::Box2i bg_area = Imath::intersect( bg->defined(), defined());
+    Imath::Box2i bg_area = ImathExt::intersect( bg->defined(), defined());
     float opacity = get_value<float>( param( "opacity"));
 
     if( !bg_area.isEmpty())
@@ -116,7 +116,7 @@ void alpha_layer_node_t::do_process( const render::context_t& context)
         release_input_image( 0);
     }
 
-    Imath::Box2i comp_area( Imath::intersect( fg->defined(), defined()));
+    Imath::Box2i comp_area( ImathExt::intersect( fg->defined(), defined()));
 
     if( !comp_area.isEmpty())
     {
@@ -158,8 +158,8 @@ void alpha_layer_node_t::do_process_mult_min_mix( const render::context_t& conte
     int mode = get_value<int>( param( "layer_mode"));
     float opacity = get_value<float>( param( "opacity"));
 
-    Imath::Box2i bg_area(   Imath::intersect( bg->defined(), defined()));
-    Imath::Box2i comp_area( Imath::intersect( fg->defined(), defined()));
+    Imath::Box2i bg_area(   ImathExt::intersect( bg->defined(), defined()));
+    Imath::Box2i comp_area( ImathExt::intersect( fg->defined(), defined()));
 
     if( !bg_area.isEmpty())
     {
@@ -178,7 +178,7 @@ void alpha_layer_node_t::do_process_mult_min_mix( const render::context_t& conte
 			image::mul_channel_scalar( boost::gil::nth_channel_view( bg->const_subimage_view( bg_area), 3), 1.0f - opacity, 
 									   boost::gil::nth_channel_view( subimage_view( bg_area), 3));
 			
-			Imath::Box2i common_area( Imath::intersect( fg->defined(), bg->defined()));
+			Imath::Box2i common_area( ImathExt::intersect( fg->defined(), bg->defined()));
 			
 			if( !common_area.isEmpty())
 				boost::gil::copy_pixels( bg->const_subimage_view( common_area), subimage_view( common_area));

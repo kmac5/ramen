@@ -7,7 +7,9 @@
 
 #include<OpenEXR/ImathMatrix.h>
 
-namespace Imath
+namespace ramen
+{
+namespace ImathExt
 {
 
 Imath::M44f hueRotationMatrix( float angle);
@@ -15,6 +17,7 @@ Imath::M44f saturationMatrix( float sat);
 Imath::M44f gainMatrix( const Imath::V3f& g);
 Imath::M44f gainMatrix( float g);
 
-} // namespace
+} // ImathExt
+} // ramen
 
 #endif

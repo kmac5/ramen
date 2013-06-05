@@ -165,7 +165,7 @@ void keyer3d_node_t::do_calc_bounds( const render::context_t& context)
 	image_node_t *in0 = input_as<image_node_t>( 0);
 	
     if( input( 1) && !is_active())
-		set_bounds( Imath::intersect( in0->bounds(), input_as<image_node_t>( 1)->bounds()));
+		set_bounds( ImathExt::intersect( in0->bounds(), input_as<image_node_t>( 1)->bounds()));
     else
 		set_bounds( in0->bounds());
 }
@@ -176,7 +176,7 @@ void keyer3d_node_t::do_calc_defined( const render::context_t& context)
 	
     if( input( 1) && !is_active())
     {
-		Imath::Box2i def( Imath::intersect( in0->defined(), input_as<image_node_t>( 1)->defined()));
+		Imath::Box2i def( ImathExt::intersect( in0->defined(), input_as<image_node_t>( 1)->defined()));
 		set_defined( def);
     }
     else
@@ -194,7 +194,7 @@ void keyer3d_node_t::do_process( const render::context_t& context)
 	
     if( !input(1))
     {
-		Imath::Box2i area( Imath::intersect( defined(), in0->defined()));
+		Imath::Box2i area( ImathExt::intersect( defined(), in0->defined()));
 
 		if( area.isEmpty())
 		    return;
@@ -206,7 +206,7 @@ void keyer3d_node_t::do_process( const render::context_t& context)
     {
 		image_node_t *in1 = input_as<image_node_t>( 1);
 		
-		Imath::Box2i area( Imath::intersect( Imath::intersect( defined(), in0->defined()), in1->defined()));
+		Imath::Box2i area( ImathExt::intersect( ImathExt::intersect( defined(), in0->defined()), in1->defined()));
 
 		if( area.isEmpty())
 		    return;

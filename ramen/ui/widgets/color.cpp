@@ -18,7 +18,7 @@ namespace
 {
 
 template<class T>
-T clamp( T x, T lo, T hi)
+T clamp_( T x, T lo, T hi)
 {
     if( x < lo)
         return lo;
@@ -43,10 +43,10 @@ color_t::color_t( double r, double g, double b, double a)
 
 color_t::operator QColor()
 {
-    return QColor( clamp( red_	, 0.0, 1.0) * 255,
-                   clamp( green_	, 0.0, 1.0) * 255,
-                   clamp( blue_	, 0.0, 1.0) * 255,
-                   clamp( alpha_	, 0.0, 1.0) * 255);
+    return QColor( clamp_( red_     , 0.0, 1.0) * 255,
+                   clamp_( green_	, 0.0, 1.0) * 255,
+                   clamp_( blue_	, 0.0, 1.0) * 255,
+                   clamp_( alpha_	, 0.0, 1.0) * 255);
 }
 
 color_t& color_t::operator*=( double s)
@@ -102,7 +102,7 @@ void color_t::to_hsv(double& h, double& s, double& v) const
     if( maxv != minv)
     {
         const double f = ( r == minv) ? ( g - b) : (( g == minv) ? ( b - r) : ( r - g)),
-                i = ( r == minv) ? 3.0 : (( g == minv) ? 5.0 : 1.0);
+                     i = ( r == minv) ? 3.0 : (( g == minv) ? 5.0 : 1.0);
 
         h = ( i - f / ( maxv - minv));
 
@@ -128,8 +128,8 @@ color_t color_t::from_hsv( double h, double s, double v)
         h *= 6.0;
         const int i = (int) std::floor( h);
         const double f = ( i & 1) ? ( h - i) : ( 1.0 - h + i),
-                 m = v * ( 1.0 - s),
-                 n = v * ( 1.0 - s * f);
+                     m = v * ( 1.0 - s),
+                     n = v * ( 1.0 - s * f);
         switch(i)
         {
             case 6:

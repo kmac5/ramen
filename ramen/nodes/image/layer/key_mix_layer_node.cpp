@@ -70,7 +70,7 @@ void key_mix_layer_node_t::do_create_params()
 void key_mix_layer_node_t::do_calc_bounds( const render::context_t& context)
 {
     Imath::Box2i bbox( input_as<image_node_t>( 0)->bounds());
-    bbox.extendBy( Imath::intersect( input_as<image_node_t>( 1)->bounds(), input_as<image_node_t>( 2)->bounds()));
+    bbox.extendBy( ImathExt::intersect( input_as<image_node_t>( 1)->bounds(), input_as<image_node_t>( 2)->bounds()));
     set_bounds( bbox);
 }
 
@@ -80,7 +80,7 @@ void key_mix_layer_node_t::do_process( const render::context_t& context)
     image_node_t *fg = input_as<image_node_t>( 1);
     image_node_t *mt = input_as<image_node_t>( 2);
 
-    Imath::Box2i bg_area = Imath::intersect( bg->defined(), defined());
+    Imath::Box2i bg_area = ImathExt::intersect( bg->defined(), defined());
 
     if( !bg_area.isEmpty())
     {
@@ -89,7 +89,7 @@ void key_mix_layer_node_t::do_process( const render::context_t& context)
         release_input_image( 0);
     }
 
-    Imath::Box2i comp_area( Imath::intersect( Imath::intersect( fg->defined(), mt->defined()), defined()));
+    Imath::Box2i comp_area( ImathExt::intersect( ImathExt::intersect( fg->defined(), mt->defined()), defined()));
 
     if( !comp_area.isEmpty())
     {

@@ -36,7 +36,7 @@ void generator_node_t::do_calc_bounds( const render::context_t& context) { set_b
 void generator_node_t::do_calc_defined( const render::context_t& context)
 {
 	//if( crop_to_format())
-	    set_defined( Imath::intersect( bounds(), interest()));
+	    set_defined( ImathExt::intersect( bounds(), interest()));
 	//else
 		//set_defined( interest()); // infinite images
 }

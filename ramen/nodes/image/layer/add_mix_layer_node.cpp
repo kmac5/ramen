@@ -123,7 +123,7 @@ void add_mix_layer_node_t::do_process( const render::context_t& context)
     image_node_t *bg = input_as<image_node_t>( 0);
     image_node_t *fg = input_as<image_node_t>( 1);
 
-    Imath::Box2i bg_area = Imath::intersect( bg->defined(), defined());
+    Imath::Box2i bg_area = ImathExt::intersect( bg->defined(), defined());
 
     if( !bg_area.isEmpty())
     {
@@ -132,7 +132,7 @@ void add_mix_layer_node_t::do_process( const render::context_t& context)
         release_input_image( 0);
     }
 
-    Imath::Box2i comp_area( Imath::intersect( fg->defined(), defined()));
+    Imath::Box2i comp_area( ImathExt::intersect( fg->defined(), defined()));
 
     if( !comp_area.isEmpty())
     {

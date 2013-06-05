@@ -73,7 +73,7 @@ void blur_mask_node_t::do_calc_bounds( const render::context_t& context)
 
 	Imath::V2i max_radius = round_blur_size( adjust_blur_size( get_value<Imath::V2f>( param( "max_radius")), 1));
 	Imath::Box2i max_bounds( input_as<image_node_t>( 1)->bounds());
-	max_bounds = Imath::intersect( max_bounds, bounds);
+	max_bounds = ImathExt::intersect( max_bounds, bounds);
 
 	bounds.min.x -= min_radius.x;
 	bounds.max.x += min_radius.x;
@@ -107,7 +107,7 @@ void blur_mask_node_t::do_calc_inputs_interest( const render::context_t& context
 	min_roi.min.y -= min_radius.y;
 	min_roi.max.y += min_radius.y;
 	
-	Imath::Box2i max_roi( Imath::intersect( roi, msk->bounds()));
+	Imath::Box2i max_roi( ImathExt::intersect( roi, msk->bounds()));
 	
 	if( !max_roi.isEmpty())
 	{
@@ -129,7 +129,7 @@ void blur_mask_node_t::do_process( const render::context_t& context)
 	image_node_t *in  = input_as<image_node_t>( 0);
 	image_node_t *msk = input_as<image_node_t>( 1);
 	
-    Imath::Box2i area( Imath::intersect( in->defined(), defined()));
+    Imath::Box2i area( ImathExt::intersect( in->defined(), defined()));
 
     if( area.isEmpty())
         return;

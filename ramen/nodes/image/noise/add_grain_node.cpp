@@ -260,7 +260,7 @@ void add_grain_node_t::do_process( const image::const_image_view_t& src, const i
     if( input( 1))
     {
         boost::gil::copy_pixels( src, dst);
-        area = Imath::intersect( input_as<image_node_t>( 1)->defined(), defined());
+        area = ImathExt::intersect( input_as<image_node_t>( 1)->defined(), defined());
 
         if( area.isEmpty())
             return;

@@ -11,6 +11,7 @@
 #include<sstream>
 #include<cmath>
 
+#include<boost/foreach.hpp>
 #include<boost/range/algorithm/for_each.hpp>
 
 #include<adobe/algorithm/for_each_position.hpp>

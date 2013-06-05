@@ -29,7 +29,7 @@ void keyer_node_t::do_calc_bounds( const render::context_t& context)
 	image_node_t *in0 = input_as<image_node_t>( 0);
 	
     if( input( 1))
-		set_bounds( Imath::intersect( in0->bounds(), input_as<image_node_t>( 1)->bounds()));
+		set_bounds( ImathExt::intersect( in0->bounds(), input_as<image_node_t>( 1)->bounds()));
     else
 		set_bounds( in0->bounds());
 }
@@ -40,7 +40,7 @@ void keyer_node_t::do_calc_defined( const render::context_t& context)
 
     if( input( 1))
     {
-		Imath::Box2i def( Imath::intersect( in0->defined(), input_as<image_node_t>( 1)->defined()));
+		Imath::Box2i def( ImathExt::intersect( in0->defined(), input_as<image_node_t>( 1)->defined()));
 		set_defined( def);
     }
     else
@@ -59,7 +59,7 @@ void keyer_node_t::get_input_frame()
 		render::image_node_renderer_t r( context);
 		r.render();
 
-		input_data_window_ = intersect( in0->format(), in0->defined());
+        input_data_window_ = ImathExt::intersect( in0->format(), in0->defined());
 		
 		if( !input_data_window_.isEmpty())
 			input_pixels_ = in0->image();
@@ -94,7 +94,7 @@ void keyer_node_t::sample_input( const Imath::Box2i& area, std::vector<Imath::Co
 	if( input_pixels_.empty())
 		return;
 
-	Imath::Box2i subarea = Imath::intersect( area, input_data_window_);
+	Imath::Box2i subarea = ImathExt::intersect( area, input_data_window_);
 
 	if( subarea.isEmpty())
 		return;

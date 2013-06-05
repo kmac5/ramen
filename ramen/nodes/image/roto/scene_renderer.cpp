@@ -85,8 +85,8 @@ scene_renderer_t::scene_renderer_t( const scene_t& scene, const Imath::Box2i& ar
 		
 		// calc an accurate bounding box and save it for later reuse.
 		Imath::Box2f box( calc_bbox( s, subsample_));
-		box = Imath::intersect( Imath::Box2f( area_.min, area_.max), box);
-		bboxes_.push_back( Imath::roundBox( box, true));
+		box = ImathExt::intersect( Imath::Box2f( area_.min, area_.max), box);
+        bboxes_.push_back( ImathExt::roundBox( box, true));
 
 		// expand the box to take into account the filters.
 		box.min.x -= std::ceil( (double) g / aspect_ / subsample_) +
@@ -101,7 +101,7 @@ scene_renderer_t::scene_renderer_t( const scene_t& scene, const Imath::Box2i& ar
 		box.max.y += std::ceil( (double) g / subsample_) +
 					 std::ceil( (double) blur.y / subsample_) + 1;
 
-		filtered_bboxes_.push_back( Imath::roundBox( box, true));
+        filtered_bboxes_.push_back( ImathExt::roundBox( box, true));
 		max_width = std::max( max_width  , filtered_bboxes_.back().size().x);
 		max_height = std::max( max_height, filtered_bboxes_.back().size().y);
 	}
@@ -193,7 +193,7 @@ void scene_renderer_t::render_and_filter_shape( const shape_t& s, int bbox_index
 		image::box_blur_gray( buf_view, boost::gil::view( tmp_), buf_view, blur.x / aspect_ / subsample_, blur.y / subsample_, 1);
 	}
 	
-	Imath::Box2i common_area = Imath::intersect( area_, filtered_bboxes_[bbox_index]);
+	Imath::Box2i common_area = ImathExt::intersect( area_, filtered_bboxes_[bbox_index]);
 	
 	if( !common_area.isEmpty())
 	{

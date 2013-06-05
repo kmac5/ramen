@@ -132,9 +132,9 @@ void twirl_node_t::do_calc_bounds( const render::context_t& context)
 	Imath::Box2f box( Imath::V2f( c.x - r, c.y - r), 
 					  Imath::V2f( c.x + r, c.y + r));
 
-	box = Imath::intersect( box, Imath::Box2f( Imath::V2f( in_bounds.min), Imath::V2f( in_bounds.max)));
+	box = ImathExt::intersect( box, Imath::Box2f( Imath::V2f( in_bounds.min), Imath::V2f( in_bounds.max)));
     twirl_fun f( c, r, get_value<float>( param( "angle")), aspect_ratio());
-	Imath::Box2i ibox = Imath::roundBox( Imath::warpBox( box, f));
+    Imath::Box2i ibox = ImathExt::roundBox( ImathExt::warpBox( box, f));
 	ibox.extendBy( in_bounds);
     set_bounds( ibox);
 }
@@ -152,7 +152,7 @@ void twirl_node_t::do_calc_inputs_interest( const render::context_t& context)
 		Imath::Box2f box( Imath::V2f( c.x - r, c.y - r), 
 						  Imath::V2f( c.x + r, c.y + r));
 		
-		box = Imath::intersect( box, Imath::Box2f( Imath::V2f( roi.min), Imath::V2f( roi.max)));
+		box = ImathExt::intersect( box, Imath::Box2f( Imath::V2f( roi.min), Imath::V2f( roi.max)));
 
 		if( box.isEmpty())
 		{
@@ -161,7 +161,7 @@ void twirl_node_t::do_calc_inputs_interest( const render::context_t& context)
 		}
 		
 		twirl_fun f( c, r, -get_value<float>( param( "angle")), aspect_ratio());
-		Imath::Box2i ibox = Imath::roundBox( Imath::warpBox( box, f));
+        Imath::Box2i ibox = ImathExt::roundBox( ImathExt::warpBox( box, f));
 		
 		// add some margin for filtering
 		ibox.min.x -= 2;

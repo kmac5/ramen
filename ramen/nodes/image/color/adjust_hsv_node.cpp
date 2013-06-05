@@ -39,9 +39,9 @@ void adjust_hsv_node_t::do_create_params()
 
 void adjust_hsv_node_t::do_process( const image::const_image_view_t& src, const image::image_view_t& dst, const render::context_t& context)
 {
-    Imath::M44f m = Imath::hueRotationMatrix( get_value<float>( param( "hue_rot"))) *
-                    Imath::saturationMatrix( get_value<float>( param( "sat"))) *
-                    Imath::gainMatrix( get_value<float>( param( "value")));
+    Imath::M44f m = ImathExt::hueRotationMatrix( get_value<float>( param( "hue_rot"))) *
+                    ImathExt::saturationMatrix( get_value<float>( param( "sat"))) *
+                    ImathExt::gainMatrix( get_value<float>( param( "value")));
 
     image::apply_color_matrix( src, dst, m);
 }

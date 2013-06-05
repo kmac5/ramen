@@ -6,8 +6,6 @@
 
 #include<map>
 
-#include<gmock/gmock.h>
-
 #include<ramen/assert.hpp>
 
 namespace
@@ -47,6 +45,7 @@ private:
 };
 
 // gmock interop
+/*
 struct init_gmock
 {
     init_gmock()
@@ -58,7 +57,7 @@ struct init_gmock
 
     ~init_gmock() {}
 };
-
+*/
 } // unnamed
 
 // for internal use
@@ -68,7 +67,7 @@ bool do_register_ramen_test( const char *name, const boost::function<void()>& fu
 }
 
 // gmock interop
-BOOST_GLOBAL_FIXTURE( init_gmock);
+//BOOST_GLOBAL_FIXTURE( init_gmock);
 
 bool init_tests()
 {

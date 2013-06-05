@@ -169,7 +169,7 @@ void color_match_node_t::do_calc_defined( const render::context_t& context)
     if( input( 2))
     {
         Imath::Box2i def( input_as<image_node_t>( 0)->defined());
-        set_defined( Imath::intersect( def, interest()));
+        set_defined( ImathExt::intersect( def, interest()));
     }
     else
         set_defined( format());
@@ -180,7 +180,7 @@ void color_match_node_t::do_process( const render::context_t& context)
     Imath::V3f src_mean( 0, 0, 0), src_dev( 0, 0, 0);
     Imath::V3f dst_mean( 0, 0, 0), dst_dev( 0, 0, 0);
 
-    Imath::Box2i area = Imath::intersect( defined(), input_as<image_node_t>( 0)->defined());
+    Imath::Box2i area = ImathExt::intersect( defined(), input_as<image_node_t>( 0)->defined());
 
     if( area.isEmpty())
         return;

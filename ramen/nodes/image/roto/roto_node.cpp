@@ -292,7 +292,7 @@ void roto_node_t::do_calc_bounds( const render::context_t& context)
 	if( get_value<int>( param( "alpha")) == replace_alpha && get_value<int>( param( "output")) == output_premult)
 	{
 		Imath::Box2i b( input_as<image_node_t>()->bounds());
-		set_bounds( Imath::intersect( b, scene_bbox_));
+		set_bounds( ImathExt::intersect( b, scene_bbox_));
 	}
 	else
 		set_bounds( input_as<image_node_t>()->bounds());
@@ -303,7 +303,7 @@ void roto_node_t::do_calc_inputs_interest( const render::context_t& context)
 	image_node_t *in = input_as<image_node_t>();
 
 	if( get_value<int>( param( "alpha")) == replace_alpha && get_value<int>( param( "output")) == output_premult)
-		in->add_interest( Imath::intersect( interest(), scene_bbox_));
+		in->add_interest( ImathExt::intersect( interest(), scene_bbox_));
 	else
 		in->add_interest( interest());
 }
@@ -323,7 +323,7 @@ void roto_node_t::do_calc_hash_str( const render::context_t& context)
 void roto_node_t::do_process( const render::context_t& context)
 {
 	image_node_t *in = input_as<image_node_t>();
-    Imath::Box2i area( Imath::intersect( in->defined(), defined()));
+    Imath::Box2i area( ImathExt::intersect( in->defined(), defined()));
 
     if( area.isEmpty())
 		return;

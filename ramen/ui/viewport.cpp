@@ -88,14 +88,14 @@ void viewport_t::resize( int w, int h) { resize( Imath::Box2i( Imath::V2i( 0, 0)
 void viewport_t::scroll( const Imath::V2i& inc)
 {
 	if( y_down_)
-		world_ = Imath::offsetBy( world_, Imath::V2f( inc.x / zoom_x(), -inc.y / zoom_y()));
+        world_ = ImathExt::offsetBy( world_, Imath::V2f( inc.x / zoom_x(), -inc.y / zoom_y()));
 	else
-		world_ = Imath::offsetBy( world_, Imath::V2f( inc.x / zoom_x(),  inc.y / zoom_y()));
+        world_ = ImathExt::offsetBy( world_, Imath::V2f( inc.x / zoom_x(),  inc.y / zoom_y()));
 }
 
 void viewport_t::scroll_to_center_point( const Imath::V2f& center)
 {
-	world_ = Imath::offsetBy( world_, center - world_.center());
+    world_ = ImathExt::offsetBy( world_, center - world_.center());
 }
 
 void viewport_t::zoom( const Imath::V2f& center, float factor)
@@ -105,12 +105,12 @@ void viewport_t::zoom( const Imath::V2f& center, float factor)
 
 void viewport_t::zoom( const Imath::V2f& center, float xfactor, float yfactor)
 {
-	world_ = Imath::offsetBy( world_, Imath::V2f( -center.x, -center.y));
+    world_ = ImathExt::offsetBy( world_, Imath::V2f( -center.x, -center.y));
 	world_.min.x *= xfactor;
 	world_.min.y *= yfactor;
 	world_.max.x *= xfactor;
 	world_.max.y *= yfactor;
-	world_ = Imath::offsetBy( world_, Imath::V2f( center.x, center.y));
+    world_ = ImathExt::offsetBy( world_, Imath::V2f( center.x, center.y));
 }
 	
 Imath::M33f viewport_t::world_to_screen_matrix() const
@@ -137,5 +137,5 @@ Imath::M33f viewport_t::screen_to_world_matrix() const
     return m.inverse();
 }
 
-} // namespace
-} // namespace
+} // ui
+} // ramen

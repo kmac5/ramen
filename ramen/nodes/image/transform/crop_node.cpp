@@ -204,20 +204,20 @@ void crop_node_t::do_calc_format( const render::context_t& context)
 
 void crop_node_t::do_calc_bounds( const render::context_t& context)
 {
-    Imath::Box2i bounds( Imath::intersect( input_as<image_node_t>()->bounds(), format()));
+    Imath::Box2i bounds( ImathExt::intersect( input_as<image_node_t>()->bounds(), format()));
     set_bounds( bounds);
 }
 
 void crop_node_t::do_calc_inputs_interest( const render::context_t& context)
 {
-    Imath::Box2i roi = Imath::intersect( interest(), format());
+    Imath::Box2i roi = ImathExt::intersect( interest(), format());
     input_as<image_node_t>()->add_interest( roi);
 }
 
 void crop_node_t::do_process( const render::context_t& context)
 {
 	image_node_t *in = input_as<image_node_t>();
-    Imath::Box2i area = Imath::intersect( in->defined(), defined());
+    Imath::Box2i area = ImathExt::intersect( in->defined(), defined());
 
     if( area.isEmpty())
 		return;

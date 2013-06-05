@@ -59,7 +59,7 @@ private:
     bool y_down_;
 };
 
-} // namespace
-} // namespace
+} // ui
+} // ramen
 
 #endif

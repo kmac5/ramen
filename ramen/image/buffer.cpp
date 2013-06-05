@@ -214,11 +214,11 @@ gray_image_view_t buffer_t::gray_subimage_view( const Imath::Box2i& area) const
 void buffer_t::check_area_inside_image( const Imath::Box2i& area) const
 {
 	#ifndef NDEBUG
-	    if( !Imath::isInside( bounds_, area))
+        if( !ImathExt::isInside( bounds_, area))
 		{
 		    // Not OK, print some debug info and exit
 		    std::cout << "Trying to access pixels outside buffer\n";
-		    std::cout << "Area = " << area << " Bounds = " << bounds_ << "\n";
+            //std::cout << "Area = " << area << " Bounds = " << bounds_ << "\n";
 			RAMEN_ASSERT( 0);
 		}
 	#endif

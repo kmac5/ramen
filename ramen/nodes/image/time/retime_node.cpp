@@ -362,7 +362,7 @@ void retime_node_t::do_retime( const render::context_t& context)
 		ctx.result_node = input( 0);
 		image::buffer_t pixels = get_input_image( ctx, full_interest_);
 		
-		Imath::Box2i area = Imath::intersect( pixels.bounds(), defined());
+		Imath::Box2i area = ImathExt::intersect( pixels.bounds(), defined());
 		
 		if( !area.isEmpty())
 			boost::gil::copy_pixels( pixels.const_rgba_subimage_view( area), subimage_view( area));
@@ -376,7 +376,7 @@ void retime_node_t::do_retime( const render::context_t& context)
 	ctx.frame = frame;
 	ctx.result_node = input( 0);
 	image::buffer_t pixels = get_input_image( ctx, full_interest_);
-	Imath::Box2i area = Imath::intersect( pixels.bounds(), defined());
+	Imath::Box2i area = ImathExt::intersect( pixels.bounds(), defined());
 		
 	if( !area.isEmpty())
 		boost::gil::copy_pixels( pixels.const_rgba_subimage_view( area), subimage_view( area));
@@ -384,7 +384,7 @@ void retime_node_t::do_retime( const render::context_t& context)
 	// second frame
 	ctx.frame = frame + 1;
 	pixels = get_input_image( ctx, full_interest_);
-	area = Imath::intersect( pixels.bounds(), defined());
+	area = ImathExt::intersect( pixels.bounds(), defined());
 	
 	if( !area.isEmpty())
 		image::lerp_images( const_subimage_view( area), pixels.const_rgba_subimage_view( area), 1.0f - fract, subimage_view( area));

@@ -190,7 +190,7 @@ void color_diff_keyer_node_t::do_process( const render::context_t& context)
 	
     if( !input(1))
     {
-		Imath::Box2i area( Imath::intersect( defined(), in0->defined()));
+		Imath::Box2i area( ImathExt::intersect( defined(), in0->defined()));
 
 		if( area.isEmpty())
 		    return;
@@ -209,7 +209,7 @@ void color_diff_keyer_node_t::do_process( const render::context_t& context)
     {
 		image_node_t *in1 = input_as<image_node_t>( 1);
 		
-		Imath::Box2i area( Imath::intersect( Imath::intersect( defined(), in0->defined()), in1->defined()));
+		Imath::Box2i area( ImathExt::intersect( ImathExt::intersect( defined(), in0->defined()), in1->defined()));
 
 		if( area.isEmpty())
 		    return;

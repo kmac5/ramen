@@ -86,7 +86,7 @@ void set_channels_node_t::do_calc_bounds( const render::context_t& context)
 
 void set_channels_node_t::do_process( const image::const_image_view_t& src, const image::image_view_t& dst, const render::context_t& context)
 {
-    Imath::Box2i area( Imath::intersect( input_as<image_node_t>()->defined(), defined()));
+    Imath::Box2i area( ImathExt::intersect( input_as<image_node_t>()->defined(), defined()));
 
     if( area.isEmpty())
         return;

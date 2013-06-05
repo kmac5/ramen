@@ -271,11 +271,11 @@ void tracker_manipulator_t::draw_tracker( const track::ncc_tracker_t* t, const u
 		draw_tracker_path( t, event, color);
 				
 		Imath::Box2f box( t->search_area());
-		box = Imath::scale( box, event.aspect_ratio, 1);
+        box = ImathExt::scale( box, event.aspect_ratio, 1);
 		manipulators::draw_box( box, color, event.pixel_scale, true);
 
 		box = t->reference_area();
-		box = Imath::scale( box, event.aspect_ratio, 1);
+        box = ImathExt::scale( box, event.aspect_ratio, 1);
 		manipulators::draw_box( box, color, event.pixel_scale, true);
 		
 		float size = 10 / event.pixel_scale;

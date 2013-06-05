@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/nodes/image/xform2d_node.hpp>
 
@@ -24,7 +26,9 @@ namespace ramen
 namespace image
 {
 
-xform2d_node_t::xform2d_node_t() : xform_node_t() {}
+xform2d_node_t::xform2d_node_t() : xform_node_t()
+{
+}
 
 xform2d_node_t::matrix3_type xform2d_node_t::calc_transform_matrix_at_frame( float frame, int subsample) const
 {
@@ -53,8 +57,8 @@ Imath::Box2i xform2d_node_t::transform_box( const Imath::Box2i& box, const matri
 	if( box.isEmpty())
 		return box;
 	
-	if( isAffine( m))
-		return Imath::transform( box, m, round_up);
+    if( Imath::isAffine( m))
+		return ImathExt::transform( box, m, round_up);
 	else
 	{
 		// TODO: this is really strange. The direct way of transforming the corners
@@ -87,7 +91,7 @@ Imath::Box2i xform2d_node_t::transform_box( const Imath::Box2i& box, const matri
 			b.extendBy( q);
 		}
 
-		return Imath::roundBox( b, round_up);
+        return ImathExt::roundBox( b, round_up);
 	}
 }
 
@@ -229,7 +233,7 @@ void xform2d_node_t::do_process( const render::context_t& context, const image_n
 
 		filter_type filt = get_filter_type();
 
-        if( isAffine( xf))
+        if( Imath::isAffine( xf))
         {
             switch( filt)
             {
@@ -322,7 +326,7 @@ void xform2d_node_t::do_process_mipmap( const render::context_t& context, const 
 
 		filter_type filt = get_filter_type();
 
-        if( isAffine( xf))
+        if( Imath::isAffine( xf))
         {
             switch( filt)
             {
@@ -383,5 +387,5 @@ xform2d_node_t::matrix3_type xform2d_node_t::global_matrix_at_frame( float frame
 	return global_matrix_at_frame( frame, xforms, subsample);
 }
 
-} // namespace
-} // namespace
+} // image
+} // ramen

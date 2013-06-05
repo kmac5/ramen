@@ -33,7 +33,7 @@ void rgba_accumulator_t::accumulate( const const_image_view_t& v, float factor)
 
 void rgba_accumulator_t::accumulate( const const_image_view_t& v, const Imath::Box2i& area, float factor)
 {
-    Imath::Box2i isect = Imath::intersect( area, defined_);
+    Imath::Box2i isect = ImathExt::intersect( area, defined_);
 
     if( isect.isEmpty())
         return;
@@ -74,7 +74,7 @@ void gray_accumulator_t::accumulate( const const_gray_image_view_t& v, float fac
 
 void gray_accumulator_t::accumulate( const const_gray_image_view_t& v, const Imath::Box2i& area, float factor)
 {
-    Imath::Box2i isect = Imath::intersect( area, defined_);
+    Imath::Box2i isect = ImathExt::intersect( area, defined_);
 
     if( isect.isEmpty())
         return;

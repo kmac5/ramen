@@ -64,7 +64,7 @@ void flipbook_t::set_format( const Imath::Box2i& f, float aspect, int subsample)
 {
 	RAMEN_ASSERT( !f.isEmpty());
 	
-	format_ = Imath::scale( f, 1.0f / subsample);
+    format_ = ImathExt::scale( f, 1.0f / subsample);
 	buffer_ = image::buffer_t( format_, 4);
 	aspect_ = aspect;
 }
@@ -79,7 +79,7 @@ void flipbook_t::add_frame( int frame, image::buffer_t pixels)
 {			
 	boost::gil::fill_pixels( buffer_.rgba_view(), image::pixel_t( 0, 0, 0, 0));
 	
-	defined_ = Imath::intersect( pixels.bounds(), format_);
+    defined_ = ImathExt::intersect( pixels.bounds(), format_);
 	
 	if( !defined_.isEmpty())
 		boost::gil::copy_pixels( pixels.const_rgba_subimage_view( defined_),

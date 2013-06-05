@@ -177,7 +177,7 @@ void glow_node_t::do_calc_bounds( const render::context_t& context)
 	if( input( 1))
 	{
 		Imath::Box2i mask_bounds( input_as<image_node_t>( 1)->bounds());
-		mask_bounds = Imath::intersect( box, mask_bounds);
+		mask_bounds = ImathExt::intersect( box, mask_bounds);
 		
 		if( !mask_bounds.isEmpty())
 		{
@@ -212,7 +212,7 @@ void glow_node_t::do_calc_inputs_interest( const render::context_t& context)
 		image_node_t *msk = input_as<image_node_t>( 1);
 		msk->add_interest( roi);
 		
-		Imath::Box2i mask_area( Imath::intersect( msk->bounds(), roi));
+		Imath::Box2i mask_area( ImathExt::intersect( msk->bounds(), roi));
 		mask_area.min.x -= hradius;
 		mask_area.min.y -= vradius;
 		mask_area.max.x += hradius;
@@ -232,7 +232,7 @@ void glow_node_t::do_process( const render::context_t& context)
 {
 	image_node_t *in = input_as<image_node_t>();
 	
-    Imath::Box2i area( Imath::intersect( in->defined(), defined()));
+    Imath::Box2i area( ImathExt::intersect( in->defined(), defined()));
 
     if( area.isEmpty())
 		return;
@@ -264,7 +264,7 @@ void glow_node_t::do_process( const render::context_t& context)
 	{
 		image_node_t *msk = input_as<image_node_t>( 1);
 
-		Imath::Box2i msk_area( Imath::intersect( msk->defined(), defined()));
+		Imath::Box2i msk_area( ImathExt::intersect( msk->defined(), defined()));
 		
 		if( !msk_area.isEmpty())
 		{

@@ -71,8 +71,8 @@ void affine_warp_seq( const Sampler& s, const Imath::Box2i& src_area,
 						const Imath::Box2i& dst_area, const image_view_t& dst,
 						 const matrix3_t& xform, const matrix3_t& inv_xform)
 {
-    Imath::Box2i active_area( Imath::transform( src_area, xform));
-    active_area = Imath::intersect( active_area, dst_area);
+    Imath::Box2i active_area( ImathExt::transform( src_area, xform));
+    active_area = ImathExt::intersect( active_area, dst_area);
 	detail::affine_warp_fn<Sampler> f( s, dst_area, dst, active_area, inv_xform);
     f( tbb::blocked_range<int>( active_area.min.y, active_area.max.y+1));
 }
@@ -82,8 +82,8 @@ void affine_warp( const Sampler& s, const Imath::Box2i& src_area,
 				 const Imath::Box2i& dst_area, const image_view_t& dst,
 				 const matrix3_t& xform, const matrix3_t& inv_xform)
 {
-    Imath::Box2i active_area( Imath::transform( src_area, xform));
-    active_area = Imath::intersect( active_area, dst_area);
+    Imath::Box2i active_area( ImathExt::transform( src_area, xform));
+    active_area = ImathExt::intersect( active_area, dst_area);
 
     tbb::parallel_for( tbb::blocked_range<int>( active_area.min.y, active_area.max.y+1),
 												detail::affine_warp_fn<Sampler>( s, dst_area, dst, active_area, inv_xform),

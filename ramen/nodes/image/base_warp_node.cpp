@@ -128,7 +128,7 @@ void base_warp_node_t::make_mipmap( image_node_t *src, mipmap_type& mipmap, std:
 
     for( int i = 1; i < max_mipmap_levels(); ++i)
     {
-        area = Imath::scale( area, 0.5f);
+        area = ImathExt::scale( area, 0.5f);
 
         if( area.size().x < mipmap.min_size() || area.size().y < mipmap.min_size())
             return;

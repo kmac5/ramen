@@ -51,7 +51,7 @@ void areaop_node_t::do_calc_defined( const render::context_t& context)
 		roi.max.x += hradius_; roi.max.y += vradius_;		
 	}
 
-	set_defined( Imath::intersect( bounds(), roi));
+	set_defined( ImathExt::intersect( bounds(), roi));
 }
 
 void areaop_node_t::get_expand_radius( int& hradius, int& vradius) const

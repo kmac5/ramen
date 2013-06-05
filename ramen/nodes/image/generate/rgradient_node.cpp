@@ -191,8 +191,8 @@ void rgradient_node_t::do_calc_bounds( const render::context_t& context)
 						Imath::M33f().setTranslation( center) *
 						Imath::M33f().setScale( Imath::V2f( 1.0f / aspect_ratio(), 1.0));
 		
-		box = Imath::transform( box, m);
-		set_bounds( Imath::intersect( format(), Imath::roundBox( box)));
+		box = ImathExt::transform( box, m);
+        set_bounds( ImathExt::intersect( format(), ImathExt::roundBox( box)));
 	}
 	else
 		generator_node_t::do_calc_bounds( context);
@@ -201,7 +201,7 @@ void rgradient_node_t::do_calc_bounds( const render::context_t& context)
 void rgradient_node_t::do_calc_defined( const render::context_t& context)
 {
 	//if( get_value<bool>( param( "crop")))
-	    set_defined( Imath::intersect( bounds(), interest()));
+	    set_defined( ImathExt::intersect( bounds(), interest()));
 	//else
 		//set_defined( interest());
 }

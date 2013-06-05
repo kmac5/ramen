@@ -102,7 +102,7 @@ void layerx_node_t::do_calc_bounds( const render::context_t& context)
 		break;
 		
 		case bbox_intersection:
-			result_box = Imath::intersect( fbox, bbox);
+			result_box = ImathExt::intersect( fbox, bbox);
 		break;
 	}
 
@@ -142,14 +142,14 @@ void layerx_node_t::do_expression( const tbb::blocked_range<int>& range, const r
 	expr.setup_variables( this, context);
 	
 	image_node_t *bg = input_as<image_node_t>( 0);
-    Imath::Box2i bg_area( Imath::intersect( bg->defined(), defined()));
+    Imath::Box2i bg_area( ImathExt::intersect( bg->defined(), defined()));
 	image::const_image_view_t bg_view;
 	
 	if( !bg_area.isEmpty())
 		bg_view = bg->const_image_view();
 	
 	image_node_t *fg = input_as<image_node_t>( 1);
-    Imath::Box2i fg_area( Imath::intersect( fg->defined(), defined()));
+    Imath::Box2i fg_area( ImathExt::intersect( fg->defined(), defined()));
 	image::const_image_view_t fg_view;
 
 	if( !fg_area.isEmpty())

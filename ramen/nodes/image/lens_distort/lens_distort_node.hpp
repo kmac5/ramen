@@ -81,7 +81,7 @@ private:
 			bbox.extendBy( p);
 		}
 		
-		return Imath::roundBox( bbox);
+        return ImathExt::roundBox( bbox);
 	}	
 };
 

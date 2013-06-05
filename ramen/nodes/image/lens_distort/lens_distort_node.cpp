@@ -112,7 +112,7 @@ void lens_distort_node_t::do_calc_bounds( const render::context_t& context)
 void lens_distort_node_t::do_calc_inputs_interest( const render::context_t& context)
 {
 	image_node_t *in = input_as<image_node_t>();	 
-	Imath::Box2i roi = Imath::intersect( interest(), bounds());
+	Imath::Box2i roi = ImathExt::intersect( interest(), bounds());
 
 	switch( get_value<int>( param( "model")))
 	{

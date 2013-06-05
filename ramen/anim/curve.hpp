@@ -7,7 +7,6 @@
 
 #include<string>
 
-#include<boost/foreach.hpp>
 #include<boost/bind.hpp>
 #include<boost/range/algorithm/for_each.hpp>
 #include<boost/range/algorithm/remove_if.hpp>

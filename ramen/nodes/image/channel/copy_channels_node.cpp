@@ -144,10 +144,10 @@ void copy_channels_node_t::do_calc_bounds( const render::context_t& context)
 
 void copy_channels_node_t::do_process( const render::context_t& context)
 {
-    Imath::Box2i src1_area( Imath::intersect( input_as<image_node_t>(0)->defined(), defined()));
+    Imath::Box2i src1_area( ImathExt::intersect( input_as<image_node_t>(0)->defined(), defined()));
     image::const_image_view_t src1( input_as<image_node_t>(0)->const_subimage_view( src1_area));
 
-    Imath::Box2i src2_area( Imath::intersect( input_as<image_node_t>(1)->defined(), defined()));
+    Imath::Box2i src2_area( ImathExt::intersect( input_as<image_node_t>(1)->defined(), defined()));
     image::const_image_view_t src2( input_as<image_node_t>(1)->const_subimage_view( src2_area));
 
     image::image_view_t dst1( subimage_view( src1_area));
@@ -181,7 +181,7 @@ void copy_channels_node_t::do_process( const render::context_t& context)
 		case set_one:
 		case set_zero:
 		{
-			Imath::Box2i area( Imath::intersect( defined(), format()));
+			Imath::Box2i area( ImathExt::intersect( defined(), format()));
 			copy_channel( src1, ch-1, subimage_view( area), 3);
 		}
 		break;

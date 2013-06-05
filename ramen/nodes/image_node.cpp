@@ -176,7 +176,7 @@ void image_node_t::set_defined( const Imath::Box2i& b) { defined_ = b;}
 void image_node_t::calc_defined( const render::context_t& context)
 {
 	if( !is_valid_)
-		defined_ = Imath::intersect( format_, interest_);
+		defined_ = ImathExt::intersect( format_, interest_);
 	else
 	{
 	    if( is_identity_)
@@ -203,17 +203,17 @@ void image_node_t::calc_defined( const render::context_t& context)
 
 void image_node_t::do_calc_defined( const render::context_t& context)
 {
-    defined_ = Imath::intersect( bounds_, interest_);
+    defined_ = ImathExt::intersect( bounds_, interest_);
 }
 
 void image_node_t::subsample_areas( const render::context_t& context)
 {
     if( context.subsample != 1)
     {
-        format_   = scale( format_  , 1.0f / context.subsample);
-        bounds_   = scale( bounds_  , 1.0f / context.subsample);
-        interest_ = scale( interest_, 1.0f / context.subsample);
-        defined_  = scale( defined_ , 1.0f / context.subsample);
+        format_   = ImathExt::scale( format_  , 1.0f / context.subsample);
+        bounds_   = ImathExt::scale( bounds_  , 1.0f / context.subsample);
+        interest_ = ImathExt::scale( interest_, 1.0f / context.subsample);
+        defined_  = ImathExt::scale( defined_ , 1.0f / context.subsample);
     }
 }
 

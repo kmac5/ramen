@@ -4,7 +4,9 @@
 
 #include<ramen/ImathExt/ImathMatrixColorAlgo.h>
 
-namespace Imath
+namespace ramen
+{
+namespace ImathExt
 {
 namespace
 {
@@ -284,4 +286,5 @@ Imath::M44f gainMatrix( const Imath::V3f& g)
 
 Imath::M44f gainMatrix( float g) { return gainMatrix( Imath::V3f( g, g, g));}
 
-} // Imath
+} // ImathExt
+} // ramen

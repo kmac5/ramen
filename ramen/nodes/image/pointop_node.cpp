@@ -19,7 +19,7 @@ pointop_node_t::pointop_node_t( const pointop_node_t& other) : image_node_t( oth
 
 void pointop_node_t::do_process( const render::context_t& context)
 {
-    Imath::Box2i area( Imath::intersect( input_as<image_node_t>()->defined(), defined()));
+    Imath::Box2i area( ImathExt::intersect( input_as<image_node_t>()->defined(), defined()));
 
     if( area.isEmpty())
 		return;

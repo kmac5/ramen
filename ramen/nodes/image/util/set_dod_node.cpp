@@ -51,19 +51,19 @@ void set_dod_node_t::do_create_params()
 
 void set_dod_node_t::do_calc_bounds( const render::context_t& context)
 {
-    Imath::Box2i bounds( Imath::intersect( input_as<image_node_t>()->bounds(), dod_area()));
+    Imath::Box2i bounds( ImathExt::intersect( input_as<image_node_t>()->bounds(), dod_area()));
     set_bounds( bounds);
 }
 
 void set_dod_node_t::do_calc_inputs_interest( const render::context_t& context)
 {
-    Imath::Box2i roi = Imath::intersect( interest(), dod_area());
+    Imath::Box2i roi = ImathExt::intersect( interest(), dod_area());
     input_as<image_node_t>()->add_interest( roi);
 }
 
 void set_dod_node_t::do_process( const render::context_t& context)
 {
-    Imath::Box2i area = Imath::intersect( input_as<image_node_t>()->defined(), defined());
+    Imath::Box2i area = ImathExt::intersect( input_as<image_node_t>()->defined(), defined());
 
     if( area.isEmpty())
 		return;

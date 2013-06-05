@@ -219,7 +219,7 @@ void distortx_node_t::do_calc_bounds( const render::context_t& context)
             b2.max.x += amplitude.x;
             b2.max.y += amplitude.y;
             b2.extendBy( input_as<image_node_t>( 0)->bounds());
-            b = Imath::intersect( b, b2);
+            b = ImathExt::intersect( b, b2);
         }
     }
 

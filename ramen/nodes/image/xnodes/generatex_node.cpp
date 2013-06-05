@@ -68,7 +68,7 @@ void generatex_node_t::do_calc_bounds( const render::context_t& context)
 
 void generatex_node_t::do_calc_defined( const render::context_t& context)
 { 
-	set_defined( Imath::intersect( bounds(), interest()));
+	set_defined( ImathExt::intersect( bounds(), interest()));
 	//set_defined( interest());
 }
 

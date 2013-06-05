@@ -342,8 +342,6 @@ SET( RAMEN_SOURCES  ref_counted.cpp
 					params/string_param.cpp
 					params/tab_group_param.cpp
 
-					python/pyside.cpp
-
 					polyscan/clip.cpp
 					polyscan/poly.cpp
 					polyscan/scan.cpp
@@ -526,7 +524,7 @@ IF( WITH_NODES)
 						nodes/image/color/exposure_node.cpp
 						nodes/image/color/gamma_node.cpp
 						nodes/image/color/hsv_colorize_node.cpp
-						nodes/image/color/log_to_linear_node.cpp
+                                                #nodes/image/color/log_to_linear_node.cpp
 						nodes/image/color/ocio_colorspace_node.cpp
 						nodes/image/color/ocio_file_transform_node.cpp
 						nodes/image/color/tint_node.cpp

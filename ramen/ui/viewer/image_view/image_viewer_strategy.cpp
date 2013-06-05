@@ -260,7 +260,7 @@ void image_viewer_strategy_t::load_texture( image_node_t *n)
 	parent()->makeCurrent();
 
 	set_aspect_ratio( n->aspect_ratio());
-    Imath::Box2i data_window = Imath::intersect( n->format(), n->defined());
+    Imath::Box2i data_window = ImathExt::intersect( n->format(), n->defined());
     image_.reset( n->image(), n->format(), data_window);
 
     if( first_image_loaded_)
