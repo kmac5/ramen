@@ -619,7 +619,7 @@ IF( WITH_NODES)
 						nodes/image/track/vis_flow_node.cpp
 
 						nodes/image/transform/camera_shake_node.cpp
-						nodes/image/transform/corner_pin_node.cpp
+						#nodes/image/transform/corner_pin_node.cpp
 						nodes/image/transform/crop_node.cpp
 						nodes/image/transform/expand_node.cpp
 						nodes/image/transform/flip_node.cpp

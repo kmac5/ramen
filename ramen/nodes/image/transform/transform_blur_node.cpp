@@ -72,7 +72,7 @@ void transform_blur_node_t::do_calc_bounds( const render::context_t& context)
     for( int i = 0; i < num_samples; ++i)
     {
         Imath::M33d m( p->xform_blur_matrix_at_frame( context.frame, (float) i / ( num_samples - 1) , aspect_ratio(), context.subsample));
-		Imath::Box2i bounds( transform( input_as<image_node_t>()->bounds(), m, false));
+		Imath::Box2i bounds( ImathExt::transform( input_as<image_node_t>()->bounds(), m, false));
 		area.extendBy( bounds);
     }
 
@@ -98,7 +98,7 @@ void transform_blur_node_t::do_calc_inputs_interest( const render::context_t& co
 		try
 		{
 			Imath::M33d inv_m( m.inverse( true));
-			Imath::Box2i box( transform( interest(), inv_m, false));
+			Imath::Box2i box( ImathExt::transform( interest(), inv_m, false));
 			roi.extendBy( box);
 		}
 		catch( Iex::MathExc& e)

@@ -162,7 +162,7 @@ corner_pin_node_t::matrix3_type corner_pin_node_t::do_calc_transform_matrix_at_f
 
     if( quad_is_convex( dst_pts))
 	{
-		boost::optional<matrix3_type> m( quadToQuadMatrix( src_pts, dst_pts));
+		boost::optional<matrix3_type> m( ImathExt::quadToQuadMatrix( src_pts, dst_pts));
 
 		if( m)
 		    return m.get();

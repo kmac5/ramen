@@ -6,6 +6,8 @@
 
 #include<ramen/nodes/image/roto/create_tool.hpp>
 
+#include<boost/foreach.hpp>
+
 #include<ramen/app/application.hpp>
 #include<ramen/app/document.hpp>
 

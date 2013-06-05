@@ -81,7 +81,7 @@ public:
 												Imath::V2i( Imath::Math<float>::floor( area.max.x),
 														    Imath::Math<float>::floor( area.max.y)));
 
-		iref_area = Imath::intersect( iref_area, pixels.bounds());
+		iref_area = ImathExt::intersect( iref_area, pixels.bounds());
 	
 		if( iref_area.isEmpty())
 		{
@@ -119,7 +119,7 @@ public:
 												Imath::V2i( Imath::Math<float>::floor( area.max.x),
 														    Imath::Math<float>::floor( area.max.y)));
 		
-		search_area = Imath::intersect( search_area, pixels.bounds());
+		search_area = ImathExt::intersect( search_area, pixels.bounds());
 	
 		if( search_area.isEmpty())
 		{

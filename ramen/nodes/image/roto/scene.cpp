@@ -8,6 +8,7 @@
 #include<map>
 
 #include<boost/foreach.hpp>
+#include<boost/range/algorithm/for_each.hpp>
 
 #include<ramen/assert.hpp>
 
@@ -165,7 +166,7 @@ void scene_t::set_frame( float f, bool motion_blur)
 
 void scene_t::add_to_hash_str( hash::generator_t& hash_gen) const
 {
-    adobe::for_each( shapes(), boost::bind( &shape_t::add_to_hash_str, _1, boost::ref( hash_gen)));
+    boost::range::for_each( shapes(), boost::bind( &shape_t::add_to_hash_str, _1, boost::ref( hash_gen)));
 }
 
 void scene_t::add_to_hash_str( const std::vector<float>& frames, hash::generator_t& hash_gen) const
@@ -302,7 +303,7 @@ void scene_t::write( serialization::yaml_oarchive_t& out) const
     out << YAML::Key << "roto_version" << YAML::Value << version;
     out << YAML::Key << "shapes" << YAML::Value;
         out.begin_seq();
-            adobe::for_each( shapes(), boost::bind( &shape_t::write, _1, boost::ref( out), version));
+            boost::range::for_each( shapes(), boost::bind( &shape_t::write, _1, boost::ref( out), version));
         out.end_seq();
 }
 

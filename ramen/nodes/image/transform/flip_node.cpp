@@ -68,13 +68,13 @@ void flip_node_t::do_calc_bounds( const render::context_t& context)
 {
     calc_transform_matrix();
     Imath::Box2i xfbounds( input_as<image_node_t>()->bounds());
-    xfbounds = transform( xfbounds, xform_);
+    xfbounds = ImathExt::transform( xfbounds, xform_);
     set_bounds( xfbounds);
 }
 
 void flip_node_t::do_calc_inputs_interest( const render::context_t& context)
 {
-    Imath::Box2i roi( transform( interest(), inv_xform_));
+    Imath::Box2i roi( ImathExt::transform( interest(), inv_xform_));
     input_as<image_node_t>()->add_interest( roi);
 }
 

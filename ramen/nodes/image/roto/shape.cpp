@@ -6,6 +6,7 @@
 
 #include<vector>
 
+#include<boost/foreach.hpp>
 #include<boost/bind.hpp>
 
 #include<adobe/algorithm/for_each.hpp>
@@ -149,9 +150,9 @@ bool shape_t::find_in_children( const shape_t *shape) const
     if( shape == this)
         return true;
 
-    BOOST_FOREACH( const roto::shape_t& s, children())
+    for( list_type::const_iterator it( children().begin()), e( children().end()); it != e; ++it)
     {
-        if( s.find_in_children( shape))
+        if( it->find_in_children( shape))
             return true;
     }
 
