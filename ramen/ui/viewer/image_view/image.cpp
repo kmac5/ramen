@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
 
-#include<ramen/python/python.hpp>
+
 
 #include<ramen/ui/viewer/image_view/image.hpp>
 

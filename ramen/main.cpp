@@ -2,8 +2,6 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-#include<ramen/python/python.hpp>
-
 #include<stdlib.h>
 #include<string.h>
 
@@ -12,8 +10,6 @@
 
 #include<boost/version.hpp>
 #include<boost/static_assert.hpp>
-
-#include<boost/python.hpp>
 
 #include<ramen/app/application.hpp>
 
@@ -40,11 +36,6 @@ int main( int argc, char **argv)
         ramen::application_t r_app( argc, argv);
 		int result = r_app.run();
 		return result;
-	}
-	catch( boost::python::error_already_set)
-	{
-		PyErr_Print();
-		PyErr_Clear();
 	}
 	catch( std::exception& e)
 	{

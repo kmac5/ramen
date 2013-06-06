@@ -46,11 +46,6 @@ void color_param_t::private_init()
 {
     set_is_rgba( true);
 
-    add_expression( "R");
-    add_expression( "G");
-    add_expression( "B");
-    add_expression( "A");
-
     add_curve( "R");
     add_curve( "G");
     add_curve( "B");
@@ -72,21 +67,13 @@ void color_param_t::set_default_value( const Imath::Color4f& x)
 poly_param_value_t color_param_t::value_at_frame(float frame) const
 {
     Imath::Color4f v( get_value<Imath::Color4f>( *this));
-
-    if( !eval_expression( 0, frame, v.r, input0_))
-        eval_curve( 0, frame, v.r);
-
-    if( !eval_expression( 1, frame, v.g, input1_))
-        eval_curve( 1, frame, v.g);
-
-    if( !eval_expression( 2, frame, v.b, input2_))
-        eval_curve( 2, frame, v.b);
+    eval_curve( 0, frame, v.r);
+    eval_curve( 1, frame, v.g);
+    eval_curve( 2, frame, v.b);
 
     if( is_rgba())
     {
-        if( !eval_expression( 3, frame, v.a, input3_))
-            eval_curve( 3, frame, v.a);
-
+        eval_curve( 3, frame, v.a);
         v.a = adobe::clamp( v.a, 0.0f, 1.0f);
     }
     else
@@ -169,22 +156,8 @@ void color_param_t::do_add_to_hash( hash::generator_t& hash_gen) const
         hash_gen << "," << c.a;
 }
 
-boost::python::object color_param_t::to_python( const poly_param_value_t& v) const
-{
-    return python::color_to_list( get_value<Imath::Color4f>( *this));
-}
-
-poly_param_value_t color_param_t::from_python( const boost::python::object& obj) const
-{
-    boost::python::list t = boost::python::extract<boost::python::list>( obj);
-    Imath::Color4f val = python::list_to_color4<float>( t);
-    poly_param_indexable_value_t v( val);
-    return adobe::poly_cast<poly_param_value_t&>( v);
-}
-
 void color_param_t::do_read( const serialization::yaml_node_t& node)
 {
-    read_expressions( node);
     read_curves( node);
 
     Imath::Color4f val;
@@ -197,9 +170,7 @@ void color_param_t::do_read( const serialization::yaml_node_t& node)
 
 void color_param_t::do_write( serialization::yaml_oarchive_t& out) const
 {
-    write_expressions( out);
     write_curves( out);
-
     bool one   = curve( 0).empty(); // && expression( 0).empty()
     bool two   = curve( 1).empty(); // && expression( 1).empty()
     bool three = curve( 2).empty(); // && expression( 2).empty()
@@ -317,7 +288,6 @@ QWidget *color_param_t::do_create_widgets()
     connect( input0_, SIGNAL( spinBoxPressed()), this, SLOT( spinbox_pressed()));
     connect( input0_, SIGNAL( spinBoxDragged( double)), this, SLOT( spinbox_dragged( double)));
     connect( input0_, SIGNAL( spinBoxReleased()), this, SLOT( spinbox_released()));
-    connect( input0_, SIGNAL( expressionSet()), this, SLOT( expression_set()));
     xpos += s.width() + 3;
 
     input1_->move( xpos, 0);
@@ -332,7 +302,6 @@ QWidget *color_param_t::do_create_widgets()
     connect( input1_, SIGNAL( spinBoxPressed()), this, SLOT( spinbox_pressed()));
     connect( input1_, SIGNAL( spinBoxDragged( double)), this, SLOT( spinbox_dragged( double)));
     connect( input1_, SIGNAL( spinBoxReleased()), this, SLOT( spinbox_released()));
-    connect( input1_, SIGNAL( expressionSet()), this, SLOT( expression_set()));
     xpos += s.width() + 3;
 
     input2_->move( xpos, 0);
@@ -347,7 +316,6 @@ QWidget *color_param_t::do_create_widgets()
     connect( input2_, SIGNAL( spinBoxPressed()), this, SLOT( spinbox_pressed()));
     connect( input2_, SIGNAL( spinBoxDragged( double)), this, SLOT( spinbox_dragged( double)));
     connect( input2_, SIGNAL( spinBoxReleased()), this, SLOT( spinbox_released()));
-    connect( input2_, SIGNAL( expressionSet()), this, SLOT( expression_set()));
     xpos += s.width() + 3;
 
     if( is_rgba())
@@ -362,7 +330,6 @@ QWidget *color_param_t::do_create_widgets()
         connect( input3_, SIGNAL( spinBoxPressed()), this, SLOT( spinbox_pressed()));
         connect( input3_, SIGNAL( spinBoxDragged( double)), this, SLOT( spinbox_dragged( double)));
         connect( input3_, SIGNAL( spinBoxReleased()), this, SLOT( spinbox_released()));
-        connect( input3_, SIGNAL( expressionSet()), this, SLOT( expression_set()));
         xpos += s.width() + 3;
     }
 
@@ -445,10 +412,6 @@ void color_param_t::spinbox_released()
 
     if( track_mouse())
         app().ui()->end_interaction();
-}
-
-void color_param_t::expression_set()
-{
 }
 
 void color_param_t::eyedropper_color_picked( const ramen::ui::color_t& c)

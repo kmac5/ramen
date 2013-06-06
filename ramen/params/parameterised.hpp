@@ -5,8 +5,6 @@
 #ifndef RAMEN_PARAMETERISED_HPP
 #define	RAMEN_PARAMETERISED_HPP
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/manipulators/manipulable.hpp>
 
 #include<utility>

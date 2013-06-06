@@ -88,19 +88,6 @@ void file_param_t::do_add_to_hash( hash::generator_t& hash_gen) const
         hash_gen << filesystem::hash_string( get_value<boost::filesystem::path>( *this));
 }
 
-boost::python::object file_param_t::to_python( const poly_param_value_t& v) const
-{
-    std::string str = filesystem::file_string( v.cast<boost::filesystem::path>());
-    return boost::python::object( str);
-}
-
-poly_param_value_t file_param_t::from_python( const boost::python::object& obj) const
-{
-    std::string str = boost::python::extract<std::string>( obj);
-    boost::filesystem::path p( str);
-    return poly_param_value_t( p);
-}
-
 void file_param_t::do_read( const serialization::yaml_node_t& node)
 {
     std::string val;

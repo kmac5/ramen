@@ -45,19 +45,6 @@ void popup_param_t::do_add_to_hash( hash::generator_t& hash_gen) const
     hash_gen << menu_items()[ get_value<int>( *this)];
 }
 
-boost::python::object popup_param_t::to_python( const poly_param_value_t& v) const
-{
-    std::string str = menu_items()[v.cast<int>()];
-    return boost::python::object( str);
-}
-
-poly_param_value_t popup_param_t::from_python( const boost::python::object& obj) const
-{
-    std::string str = boost::python::extract<std::string>( obj);
-    int index = find_index_for_string( str);
-    return poly_param_value_t( index);
-}
-
 void popup_param_t::do_read( const serialization::yaml_node_t& node)
 {
     serialization::yaml_node_t n = node.get_node( "value");

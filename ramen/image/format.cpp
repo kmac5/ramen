@@ -1,7 +1,5 @@
 // Copyright (c) 2010 Esteban Tovagliari
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/image/format.hpp>
 
 #include<ramen/assert.hpp>

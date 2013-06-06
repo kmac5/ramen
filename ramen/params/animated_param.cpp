@@ -28,7 +28,6 @@ namespace ramen
 
 animated_param_t::animated_param_t( const std::string& name) : param_t(name), step_( 1.0f)
 {
-	//set_can_have_expressions( true);
 }
 
 animated_param_t::animated_param_t( const animated_param_t& other) : param_t( other), curves_( other.curves_)

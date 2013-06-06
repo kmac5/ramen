@@ -137,10 +137,6 @@ private:
 	std::auto_ptr<ui::splash_screen_t> splash_;
 
 	bool quitting_;
-
-    #ifndef NDEBUG
-        bool run_unit_tests_;
-    #endif
 };
 
 RAMEN_API application_t& app();

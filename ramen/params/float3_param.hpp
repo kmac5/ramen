@@ -48,9 +48,6 @@ private:
 
     virtual void do_add_to_hash( hash::generator_t& hash_gen) const;
 
-    virtual boost::python::object to_python( const poly_param_value_t& v) const;
-    virtual poly_param_value_t from_python( const boost::python::object& obj) const;
-
     virtual void do_read( const serialization::yaml_node_t& node);
     virtual void do_write( serialization::yaml_oarchive_t& out) const;
 
@@ -66,7 +63,6 @@ private Q_SLOTS:
     void spinbox_pressed();
     void spinbox_dragged( double value);
     void spinbox_released();
-    void expression_set();
 };
 
 } // namespace

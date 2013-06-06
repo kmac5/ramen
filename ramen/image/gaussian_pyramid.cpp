@@ -1,7 +1,5 @@
 // Copyright (c) 2011 Esteban Tovagliari
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/image/gaussian_pyramid.hpp>
 
 #include<cmath>

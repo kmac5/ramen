@@ -7,8 +7,6 @@
 
 #include<ramen/params/param_set_fwd.hpp>
 
-#include<ramen/python/python.hpp>
-
 #include<map>
 #include<memory>
 #include<string>

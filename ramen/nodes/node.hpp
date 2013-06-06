@@ -5,8 +5,6 @@
 #ifndef RAMEN_NODE_HPP
 #define	RAMEN_NODE_HPP
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/nodes/node_fwd.hpp>
 
 #include<vector>

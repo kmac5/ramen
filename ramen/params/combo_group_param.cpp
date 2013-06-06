@@ -64,17 +64,6 @@ void combo_group_param_t::do_add_to_hash( hash::generator_t& hash_gen) const
     params()[val].add_to_hash( hash_gen);
 }
 
-boost::python::object combo_group_param_t::to_python( const poly_param_value_t& v) const
-{
-    return boost::python::object( v.cast<int>());
-}
-
-poly_param_value_t combo_group_param_t::from_python( const boost::python::object& obj) const
-{
-    int i = boost::python::extract<int>( obj);
-    return poly_param_value_t( i);
-}
-
 // serialization
 void combo_group_param_t::do_read( const serialization::yaml_node_t& node)
 {

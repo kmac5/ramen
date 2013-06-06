@@ -5,8 +5,6 @@
 #ifndef RAMEN_MANIPULABLE_HPP
 #define RAMEN_MANIPULABLE_HPP
 
-#include<ramen/python/python.hpp>
-
 #include<memory>
 
 #include<boost/noncopyable.hpp>

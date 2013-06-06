@@ -17,11 +17,7 @@ ENDIF()
 ####################################################################
 # edit the paths if needed
 
-SET( CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH}
-						/usr/include/jpeg
-						/usr/include/tiff
-						)
-
+SET( CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH})
 SET( CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH})
 
 ####################################################################
@@ -32,8 +28,8 @@ OPTION( WITH_NODES "Build nodes" ON)
 ####################################################################
 # compiler & linker settings
 
-SET( CMAKE_SKIP_RPATH ON)
-SET( CMAKE_SKIP_INSTALL_RPATH ON)
+#SET( CMAKE_SKIP_RPATH ON)
+#SET( CMAKE_SKIP_INSTALL_RPATH ON)
 
 # Set the default built type
 IF( NOT CMAKE_BUILD_TYPE)
@@ -62,20 +58,14 @@ FIND_PACKAGE( OpenGL REQUIRED)
 FIND_PACKAGE( GLEW REQUIRED)
 
 # boost
-SET( Boost_ADDITIONAL_VERSIONS "1.49.0")
+SET( Boost_ADDITIONAL_VERSIONS "1.53.0")
 SET( BOOST_NEEDED_LIBS  filesystem
                         thread
-                        signals
                         system
                         regex
                         date_time
                         program_options
-                        python
                         )
-
-IF( CMAKE_BUILD_TYPE MATCHES Debug)
-	SET( BOOST_NEEDED_LIBS ${BOOST_NEEDED_LIBS} unit_test_framework)
-ENDIF()
 
 FIND_PACKAGE( Boost COMPONENTS ${BOOST_NEEDED_LIBS} REQUIRED)
 ADD_DEFINITIONS( -DBOOST_FILESYSTEM_VERSION=3)
@@ -106,100 +96,61 @@ FIND_PACKAGE( OpenImageIO REQUIRED)
 
 # OpenColorIO
 FIND_PACKAGE( OpenColorIO REQUIRED)
-
-#FIND_PACKAGE( OpenCV REQUIRED)
-# override OpenCV_LIBS as we don't want to link everything
-#SET( OpenCV_LIBS	opencv_core
-#					opencv_imgproc
-#					opencv_features2d
-#					opencv_calib3d
-#					opencv_flann
-#					opencv_video)
-#MESSAGE( "OpenCV found, Libs = ${OpenCV_LIBS}")
-
 FIND_PACKAGE( CIMG REQUIRED)
 
 # more libs
 FIND_PACKAGE( AGG REQUIRED)
 FIND_PACKAGE( EIGEN REQUIRED)
-FIND_PACKAGE( Freetype REQUIRED)
 FIND_PACKAGE( ZLIB REQUIRED)
-FIND_PACKAGE( SEEXPR REQUIRED)
 
-# python
-FIND_PACKAGE( PythonLibs REQUIRED)
+INCLUDE_DIRECTORIES(    ${PROJECT_SOURCE_DIR}
+                        ${PROJECT_SOURCE_DIR}/ramen/
 
-# testing, debugging, ...
-#FIND_PACKAGE( GMOCK REQUIRED)
-#FIND_PACKAGE( GLOG REQUIRED)
-#FIND_PACKAGE( BREAKPAD REQUIRED)
+                        ${NEEDED_QT_INCLUDES}
 
-INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}
-                     ${PROJECT_SOURCE_DIR}/ramen/
+                        ${Boost_INCLUDE_DIR}
+                        ${TBB_INCLUDE_DIRS}
+                        ${ASL_INCLUDE_DIRS}
+                        ${YAMLCPP_INCLUDE_DIRS}
 
-						${NEEDED_QT_INCLUDES}
+                        ${OPENGL_INCLUDE_DIR}
+                        ${GLEW_INCLUDE_DIRS}
 
-						${Boost_INCLUDE_DIR}
-						${TBB_INCLUDE_DIRS}
-						${ASL_INCLUDE_DIRS}
-						${YAMLCPP_INCLUDE_DIRS}
+                        ${OPENEXR_INCLUDE_DIR}
+                        ${OPENEXR_INCLUDE_DIR}/OpenEXR/
 
-						${OPENGL_INCLUDE_DIR}
-						${GLEW_INCLUDE_DIRS}
+                        ${JPEG_INCLUDE_DIR}
+                        ${PNG_INCLUDE_DIR}
+                        ${TIFF_INCLUDE_DIR}
+                        ${OPENIMAGEIO_INCLUDE_DIRS}
 
-						${OPENEXR_INCLUDE_DIR}
-						${OPENEXR_INCLUDE_DIR}/OpenEXR/
+                        ${OPENCOLORIO_INCLUDE_DIRS}
+                        ${CIMG_INCLUDE_DIRS}
+                        ${EIGEN_INCLUDE_DIRS}
+                        ${AGG_INCLUDE_DIRS}
 
-						${JPEG_INCLUDE_DIR}
-						${PNG_INCLUDE_DIR}
-						${TIFF_INCLUDE_DIR}
-						${OPENIMAGEIO_INCLUDE_DIRS}
-
-						${OPENCOLORIO_INCLUDE_DIRS}
-
-						${CIMG_INCLUDE_DIRS}
-
-						${EIGEN_INCLUDE_DIRS}
-						${AGG_INCLUDE_DIRS}
-						${FREETYPE_INCLUDE_DIRS}
-
-						${SEEXPR_INCLUDE_DIRS}
-
-						${PYTHON_INCLUDE_DIRS}
-
-						${ZLIB_INCLUDE_DIRS}
-						${GLOG_INCLUDE_DIRS}
-						${GMOCK_INCLUDE_DIRS}
-						${BREAKPAD_INCLUDE_DIRS}
-						)
+                        ${ZLIB_INCLUDE_DIRS}
+                        )
 
 SET( RAMEN_ALL_LIBS	${NEEDED_QT_LIBS}
 
-					${OPENCOLORIO_LIBRARIES}
+                        ${OPENCOLORIO_LIBRARIES}
+                        ${OPENIMAGEIO_LIBRARIES}
+                        ${OPENEXR_LIBRARIES}
+                        ${JPEG_LIBRARIES}
+                        ${PNG_LIBRARIES}
+                        ${TIFF_LIBRARIES}
 
-					${OPENIMAGEIO_LIBRARIES}
-					${OPENEXR_LIBRARIES}
-					${JPEG_LIBRARIES}
-					${PNG_LIBRARIES}
-					${TIFF_LIBRARIES}
+                        ${GLEW_LIBRARIES}
+                        ${OPENGL_LIBRARIES}
 
-					${GLEW_LIBRARIES}
-					${OPENGL_LIBRARIES}
-
-					${ASL_LIBRARIES}
-					${Boost_LIBRARIES}
-					${TBB_LIBRARIES}
-					${YAMLCPP_LIBRARIES}
-
-					${AGG_LIBRARIES}
-					${FREETYPE_LIBRARIES}
-
-					${SEEXPR_LIBRARIES}
-
-					${PYTHON_LIBRARIES}
-
-					${ZLIB_LIBRARIES}
-					)
+                        ${ASL_LIBRARIES}
+                        ${Boost_LIBRARIES}
+                        ${TBB_LIBRARIES}
+                        ${YAMLCPP_LIBRARIES}
+                        ${AGG_LIBRARIES}
+                        ${ZLIB_LIBRARIES}
+                        )
 
 ADD_SUBDIRECTORY( ramen)
 

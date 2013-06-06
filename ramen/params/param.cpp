@@ -25,9 +25,8 @@ param_t::param_t( const std::string& name) : QObject(), param_set_(0), name_(nam
 }
 
 param_t::param_t( const param_t& other) : QObject(), param_set_(0), id_( other.id_), name_( other.name_),
-                                            value_( other.value_), flags_( other.flags_), expressions_( other.expressions_)
+                                            value_( other.value_), flags_( other.flags_)
 {
-    //RAMEN_ASSERT( 0 && "warning: implement expressions copy!");
 }
 
 void param_t::init()    { do_init();}
@@ -128,13 +127,6 @@ void param_t::set_include_in_hash( bool b)
     util::set_flag( flags_, include_in_hash_bit, b);
 }
 
-bool param_t::can_have_expressions() const	{ return util::test_flag( flags_, can_have_expressions_bit);}
-
-void param_t::set_can_have_expressions( bool b)
-{
-    util::set_flag( flags_, can_have_expressions_bit, b);
-}
-
 bool param_t::track_mouse() const
 {
     if( const parameterised_t *p = parameterised())
@@ -194,120 +186,6 @@ void param_t::do_set_frame( float frame) {}
 void param_t::evaluate( float frame)	{ do_evaluate( frame);}
 void param_t::do_evaluate( float frame)	{}
 
-int param_t::num_expressions() const { return expressions_.size();}
-
-const expressions::expression_t& param_t::expression( int indx) const
-{
-    RAMEN_ASSERT( indx >= 0 && indx < num_expressions());
-    return expressions_[indx].second;
-}
-
-expressions::expression_t& param_t::expression( int indx)
-{
-    RAMEN_ASSERT( indx >= 0 && indx < num_expressions());
-    return expressions_[indx].second;
-}
-
-void param_t::add_expression( const std::string& name)
-{
-    expressions_.push_back( std::make_pair( boost::flyweight<std::string>( name), expressions::expression_t()));
-}
-
-bool param_t::eval_expression( int index, float frame, float& v, ui::param_spinbox_t *widget) const
-{
-    RAMEN_ASSERT( index < num_expressions());
-
-    //if( expression( index).empty())
-    //	return false;
-
-    /*
-    try
-    {
-        expressions::context_t context;
-        context.current = 0; // <-- TODO: do something with this.
-        context.frame = frame;
-
-        expressions::expression_t::result_type r( expression( index).eval( context));
-        v = boost::get<float>( r);
-        return true;
-    }
-    catch( std::exception& e)
-    {
-    }
-    */
-
-    return false;
-}
-
-void param_t::read_expressions( const serialization::yaml_node_t& node)
-{
-    /*
-    serialization::optional_yaml_node_t expr( node.get_optional_node( "expressions"));
-
-    if( expr)
-    {
-        for( serialization::yaml_node_t::const_iterator it( expr.get().begin()); it != expr.get().end(); ++it)
-        {
-            std::string key;
-            it.first() >> key;
-
-            if( expressions::expression_t *e = find_expression( key))
-            {
-                std::string str;
-                it.second() >> str;
-                //e->set_string( str);
-            }
-            else
-                node.error_stream() << "Unknown expression " << key << " found in param.";
-        }
-    }
-    */
-}
-
-void param_t::write_expressions( serialization::yaml_oarchive_t& out) const
-{
-    /*
-    bool all_empty = true;
-
-    for( int i = 0; i < num_expressions(); ++i)
-    {
-        if( !expression( i).empty())
-        {
-            all_empty = false;
-            break;
-        }
-    }
-
-    if( all_empty)
-        return;
-
-    out << YAML::Key << "expessions" << YAML::Value;
-    out.begin_map();
-
-    for( int i = 0; i < num_expressions(); ++i)
-    {
-        if( !expressions_[i].second.empty())
-        {
-            out << YAML::Key << expressions_[i].first
-                    << YAML::Value << YAML::DoubleQuoted << expressions_[i].second.string();
-        }
-    }
-
-    out.end_map();
-    */
-}
-
-expressions::expression_t *param_t::find_expression( const std::string& name)
-{
-    for( int i = 0; i < num_expressions(); ++i)
-    {
-        if( expressions_[i].first == name)
-            return &( expressions_[i].second);
-    }
-
-    return 0;
-}
-
 // undo
 std::auto_ptr<undo::command_t> param_t::create_command() { return do_create_command();}
 
@@ -338,20 +216,6 @@ void param_t::apply_function( const boost::function<void ( param_t*)>& f)
 }
 
 void param_t::do_apply_function( const boost::function<void ( param_t*)>& f) {}
-
-// python interop
-boost::python::object param_t::to_python( const poly_param_value_t& v) const
-{
-    PyErr_SetString( PyExc_TypeError, "Can't convert value from C++");
-    boost::python::throw_error_already_set();
-    return boost::python::object();
-}
-
-poly_param_value_t param_t::from_python( const boost::python::object& obj) const
-{
-    throw std::bad_cast();
-    return poly_param_value_t();
-}
 
 // serialization
 void param_t::read(const serialization::yaml_node_t& in) { do_read( in);}

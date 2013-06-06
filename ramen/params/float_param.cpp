@@ -35,17 +35,13 @@ float_param_t::float_param_t( const float_param_t& other) : numeric_param_t( oth
 void float_param_t::private_init()
 {
     add_curve( name());
-    add_expression( name());
     set_default_value( 0);
 }
 
 poly_param_value_t float_param_t::value_at_frame( float frame) const
 {
     float val = get_value<float>( *this);
-
-    if( !eval_expression( 0, frame, val, input_))
-        eval_curve( 0, frame, val);
-
+    eval_curve( 0, frame, val);
     return poly_param_value_t( val);
 }
 
@@ -63,8 +59,6 @@ void float_param_t::set_value( float x, change_reason reason)
 
 void float_param_t::set_value_at_frame( float x, float frame, change_reason reason)
 {
-    //RAMEN_ASSERT( expression().empty());
-
     if( can_undo())
         param_set()->add_command( this);
 
@@ -93,8 +87,6 @@ void float_param_t::set_absolute_value_at_frame( float x, float frame, change_re
 
 float float_param_t::derive( float time) const
 {
-    //RAMEN_ASSERT( expression().empty());
-
     if( num_curves() && !curve().empty())
         return curve().derive( time);
     else
@@ -103,8 +95,6 @@ float float_param_t::derive( float time) const
 
 float float_param_t::integrate( float time1, float time2) const
 {
-    //RAMEN_ASSERT( expression().empty());
-
     if( num_curves() && !curve().empty())
         return curve().integrate( time1, time2);
     else
@@ -139,29 +129,9 @@ void float_param_t::do_add_to_hash( hash::generator_t& hash_gen) const
     hash_gen << get_value<float>( *this);
 }
 
-boost::python::object float_param_t::to_python( const poly_param_value_t& v) const
-{
-    return boost::python::object( v.cast<float>());
-}
-
-poly_param_value_t float_param_t::from_python( const boost::python::object& obj) const
-{
-    float val = boost::python::extract<float>( obj);
-    return poly_param_value_t( val);
-}
-
 void float_param_t::do_read( const serialization::yaml_node_t& node)
 {
-    serialization::optional_yaml_node_t n = node.get_optional_node( "expression");
-
-    if( n)
-    {
-        // TODO: implement this
-        // ...
-        return;
-    }
-
-    n = node.get_optional_node( "curve");
+    serialization::optional_yaml_node_t n = node.get_optional_node( "curve");
 
     if( n)
     {
@@ -176,9 +146,6 @@ void float_param_t::do_read( const serialization::yaml_node_t& node)
 
 void float_param_t::do_write( serialization::yaml_oarchive_t& out) const
 {
-//	if( !expression().empty())
-//		out << YAML::Key << "expression" << YAML::Value << YAML::DoubleQuoted << expression().string();
-//	else
     {
         if( !curve().empty())
         {
@@ -195,12 +162,7 @@ void float_param_t::do_update_widgets()
     if( input_)
     {
         input_->blockSignals( true);
-
-        //if( !expression().empty())
-        //	input_->setValue( expression().string());
-        //else
         input_->setValue( relative_to_absolute( get_value<float>( *this)));
-
         input_->blockSignals( false);
     }
 }
@@ -230,9 +192,6 @@ QWidget *float_param_t::do_create_widgets()
 
     input_->setRange( low, high);
 
-    //if( !expression().empty())
-    //	input_->setValue( expression().string());
-    //else
     input_->setValue( relative_to_absolute( get_value<float>( *this)));
 
     input_->setSingleStep( step());
@@ -247,7 +206,6 @@ QWidget *float_param_t::do_create_widgets()
     connect( input_, SIGNAL( spinBoxPressed()), this, SLOT( spinbox_pressed()));
     connect( input_, SIGNAL( spinBoxDragged( double)), this, SLOT( spinbox_dragged( double)));
     connect( input_, SIGNAL( spinBoxReleased()), this, SLOT( spinbox_released()));
-    connect( input_, SIGNAL( expressionSet()), this, SLOT( expression_set()));
 
     top->setMinimumSize( app().ui()->inspector().width(), s.height());
     top->setMaximumSize( app().ui()->inspector().width(), s.height());
@@ -288,11 +246,6 @@ void float_param_t::spinbox_released()
 
     if( track_mouse())
         app().ui()->end_interaction();
-}
-
-void float_param_t::expression_set()
-{
-    // TODO: create an undo command here
 }
 
 } // namespace

@@ -17,7 +17,6 @@
 #include<ramen/memory/pool_allocator.hpp>
 
 #include<ramen/memory/image_cache.hpp>
-#include<ramen/memory/image_disk_cache.hpp>
 
 namespace ramen
 {
@@ -42,9 +41,7 @@ public:
     void insert_in_cache( node_t *n, const digest_type& key, image::buffer_t& img);
     boost::optional<image::buffer_t> find_in_cache( const digest_type& key, const Imath::Box2i& area);
 
-    // CPU
     image_allocator_type& image_allocator() { return *img_alloc_;}
-	image_disk_cache_t& image_disk_cache()	{ return *img_disk_cache_;}
 
 private:
 
@@ -54,13 +51,11 @@ private:
 
     image_cache_t& image_cache() { return *img_cache_;}
 	
-	// cpu
     std::auto_ptr<image_allocator_type> img_alloc_;
     std::auto_ptr<image_cache_t> img_cache_;
-	std::auto_ptr<image_disk_cache_t> img_disk_cache_;
 };
 
-} // namespace
-} // namespace
+} // memory
+} // ramen
 
 #endif

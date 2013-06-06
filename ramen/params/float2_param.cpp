@@ -36,12 +36,8 @@ float2_param_t::float2_param_t( const float2_param_t& other) : proportional_para
 
 void float2_param_t::private_init()
 {
-    add_expression( "X");
-    add_expression( "Y");
-
     add_curve( "X");
     add_curve( "Y");
-
     set_default_value( Imath::V2f( 0, 0));
 }
 
@@ -54,13 +50,8 @@ void float2_param_t::set_default_value( const Imath::V2f& x)
 poly_param_value_t float2_param_t::value_at_frame( float frame) const
 {
     Imath::V2f v( get_value<Imath::V2f>( *this));
-
-    if( !eval_expression( 0, frame, v.x, input0_))
-        eval_curve( 0, frame, v.x);
-
-    if( !eval_expression( 1, frame, v.y, input1_))
-        eval_curve( 1, frame, v.y);
-
+    eval_curve( 0, frame, v.x);
+    eval_curve( 1, frame, v.y);
     poly_param_indexable_value_t val( v);
     return adobe::poly_cast<poly_param_value_t&>( val);
 }
@@ -77,9 +68,6 @@ void float2_param_t::set_value( const Imath::V2f& x, change_reason reason)
 
 void float2_param_t::set_value_at_frame( const Imath::V2f& x, float frame, change_reason reason)
 {
-    //RAMEN_ASSERT( expression( 0).empty());
-    //RAMEN_ASSERT( expression( 1).empty());
-
     if( can_undo())
         param_set()->add_command( this);
 
@@ -169,22 +157,8 @@ void float2_param_t::do_add_to_hash( hash::generator_t& hash_gen) const
     hash_gen << v.x << "," << v.y;
 }
 
-boost::python::object float2_param_t::to_python( const poly_param_value_t& v) const
-{
-    return python::vec_to_list( v.cast<Imath::V2f>());
-}
-
-poly_param_value_t float2_param_t::from_python( const boost::python::object& obj) const
-{
-    boost::python::list t = boost::python::extract<boost::python::list>( obj);
-    Imath::V2f val = python::list_to_vec2<float>( t);
-    poly_param_indexable_value_t v( val);
-    return adobe::poly_cast<poly_param_value_t&>( v);
-}
-
 void float2_param_t::do_read( const serialization::yaml_node_t& node)
 {
-    read_expressions( node);
     read_curves( node);
 
     Imath::V2f val;
@@ -197,7 +171,6 @@ void float2_param_t::do_read( const serialization::yaml_node_t& node)
 
 void float2_param_t::do_write( serialization::yaml_oarchive_t& out) const
 {
-    write_expressions( out);
     write_curves( out);
 
     bool one = curve( 0).empty(); // && expression( 0).empty();
@@ -270,7 +243,6 @@ QWidget *float2_param_t::do_create_widgets()
     connect( input0_, SIGNAL( spinBoxPressed()), this, SLOT( spinbox_pressed()));
     connect( input0_, SIGNAL( spinBoxDragged( double)), this, SLOT( spinbox_dragged( double)));
     connect( input0_, SIGNAL( spinBoxReleased()), this, SLOT( spinbox_released()));
-    connect( input0_, SIGNAL( expressionSet()), this, SLOT( expression_set()));
     xpos += ( s.width() + 5);
 
     input1_->move( xpos, 0);
@@ -284,7 +256,6 @@ QWidget *float2_param_t::do_create_widgets()
     connect( input1_, SIGNAL( spinBoxPressed()), this, SLOT( spinbox_pressed()));
     connect( input1_, SIGNAL( spinBoxDragged( double)), this, SLOT( spinbox_dragged( double)));
     connect( input1_, SIGNAL( spinBoxReleased()), this, SLOT( spinbox_released()));
-    connect( input1_, SIGNAL( expressionSet()), this, SLOT( expression_set()));
     xpos += ( s.width() + 2);
 
     if( proportional())
@@ -421,7 +392,5 @@ void float2_param_t::spinbox_released()
     if( track_mouse())
         app().ui()->end_interaction();
 }
-
-void float2_param_t::expression_set() {}
 
 } // namespace

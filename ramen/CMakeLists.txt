@@ -6,131 +6,104 @@ CONFIGURE_FILE( ${PROJECT_SOURCE_DIR}/ramen/version.hpp.in ${PROJECT_SOURCE_DIR}
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR})
 
 SET( RAMEN_MOC_CLASSES  flipbook/djv_flipbook.hpp
-						flipbook/external_flipbook.hpp
-						flipbook/internal_flipbook.hpp
+                        flipbook/external_flipbook.hpp
+                        flipbook/internal_flipbook.hpp
 
-						params/animated_param.hpp
-						params/aspect_ratio_param.hpp
-						params/bool_param.hpp
-						params/button_param.hpp
-						params/color_param.hpp
-						params/combo_group_param.hpp
-						params/composite_param.hpp
-						params/curve_param.hpp
-						params/file_param.hpp
-						params/float_param.hpp
-						params/float2_param.hpp
-						params/float3_param.hpp
-						params/group_param.hpp
-						params/image_format_param.hpp
-						params/inspector_param.hpp
-						params/motion_blur_param.hpp
-						params/numeric_param.hpp
-						params/ocio_colorspace_param.hpp
-						params/param.hpp
-						params/popup_param.hpp
-						params/proportional_param.hpp
-						params/separator_param.hpp
-						params/static_param.hpp
-						params/string_param.hpp
-						params/tab_group_param.hpp
+                        params/animated_param.hpp
+                        params/aspect_ratio_param.hpp
+                        params/bool_param.hpp
+                        params/button_param.hpp
+                        params/color_param.hpp
+                        params/combo_group_param.hpp
+                        params/composite_param.hpp
+                        params/curve_param.hpp
+                        params/file_param.hpp
+                        params/float_param.hpp
+                        params/float2_param.hpp
+                        params/float3_param.hpp
+                        params/group_param.hpp
+                        params/image_format_param.hpp
+                        params/inspector_param.hpp
+                        params/motion_blur_param.hpp
+                        params/numeric_param.hpp
+                        params/ocio_colorspace_param.hpp
+                        params/param.hpp
+                        params/popup_param.hpp
+                        params/proportional_param.hpp
+                        params/separator_param.hpp
+                        params/static_param.hpp
+                        params/string_param.hpp
+                        params/tab_group_param.hpp
 
-						ui/anim/anim_curves_view.hpp
-						ui/anim/anim_editor.hpp
-						ui/anim/track_model.hpp
+                        ui/anim/anim_curves_view.hpp
+                        ui/anim/anim_editor.hpp
+                        ui/anim/track_model.hpp
 
-						ui/main_window.hpp
-						ui/time_controls.hpp
-						ui/user_interface.hpp
+                        ui/main_window.hpp
+                        ui/time_controls.hpp
+                        ui/user_interface.hpp
+                        ui/anim/anim_editor_toolbar.hpp
+                        ui/compview/composition_view.hpp
+                        ui/compview/composition_view_toolbar.hpp
+                        ui/dialogs/about_dialog.hpp
+                        ui/dialogs/composition_settings_dialog.hpp
+                        ui/dialogs/multiline_alert.hpp
+                        ui/dialogs/preferences_dialog.hpp
+                        ui/dialogs/render_composition_dialog.hpp
+                        ui/dialogs/render_flipbook_dialog.hpp
+                        ui/dialogs/smooth_anim_curves_dialog.hpp
+                        ui/inspector/inspector.hpp
+                        ui/inspector/panel.hpp
+                        ui/viewer/image_view/image_viewer_strategy.hpp
+                        ui/viewer/image_view/image_view_toolbar.hpp
+                        ui/viewer/viewer.hpp
+                        ui/viewer/viewer_context.hpp
+                        ui/viewer/viewer_strategy.hpp
+                        ui/widgets/color_button.hpp
+                        ui/widgets/color_picker.hpp
+                        ui/widgets/color_swatch.hpp
+                        ui/widgets/exposure_picker.hpp
+                        ui/widgets/hue_picker.hpp
+                        ui/widgets/saturation_value_picker.hpp
+                        ui/widgets/container_widget.hpp
+                        ui/widgets/double_spinbox.hpp
+                        ui/widgets/eyedropper_button.hpp
+                        ui/widgets/group_box.hpp
+                        ui/widgets/label_separator.hpp
+                        ui/widgets/line_edit.hpp
+                        ui/widgets/image_format_widget.hpp
+                        ui/widgets/ocio_colorspace_combo.hpp
+                        ui/widgets/ocio_combo.hpp
+                        ui/widgets/ocio_display_combo.hpp
+                        ui/widgets/ocio_display_widget.hpp
+                        ui/widgets/ocio_view_combo.hpp
+                        ui/widgets/param_spinbox.hpp
+                        ui/widgets/spinbox.hpp
+                        ui/widgets/text_edit.hpp
+                        ui/widgets/time_slider.hpp
+                        )
 
-						ui/anim/anim_editor_toolbar.hpp
+SET( RAMEN_SOURCES  anim/any_curve.cpp
+                    anim/clipboard.cpp
+                    anim/curve_algorithm.cpp
+                    anim/curve_to_half_lut.cpp
+                    anim/float_curve.cpp
+                    anim/float_key.cpp
+                    anim/keyframe.cpp
+                    anim/track.cpp
+                    anim/util.cpp
 
-						ui/compview/composition_view.hpp
-						ui/compview/composition_view_toolbar.hpp
+                    app/application.cpp
+                    app/composition.cpp
+                    app/document.cpp
+                    app/export_selected_nodes.cpp
+                    app/import_composition.cpp
+                    app/preferences.cpp
 
-						ui/dialogs/about_dialog.hpp
-						ui/dialogs/composition_settings_dialog.hpp
-						ui/dialogs/multiline_alert.hpp
-						ui/dialogs/preferences_dialog.hpp
-						ui/dialogs/render_composition_dialog.hpp
-						ui/dialogs/render_flipbook_dialog.hpp
-						ui/dialogs/smooth_anim_curves_dialog.hpp
+                    bezier/algorithm.cpp
 
-						ui/inspector/inspector.hpp
-						ui/inspector/panel.hpp
-
-						ui/viewer/image_view/image_viewer_strategy.hpp
-						ui/viewer/image_view/image_view_toolbar.hpp
-
-						ui/viewer/viewer.hpp
-						ui/viewer/viewer_context.hpp
-						ui/viewer/viewer_strategy.hpp
-
-						ui/widgets/color_button.hpp
-						ui/widgets/color_picker.hpp
-						ui/widgets/color_swatch.hpp
-						ui/widgets/exposure_picker.hpp
-						ui/widgets/hue_picker.hpp
-						ui/widgets/saturation_value_picker.hpp
-
-						ui/widgets/container_widget.hpp
-						ui/widgets/double_spinbox.hpp
-						ui/widgets/eyedropper_button.hpp
-						ui/widgets/group_box.hpp
-						ui/widgets/label_separator.hpp
-						ui/widgets/line_edit.hpp
-						ui/widgets/image_format_widget.hpp
-
-						ui/widgets/ocio_colorspace_combo.hpp
-						ui/widgets/ocio_combo.hpp
-						ui/widgets/ocio_display_combo.hpp
-						ui/widgets/ocio_display_widget.hpp
-						ui/widgets/ocio_view_combo.hpp
-
-						ui/widgets/param_spinbox.hpp
-						ui/widgets/spinbox.hpp
-						ui/widgets/text_edit.hpp
-						ui/widgets/time_slider.hpp
-						)
-
-SET( RAMEN_SOURCES  ref_counted.cpp
-
-					anim/any_curve.cpp
-					anim/clipboard.cpp
-					anim/curve_algorithm.cpp
-					anim/curve_to_half_lut.cpp
-					anim/expression_curve.cpp
-					anim/float_curve.cpp
-					anim/float_key.cpp
-					anim/keyframe.cpp
-					anim/track.cpp
-					anim/util.cpp
-
-					app/application.cpp
-					app/composition.cpp
-					app/document.cpp
-					app/export_selected_nodes.cpp
-					app/import_composition.cpp
-					app/plugin_manager.cpp
-					app/preferences.cpp
-
-					bezier/algorithm.cpp
-
-					camera/ortho_projection.cpp
-					camera/persp_projection.cpp
-					camera/projection.cpp
-					camera/syntheyes_lens_distortion.cpp
-
-					expressions/context.cpp
-					expressions/expression.cpp
-					expressions/se_expression.cpp
-
-					dependency/graph.cpp
-					dependency/node.cpp
-					dependency/exceptions.cpp
-
-					filesystem/path.cpp
-					filesystem/path_sequence.cpp
+                    filesystem/path.cpp
+                    filesystem/path_sequence.cpp
 
 					flipbook/external_flipbook.cpp
 					flipbook/djv_flipbook.cpp
@@ -269,7 +242,6 @@ SET( RAMEN_SOURCES  ref_counted.cpp
 					manipulators/util.cpp
 
 					memory/image_cache.cpp
-					memory/image_disk_cache.cpp
 					memory/manager.cpp
 					memory/pool.cpp
 
@@ -319,7 +291,6 @@ SET( RAMEN_SOURCES  ref_counted.cpp
 					params/composite_param.cpp
 					params/composite_parameterised.cpp
 					params/curve_param.cpp
-					params/expression_commands.cpp
 					params/file_param.cpp
 					params/float_param.cpp
 					params/float2_param.cpp
@@ -342,20 +313,11 @@ SET( RAMEN_SOURCES  ref_counted.cpp
 					params/string_param.cpp
 					params/tab_group_param.cpp
 
-					polyscan/clip.cpp
-					polyscan/poly.cpp
-					polyscan/scan.cpp
-					polyscan/vertex.cpp
-
-					rdk/rdk.cpp
-
 					render/context.cpp
 					render/context_guard.cpp
 					render/image_node_renderer.cpp
 					render/render_sequence.cpp
 					render/render_thread.cpp
-
-					SeExpr/OcioSeExprFuncs.cpp
 
 					serialization/yaml.cpp
 					serialization/yaml_iarchive.cpp
@@ -461,18 +423,17 @@ SET( RAMEN_SOURCES  ref_counted.cpp
 
 IF( WITH_NODES)
     SET( RAMEN_MOC_CLASSES	${RAMEN_MOC_CLASSES}
-                            nodes/image/input/image_channels_param.hpp
-                            nodes/image/input/image_seq_param.hpp
+                                nodes/image/input/image_channels_param.hpp
+                                nodes/image/input/image_seq_param.hpp
 
-                            nodes/image/key/keyer3d/toolbar.hpp
+                                nodes/image/key/keyer3d/toolbar.hpp
 
-                            nodes/image/roto/roto_shape_param.hpp
-                            nodes/image/roto/shape_transform_param.hpp
-                            nodes/image/roto/toolbar.hpp
+                                nodes/image/roto/roto_shape_param.hpp
+                                nodes/image/roto/shape_transform_param.hpp
+                                nodes/image/roto/toolbar.hpp
 
-                            nodes/image/track/tracker_toolbar.hpp
+                                nodes/image/track/tracker_toolbar.hpp
 
-                        	params/se_expr_param.hpp
                         	params/tracker_areas_param.hpp
                         	params/transform2_param.hpp
                         	params/transform3_param.hpp
@@ -630,13 +591,6 @@ IF( WITH_NODES)
 						nodes/image/util/nop_node.cpp
 						nodes/image/util/set_dod_node.cpp
 
-						nodes/image/xnodes/base_expr_node.cpp
-						nodes/image/xnodes/colorx_node.cpp
-						nodes/image/xnodes/distortx_node.cpp
-						nodes/image/xnodes/generatex_node.cpp
-						nodes/image/xnodes/layerx_node.cpp
-
-						params/se_expr_param.cpp
 						params/tracker_areas_param.cpp
 						params/transform2_param.cpp
 						params/transform3_param.cpp
@@ -647,83 +601,31 @@ IF( WITH_NODES)
 						)
 ENDIF()
 
-# python
-SET( RAMEN_MOC_PY_CLASSES	ui/python/console.hpp
-							ui/python/editor.hpp
-							)
-
-SET( RAMEN_PYTHON_SOURCES	python/access.cpp
-							python/export_anim.cpp
-							python/export_composition.cpp
-							python/export_expressions.cpp
-							python/export_gl.cpp
-							python/export_image.cpp
-							python/export_node.cpp
-							python/export_manipulable.cpp
-							python/export_manipulator.cpp
-							python/export_param.cpp
-							python/export_parameterised.cpp
-							python/export_python.cpp
-							python/export_ramen.cpp
-							python/export_roto.cpp
-							python/export_ui.cpp
-							python/export_ui_events.cpp
-							python/interpreter.cpp
-							python/SeExpr/export_SeExpr.cpp
-
-							ui/expression_editor.cpp
-
-							ui/python/console.cpp
-							ui/python/editor.cpp
-							)
-
-# tests
-IF( CMAKE_BUILD_TYPE MATCHES Debug)
-	SET( RAMEN_TEST_SOURCES	test/test.cpp
-							test/composite_nodes.cpp
-							test/container.cpp
-							test/depgraph.cpp
-							test/expressions.cpp
-							test/math.cpp
-							test/memory.cpp
-							test/filesystem.cpp
-							test/ImathExt.cpp
-							test/nodes.cpp
-							test/params.cpp
-							test/param_set.cpp
-							test/string.cpp
-							#test/python.cpp
-							test/undo.cpp
-							)
-
-	SET( RAMEN_TEST_LIBRARIES ${GMOCK_LIBRARIES})
-ENDIF()
-
 # platform sources
 IF( APPLE)
-	SET( RAMEN_PLATFORM_SOURCES system/system_pvt_osx.cpp)
+    SET( RAMEN_PLATFORM_SOURCES system/system_pvt_osx.cpp)
 ENDIF()
 
 IF( WIN32)
-	SET( RAMEN_PLATFORM_SOURCES system/system_pvt_win.cpp)
-	SET( EXTRA_PLATFORM_LIBS Userenv)
+    SET( RAMEN_PLATFORM_SOURCES system/system_pvt_win.cpp)
+    SET( EXTRA_PLATFORM_LIBS Userenv)
 ENDIF()
 
 IF( CMAKE_SYSTEM_NAME MATCHES "Linux")
-		SET( RAMEN_PLATFORM_SOURCES system/system_pvt_linux.cpp)
+    SET( RAMEN_PLATFORM_SOURCES system/system_pvt_linux.cpp)
 ENDIF()
 
 # ui files
-SET( RAMEN_DESIGNER_FILES	../designer/about.ui
-							../designer/apply_corner_track.ui
-							../designer/apply_point_track.ui
-							../designer/apply_track.ui
-							../designer/preferences.ui
-							../designer/composition_settings.ui
-							../designer/render_composition.ui
-							../designer/render_flipbook.ui
-							../designer/smooth_anim_curves.ui
-							)
+SET( RAMEN_DESIGNER_FILES   ../designer/about.ui
+                            ../designer/apply_corner_track.ui
+                            ../designer/apply_point_track.ui
+                            ../designer/apply_track.ui
+                            ../designer/preferences.ui
+                            ../designer/composition_settings.ui
+                            ../designer/render_composition.ui
+                            ../designer/render_flipbook.ui
+                            ../designer/smooth_anim_curves.ui
+                            )
 
 # QT
 QT4_WRAP_CPP( RAMEN_MOC_SOURCES	${RAMEN_MOC_CLASSES} OPTIONS ${MOC_EXTRA_ARGS})
@@ -731,13 +633,11 @@ QT4_WRAP_UI( RAMEN_DESIGNER_SOURCES ${RAMEN_DESIGNER_FILES})
 QT4_ADD_RESOURCES( RAMEN_RESOURCES ${PROJECT_SOURCE_DIR}/resources/resources.qrc)
 
 SET( RAMEN_LIB_SOURCES	${RAMEN_SOURCES}
-						${RAMEN_MOC_SOURCES}
-
-						${RAMEN_DESIGNER_SOURCES}
-						${RAMEN_PLATFORM_SOURCES}
-						${RAMEN_TEST_SOURCES}
-						${RAMEN_RESOURCES}
-						)
+                        ${RAMEN_MOC_SOURCES}
+                        ${RAMEN_DESIGNER_SOURCES}
+                        ${RAMEN_PLATFORM_SOURCES}
+                        ${RAMEN_RESOURCES}
+                        )
 
 # Ramen lib
 
@@ -746,9 +646,8 @@ SET_TARGET_PROPERTIES( ramen PROPERTIES COMPILE_FLAGS -DRAMEN_MAKING_DSO)
 SET_TARGET_PROPERTIES( ramen PROPERTIES VERSION ${RAMEN_VERSION_MAJOR}.${RAMEN_VERSION_MINOR}.${RAMEN_VERSION_PATCH}
 										SOVERSION ${RAMEN_VERSION_MAJOR} )
 TARGET_LINK_LIBRARIES( ramen	${RAMEN_ALL_LIBS}
-								${EXTRA_PLATFORM_LIBS}
-								${RAMEN_TEST_LIBRARIES}
-								)
+                                ${EXTRA_PLATFORM_LIBS}
+                                )
 
 SET( LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/lib/)
 
@@ -756,16 +655,10 @@ SET( LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/lib/)
 # Ramen app
 
 SET( RAMEN_APP_SOURCES  main.cpp
-						assert.cpp
-						)
+                        assert.cpp
+                        )
 
 ADD_EXECUTABLE( ramen.bin ${RAMEN_APP_SOURCES})
 
-TARGET_LINK_LIBRARIES( ramen.bin	ramen
-									${RAMEN_ALL_LIBS}
-									${EXTRA_PLATFORM_LIBS}
-									${BREAKPAD_CLIENT_LIBRARY}
-									${RAMEN_TEST_LIBRARIES}
-									)
-
+TARGET_LINK_LIBRARIES( ramen.bin ramen ${RAMEN_ALL_LIBS} ${EXTRA_PLATFORM_LIBS})
 SET( EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/bin/)

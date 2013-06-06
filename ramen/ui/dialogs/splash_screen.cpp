@@ -2,7 +2,7 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-#include<ramen/python/python.hpp>
+
 
 #include<ramen/ui/dialogs/splash_screen.hpp>
 
@@ -15,7 +15,7 @@
 #include<QApplication>
 #include<QSplashScreen>
 
-#include<SeExpression.h>
+//#include<SeExpression.h>
 
 #include<ramen/app/application.hpp>
 
@@ -27,7 +27,7 @@ namespace ui
 {
 namespace
 {
-
+/*
 class splash_expression_t : public SeExpression, boost::noncopyable
 {
 public:
@@ -55,7 +55,8 @@ public:
 	
 	mutable std::map<std::string,var_t> vars;
 };
-	
+*/
+
 } // unnamed
 
 class splash_screen_widget_t : public QSplashScreen
@@ -107,6 +108,7 @@ void splash_screen_t::finish( QWidget *w)
 
 bool splash_screen_t::render_splash()
 {
+    /*
 	boost::filesystem::path splash_sexpr_path = app().system().app_user_path() / "ui/splash.se";
 	if( do_render_splash( splash_sexpr_path))
 		return true;
@@ -114,7 +116,7 @@ bool splash_screen_t::render_splash()
 	splash_sexpr_path = app().system().app_bundle_path() / "ui/splash.se";
 	if( do_render_splash( splash_sexpr_path))
 		return true;
-	
+    */
 	return false;
 }
 

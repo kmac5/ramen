@@ -3,7 +3,7 @@
 #ifndef RAMEN_UI_VIEWER_IMAGE_VIEW_STRATEGY_HPP
 #define	RAMEN_UI_VIEWER_IMAGE_VIEW_STRATEGY_HPP
 
-#include<ramen/python/python.hpp>
+
 
 #include<ramen/ui/viewer/viewer_strategy.hpp>
 

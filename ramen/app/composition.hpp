@@ -5,8 +5,6 @@
 #ifndef RAMEN_COMPOSITION_HPP
 #define	RAMEN_COMPOSITION_HPP
 
-#include<ramen/python/python.hpp>
-
 #include<vector>
 #include<utility>
 #include<memory>

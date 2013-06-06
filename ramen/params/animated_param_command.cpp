@@ -2,8 +2,6 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/params/animated_param_command.hpp>
 
 #include<boost/foreach.hpp>

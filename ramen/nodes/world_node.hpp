@@ -7,8 +7,6 @@
 
 #include<ramen/nodes/composite_node.hpp>
 
-#include<ramen/dependency/graph.hpp>
-
 namespace ramen
 {
 
@@ -23,12 +21,6 @@ public:
 	world_node_t();
 	virtual ~world_node_t();
 
-    /// Returns a const reference to the dependency graph.
-    const dependency::graph_t& dependency_graph() const { return dep_graph_;}
-
-    /// Returns a reference to the dependency graph.
-    dependency::graph_t& dependency_graph() { return dep_graph_;}
-
     boost::signals2::signal<void ( node_t*)> node_added;
     boost::signals2::signal<void ( node_t*)> node_removed;
 
@@ -36,12 +28,8 @@ protected:
 
 	world_node_t( const world_node_t& other);
 	void operator=( const world_node_t&);
-
-private:
-
-	dependency::graph_t dep_graph_;
 };
 
-} // namespace
+} // ramen
 
 #endif

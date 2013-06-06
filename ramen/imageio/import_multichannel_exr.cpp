@@ -2,8 +2,6 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/imageio/import_multichannel_exr.hpp>
 
 #include<vector>

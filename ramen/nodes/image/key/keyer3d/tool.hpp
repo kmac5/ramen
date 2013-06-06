@@ -3,8 +3,6 @@
 #ifndef RAMEN_KEYER3D_TOOL_HPP
 #define	RAMEN_KEYER3D_TOOL_HPP
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/nodes/image/key/keyer3d/tool_fwd.hpp>
 
 #include<ramen/ui/tool.hpp>

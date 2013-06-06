@@ -1,7 +1,5 @@
 // Copyright (c) 2010 Esteban Tovagliari
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/nodes/image/key/keyer3d/keyer3d_commands.hpp>
 
 #include<ramen/nodes/image/key/keyer3d/keyer3d_node.hpp>

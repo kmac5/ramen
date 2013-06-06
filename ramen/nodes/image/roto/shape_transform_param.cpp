@@ -27,13 +27,11 @@ shape_transform_param_t::shape_transform_param_t( const std::string& name, const
     std::auto_ptr<float2_param_t> p( new float2_param_t( "Center"));
     p->set_id( id + std::string( "_center"));
     p->set_default_value( Imath::V2f( 0, 0));
-	p->set_can_have_expressions( false);
     add_param( p);
 
     p.reset( new float2_param_t( "Pos"));
     p->set_id( id + std::string( "_pos"));
     p->set_default_value( Imath::V2f( 0, 0));
-	p->set_can_have_expressions( false);
     add_param( p);
 
     p.reset( new float2_param_t( "Scale"));
@@ -41,14 +39,12 @@ shape_transform_param_t::shape_transform_param_t( const std::string& name, const
     p->set_default_value( Imath::V2f( 1, 1));
     p->set_step( 0.05);
     p->set_proportional( true);
-	p->set_can_have_expressions( false);
     add_param( p);
 
     std::auto_ptr<float_param_t> q( new float_param_t( "Rotation"));
     q->set_id( id + std::string( "_rot"));
     q->set_default_value( 0);
     q->set_step( 0.5);
-	q->set_can_have_expressions( false);
     add_param( q);
 	
 	set_create_track( false);

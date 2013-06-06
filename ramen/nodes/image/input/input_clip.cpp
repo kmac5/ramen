@@ -1,7 +1,5 @@
 // Copyright (c) 2011 Esteban Tovagliari
 
-#include<ramen/python/python.hpp>
-
 #include<stdio.h>
 
 #include<algorithm>

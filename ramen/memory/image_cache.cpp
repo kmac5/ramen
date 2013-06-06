@@ -2,8 +2,6 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/memory/image_cache.hpp>
 
 #include<ImathExt/ImathBoxAlgo.h>
@@ -15,9 +13,7 @@ namespace ramen
 namespace memory
 {
 
-image_cache_t::image_cache_t() : interacting_( false), disk_cache_( 0) {}
-
-image_cache_t::image_cache_t( image_disk_cache_t *disk_cache) : interacting_( false), disk_cache_( disk_cache) {}
+image_cache_t::image_cache_t() : interacting_( false) {}
 
 bool image_cache_t::empty() const { return items_.empty();}
 
@@ -144,12 +140,9 @@ void image_cache_t::erase( map_iterator it)
 		}
 	}
 
-	if( disk_cache_ && it->second.buffer.use_disk_cache())
-		disk_cache_->insert( it->first, it->second.buffer);
-
 	use_list_.remove( it);
 	items_.erase( it);
 }
 
-} // namespace
-} // namespace
+} // memory
+} // ramen

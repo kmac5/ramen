@@ -5,8 +5,6 @@
 #ifndef RAMEN_NODES_GRAPH_ALGORITHM_HPP
 #define RAMEN_NODES_GRAPH_ALGORITHM_HPP
 
-#include<ramen/python/python.hpp>
-
 #include<boost/range.hpp>
 #include<boost/bind.hpp>
 #include<boost/ref.hpp>

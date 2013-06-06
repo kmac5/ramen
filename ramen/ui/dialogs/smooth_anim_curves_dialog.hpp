@@ -5,7 +5,7 @@
 #ifndef RAMEN_SMOOTH_ANIM_CURVES_DIALOG_HPP
 #define	RAMEN_SMOOTH_ANIM_CURVES_DIALOG_HPP
 
-#include<ramen/python/python.hpp>
+
 
 #include<QDialog>
 

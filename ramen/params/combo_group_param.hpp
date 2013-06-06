@@ -41,9 +41,6 @@ private:
 
     virtual std::auto_ptr<undo::command_t> do_create_command();
 
-    virtual boost::python::object to_python( const poly_param_value_t& v) const;
-    virtual poly_param_value_t from_python( const boost::python::object& obj) const;
-
     virtual void do_read( const serialization::yaml_node_t& node);
     virtual void do_write( serialization::yaml_oarchive_t& out) const;
 

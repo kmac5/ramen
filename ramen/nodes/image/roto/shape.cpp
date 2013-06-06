@@ -1,7 +1,5 @@
 // Copyright (c) 2011 Esteban Tovagliari
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/nodes/image/roto/shape.hpp>
 
 #include<vector>
@@ -195,7 +193,6 @@ void shape_t::do_create_params()
         f->set_range( 0, 1);
         f->set_step( 0.025);
         f->set_enabled( !is_null());
-        f->set_can_have_expressions( false);
         add_param( f);
 
         f.reset( new float_param_t( "Opacity"));
@@ -203,13 +200,11 @@ void shape_t::do_create_params()
         f->set_default_value( 1);
         f->set_range( 0, 1);
         f->set_step( 0.025);
-        f->set_can_have_expressions( false);
         add_param( f);
 
         f.reset( new float_param_t( "Grow"));
         f->set_id( "grow");
         f->set_default_value( 0);
-        f->set_can_have_expressions( false);
         add_param( f);
 
         std::auto_ptr<float2_param_t> f2( new float2_param_t( "Blur"));
@@ -217,7 +212,6 @@ void shape_t::do_create_params()
         f2->set_min( 0);
         f2->set_default_value( Imath::V2f( 0, 0));
         f2->set_proportional( true);
-        f2->set_can_have_expressions( false);
         add_param( f2);
 
         /*

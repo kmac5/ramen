@@ -7,8 +7,6 @@
 
 #include<ramen/config.hpp>
 
-#include<ramen/python/python.hpp>
-
 #include<boost/shared_array.hpp>
 #include<boost/cstdint.hpp>
 

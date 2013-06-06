@@ -2,7 +2,7 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-#include<ramen/python/python.hpp>
+
 
 #include<ramen/ui/widgets/param_spinbox.hpp>
 
@@ -61,12 +61,7 @@ param_spinbox_t::param_spinbox_t( param_t& param, int comp_index, QWidget *paren
 	connect( copy_anim_, SIGNAL( triggered()), this, SLOT( copy_anim()));
 
 	paste_anim_ = new QAction( "Paste anim", this);
-	connect( paste_anim_, SIGNAL( triggered()), this, SLOT( paste_anim()));
-	
-	del_expr_ = new QAction( "Delete expression", this);
-	expr_editor_ = new QAction( "Expression editor...", this);
-	copy_ref_ = new QAction( "Copy reference", this);
-	paste_ref_ = new QAction( "Paste reference", this);
+	connect( paste_anim_, SIGNAL( triggered()), this, SLOT( paste_anim()));	
 }
 
 double param_spinbox_t::value() const
@@ -240,26 +235,9 @@ void param_spinbox_t::contextMenuEvent( QContextMenuEvent *event)
 		menu.addAction( del_key_);
 		menu.addAction( copy_anim_);
 		menu.addAction( paste_anim_);
-		menu.addAction( del_anim_);
-		
-		if( param_.can_have_expressions())
-			menu.addSeparator();
+		menu.addAction( del_anim_);		
 	}
 	
-	if( param_.can_have_expressions())
-	{
-		// enable or disable items
-		expr_editor_->setEnabled( false);
-		copy_ref_->setEnabled( false);
-		paste_ref_->setEnabled( false);
-		del_expr_->setEnabled( false);
-		
-		menu.addAction( expr_editor_);
-		menu.addAction( copy_ref_);
-		menu.addAction( paste_ref_);
-		menu.addAction( del_expr_);
-	}
-
 	if( !menu.isEmpty())
 	{
 		menu.exec(event->globalPos());
@@ -285,15 +263,7 @@ void param_spinbox_t::textChanged()
 				valueChanged( value());
 		}
 		else
-		{
-			if( param_.can_have_expressions())
-			{
-				setValue( s); // in this case, it's a potential expression
-				expressionSet();
-			}
-			else
-				restorePreviousValue();
-		}
+            restorePreviousValue();
 	}
 }
 

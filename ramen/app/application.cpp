@@ -25,7 +25,6 @@
 
 #include<ramen/app/preferences.hpp>
 #include<ramen/app/document.hpp>
-#include<ramen/app/plugin_manager.hpp>
 
 #include<ramen/memory/manager.hpp>
 
@@ -47,11 +46,6 @@
 #include<ramen/ui/main_window.hpp>
 #include<ramen/ui/dialogs/splash_screen.hpp>
 
-// Tests
-#ifndef NDEBUG
-    int run_ramen_unit_tests( int argc, char **argv);
-#endif
-
 namespace ramen
 {
 
@@ -67,11 +61,6 @@ application_t::application_t( int argc, char **argv) : system_(), preferences_()
     command_line_ = false;
     render_mode_ = false;
     quitting_ = false;
-
-    #ifndef NDEBUG
-        run_unit_tests_ = false;
-    #endif
-
     cmd_parser_.reset( new util::command_line_parser_t( argc, argv));
 
     // Create QApplication
@@ -116,10 +105,6 @@ application_t::application_t( int argc, char **argv) : system_(), preferences_()
     if( !command_line_)
         splash_->show_message( "Initializing builtin nodes");
     node_factory_t::instance();
-
-    if( !command_line_)
-        splash_->show_message( "Loading plugins...");
-    plugin_manager_t::instance();
 
     if( !command_line_)
         splash_->show_message( "Initializing image processing");
@@ -208,14 +193,6 @@ int application_t::run()
                                      proxy_level_.get(), subsample_.get(), mb_extra_samples_.get(), mb_shutter_factor_.get());
         }
     }
-
-    #ifndef NDEBUG
-        if( run_unit_tests_)
-        {
-            int result = run_ramen_unit_tests( cmd_parser_->argc, cmd_parser_->argv);
-            std::exit( result);
-        }
-    #endif
 
     return 0;
 }
@@ -321,18 +298,7 @@ void application_t::parse_command_line( int argc, char **argv)
         std::exit( 0);
     }
 
-    #ifndef NDEBUG
-        if( matches_option( argv[1], "-runtests"))
-        {
-            run_unit_tests_ = true;
-            command_line_ = true;
-            render_mode_ = false;
-            return;
-        }
-    #endif
-
     int i = 1;
-
     while (i < argc)
     {
         if( matches_option( argv[i], "-render"))
@@ -396,11 +362,6 @@ void application_t::usage()
                     "-version:        Print version number and exit.\n"
                     "-threads n:      Use n threads.\n\n"
                     "-render:         Render composition. Run ramen -render -help for more information.\n"
-
-                    #ifndef NDEBUG
-                    "-runtests:       Run unit tests and exit.\n"
-                    #endif
-
                     << std::endl;
     std::exit( 0);
 }

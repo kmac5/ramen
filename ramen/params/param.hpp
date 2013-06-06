@@ -9,8 +9,6 @@
 
 #include<ramen/params/param_fwd.hpp>
 
-#include<ramen/python/python.hpp>
-
 #include<memory>
 #include<sstream>
 #include<string>
@@ -19,8 +17,6 @@
 
 #include<boost/flyweight.hpp>
 #include<boost/filesystem/fstream.hpp>
-#include<boost/python/object.hpp>
-#include<boost/python/extract.hpp>
 
 #include<OpenEXR/ImathBox.h>
 
@@ -38,16 +34,12 @@
 
 #include<ramen/anim/track_fwd.hpp>
 
-#include<ramen/expressions/expression.hpp>
-
 #include<ramen/undo/command.hpp>
 
 #include<ramen/hash/generator.hpp>
 
 #include<ramen/serialization/yaml_iarchive.hpp>
 #include<ramen/serialization/yaml_oarchive.hpp>
-
-#include<ramen/python/access_fwd.hpp>
 
 #include<ramen/ui/widgets/param_spinbox_fwd.hpp>
 
@@ -76,8 +68,7 @@ protected:
         dont_track_mouse_bit		= 1 << 5,   // notify is called on mouse up only.
         round_to_int_bit			= 1 << 6,   // for float params, round to value to integer. Emulates an integer_param.
         proportional_bit			= 1 << 7,   // param is a float2 or float3 and the values can be modified proportionally.
-        include_in_hash_bit			= 1 << 8,	// param is included in hash
-        can_have_expressions_bit	= 1 << 9    // param can have expressions
+        include_in_hash_bit			= 1 << 8	// param is included in hash
     };
 
 public:
@@ -158,9 +149,6 @@ public:
     bool include_in_hash() const;
     void set_include_in_hash( bool b);
 
-    bool can_have_expressions() const;
-    void set_can_have_expressions( bool b);
-
     bool track_mouse() const;
     void set_track_mouse( bool b);
 
@@ -178,10 +166,6 @@ public:
     void create_tracks( anim::track_t *parent);
     void set_frame( float frame);
     void evaluate( float frame);
-
-    int num_expressions() const;
-    const expressions::expression_t& expression( int indx = 0) const;
-    expressions::expression_t& expression( int indx = 0);
 
     // hash
     void add_to_hash( hash::generator_t& hash_gen) const;
@@ -219,12 +203,6 @@ protected:
 
     virtual poly_param_value_t value_at_frame( float frame) const { return value();}
 
-    // expressions
-    void add_expression( const std::string& name);
-    bool eval_expression( int index, float frame, float& v, ui::param_spinbox_t *widget) const;
-    void read_expressions( const serialization::yaml_node_t& node);
-    void write_expressions( serialization::yaml_oarchive_t& out) const;
-
 private:
 
     friend class param_set_t;
@@ -245,19 +223,12 @@ private:
     virtual void do_create_tracks( anim::track_t *parent);
     virtual void do_set_frame( float frame);
     virtual void do_evaluate( float frame);
-    expressions::expression_t *find_expression( const std::string& name);
 
     // undo
     virtual std::auto_ptr<undo::command_t> do_create_command();
 
     // hash
     virtual void do_add_to_hash( hash::generator_t& hash_gen) const;
-
-    // python interop
-    friend class python::access;
-
-    virtual boost::python::object to_python( const poly_param_value_t& v) const;
-    virtual poly_param_value_t from_python( const boost::python::object& obj) const;
 
     // paths
     virtual void do_convert_relative_paths( const boost::filesystem::path& old_base, const boost::filesystem::path& new_base);
@@ -290,8 +261,6 @@ private:
 
     boost::uint32_t flags_;
     poly_param_value_t value_;
-
-    std::vector<std::pair<boost::flyweight<std::string>, expressions::expression_t> > expressions_;
 };
 
 template<class S>

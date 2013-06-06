@@ -5,8 +5,6 @@
 #ifndef RAMEN_FLIPBOOK_FLIPBOOK_HPP
 #define RAMEN_FLIPBOOK_FLIPBOOK_HPP
 
-#include<ramen/python/python.hpp>
-
 #include<boost/noncopyable.hpp>
 #include<boost/signals2/signal.hpp>
 

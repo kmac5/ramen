@@ -17,8 +17,6 @@
 #include<ramen/image/buffer.hpp>
 #include<ramen/hash/generator.hpp>
 
-#include<ramen/memory/image_disk_cache.hpp>
-
 namespace ramen
 {
 namespace memory
@@ -31,8 +29,6 @@ public:
     typedef hash::generator_t::digest_type digest_type;
 
     image_cache_t();
-    explicit image_cache_t( image_disk_cache_t *disk_cache);
-
     virtual ~image_cache_t() {}
 
     virtual bool empty() const;
@@ -72,11 +68,9 @@ private:
     // interactions
     bool interacting_;
     std::map<node_t*, map_iterator> added_while_interacting_;
-
-    image_disk_cache_t *disk_cache_;
 };
 
-} // namespace
-} // namespace
+} // memory
+} // ramen
 
 #endif

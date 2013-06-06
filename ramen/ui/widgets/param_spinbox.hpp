@@ -53,7 +53,6 @@ Q_SIGNALS:
     void spinBoxPressed();
     void spinBoxDragged( double value);
     void spinBoxReleased();
-	void expressionSet();
 
 private Q_SLOTS:
 

@@ -39,17 +39,6 @@ param_t *bool_param_t::do_clone() const { return new bool_param_t( *this);}
 
 void bool_param_t::do_add_to_hash( hash::generator_t& hash_gen) const { hash_gen << get_value<bool>( *this);}
 
-boost::python::object bool_param_t::to_python( const poly_param_value_t& v) const
-{
-    return boost::python::object( v.cast<bool>());
-}
-
-poly_param_value_t bool_param_t::from_python( const boost::python::object& obj) const
-{
-    bool b = boost::python::extract<bool>( obj);
-    return poly_param_value_t( b);
-}
-
 void bool_param_t::do_read( const serialization::yaml_node_t& node)
 {
     bool val;

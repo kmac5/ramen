@@ -1,7 +1,5 @@
 // Copyright (c) 2010 Esteban Tovagliari
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/params/static_param_command.hpp>
 
 #include<ramen/nodes/node.hpp>

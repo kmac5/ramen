@@ -40,8 +40,6 @@
 //
 //-----------------------------------------------------------------------------
 
-#include<ramen/python/python.hpp>
-
 #include<ramen/flipbook/FileReadingThread.h>
 
 #include<iostream>

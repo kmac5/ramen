@@ -7,8 +7,6 @@
 
 #include<ramen/app/document_fwd.hpp>
 
-#include<ramen/python/python.hpp>
-
 #include<memory>
 
 #include<boost/noncopyable.hpp>

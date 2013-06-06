@@ -2,7 +2,7 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-#include<ramen/python/python.hpp>
+
 
 #include<ramen/ui/compview/draw_pick_generic_node.hpp>
 
