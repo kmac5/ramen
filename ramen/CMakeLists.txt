@@ -83,7 +83,7 @@ SET( RAMEN_MOC_CLASSES	flipbook/djv_flipbook.hpp
                         ui/widgets/time_slider.hpp
                         )
 
-SET( RAMEN_LIB_SOURCES  anim/any_curve.cpp
+SET( RAMEN_SOURCES      anim/any_curve.cpp
                         anim/clipboard.cpp
                         anim/curve_algorithm.cpp
                         anim/curve_to_half_lut.cpp
