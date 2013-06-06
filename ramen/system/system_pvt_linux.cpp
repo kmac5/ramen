@@ -160,7 +160,7 @@ const boost::filesystem::path& system_pvt::preferences_path() const
 		preferences_path_ = app_user_path() / "prefs";
 
 	    if( !boost::filesystem::exists( preferences_path_))
-			boost::filesystem::create_directory( preferences_path_);
+            boost::filesystem::create_directories( preferences_path_);
 	}
 
     return preferences_path_;
