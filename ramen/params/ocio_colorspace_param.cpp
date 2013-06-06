@@ -95,17 +95,6 @@ void ocio_colorspace_param_t::do_add_to_hash( hash::generator_t& hash_gen) const
     hash_gen << get_value<std::string>( *this);
 }
 
-boost::python::object ocio_colorspace_param_t::to_python( const poly_param_value_t& v) const
-{
-    return boost::python::object( v.cast<std::string>());
-}
-
-poly_param_value_t ocio_colorspace_param_t::from_python( const boost::python::object& obj) const
-{
-    std::string str = boost::python::extract<std::string>( obj);
-    return poly_param_value_t( str);
-}
-
 void ocio_colorspace_param_t::do_read( const serialization::yaml_node_t& node)
 {
     serialization::yaml_node_t n = node.get_node( "value");

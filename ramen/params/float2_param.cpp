@@ -15,8 +15,6 @@
 
 #include<ramen/nodes/node.hpp>
 
-#include<ramen/python/util.hpp>
-
 #include<ramen/ui/user_interface.hpp>
 #include<ramen/ui/anim/anim_editor.hpp>
 #include<ramen/ui/viewer/viewer.hpp>

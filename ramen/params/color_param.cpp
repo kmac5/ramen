@@ -29,8 +29,6 @@
 #include<ramen/ui/widgets/eyedropper_button.hpp>
 #include<ramen/ui/widgets/color_picker.hpp>
 
-#include<ramen/python/util.hpp>
-
 namespace ramen
 {
 

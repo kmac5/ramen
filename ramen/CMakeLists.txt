@@ -426,8 +426,6 @@ IF( WITH_NODES)
                                 nodes/image/input/image_channels_param.hpp
                                 nodes/image/input/image_seq_param.hpp
 
-                                nodes/image/key/keyer3d/toolbar.hpp
-
                                 nodes/image/roto/roto_shape_param.hpp
                                 nodes/image/roto/shape_transform_param.hpp
                                 nodes/image/roto/toolbar.hpp
@@ -485,7 +483,6 @@ IF( WITH_NODES)
 						nodes/image/color/exposure_node.cpp
 						nodes/image/color/gamma_node.cpp
 						nodes/image/color/hsv_colorize_node.cpp
-                                                #nodes/image/color/log_to_linear_node.cpp
 						nodes/image/color/ocio_colorspace_node.cpp
 						nodes/image/color/ocio_file_transform_node.cpp
 						nodes/image/color/tint_node.cpp
@@ -521,16 +518,6 @@ IF( WITH_NODES)
 						nodes/image/key/color_diff_keyer_node.cpp
 						nodes/image/key/lum_key_node.cpp
 						nodes/image/key/spill_suppressor_node.cpp
-
-						nodes/image/key/keyer3d/keyer3d_node.cpp
-						nodes/image/key/keyer3d/keyer3d_commands.cpp
-						nodes/image/key/keyer3d/km_keyer.cpp
-						nodes/image/key/keyer3d/manipulator.cpp
-						nodes/image/key/keyer3d/sample_tool.cpp
-						nodes/image/key/keyer3d/softness_tool.cpp
-						nodes/image/key/keyer3d/tolerance_tool.cpp
-						nodes/image/key/keyer3d/tool.cpp
-						nodes/image/key/keyer3d/toolbar.cpp
 
 						nodes/image/layer/add_mix_layer_node.cpp
 						nodes/image/layer/alpha_layer_node.cpp

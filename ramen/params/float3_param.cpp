@@ -24,8 +24,6 @@
 
 #include<ramen/ui/widgets/param_spinbox.hpp>
 
-#include<ramen/python/util.hpp>
-
 namespace ramen
 {
 

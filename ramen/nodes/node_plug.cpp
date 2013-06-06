@@ -58,8 +58,7 @@ struct match_output_connection_by_port
 node_output_plug_t::node_output_plug_t( ramen::node_t *parent, const std::string& id,
 										const Imath::Color3c& color,
 										const std::string& tooltip) : node_plug_t( id, color, tooltip),
-																	dependency::output_node_t(),
-																	parent_( parent)
+                                                                        parent_( parent)
 {
 	RAMEN_ASSERT( parent_);
 }

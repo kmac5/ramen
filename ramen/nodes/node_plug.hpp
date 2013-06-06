@@ -18,8 +18,6 @@
 
 #include<ramen/assert.hpp>
 
-#include<ramen/dependency/node.hpp>
-
 #include<ramen/nodes/node_fwd.hpp>
 
 namespace ramen
@@ -133,7 +131,7 @@ private:
 \ingroup nodes
 \brief An output plug to which other node plugs can be connected.
 */
-class node_output_plug_t : public node_plug_t, public dependency::output_node_t
+class node_output_plug_t : public node_plug_t
 {
 public:
 

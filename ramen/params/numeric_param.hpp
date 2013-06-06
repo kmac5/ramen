@@ -66,9 +66,6 @@ protected:
 	
 private:
 
-	// python interop
-	friend class python::access;
-
 	poly_param_value_t relative_to_absolute( const poly_param_value_t& val) const;
     poly_param_value_t absolute_to_relative( const poly_param_value_t& val) const;
 
