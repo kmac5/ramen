@@ -1,15 +1,15 @@
 
-    Ramen TODO
-    ----------
+    TODO
+    ----
 
-        Bugs
-        ----
-
-            - exception when prefs dir does not exist.
-            - opencolorio displays are not correct.
-            - crash when duplicating nodes.
-
-        Cleanup
-        -------
-
-            - remove many dependencies.
+        - remove adobe source libs dependency.
+        - remove unused code.
+        - remove half done code.
+        - remove some dependencies, like CImg, ...
+        - unit tests.
+        - image processing code needs a review.
+        - viewer code is a mess.
+        - add a dependency graph.
+        - switch to more modern OpenGL code.
+        - switch the file format to json or update to new yaml-cpp api.
+        
