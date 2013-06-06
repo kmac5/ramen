@@ -2,8 +2,6 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-
-
 #include<ramen/ui/dialogs/splash_screen.hpp>
 
 #include<fstream>
@@ -122,6 +120,7 @@ bool splash_screen_t::render_splash()
 
 bool splash_screen_t::do_render_splash( const boost::filesystem::path& p)
 {
+    /*
 	try
 	{
 		if( !boost::filesystem::exists( p))
@@ -176,9 +175,11 @@ bool splash_screen_t::do_render_splash( const boost::filesystem::path& p)
 	}
 	catch( ...)
 	{
-		return false;
 	}
+    */
+
+    return false;
 }
 
-} // namespace
-} // namespace
+} // ui
+} // ramen
