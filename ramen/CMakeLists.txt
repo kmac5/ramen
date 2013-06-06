@@ -5,7 +5,7 @@ CONFIGURE_FILE( ${PROJECT_SOURCE_DIR}/ramen/version.hpp.in ${PROJECT_SOURCE_DIR}
 
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR})
 
-SET( RAMEN_MOC_CLASSES  flipbook/djv_flipbook.hpp
+SET( RAMEN_MOC_CLASSES	flipbook/djv_flipbook.hpp
                         flipbook/external_flipbook.hpp
                         flipbook/internal_flipbook.hpp
 
@@ -83,509 +83,484 @@ SET( RAMEN_MOC_CLASSES  flipbook/djv_flipbook.hpp
                         ui/widgets/time_slider.hpp
                         )
 
-SET( RAMEN_SOURCES  anim/any_curve.cpp
-                    anim/clipboard.cpp
-                    anim/curve_algorithm.cpp
-                    anim/curve_to_half_lut.cpp
-                    anim/float_curve.cpp
-                    anim/float_key.cpp
-                    anim/keyframe.cpp
-                    anim/track.cpp
-                    anim/util.cpp
+SET( RAMEN_LIB_SOURCES  anim/any_curve.cpp
+                        anim/clipboard.cpp
+                        anim/curve_algorithm.cpp
+                        anim/curve_to_half_lut.cpp
+                        anim/float_curve.cpp
+                        anim/float_key.cpp
+                        anim/keyframe.cpp
+                        anim/track.cpp
+                        anim/util.cpp
 
-                    app/application.cpp
-                    app/composition.cpp
-                    app/document.cpp
-                    app/export_selected_nodes.cpp
-                    app/import_composition.cpp
-                    app/preferences.cpp
+                        app/application.cpp
+                        app/composition.cpp
+                        app/document.cpp
+                        app/export_selected_nodes.cpp
+                        app/import_composition.cpp
+                        app/preferences.cpp
 
-                    bezier/algorithm.cpp
+                        bezier/algorithm.cpp
 
-                    filesystem/path.cpp
-                    filesystem/path_sequence.cpp
+                        filesystem/path.cpp
+                        filesystem/path_sequence.cpp
 
-					flipbook/external_flipbook.cpp
-					flipbook/djv_flipbook.cpp
-					flipbook/factory.cpp
-					flipbook/FileReadingThread.cpp
-					flipbook/flipbook.cpp
-					flipbook/ImageBuffers.cpp
-					flipbook/internal_flipbook.cpp
-					flipbook/render_flipbook.cpp
-					flipbook/Timer.cpp
+                        flipbook/external_flipbook.cpp
+                        flipbook/djv_flipbook.cpp
+                        flipbook/factory.cpp
+                        flipbook/FileReadingThread.cpp
+                        flipbook/flipbook.cpp
+                        flipbook/ImageBuffers.cpp
+                        flipbook/internal_flipbook.cpp
+                        flipbook/render_flipbook.cpp
+                        flipbook/Timer.cpp
 
-					ggems/ggveclib.c
-					ggems/nearestpoint.c
-					ggems/convex_opt.c
-					ggems/poly_clip.cpp
-					ggems/poly_scan.cpp
+                        ggems/ggveclib.c
+                        ggems/nearestpoint.c
+                        ggems/convex_opt.c
+                        ggems/poly_clip.cpp
+                        ggems/poly_scan.cpp
 
-					GL/gl.cpp
-					GL/glu.cpp
-					GL/Imath_gl.cpp
-					GL/lut3d.cpp
-					GL/program.cpp
+                        GL/gl.cpp
+                        GL/glu.cpp
+                        GL/Imath_gl.cpp
+                        GL/lut3d.cpp
+                        GL/program.cpp
 
-					half/halfExpLogTable.cpp
+                        half/halfExpLogTable.cpp
 
-					hash/goulburn.cpp
-					hash/generator.cpp
+                        hash/goulburn.cpp
+                        hash/generator.cpp
 
-					image/accumulator.cpp
-					image/agg_renderers.cpp
-					image/box_blur.cpp
-					image/buffer.cpp
-					image/channel_range.cpp
-					image/cimg_to_image.cpp
-					image/color.cpp
-					image/color_bars.cpp
-					image/denan.cpp
-					image/dilate.cpp
-					image/filters.cpp
-					image/format.cpp
-					image/gaussian_blur.cpp
-					image/gaussian_pyramid.cpp
-					image/init_image_processing.cpp
-					image/invalid_pixels.cpp
-					image/ocio_transform.cpp
-					#image/opencv.cpp
-					image/percentile_filter.cpp
-					image/pyramid.cpp
-					image/resize.cpp
-					image/smart_blur.cpp
-					image/watermark.cpp
+                        image/accumulator.cpp
+                        image/agg_renderers.cpp
+                        image/box_blur.cpp
+                        image/buffer.cpp
+                        image/channel_range.cpp
+                        image/cimg_to_image.cpp
+                        image/color.cpp
+                        image/color_bars.cpp
+                        image/denan.cpp
+                        image/dilate.cpp
+                        image/filters.cpp
+                        image/format.cpp
+                        image/gaussian_blur.cpp
+                        image/init_image_processing.cpp
+                        image/invalid_pixels.cpp
+                        image/ocio_transform.cpp
+                        image/percentile_filter.cpp
+                        image/pyramid.cpp
+                        image/resize.cpp
+                        image/smart_blur.cpp
+                        image/watermark.cpp
 
-					image/processing.cpp
+                        image/processing.cpp
 
-					image/generic/affine_warp.cpp
-					image/generic/alpha_composite.cpp
-					image/generic/alpha_layer_modes.cpp
-					image/generic/apply_color_matrix.cpp
-					image/generic/apply_gamma_exp_log.cpp
-					image/generic/box_blur_channel.cpp
-					image/generic/composite.cpp
-					image/generic/convolve33.cpp
-					image/generic/gaussian_blur_channel.cpp
-					image/generic/gaussian_blur_rgb.cpp
-					image/generic/layer_modes.cpp
-					image/generic/math.cpp
-					image/generic/projective_warp.cpp
-					image/generic/resize.cpp
-					image/generic/samplers.cpp
+                        image/generic/affine_warp.cpp
+                        image/generic/alpha_composite.cpp
+                        image/generic/alpha_layer_modes.cpp
+                        image/generic/apply_color_matrix.cpp
+                        image/generic/apply_gamma_exp_log.cpp
+                        image/generic/box_blur_channel.cpp
+                        image/generic/composite.cpp
+                        image/generic/convolve33.cpp
+                        image/generic/gaussian_blur_channel.cpp
+                        image/generic/gaussian_blur_rgb.cpp
+                        image/generic/layer_modes.cpp
+                        image/generic/math.cpp
+                        image/generic/projective_warp.cpp
+                        image/generic/resize.cpp
+                        image/generic/samplers.cpp
 
-					image/sse2/affine_warp.cpp
-					image/sse2/box_blur.cpp
-					image/sse2/channel_math.cpp
-					image/sse2/composite.cpp
-					image/sse2/gaussian_blur.cpp
-					image/sse2/key_mix.cpp
-					image/sse2/layer_modes.cpp
-					image/sse2/math.cpp
-					image/sse2/projective_warp.cpp
-					image/sse2/resize.cpp
-					image/sse2/samplers.cpp
-					image/util.cpp
-					image/sse2/warp.cpp
+                        image/sse2/affine_warp.cpp
+                        image/sse2/box_blur.cpp
+                        image/sse2/channel_math.cpp
+                        image/sse2/composite.cpp
+                        image/sse2/gaussian_blur.cpp
+                        image/sse2/key_mix.cpp
+                        image/sse2/layer_modes.cpp
+                        image/sse2/math.cpp
+                        image/sse2/projective_warp.cpp
+                        image/sse2/resize.cpp
+                        image/sse2/samplers.cpp
+                        image/util.cpp
+                        image/sse2/warp.cpp
 
-					imageio/exceptions.cpp
-					imageio/factory.cpp
-					imageio/format.cpp
-					imageio/multichannel_reader.cpp
-					imageio/reader.cpp
+                        imageio/exceptions.cpp
+                        imageio/factory.cpp
+                        imageio/format.cpp
+                        imageio/multichannel_reader.cpp
+                        imageio/reader.cpp
 
-					#imageio/cineon/cineon_format.cpp
-					#imageio/cineon/cineon_reader.cpp
-					#imageio/cineon/cineon_writer.cpp
+                        imageio/exr/exr_format.cpp
+                        imageio/exr/exr_reader.cpp
+                        imageio/exr/exr_writer.cpp
+                        imageio/imf_memory_stream.cpp
 
-					#imageio/dpx/dpx_format.cpp
-					#imageio/dpx/dpx_reader.cpp
-					#imageio/dpx/dpx_writer.cpp
-					#imageio/dpx/dpxHeader.cpp
+                        imageio/flo/flo_format.cpp
+                        imageio/flo/flo_reader.cpp
+                        imageio/flo/flo_writer.cpp
 
-					imageio/exr/exr_format.cpp
-					imageio/exr/exr_reader.cpp
-					imageio/exr/exr_writer.cpp
-					imageio/imf_memory_stream.cpp
+                        imageio/hdr/hdr_format.cpp
+                        imageio/hdr/hdr_writer.cpp
 
-					imageio/flo/flo_format.cpp
-					imageio/flo/flo_reader.cpp
-					imageio/flo/flo_writer.cpp
+                        imageio/jpg/jpg_format.cpp
+                        imageio/jpg/jpg_reader.cpp
+                        imageio/jpg/jpg_writer.cpp
+                        imageio/jpg/jpg_size.cpp
 
-					imageio/hdr/hdr_format.cpp
-					imageio/hdr/hdr_writer.cpp
+                        imageio/oiio/oiio_reader.cpp
+                        imageio/oiio/oiio_writer.cpp
 
-					imageio/jpg/jpg_format.cpp
-					imageio/jpg/jpg_reader.cpp
-					imageio/jpg/jpg_writer.cpp
-					imageio/jpg/jpg_size.cpp
+                        imageio/png/png_format.cpp
+                        imageio/png/png_writer.cpp
 
-					imageio/oiio/oiio_reader.cpp
-					imageio/oiio/oiio_writer.cpp
+                        imageio/tga/tga_format.cpp
+                        imageio/tga/tga_writer.cpp
 
-					imageio/png/png_format.cpp
-					imageio/png/png_writer.cpp
+                        imageio/tiff/tiff_format.cpp
+                        imageio/tiff/tiff_writer.cpp
 
-					imageio/tga/tga_format.cpp
-					imageio/tga/tga_writer.cpp
+                        ImathExt/ImathBoxAlgo.cpp
+                        ImathExt/ImathMatrixColorAlgo.cpp
 
-					imageio/tiff/tiff_format.cpp
-					imageio/tiff/tiff_writer.cpp
+                        manipulators/draw.cpp
+                        manipulators/manipulable.cpp
+                        manipulators/manipulator.cpp
+                        manipulators/pick.cpp
+                        manipulators/util.cpp
 
-					ImathExt/ImathBoxAlgo.cpp
-					ImathExt/ImathMatrixColorAlgo.cpp
+                        memory/image_cache.cpp
+                        memory/manager.cpp
+                        memory/pool.cpp
 
-					manipulators/draw.cpp
-					manipulators/manipulable.cpp
-					manipulators/manipulator.cpp
-					manipulators/pick.cpp
-					manipulators/util.cpp
+                        movieio/exceptions.cpp
+                        movieio/factory.cpp
+                        movieio/format.cpp
+                        movieio/image_seq_reader.cpp
+                        movieio/image_seq_writer.cpp
+                        movieio/reader.cpp
+                        movieio/writer.cpp
 
-					memory/image_cache.cpp
-					memory/manager.cpp
-					memory/pool.cpp
+                        nodes/composite_node.cpp
+                        nodes/edge.cpp
+                        nodes/graph_algorithm.cpp
+                        nodes/image_node.cpp
+                        nodes/node.cpp
+                        nodes/node_factory.cpp
+                        nodes/node_graph.cpp
+                        nodes/node_metaclass.cpp
+                        nodes/node_plug.cpp
+                        nodes/node_output_interface.cpp
+                        nodes/node_visitor.cpp
+                        nodes/world_node.cpp
 
-					movieio/exceptions.cpp
-					movieio/factory.cpp
-					movieio/format.cpp
-					movieio/image_seq_reader.cpp
-					movieio/image_seq_writer.cpp
-					movieio/reader.cpp
-					movieio/writer.cpp
+                        noise/catrom2.cpp
+                        noise/cellular.c
+                        noise/global_noise.cpp
+                        noise/noise_base.cpp
+                        noise/perlin.cpp
+                        noise/permutation_array.cpp
+                        noise/simplex_noise.cpp
+                        noise/simplex_noise_generator.cpp
+                        noise/vcnoise.cpp
 
-					nodes/composite_node.cpp
-					nodes/edge.cpp
-					nodes/graph_algorithm.cpp
-					nodes/image_node.cpp
-					nodes/node.cpp
-					nodes/node_factory.cpp
-					nodes/node_graph.cpp
-					nodes/node_metaclass.cpp
-					nodes/node_plug.cpp
-					nodes/node_output_interface.cpp
-					nodes/node_visitor.cpp
-					nodes/world_node.cpp
+                        ocio/context.cpp
+                        ocio/manager.cpp
+                        ocio/gl_display_manager.cpp
+                        ocio/gl_lut3d.cpp
 
-					noise/catrom2.cpp
-					noise/cellular.c
-					noise/global_noise.cpp
-					noise/noise_base.cpp
-					noise/perlin.cpp
-					noise/permutation_array.cpp
-					noise/simplex_noise.cpp
-					noise/simplex_noise_generator.cpp
-					noise/vcnoise.cpp
+                        params/animated_param.cpp
+                        params/animated_param_command.cpp
+                        params/aspect_ratio_param.cpp
+                        params/bool_param.cpp
+                        params/button_param.cpp
+                        params/color_param.cpp
+                        params/combo_group_param.cpp
+                        params/composite_param.cpp
+                        params/composite_parameterised.cpp
+                        params/curve_param.cpp
+                        params/file_param.cpp
+                        params/float_param.cpp
+                        params/float2_param.cpp
+                        params/float3_param.cpp
+                        params/group_param.cpp
+                        params/image_format_param.cpp
+                        params/inspector_param.cpp
+                        params/motion_blur_info.cpp
+                        params/motion_blur_param.cpp
+                        params/numeric_param.cpp
+                        params/ocio_colorspace_param.cpp
+                        params/param.cpp
+                        params/param_set.cpp
+                        params/parameterised.cpp
+                        params/popup_param.cpp
+                        params/proportional_param.cpp
+                        params/separator_param.cpp
+                        params/static_param.cpp
+                        params/static_param_command.cpp
+                        params/string_param.cpp
+                        params/tab_group_param.cpp
 
-					ocio/context.cpp
-					ocio/manager.cpp
-					ocio/gl_display_manager.cpp
-					ocio/gl_lut3d.cpp
+                        render/context.cpp
+                        render/context_guard.cpp
+                        render/image_node_renderer.cpp
+                        render/render_sequence.cpp
+                        render/render_thread.cpp
 
-					params/animated_param.cpp
-					params/animated_param_command.cpp
-					params/aspect_ratio_param.cpp
-					params/bool_param.cpp
-					params/button_param.cpp
-					params/color_param.cpp
-					params/combo_group_param.cpp
-					params/composite_param.cpp
-					params/composite_parameterised.cpp
-					params/curve_param.cpp
-					params/file_param.cpp
-					params/float_param.cpp
-					params/float2_param.cpp
-					params/float3_param.cpp
-					params/group_param.cpp
-					params/image_format_param.cpp
-					params/inspector_param.cpp
-					params/motion_blur_info.cpp
-					params/motion_blur_param.cpp
-					params/numeric_param.cpp
-					params/ocio_colorspace_param.cpp
-					params/param.cpp
-					params/param_set.cpp
-					params/parameterised.cpp
-					params/popup_param.cpp
-					params/proportional_param.cpp
-					params/separator_param.cpp
-					params/static_param.cpp
-					params/static_param_command.cpp
-					params/string_param.cpp
-					params/tab_group_param.cpp
+                        serialization/yaml.cpp
+                        serialization/yaml_iarchive.cpp
+                        serialization/yaml_node.cpp
+                        serialization/yaml_oarchive.cpp
 
-					render/context.cpp
-					render/context_guard.cpp
-					render/image_node_renderer.cpp
-					render/render_sequence.cpp
-					render/render_thread.cpp
+                        ui/add_node_command.cpp
+                        ui/edit_commands.cpp
+                        ui/events.cpp
+                        ui/events_util.cpp
+                        ui/graph_layout.cpp
+                        ui/main_window.cpp
+                        ui/nice_numbers.cpp
+                        ui/node_menu.cpp
+                        ui/palette.cpp
+                        ui/render_composition.cpp
+                        ui/time_controls.cpp
+                        ui/tool.cpp
+                        ui/user_interface.cpp
+                        ui/viewport.cpp
 
-					serialization/yaml.cpp
-					serialization/yaml_iarchive.cpp
-					serialization/yaml_node.cpp
-					serialization/yaml_oarchive.cpp
+                        ui/anim/anim_curves_view.cpp
+                        ui/anim/anim_editor.cpp
+                        ui/anim/anim_editor_command.cpp
+                        ui/anim/anim_editor_select_tool.cpp
+                        ui/anim/anim_editor_tool.cpp
+                        ui/anim/anim_editor_toolbar.cpp
+                        ui/anim/drag_keys_command.cpp
+                        ui/anim/draw_curves_visitors.cpp
+                        ui/anim/edit_keys_visitors.cpp
+                        ui/anim/edit_tangents_visitors.cpp
+                        ui/anim/pick_curves_visitors.cpp
+                        ui/anim/track_model.cpp
 
-					ui/add_node_command.cpp
-					ui/edit_commands.cpp
-					ui/events.cpp
-					ui/events_util.cpp
-					ui/graph_layout.cpp
-					ui/main_window.cpp
-					ui/nice_numbers.cpp
-					ui/node_menu.cpp
-					ui/palette.cpp
-					ui/render_composition.cpp
-					ui/time_controls.cpp
-					ui/tool.cpp
-					ui/user_interface.cpp
-					ui/viewport.cpp
+                        ui/compview/composition_view.cpp
+                        ui/compview/composition_view_commands.cpp
+                        ui/compview/composition_view_layout.cpp
+                        ui/compview/composition_view_toolbar.cpp
+                        ui/compview/draw_pick_visitors.cpp
+                        ui/compview/draw_pick_generic_node.cpp
 
-					ui/anim/anim_curves_view.cpp
-					ui/anim/anim_editor.cpp
-					ui/anim/anim_editor_command.cpp
-					ui/anim/anim_editor_select_tool.cpp
-					ui/anim/anim_editor_tool.cpp
-					ui/anim/anim_editor_toolbar.cpp
-					ui/anim/drag_keys_command.cpp
-					ui/anim/draw_curves_visitors.cpp
-					ui/anim/edit_keys_visitors.cpp
-					ui/anim/edit_tangents_visitors.cpp
-					ui/anim/pick_curves_visitors.cpp
-					ui/anim/track_model.cpp
+                        ui/dialogs/about_dialog.cpp
+                        ui/dialogs/composition_settings_dialog.cpp
+                        ui/dialogs/multiline_alert.cpp
+                        ui/dialogs/preferences_dialog.cpp
+                        ui/dialogs/render_composition_dialog.cpp
+                        ui/dialogs/render_flipbook_dialog.cpp
+                        ui/dialogs/smooth_anim_curves_dialog.cpp
+                        ui/dialogs/splash_screen.cpp
 
-					ui/compview/composition_view.cpp
-					ui/compview/composition_view_commands.cpp
-					ui/compview/composition_view_layout.cpp
-					ui/compview/composition_view_toolbar.cpp
-					ui/compview/draw_pick_visitors.cpp
-					ui/compview/draw_pick_generic_node.cpp
+                        ui/inspector/inspector.cpp
+                        ui/inspector/panel.cpp
+                        ui/inspector/panel_factory.cpp
 
-					ui/dialogs/about_dialog.cpp
-					ui/dialogs/composition_settings_dialog.cpp
-					ui/dialogs/multiline_alert.cpp
-					ui/dialogs/preferences_dialog.cpp
-					ui/dialogs/render_composition_dialog.cpp
-					ui/dialogs/render_flipbook_dialog.cpp
-					ui/dialogs/smooth_anim_curves_dialog.cpp
-					ui/dialogs/splash_screen.cpp
+                        ui/viewer/image_view/empty_image_strategy.cpp
+                        ui/viewer/image_view/image.cpp
+                        ui/viewer/image_view/image_strategy.cpp
+                        ui/viewer/image_view/image_viewer_strategy.cpp
+                        ui/viewer/image_view/image_view_toolbar.cpp
+                        ui/viewer/image_view/tiled_image_strategy.cpp
 
-					ui/inspector/inspector.cpp
-					ui/inspector/panel.cpp
-					ui/inspector/panel_factory.cpp
+                        ui/viewer/viewer_context.cpp
+                        ui/viewer/viewer_strategy.cpp
+                        ui/viewer/viewer.cpp
 
-					ui/viewer/image_view/empty_image_strategy.cpp
-					ui/viewer/image_view/image.cpp
-					ui/viewer/image_view/image_strategy.cpp
-					ui/viewer/image_view/image_viewer_strategy.cpp
-					ui/viewer/image_view/image_view_toolbar.cpp
-					ui/viewer/image_view/tiled_image_strategy.cpp
+                        ui/widgets/color.cpp
+                        ui/widgets/color_button.cpp
+                        ui/widgets/color_picker.cpp
+                        ui/widgets/color_swatch.cpp
+                        ui/widgets/exposure_picker.cpp
+                        ui/widgets/hue_picker.cpp
+                        ui/widgets/saturation_value_picker.cpp
+                        ui/widgets/container_widget.cpp
+                        ui/widgets/double_spinbox.cpp
+                        ui/widgets/eyedropper_button.cpp
+                        ui/widgets/image_format_widget.cpp
+                        ui/widgets/group_box.cpp
+                        ui/widgets/label_separator.cpp
+                        ui/widgets/line_edit.cpp
 
-					ui/viewer/viewer_context.cpp
-					ui/viewer/viewer_strategy.cpp
-					ui/viewer/viewer.cpp
+                        ui/widgets/ocio_colorspace_combo.cpp
+                        ui/widgets/ocio_combo.cpp
+                        ui/widgets/ocio_display_combo.cpp
+                        ui/widgets/ocio_display_widget.cpp
+                        ui/widgets/ocio_view_combo.cpp
 
-					ui/widgets/color.cpp
-					ui/widgets/color_button.cpp
-					ui/widgets/color_picker.cpp
-					ui/widgets/color_swatch.cpp
-					ui/widgets/exposure_picker.cpp
-					ui/widgets/hue_picker.cpp
-					ui/widgets/saturation_value_picker.cpp
-					ui/widgets/container_widget.cpp
-					ui/widgets/double_spinbox.cpp
-					ui/widgets/eyedropper_button.cpp
-					ui/widgets/image_format_widget.cpp
-					ui/widgets/group_box.cpp
-					ui/widgets/label_separator.cpp
-					ui/widgets/line_edit.cpp
+                        ui/widgets/param_spinbox.cpp
+                        ui/widgets/spinbox.cpp
+                        ui/widgets/text_edit.cpp
+                        ui/widgets/time_slider.cpp
 
-					ui/widgets/ocio_colorspace_combo.cpp
-					ui/widgets/ocio_combo.cpp
-					ui/widgets/ocio_display_combo.cpp
-					ui/widgets/ocio_display_widget.cpp
-					ui/widgets/ocio_view_combo.cpp
+                        undo/command.cpp
+                        undo/stack.cpp
 
-					ui/widgets/param_spinbox.cpp
-					ui/widgets/spinbox.cpp
-					ui/widgets/text_edit.cpp
-					ui/widgets/time_slider.cpp
+                        util/calculator.cpp
+                        util/command_line_parser.cpp
+                        util/edit_distance.cpp
+                        util/error_log.cpp
+                        util/string.cpp
 
-					undo/command.cpp
-					undo/stack.cpp
-
-					util/calculator.cpp
-					util/command_line_parser.cpp
-					util/edit_distance.cpp
-					util/error_log.cpp
-					util/string.cpp
-
-					system/system.cpp
-					)
+                        system/system.cpp
+                        )
 
 IF( WITH_NODES)
-    SET( RAMEN_MOC_CLASSES	${RAMEN_MOC_CLASSES}
-                                nodes/image/input/image_channels_param.hpp
-                                nodes/image/input/image_seq_param.hpp
+    SET( RAMEN_MOC_CLASSES ${RAMEN_MOC_CLASSES} nodes/image/input/image_channels_param.hpp
+                                                nodes/image/input/image_seq_param.hpp
 
-                                nodes/image/roto/roto_shape_param.hpp
-                                nodes/image/roto/shape_transform_param.hpp
-                                nodes/image/roto/toolbar.hpp
+                                                nodes/image/roto/roto_shape_param.hpp
+                                                nodes/image/roto/shape_transform_param.hpp
+                                                nodes/image/roto/toolbar.hpp
+                                                nodes/image/track/tracker_toolbar.hpp
 
-                                nodes/image/track/tracker_toolbar.hpp
+                                                params/tracker_areas_param.hpp
+                                                params/transform2_param.hpp
+                                                params/transform3_param.hpp
 
-                        	params/tracker_areas_param.hpp
-                        	params/transform2_param.hpp
-                        	params/transform3_param.hpp
+                                                ui/dialogs/apply_corner_track_dialog.hpp
+                                                ui/dialogs/apply_point_track_dialog.hpp
+                                                ui/dialogs/apply_track_dialog.hpp
+                                                )
 
-                        	ui/dialogs/apply_corner_track_dialog.hpp
-                        	ui/dialogs/apply_point_track_dialog.hpp
-                        	ui/dialogs/apply_track_dialog.hpp
-                        	)
+    SET( RAMEN_SOURCES ${RAMEN_SOURCES}	imageio/import_multichannel_exr.cpp
 
-    SET( RAMEN_SOURCES	${RAMEN_SOURCES}
-                        imageio/import_multichannel_exr.cpp
+                                        manipulators/circle_manipulator.cpp
+                                        manipulators/point2_manipulator.cpp
+                                        manipulators/quad_manipulator.cpp
+                                        manipulators/transform2_manipulator.cpp
 
-						manipulators/circle_manipulator.cpp
-						manipulators/point2_manipulator.cpp
-						manipulators/quad_manipulator.cpp
-						manipulators/transform2_manipulator.cpp
+                                        nodes/image/areaop_node.cpp
+                                        nodes/image/base_blur_node.cpp
+                                        nodes/image/base_layer_node.cpp
+                                        nodes/image/base_output_node.cpp
+                                        nodes/image/base_warp_node.cpp
+                                        nodes/image/distort_node.cpp
+                                        nodes/image/generator_node.cpp
+                                        nodes/image/keyer_node.cpp
+                                        nodes/image/pointop_node.cpp
+                                        nodes/image/xform_node.cpp
+                                        nodes/image/xform2d_node.cpp
 
-						nodes/image/areaop_node.cpp
-						nodes/image/base_blur_node.cpp
-						nodes/image/base_layer_node.cpp
-						nodes/image/base_output_node.cpp
-						nodes/image/base_warp_node.cpp
-						nodes/image/distort_node.cpp
-						nodes/image/generator_node.cpp
-						nodes/image/keyer_node.cpp
-						nodes/image/pointop_node.cpp
-						nodes/image/xform_node.cpp
-						nodes/image/xform2d_node.cpp
+                                        nodes/image/color_op_interface.cpp
+                                        nodes/image/rasterizable2d_interface.cpp
+                                        nodes/image/rasterizable3d_interface.cpp
 
-						nodes/image/color_op_interface.cpp
-						nodes/image/rasterizable2d_interface.cpp
-						nodes/image/rasterizable3d_interface.cpp
+                                        nodes/image/channel/copy_channels_node.cpp
+                                        nodes/image/channel/invert_node.cpp
+                                        nodes/image/channel/premult_node.cpp
+                                        nodes/image/channel/set_channels_node.cpp
+                                        nodes/image/channel/set_matte_node.cpp
 
-						nodes/image/channel/copy_channels_node.cpp
-						nodes/image/channel/invert_node.cpp
-						nodes/image/channel/premult_node.cpp
-						nodes/image/channel/set_channels_node.cpp
-						nodes/image/channel/set_matte_node.cpp
+                                        nodes/image/color/adjust_hsv_node.cpp
+                                        nodes/image/color/cdl_node.cpp
+                                        nodes/image/color/channel_mixer_node.cpp
+                                        nodes/image/color/clamp_colors_node.cpp
+                                        nodes/image/color/color_correct_node.cpp
+                                        nodes/image/color/color_match_node.cpp
+                                        nodes/image/color/color_replace_node.cpp
+                                        nodes/image/color/colorspace_node.cpp
+                                        nodes/image/color/curves_node.cpp
+                                        nodes/image/color/exposure_node.cpp
+                                        nodes/image/color/gamma_node.cpp
+                                        nodes/image/color/hsv_colorize_node.cpp
+                                        nodes/image/color/ocio_colorspace_node.cpp
+                                        nodes/image/color/ocio_file_transform_node.cpp
+                                        nodes/image/color/tint_node.cpp
 
-						nodes/image/color/adjust_hsv_node.cpp
-						nodes/image/color/cdl_node.cpp
-						nodes/image/color/channel_mixer_node.cpp
-						nodes/image/color/clamp_colors_node.cpp
-						nodes/image/color/color_correct_node.cpp
-						nodes/image/color/color_match_node.cpp
-						nodes/image/color/color_replace_node.cpp
-						nodes/image/color/colorspace_node.cpp
-						nodes/image/color/curves_node.cpp
-						nodes/image/color/exposure_node.cpp
-						nodes/image/color/gamma_node.cpp
-						nodes/image/color/hsv_colorize_node.cpp
-						nodes/image/color/ocio_colorspace_node.cpp
-						nodes/image/color/ocio_file_transform_node.cpp
-						nodes/image/color/tint_node.cpp
+                                        nodes/image/distort/displace_node.cpp
+                                        nodes/image/distort/turbulent_displace_node.cpp
+                                        nodes/image/distort/twirl_node.cpp
 
-						nodes/image/distort/displace_node.cpp
-						nodes/image/distort/turbulent_displace_node.cpp
-						nodes/image/distort/twirl_node.cpp
+                                        nodes/image/filter/blur_channels_node.cpp
+                                        nodes/image/filter/blur_mask_node.cpp
+                                        nodes/image/filter/blur_node.cpp
+                                        nodes/image/filter/chroma_blur_node.cpp
+                                        nodes/image/filter/gauss_blur_node.cpp
+                                        nodes/image/filter/percentile_filter_node.cpp
+                                        nodes/image/filter/smart_blur_node.cpp
+                                        nodes/image/filter/unsharp_mask_node.cpp
 
-						nodes/image/filter/blur_channels_node.cpp
-						nodes/image/filter/blur_mask_node.cpp
-						nodes/image/filter/blur_node.cpp
-						nodes/image/filter/chroma_blur_node.cpp
-						nodes/image/filter/gauss_blur_node.cpp
-						nodes/image/filter/percentile_filter_node.cpp
-						nodes/image/filter/smart_blur_node.cpp
-						nodes/image/filter/unsharp_mask_node.cpp
+                                        nodes/image/generate/checkerboard_node.cpp
+                                        nodes/image/generate/color_bars_node.cpp
+                                        nodes/image/generate/color_node.cpp
+                                        nodes/image/generate/fractal_noise_node.cpp
+                                        nodes/image/generate/gradient_node.cpp
+                                        nodes/image/generate/grid_node.cpp
+                                        nodes/image/generate/rgradient_node.cpp
 
-						nodes/image/generate/checkerboard_node.cpp
-						nodes/image/generate/color_bars_node.cpp
-						nodes/image/generate/color_node.cpp
-						nodes/image/generate/fractal_noise_node.cpp
-						nodes/image/generate/gradient_node.cpp
-						nodes/image/generate/grid_node.cpp
-						nodes/image/generate/rgradient_node.cpp
-						nodes/image/generate/text_node.cpp
+                                        nodes/image/input/image_channels_param.cpp
+                                        nodes/image/input/image_input_command.cpp
+                                        nodes/image/input/image_seq_param.cpp
+                                        nodes/image/input/input_node.cpp
+                                        nodes/image/input/input_clip.cpp
 
-						nodes/image/input/image_channels_param.cpp
-						nodes/image/input/image_input_command.cpp
-						nodes/image/input/image_seq_param.cpp
-						nodes/image/input/input_node.cpp
-						nodes/image/input/input_clip.cpp
+                                        nodes/image/key/color_diff_keyer_node.cpp
+                                        nodes/image/key/lum_key_node.cpp
+                                        nodes/image/key/spill_suppressor_node.cpp
 
-						nodes/image/key/color_diff_keyer_node.cpp
-						nodes/image/key/lum_key_node.cpp
-						nodes/image/key/spill_suppressor_node.cpp
+                                        nodes/image/layer/add_mix_layer_node.cpp
+                                        nodes/image/layer/alpha_layer_node.cpp
+                                        nodes/image/layer/key_mix_layer_node.cpp
+                                        nodes/image/layer/layer_node.cpp
 
-						nodes/image/layer/add_mix_layer_node.cpp
-						nodes/image/layer/alpha_layer_node.cpp
-						nodes/image/layer/key_mix_layer_node.cpp
-						nodes/image/layer/layer_node.cpp
+                                        nodes/image/lighting/glow_node.cpp
 
-						nodes/image/lens_distort/lens_distort_node.cpp
+                                        nodes/image/matte/alpha_levels_node.cpp
+                                        nodes/image/matte/alpha_ops_node.cpp
 
-						nodes/image/lighting/glow_node.cpp
+                                        nodes/image/noise/add_grain_node.cpp
 
-						nodes/image/matte/alpha_levels_node.cpp
-						nodes/image/matte/alpha_ops_node.cpp
-						nodes/image/matte/trimap_node.cpp
+                                        nodes/image/output/output_node.cpp
 
-						nodes/image/noise/add_grain_node.cpp
+                                        nodes/image/roto/convert_tool.cpp
+                                        nodes/image/roto/create_tool.cpp
+                                        nodes/image/roto/manipulator.cpp
+                                        nodes/image/roto/null_tool.cpp
+                                        nodes/image/roto/roto_commands.cpp
+                                        nodes/image/roto/roto_node.cpp
+                                        nodes/image/roto/roto_shape_param.cpp
+                                        nodes/image/roto/select_tool.cpp
+                                        nodes/image/roto/shape_transform_param.cpp
+                                        nodes/image/roto/tool.cpp
+                                        nodes/image/roto/rect_tool.cpp
+                                        nodes/image/roto/toolbar.cpp
+                                        nodes/image/roto/shape.cpp
+                                        nodes/image/roto/scene.cpp
+                                        nodes/image/roto/scene_renderer.cpp
+                                        nodes/image/roto/triple.cpp
 
-						nodes/image/output/output_node.cpp
+                                        nodes/image/tonemap/global_tonemap_node.cpp
 
-						nodes/image/roto/convert_tool.cpp
-						nodes/image/roto/create_tool.cpp
-						nodes/image/roto/manipulator.cpp
-						nodes/image/roto/null_tool.cpp
-						nodes/image/roto/roto_commands.cpp
-						nodes/image/roto/roto_node.cpp
-						nodes/image/roto/roto_shape_param.cpp
-						nodes/image/roto/select_tool.cpp
-						nodes/image/roto/shape_transform_param.cpp
-						nodes/image/roto/tool.cpp
-						nodes/image/roto/rect_tool.cpp
-						nodes/image/roto/toolbar.cpp
-						nodes/image/roto/shape.cpp
-						nodes/image/roto/scene.cpp
-						nodes/image/roto/scene_renderer.cpp
-						nodes/image/roto/triple.cpp
+                                        nodes/image/track/ncc_tracker.cpp
+                                        nodes/image/track/tracker_node.cpp
+                                        nodes/image/track/tracker_manipulator.cpp
+                                        nodes/image/track/tracker_toolbar.cpp
 
-						nodes/image/time/retime_node.cpp
+                                        nodes/image/transform/camera_shake_node.cpp
+                                        nodes/image/transform/crop_node.cpp
+                                        nodes/image/transform/expand_node.cpp
+                                        nodes/image/transform/flip_node.cpp
+                                        nodes/image/transform/move2d_node.cpp
+                                        nodes/image/transform/resize_node.cpp
+                                        nodes/image/transform/transform_blur_node.cpp
 
-						nodes/image/tonemap/global_tonemap_node.cpp
+                                        nodes/image/util/nop_node.cpp
+                                        nodes/image/util/set_dod_node.cpp
 
-						nodes/image/track/ncc_tracker.cpp
-						nodes/image/track/tracker_node.cpp
-						nodes/image/track/tracker_manipulator.cpp
-						nodes/image/track/tracker_toolbar.cpp
-						#nodes/image/track/autoalign_base_node.cpp
-						#nodes/image/track/autostab_node.cpp
-						#nodes/image/track/cv_autoalign_node.cpp
-						nodes/image/track/vis_flow_node.cpp
+                                        params/tracker_areas_param.cpp
+                                        params/transform2_param.cpp
+                                        params/transform3_param.cpp
 
-						nodes/image/transform/camera_shake_node.cpp
-						#nodes/image/transform/corner_pin_node.cpp
-						nodes/image/transform/crop_node.cpp
-						nodes/image/transform/expand_node.cpp
-						nodes/image/transform/flip_node.cpp
-						nodes/image/transform/move2d_node.cpp
-						nodes/image/transform/resize_node.cpp
-						nodes/image/transform/transform_blur_node.cpp
-
-						nodes/image/util/nop_node.cpp
-						nodes/image/util/set_dod_node.cpp
-
-						params/tracker_areas_param.cpp
-						params/transform2_param.cpp
-						params/transform3_param.cpp
-
-						ui/dialogs/apply_corner_track_dialog.cpp
-						ui/dialogs/apply_point_track_dialog.cpp
-						ui/dialogs/apply_track_dialog.cpp
-						)
+                                        ui/dialogs/apply_corner_track_dialog.cpp
+                                        ui/dialogs/apply_point_track_dialog.cpp
+                                        ui/dialogs/apply_track_dialog.cpp
+                                        )
 ENDIF()
 
 # platform sources
@@ -631,17 +606,17 @@ SET( RAMEN_LIB_SOURCES	${RAMEN_SOURCES}
 ADD_LIBRARY( ramen SHARED ${RAMEN_LIB_SOURCES})
 SET_TARGET_PROPERTIES( ramen PROPERTIES COMPILE_FLAGS -DRAMEN_MAKING_DSO)
 SET_TARGET_PROPERTIES( ramen PROPERTIES VERSION ${RAMEN_VERSION_MAJOR}.${RAMEN_VERSION_MINOR}.${RAMEN_VERSION_PATCH}
-										SOVERSION ${RAMEN_VERSION_MAJOR} )
-TARGET_LINK_LIBRARIES( ramen	${RAMEN_ALL_LIBS}
-                                ${EXTRA_PLATFORM_LIBS}
-                                )
+                                SOVERSION ${RAMEN_VERSION_MAJOR} )
+TARGET_LINK_LIBRARIES( ramen ${RAMEN_ALL_LIBS}
+${EXTRA_PLATFORM_LIBS}
+)
 
 SET( LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/lib/)
 
 ######################################################
 # Ramen app
 
-SET( RAMEN_APP_SOURCES  main.cpp
+SET( RAMEN_APP_SOURCES	main.cpp
                         assert.cpp
                         )
 
