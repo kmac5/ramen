@@ -232,8 +232,6 @@ void node_t::do_notify()
     set_notify_dirty( false);
 }
 
-node_t::frame_interval_type node_t::frame_interval() const { return do_calc_frame_interval();}
-
 void node_t::calc_frames_needed( const render::context_t& context)
 {
     do_calc_frames_needed( context);

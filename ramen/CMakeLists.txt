@@ -438,10 +438,6 @@ IF( WITH_NODES)
                                         nodes/image/xform_node.cpp
                                         nodes/image/xform2d_node.cpp
 
-                                        nodes/image/color_op_interface.cpp
-                                        nodes/image/rasterizable2d_interface.cpp
-                                        nodes/image/rasterizable3d_interface.cpp
-
                                         nodes/image/channel/copy_channels_node.cpp
                                         nodes/image/channel/invert_node.cpp
                                         nodes/image/channel/premult_node.cpp

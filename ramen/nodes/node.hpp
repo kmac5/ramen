@@ -24,8 +24,6 @@
 #include<ramen/nodes/node_factory.hpp>
 #include<ramen/nodes/node_visitor.hpp>
 
-#include<ramen/interval.hpp>
-
 #include<ramen/render/context.hpp>
 
 #include<ramen/undo/command.hpp>
@@ -165,10 +163,6 @@ public:
     bool ignored() const;
     void set_ignored( bool b);
 
-    // time
-    typedef interval_t<> frame_interval_type;
-    frame_interval_type frame_interval() const;
-
     void calc_frames_needed( const render::context_t& context);
 
     const std::vector<std::pair<int, float> >& frames_needed() const	{ return frames_needed_;}
@@ -252,9 +246,6 @@ private:
 
     virtual bool do_is_valid() const;
     virtual bool do_is_identity() const;
-
-    // time
-    virtual frame_interval_type do_calc_frame_interval() const { return frame_interval_type();}
 
     virtual void do_calc_frames_needed( const render::context_t& context);
 
