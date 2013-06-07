@@ -2,8 +2,6 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-
-
 #include<ramen/ui/user_interface.hpp>
 
 #include<utility>
@@ -40,15 +38,11 @@
 
 #include<ramen/ui/main_window.hpp>
 #include<ramen/ui/palette.hpp>
-
 #include<ramen/ui/inspector/inspector.hpp>
 #include<ramen/ui/viewer/viewer.hpp>
 #include<ramen/ui/anim/anim_editor.hpp>
-
 #include<ramen/ui/dialogs/multiline_alert.hpp>
 #include<ramen/ui/dialogs/render_composition_dialog.hpp>
-#include<ramen/ui/dialogs/render_flipbook_dialog.hpp>
-
 #include<ramen/ui/widgets/time_slider.hpp>
 
 #include<ramen/serialization/yaml_iarchive.hpp>
@@ -174,11 +168,7 @@ void user_interface_t::create_new_document()
     render_composition_dialog_t::instance().set_frame_range( app().document().composition().start_frame(),
 																app().document().composition().end_frame());
 
-    render_composition_dialog_t::instance().set_mblur_settings( 0, 1);
-
-    render_flipbook_dialog_t::instance().set_frame_range( app().document().composition().start_frame(),
-															app().document().composition().end_frame());
-    
+    render_composition_dialog_t::instance().set_mblur_settings( 0, 1);    
     update();
 }
 
@@ -228,9 +218,6 @@ void user_interface_t::open_document( const boost::filesystem::path& p)
 
     render_composition_dialog_t::instance().set_mblur_settings( 0, 1);
 
-    render_flipbook_dialog_t::instance().set_frame_range( app().document().composition().start_frame(),
-															app().document().composition().end_frame());
-	
     update();
 	std::string err = in->errors();
 	
@@ -368,9 +355,6 @@ void user_interface_t::set_start_frame( int t)
 
     render_composition_dialog_t::instance().set_frame_range( app().document().composition().start_frame(),
 														    app().document().composition().end_frame());
-
-    render_flipbook_dialog_t::instance().set_frame_range( app().document().composition().start_frame(),
-									    				app().document().composition().end_frame());
 }
 
 void user_interface_t::set_end_frame( int t)
@@ -382,9 +366,6 @@ void user_interface_t::set_end_frame( int t)
 
     render_composition_dialog_t::instance().set_frame_range( app().document().composition().start_frame(),
 														    app().document().composition().end_frame());
-
-    render_flipbook_dialog_t::instance().set_frame_range( app().document().composition().start_frame(),
-										    				app().document().composition().end_frame());
 }
 
 void user_interface_t::set_frame( int t)

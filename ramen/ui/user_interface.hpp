@@ -9,8 +9,6 @@
 
 #include<ramen/ui/user_interface_fwd.hpp>
 
-
-
 #include<memory>
 
 #include<boost/noncopyable.hpp>

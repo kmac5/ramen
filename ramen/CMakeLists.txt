@@ -5,11 +5,7 @@ CONFIGURE_FILE( ${PROJECT_SOURCE_DIR}/ramen/version.hpp.in ${PROJECT_SOURCE_DIR}
 
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR})
 
-SET( RAMEN_MOC_CLASSES	flipbook/djv_flipbook.hpp
-                        flipbook/external_flipbook.hpp
-                        flipbook/internal_flipbook.hpp
-
-                        params/animated_param.hpp
+SET( RAMEN_MOC_CLASSES	params/animated_param.hpp
                         params/aspect_ratio_param.hpp
                         params/bool_param.hpp
                         params/button_param.hpp
@@ -50,7 +46,6 @@ SET( RAMEN_MOC_CLASSES	flipbook/djv_flipbook.hpp
                         ui/dialogs/multiline_alert.hpp
                         ui/dialogs/preferences_dialog.hpp
                         ui/dialogs/render_composition_dialog.hpp
-                        ui/dialogs/render_flipbook_dialog.hpp
                         ui/dialogs/smooth_anim_curves_dialog.hpp
                         ui/inspector/inspector.hpp
                         ui/inspector/panel.hpp
@@ -104,16 +99,6 @@ SET( RAMEN_SOURCES      anim/any_curve.cpp
 
                         filesystem/path.cpp
                         filesystem/path_sequence.cpp
-
-                        flipbook/external_flipbook.cpp
-                        flipbook/djv_flipbook.cpp
-                        flipbook/factory.cpp
-                        flipbook/FileReadingThread.cpp
-                        flipbook/flipbook.cpp
-                        flipbook/ImageBuffers.cpp
-                        flipbook/internal_flipbook.cpp
-                        flipbook/render_flipbook.cpp
-                        flipbook/Timer.cpp
 
                         ggems/ggveclib.c
                         ggems/nearestpoint.c
@@ -353,7 +338,6 @@ SET( RAMEN_SOURCES      anim/any_curve.cpp
                         ui/dialogs/multiline_alert.cpp
                         ui/dialogs/preferences_dialog.cpp
                         ui/dialogs/render_composition_dialog.cpp
-                        ui/dialogs/render_flipbook_dialog.cpp
                         ui/dialogs/smooth_anim_curves_dialog.cpp
                         ui/dialogs/splash_screen.cpp
 
@@ -585,7 +569,6 @@ SET( RAMEN_DESIGNER_FILES   ../designer/about.ui
                             ../designer/preferences.ui
                             ../designer/composition_settings.ui
                             ../designer/render_composition.ui
-                            ../designer/render_flipbook.ui
                             ../designer/smooth_anim_curves.ui
                             )
 

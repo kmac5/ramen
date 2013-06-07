@@ -51,9 +51,6 @@
 
 #include<ramen/render/render_sequence.hpp>
 
-#include<ramen/flipbook/factory.hpp>
-#include<ramen/flipbook/render_flipbook.hpp>
-
 #include<ramen/ui/user_interface.hpp>
 #include<ramen/ui/inspector/inspector.hpp>
 #include<ramen/ui/add_node_command.hpp>
@@ -66,7 +63,6 @@
 #include<ramen/ui/widgets/time_slider.hpp>
 #include<ramen/ui/dialogs/about_dialog.hpp>
 #include<ramen/ui/dialogs/render_composition_dialog.hpp>
-#include<ramen/ui/dialogs/render_flipbook_dialog.hpp>
 #include<ramen/ui/dialogs/composition_settings_dialog.hpp>
 #include<ramen/ui/dialogs/preferences_dialog.hpp>
 #include<ramen/ui/dialogs/multiline_alert.hpp>
@@ -846,6 +842,7 @@ void main_window_t::render_composition()
 
 void main_window_t::render_flipbook()
 {
+    /*
     int result = render_flipbook_dialog_t::instance().exec();
 
     if( result == QDialog::Accepted)
@@ -872,6 +869,7 @@ void main_window_t::render_flipbook()
             }
         }
     }
+    */
 }
 
 void main_window_t::show_preferences_dialog()
@@ -932,12 +930,12 @@ void main_window_t::create_node()
 
 void main_window_t::show_about_box()
 {
-    about_dialog_t::instance().exec();
+    //about_dialog_t::instance().exec();
 }
 
 void main_window_t::go_to_project_website()
 {
-    QDesktopServices::openUrl( QUrl( "http://ramencomp.blogspot.com/"));
+    //QDesktopServices::openUrl( QUrl( "http://ramencomp.blogspot.com/"));
 }
 
 void main_window_t::update()
@@ -1049,5 +1047,5 @@ void main_window_t::update_menus()
         comp_flipbook_->setEnabled( false);
 }
 
-} // namespace
-} // namespace
+} // ui
+} // ramen

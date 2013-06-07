@@ -34,7 +34,6 @@ public:
     const boost::filesystem::path& app_bundle_path() const;
     const boost::filesystem::path& preferences_path() const;
     const boost::filesystem::path& tmp_path() const;
-    const boost::filesystem::path& persistent_tmp_path() const;
 
     // cpu
     cpu_family_type cpu_type() const;
@@ -42,15 +41,7 @@ public:
 
     // ram
     boost::uint64_t ram_size() const;
-
-	// mac address
-	const boost::array<boost::uint8_t,6>& mac_address() const;
-	std::string mac_address_as_string() const;
 	
-	// file locks
-	bool create_file_lock( const boost::filesystem::path& p) const;
-	void release_file_lock( const boost::filesystem::path& p) const;
-
 private:
 
     friend class ramen::application_t;
@@ -60,7 +51,7 @@ private:
 	std::auto_ptr<system_pvt> pimpl_;
 };
 
-} // namespace
-} // namespace
+} // system
+} // ramen
 
 #endif

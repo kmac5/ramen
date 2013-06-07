@@ -13,7 +13,6 @@
 
 #include<memory.h>
 
-#include<boost/signal.hpp>
 #include<boost/ptr_container/ptr_vector.hpp>
 
 #include<OpenEXR/ImfIO.h>

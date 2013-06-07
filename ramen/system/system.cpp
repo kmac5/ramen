@@ -42,11 +42,6 @@ const boost::filesystem::path& system_t::tmp_path() const
 	return pimpl_->tmp_path();
 }
 
-const boost::filesystem::path& system_t::persistent_tmp_path() const
-{
-	return pimpl_->persistent_tmp_path();
-}
-
 // cpu
 cpu_family_type system_t::cpu_type() const	{ return pimpl_->cpu_type();}
 
@@ -55,22 +50,5 @@ int system_t::simd_type() const { return pimpl_->simd_type();}
 // ram
 boost::uint64_t system_t::ram_size() const { return pimpl_->ram_size();}
 
-// mac address
-const boost::array<boost::uint8_t,6>& system_t::mac_address() const { return pimpl_->mac_address();}
-
-std::string system_t::mac_address_as_string() const
-{
-    std::stringstream s;
-
-    for( int i = 0; i < 6; ++i)
-		s << std::setfill( '0') << std::setw( 2) << std::hex << (int) mac_address()[i];
-
-    return s.str();	
-}
-
-bool system_t::create_file_lock( const boost::filesystem::path& p) const { return pimpl_->create_file_lock( p);}
-
-void system_t::release_file_lock( const boost::filesystem::path& p)	 const { pimpl_->release_file_lock( p);}
-
-} // namespace
-} // namespace
+} // system
+} // ramen

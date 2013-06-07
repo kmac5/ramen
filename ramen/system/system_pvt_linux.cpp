@@ -71,26 +71,9 @@ system_pvt::system_pvt()
     #endif
 
     // get ram size
-	for( int i = 0; i < 6; ++i)
-		mac_address_[i] = 0;
-
     struct sysinfo info;
     sysinfo( &info);
     ram_size_ = info.totalram * info.mem_unit;
-	
-	// mac address
-	int fd = socket( AF_INET, SOCK_DGRAM, 0);
-	struct ifreq ifr;
-	ifr.ifr_addr.sa_family = AF_INET;
-	strncpy( ifr.ifr_name, "eth0", IFNAMSIZ-1);
-	int err = ioctl( fd, SIOCGIFHWADDR, &ifr);
-	close( fd);
-
-	if( err != -1)
-	{
-		for( int i = 0; i < 6; ++i)
-			mac_address_[i] = ifr.ifr_hwaddr.sa_data[i];
-	}
 }
 	
 const std::string& system_pvt::system_name() const
@@ -187,17 +170,6 @@ cpu_family_type system_pvt::cpu_type() const { return cpu_type_;}
 int system_pvt::simd_type() const { return simd_type_;}
 
 boost::uint64_t system_pvt::ram_size() const { return ram_size_;}
-
-const boost::array<boost::uint8_t,6>& system_pvt::mac_address() const { return mac_address_;}
-
-bool system_pvt::create_file_lock( const boost::filesystem::path& p) const
-{
-	return false;
-}
-
-void system_pvt::release_file_lock( const boost::filesystem::path& p) const
-{
-}
 
 } // namespace
 } // namespace

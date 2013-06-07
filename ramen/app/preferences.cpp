@@ -8,6 +8,8 @@
 #include<stdio.h>
 
 #include<boost/filesystem/fstream.hpp>
+#include<boost/filesystem/operations.hpp>
+#include<boost/filesystem/convenience.hpp>
 
 #include<ramen/app/application.hpp>
 
@@ -38,11 +40,8 @@ void preferences_t::set_defaults()
 
 void preferences_t::load()
 {
-	// TODO: load pick distance
-	
     boost::filesystem::path p = app().system().preferences_path() / "preferences.yaml";
     boost::filesystem::ifstream ifs( p);
-
     if( !ifs.is_open() || !ifs.good())
     {
         save();

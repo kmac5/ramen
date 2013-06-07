@@ -2,8 +2,6 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-
-
 #include<ramen/ui/time_controls.hpp>
 
 #include<QHBoxLayout>
@@ -17,9 +15,6 @@
 #include<ramen/app/document.hpp>
 
 #include<ramen/nodes/image_node.hpp>
-
-#include<ramen/flipbook/factory.hpp>
-#include<ramen/flipbook/render_flipbook.hpp>
 
 #include<ramen/ui/user_interface.hpp>
 #include<ramen/ui/inspector/inspector.hpp>
@@ -257,6 +252,7 @@ void time_controls_t::set_autokey( bool b)
 
 void time_controls_t::make_flipbook()
 {
+    /*
 	node_t *n = app().document().composition().selected_node();
 	image_node_t *inode = dynamic_cast<image_node_t*>( n);
 	RAMEN_ASSERT( inode);
@@ -287,7 +283,8 @@ void time_controls_t::make_flipbook()
 		if( flipbook::render_flipbook( flip, inode, start, end, proxy_level, subsample, 0, mb_shutter_factor))
 			flip->play();
 	}
+    */
 }
 
-} // namespace
-} // namespace
+} // ui
+} // ramen

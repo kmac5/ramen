@@ -10,7 +10,6 @@
 #include<map>
 
 #include<boost/noncopyable.hpp>
-#include<boost/signal.hpp>
 
 #include<QWidget>
 
@@ -69,7 +68,7 @@ private:
     bool stop_playing_;
 };
 
-} // namespace
-} // namespace
+} // ui
+} // ramen
 
 #endif

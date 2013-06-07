@@ -24,10 +24,6 @@ public:
 
     void exec_dialog();
 
-private Q_SLOTS:
-
-	void pick_disk_cache_path();
-
 private:
 
     preferences_dialog_t();
@@ -35,7 +31,7 @@ private:
 	Ui::preferences ui_;
 };
 
-} // namespace
-} // namespace
+} // ui
+} // ramen
 
 #endif

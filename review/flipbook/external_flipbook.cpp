@@ -23,7 +23,7 @@ namespace flipbook
 	
 external_flipbook_t::external_flipbook_t( int frame_rate, 
 										  const std::string& display_device,
-										 const std::string& display_transform) : flipbook_t( frame_rate, display_device, display_transform)
+                                          const std::string& display_transform) : flipbook_t( frame_rate, display_device, display_transform)
 {
 	empty_ = true;
 	proc_ = new QProcess( this);

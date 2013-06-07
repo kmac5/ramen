@@ -26,10 +26,10 @@
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
+         <item alignment="Qt::AlignLeft">
           <widget class="QLabel" name="label_2">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -42,7 +42,7 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>175</width>
+             <width>16777215</width>
              <height>16777215</height>
             </size>
            </property>
@@ -59,6 +59,12 @@
          </item>
          <item>
           <widget class="Line" name="line">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -123,36 +129,6 @@
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>Default Flipbook</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="flipbook_combo_"/>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -175,29 +151,6 @@
        <property name="verticalSpacing">
         <number>-1</number>
        </property>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>Image RAM cache size</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QSlider" name="ram_slider_">
-         <property name="minimum">
-          <number>5</number>
-         </property>
-         <property name="maximum">
-          <number>80</number>
-         </property>
-         <property name="value">
-          <number>20</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="2">
         <widget class="QSpinBox" name="ram_spinbox_">
          <property name="minimumSize">
@@ -220,34 +173,7 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="3">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>of total RAM size.</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_11">
-         <property name="text">
-          <string>Image Disk cache dir</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_12">
-         <property name="text">
-          <string>Image Disk cache size</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
+       <item row="1" column="0">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -260,89 +186,37 @@
          </property>
         </spacer>
        </item>
-       <item row="3" column="1">
-        <widget class="QSlider" name="disk_slider_">
-         <property name="enabled">
-          <bool>false</bool>
+       <item row="0" column="3">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>of total RAM size.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QSlider" name="ram_slider_">
+         <property name="minimum">
+          <number>5</number>
          </property>
          <property name="maximum">
-          <number>50</number>
+          <number>80</number>
          </property>
          <property name="value">
-          <number>10</number>
+          <number>20</number>
          </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="tickPosition">
-          <enum>QSlider::NoTicks</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1" colspan="2">
-        <widget class="QLineEdit" name="disk_cache_path_">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string notr="true"/>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="4">
-        <widget class="Line" name="line_3">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
-       <item row="2" column="3">
-        <widget class="QPushButton" name="pick_disk_cache_path_">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>16777215</height>
-          </size>
-         </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>...</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QSpinBox" name="disk_spinbox_">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="suffix">
-          <string> Gb</string>
-         </property>
-         <property name="maximum">
-          <number>50</number>
-         </property>
-         <property name="value">
-          <number>10</number>
+          <string>Image RAM cache size</string>
          </property>
         </widget>
        </item>
       </layout>
-     </widget>
-     <widget class="QWidget" name="gui">
-      <attribute name="title">
-       <string>Interface</string>
-      </attribute>
      </widget>
     </widget>
    </item>
