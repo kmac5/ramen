@@ -110,11 +110,9 @@ FIND_PACKAGE( OpenImageIO REQUIRED)
 
 # OpenColorIO
 FIND_PACKAGE( OpenColorIO REQUIRED)
-FIND_PACKAGE( CIMG REQUIRED)
 
 # more libs
 FIND_PACKAGE( AGG REQUIRED)
-FIND_PACKAGE( EIGEN REQUIRED)
 FIND_PACKAGE( ZLIB REQUIRED)
 
 ######################################################
@@ -150,8 +148,6 @@ INCLUDE_DIRECTORIES(    ${PROJECT_SOURCE_DIR}
                         ${OPENIMAGEIO_INCLUDE_DIRS}
 
                         ${OPENCOLORIO_INCLUDE_DIRS}
-                        ${CIMG_INCLUDE_DIRS}
-                        ${EIGEN_INCLUDE_DIRS}
                         ${AGG_INCLUDE_DIRS}
 
                         ${ZLIB_INCLUDE_DIRS}

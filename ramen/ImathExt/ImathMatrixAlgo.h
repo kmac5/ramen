@@ -10,8 +10,10 @@
 
 #include<OpenEXR/ImathMatrix.h>
 
+/*
 #include<Eigen/Core>
 #include<Eigen/LU>
+*/
 
 namespace Imath
 {
@@ -52,6 +54,7 @@ bool isAffine( const Matrix33<T>& m)
     return m[0][2] == 0 && m[1][2] == 0 && m[2][2] == 1;
 }
 
+/*
 template<class T>
 boost::optional<Matrix33<T> > quadToQuadMatrix( const boost::array<Vec2<T> ,4>& src, const boost::array<Vec2<T> ,4>& dst)
 {
@@ -90,6 +93,7 @@ boost::optional<Matrix33<T> > quadToQuadMatrix( const boost::array<Vec2<T> ,4>& 
 
 	return boost::optional<Matrix33<T> >();
 }
+*/
 
 } // Imath
 

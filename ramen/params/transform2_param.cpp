@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/params/transform2_param.hpp>
 
@@ -12,8 +14,6 @@
 
 #include<ramen/params/float2_param.hpp>
 #include<ramen/params/float_param.hpp>
-
-#include<ramen/nodes/image/track/tracker_node.hpp>
 
 #include<ramen/ui/user_interface.hpp>
 
@@ -126,6 +126,7 @@ transform2_param_t::matrix_type transform2_param_t::xform_blur_matrix_at_frame( 
     return m;
 }
 
+/*
 void transform2_param_t::apply_track( float start_frame, float end_frame, const image::tracker_node_t *tracker, 
 									  image::apply_track_mode mode, image::apply_track_use use)
 {
@@ -140,5 +141,6 @@ void transform2_param_t::apply_track( float start_frame, float end_frame, const 
 	param_set()->end_edit( true);
 	app().ui()->update_anim_editors();
 }
+*/
 
 } // namespace

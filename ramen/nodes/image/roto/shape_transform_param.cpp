@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/nodes/image/roto/shape_transform_param.hpp>
 
@@ -12,8 +14,6 @@
 
 #include<ramen/params/float2_param.hpp>
 #include<ramen/params/float_param.hpp>
-
-#include<ramen/nodes/image/track/tracker_node.hpp>
 
 #include<ramen/ui/user_interface.hpp>
 
@@ -113,6 +113,7 @@ Imath::M33f shape_transform_param_t::matrix() const
     return m;
 }
 
+/*
 void shape_transform_param_t::apply_track( float start_frame, float end_frame, const image::tracker_node_t *tracker, 
 										   image::apply_track_mode mode, image::apply_track_use use)
 {
@@ -129,5 +130,6 @@ void shape_transform_param_t::apply_track( float start_frame, float end_frame, c
 	parameterised()->update_widgets();
 	app().ui()->update_anim_editors();
 }
+*/
 
-} // namespace
+} // ramen

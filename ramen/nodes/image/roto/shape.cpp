@@ -26,11 +26,9 @@
 #include<ramen/ImathExt/ImathMatrixAlgo.h>
 
 #include<ramen/ui/viewer/viewer.hpp>
-#include<ramen/ui/dialogs/apply_track_dialog.hpp>
 
 #include<ramen/nodes/image/roto/scene.hpp>
 #include<ramen/nodes/image/roto/roto_node.hpp>
-#include<ramen/nodes/image/track/tracker_node.hpp>
 
 #include<ramen/serialization/yaml_node.hpp>
 #include<ramen/serialization/yaml_oarchive.hpp>
@@ -227,6 +225,7 @@ void shape_t::param_changed( param_t *p, param_t::change_reason reason)
 {
     if( p == &param( "apply_track"))
     {
+        /*
         if( reason != param_t::user_edited)
             return;
 
@@ -244,6 +243,7 @@ void shape_t::param_changed( param_t *p, param_t::change_reason reason)
         }
 
         return;
+        */
     }
 
     // bezier shapes only parameters.

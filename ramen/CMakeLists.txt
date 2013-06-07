@@ -111,8 +111,6 @@ SET( RAMEN_SOURCES      anim/any_curve.cpp
                         ggems/ggveclib.c
                         ggems/nearestpoint.c
                         ggems/convex_opt.c
-                        ggems/poly_clip.cpp
-                        ggems/poly_scan.cpp
 
                         GL/gl.cpp
                         GL/glu.cpp
@@ -130,7 +128,6 @@ SET( RAMEN_SOURCES      anim/any_curve.cpp
                         image/box_blur.cpp
                         image/buffer.cpp
                         image/channel_range.cpp
-                        image/cimg_to_image.cpp
                         image/color.cpp
                         image/color_bars.cpp
                         image/denan.cpp
@@ -248,15 +245,12 @@ SET( RAMEN_SOURCES      anim/any_curve.cpp
                         nodes/node_visitor.cpp
                         nodes/world_node.cpp
 
-                        noise/catrom2.cpp
-                        noise/cellular.c
                         noise/global_noise.cpp
                         noise/noise_base.cpp
                         noise/perlin.cpp
                         noise/permutation_array.cpp
                         noise/simplex_noise.cpp
                         noise/simplex_noise_generator.cpp
-                        noise/vcnoise.cpp
 
                         ocio/context.cpp
                         ocio/manager.cpp
@@ -408,15 +402,9 @@ IF( WITH_NODES)
                                                 nodes/image/roto/roto_shape_param.hpp
                                                 nodes/image/roto/shape_transform_param.hpp
                                                 nodes/image/roto/toolbar.hpp
-                                                nodes/image/track/tracker_toolbar.hpp
 
-                                                params/tracker_areas_param.hpp
                                                 params/transform2_param.hpp
                                                 params/transform3_param.hpp
-
-                                                ui/dialogs/apply_corner_track_dialog.hpp
-                                                ui/dialogs/apply_point_track_dialog.hpp
-                                                ui/dialogs/apply_track_dialog.hpp
                                                 )
 
     SET( RAMEN_SOURCES ${RAMEN_SOURCES}	imageio/import_multichannel_exr.cpp
@@ -524,11 +512,6 @@ IF( WITH_NODES)
 
                                         nodes/image/tonemap/global_tonemap_node.cpp
 
-                                        nodes/image/track/ncc_tracker.cpp
-                                        nodes/image/track/tracker_node.cpp
-                                        nodes/image/track/tracker_manipulator.cpp
-                                        nodes/image/track/tracker_toolbar.cpp
-
                                         nodes/image/transform/camera_shake_node.cpp
                                         nodes/image/transform/crop_node.cpp
                                         nodes/image/transform/expand_node.cpp
@@ -540,13 +523,8 @@ IF( WITH_NODES)
                                         nodes/image/util/nop_node.cpp
                                         nodes/image/util/set_dod_node.cpp
 
-                                        params/tracker_areas_param.cpp
                                         params/transform2_param.cpp
                                         params/transform3_param.cpp
-
-                                        ui/dialogs/apply_corner_track_dialog.cpp
-                                        ui/dialogs/apply_point_track_dialog.cpp
-                                        ui/dialogs/apply_track_dialog.cpp
                                         )
 ENDIF()
 
@@ -569,10 +547,7 @@ ENDIF()
 ######################################################
 # ui files
 
-SET( RAMEN_DESIGNER_FILES   ../designer/apply_corner_track.ui
-                            ../designer/apply_point_track.ui
-                            ../designer/apply_track.ui
-                            ../designer/preferences.ui
+SET( RAMEN_DESIGNER_FILES   ../designer/preferences.ui
                             ../designer/composition_settings.ui
                             ../designer/render_composition.ui
                             ../designer/smooth_anim_curves.ui

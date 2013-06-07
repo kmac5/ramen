@@ -18,9 +18,6 @@
 
 #include<ramen/GL/Imath_gl.hpp>
 
-#include<ramen/nodes/image/track/tracker_node.hpp>
-
-#include<ramen/ui/dialogs/apply_track_dialog.hpp>
 #include<ramen/ui/viewer/viewer_strategy.hpp>
 
 namespace ramen
@@ -255,6 +252,7 @@ void move2d_node_t::param_changed( param_t *p, param_t::change_reason reason)
 	
 	if( reason == param_t::user_edited && p == &param( "apply_track"))
 	{
+        /*
 		apply_track_mode mode;
 		apply_track_use use;
 		
@@ -266,6 +264,7 @@ void move2d_node_t::param_changed( param_t *p, param_t::change_reason reason)
 			xf->apply_track( composition()->start_frame(), composition()->end_frame(), tracker, mode, use);
 			update_widgets();
 		}
+        */
 	}
 }
 

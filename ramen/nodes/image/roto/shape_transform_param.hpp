@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_SHAPE_TRANSFORM_PARAM_HPP
 #define	RAMEN_SHAPE_TRANSFORM_PARAM_HPP
@@ -6,8 +8,6 @@
 #include<ramen/params/composite_param.hpp>
 
 #include<OpenEXR/ImathMatrix.h>
-
-#include<ramen/nodes/image/track/tracker_node_fwd.hpp>
 
 namespace ramen
 {
@@ -36,9 +36,6 @@ public:
 	Imath::M33f matrix() const;
     Imath::M33f matrix_at_frame( float frame) const;
 
-	void apply_track( float start_frame, float end_frame, const image::tracker_node_t *tracker,
-					  image::apply_track_mode mode, image::apply_track_use use);
-	
 protected:
 
     shape_transform_param_t( const shape_transform_param_t& other);
