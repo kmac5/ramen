@@ -61,7 +61,6 @@
 #include<ramen/ui/anim/anim_editor.hpp>
 #include<ramen/ui/render_composition.hpp>
 #include<ramen/ui/widgets/time_slider.hpp>
-#include<ramen/ui/dialogs/about_dialog.hpp>
 #include<ramen/ui/dialogs/render_composition_dialog.hpp>
 #include<ramen/ui/dialogs/composition_settings_dialog.hpp>
 #include<ramen/ui/dialogs/preferences_dialog.hpp>
@@ -930,12 +929,10 @@ void main_window_t::create_node()
 
 void main_window_t::show_about_box()
 {
-    //about_dialog_t::instance().exec();
 }
 
 void main_window_t::go_to_project_website()
 {
-    //QDesktopServices::openUrl( QUrl( "http://ramencomp.blogspot.com/"));
 }
 
 void main_window_t::update()

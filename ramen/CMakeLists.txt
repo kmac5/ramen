@@ -1,9 +1,18 @@
+######################################################################
+# Copyright (C) 2013 Esteban Tovagliari. All Rights Reserved.        #
+# Licensed under the terms of the CDDL License.                      #
+# See CDDL_LICENSE.txt for a copy of the license.                    #
+######################################################################
+
 ######################################################
-# Ramen lib
+# ramen lib sources
 
-CONFIGURE_FILE( ${PROJECT_SOURCE_DIR}/ramen/version.hpp.in ${PROJECT_SOURCE_DIR}/ramen/version.hpp)
+CONFIGURE_FILE( ${PROJECT_SOURCE_DIR}/ramen/version.hpp.in
+                ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/include/ramen/version.hpp)
 
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR})
+INCLUDE_DIRECTORIES( ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/include)
+
+FILE(GLOB_RECURSE RAMEN_HEADERS ./*.h*)
 
 SET( RAMEN_MOC_CLASSES	params/animated_param.hpp
                         params/aspect_ratio_param.hpp
@@ -41,7 +50,6 @@ SET( RAMEN_MOC_CLASSES	params/animated_param.hpp
                         ui/anim/anim_editor_toolbar.hpp
                         ui/compview/composition_view.hpp
                         ui/compview/composition_view_toolbar.hpp
-                        ui/dialogs/about_dialog.hpp
                         ui/dialogs/composition_settings_dialog.hpp
                         ui/dialogs/multiline_alert.hpp
                         ui/dialogs/preferences_dialog.hpp
@@ -333,7 +341,6 @@ SET( RAMEN_SOURCES      anim/any_curve.cpp
                         ui/compview/draw_pick_visitors.cpp
                         ui/compview/draw_pick_generic_node.cpp
 
-                        ui/dialogs/about_dialog.cpp
                         ui/dialogs/composition_settings_dialog.cpp
                         ui/dialogs/multiline_alert.cpp
                         ui/dialogs/preferences_dialog.cpp
@@ -547,23 +554,26 @@ IF( WITH_NODES)
                                         )
 ENDIF()
 
+######################################################
+# platform specific
+
 # platform sources
-IF( APPLE)
-    SET( RAMEN_PLATFORM_SOURCES system/system_pvt_osx.cpp)
-ENDIF()
-
-IF( WIN32)
-    SET( RAMEN_PLATFORM_SOURCES system/system_pvt_win.cpp)
-    SET( EXTRA_PLATFORM_LIBS Userenv)
-ENDIF()
-
-IF( CMAKE_SYSTEM_NAME MATCHES "Linux")
+IF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+   # Mac OS X
+ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     SET( RAMEN_PLATFORM_SOURCES system/system_pvt_linux.cpp)
+ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+   # Windows
+    SET( EXTRA_PLATFORM_LIBS Userenv)
+ELSE()
+    MESSAGE( FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} not supported yet")
 ENDIF()
 
+
+######################################################
 # ui files
-SET( RAMEN_DESIGNER_FILES   ../designer/about.ui
-                            ../designer/apply_corner_track.ui
+
+SET( RAMEN_DESIGNER_FILES   ../designer/apply_corner_track.ui
                             ../designer/apply_point_track.ui
                             ../designer/apply_track.ui
                             ../designer/preferences.ui
@@ -572,32 +582,35 @@ SET( RAMEN_DESIGNER_FILES   ../designer/about.ui
                             ../designer/smooth_anim_curves.ui
                             )
 
+######################################################
 # QT
-QT4_WRAP_CPP( RAMEN_MOC_SOURCES	${RAMEN_MOC_CLASSES} OPTIONS ${MOC_EXTRA_ARGS})
+
 QT4_WRAP_UI( RAMEN_DESIGNER_SOURCES ${RAMEN_DESIGNER_FILES})
+QT4_WRAP_CPP( RAMEN_MOC_SOURCES	${RAMEN_MOC_CLASSES} OPTIONS ${MOC_EXTRA_ARGS})
 QT4_ADD_RESOURCES( RAMEN_RESOURCES ${PROJECT_SOURCE_DIR}/resources/resources.qrc)
 
-SET( RAMEN_LIB_SOURCES	${RAMEN_SOURCES}
-                        ${RAMEN_MOC_SOURCES}
-                        ${RAMEN_DESIGNER_SOURCES}
-                        ${RAMEN_PLATFORM_SOURCES}
-                        ${RAMEN_RESOURCES}
-                        )
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR})
 
-# Ramen lib
+######################################################
+# ramen lib
 
-ADD_LIBRARY( ramen SHARED ${RAMEN_LIB_SOURCES})
-SET_TARGET_PROPERTIES( ramen PROPERTIES COMPILE_FLAGS -DRAMEN_MAKING_DSO)
-SET_TARGET_PROPERTIES( ramen PROPERTIES VERSION ${RAMEN_VERSION_MAJOR}.${RAMEN_VERSION_MINOR}.${RAMEN_VERSION_PATCH}
-                                SOVERSION ${RAMEN_VERSION_MAJOR} )
-TARGET_LINK_LIBRARIES( ramen ${RAMEN_ALL_LIBS}
-${EXTRA_PLATFORM_LIBS}
-)
+ADD_LIBRARY( ramen SHARED   ${RAMEN_HEADERS}
+                            ${RAMEN_SOURCES}
+                            ${RAMEN_MOC_SOURCES}
+                            ${RAMEN_DESIGNER_SOURCES}
+                            ${RAMEN_PLATFORM_SOURCES}
+                            ${RAMEN_RESOURCES}
+                            )
+SET_TARGET_PROPERTIES( ramen PROPERTIES
+                             VERSION ${RAMEN_VERSION_MAJOR}.${RAMEN_VERSION_MINOR}.${RAMEN_VERSION_PATCH}
+                             SOVERSION ${RAMEN_VERSION_MAJOR}
+                            )
 
+TARGET_LINK_LIBRARIES( ramen ${RAMEN_ALL_LIBS} ${EXTRA_PLATFORM_LIBS})
 SET( LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/lib/)
 
 ######################################################
-# Ramen app
+# ramen binary
 
 SET( RAMEN_APP_SOURCES	main.cpp
                         assert.cpp

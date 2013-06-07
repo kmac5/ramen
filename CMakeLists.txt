@@ -1,54 +1,68 @@
-PROJECT( ramen)
-
-SET( RAMEN_VERSION_MAJOR "0")
-SET( RAMEN_VERSION_MINOR "9")
-SET( RAMEN_VERSION_PATCH "0")
-SET( RAMEN_VERSION ${RAMEN_VERSION_MAJOR}.${RAMEN_VERSION_MINOR}.${RAMEN_VERSION_PATCH})
+######################################################################
+# Copyright (C) 2013 Esteban Tovagliari. All Rights Reserved.        #
+# Licensed under the terms of the CDDL License.                      #
+# See CDDL_LICENSE.txt for a copy of the license.                    #
+######################################################################
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.0 FATAL_ERROR)
+
+######################################################
+# project
+
+PROJECT( ramen)
+
+######################################################
+# cmake stuff
+
 SET( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake/Modules)
-SET( CMAKE_SKIP_RPATH ON)
 
 #disable in source builds
 IF( ${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
 	MESSAGE(FATAL_ERROR "CMake generation for Ramen is not allowed within the source directory!")
 ENDIF()
 
-####################################################################
-# edit the paths if needed
-
-SET( CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH})
-SET( CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH})
-
-####################################################################
-# options
-
-OPTION( WITH_NODES "Build nodes" ON)
-
-####################################################################
-# compiler & linker settings
-
-#SET( CMAKE_SKIP_RPATH ON)
-#SET( CMAKE_SKIP_INSTALL_RPATH ON)
-
 # Set the default built type
 IF( NOT CMAKE_BUILD_TYPE)
   SET( CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
-IF( CMAKE_BUILD_TYPE MATCHES Release)
-    SET( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -rdynamic -pipe -fvisibility=hidden -fvisibility-inlines-hidden -msse -msse2 -mfpmath=sse")
-    SET( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -funroll-loops -fexpensive-optimizations -march=core2")
-    SET( CMAKE_EXE_LINKER_FLAGS_RELEASE "-Wl,--export-dynamic")
+######################################################
+# version
+
+SET( RAMEN_VERSION_MAJOR "0")
+SET( RAMEN_VERSION_MINOR "9")
+SET( RAMEN_VERSION_PATCH "5")
+SET( RAMEN_VERSION ${RAMEN_VERSION_MAJOR}.${RAMEN_VERSION_MINOR}.${RAMEN_VERSION_PATCH})
+
+####################################################################
+# options
+
+OPTION( WITH_NODES "Build nodes" ON)
+OPTION( WITH_TESTS "Build tests" ON)
+
+######################################################
+# platform specific
+
+IF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    MESSAGE( FATAL_ERROR "OSX not supported yet")
+ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    # Linux
+ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    MESSAGE( FATAL_ERROR "Windows not supported yet")
 ELSE()
-    IF( CMAKE_BUILD_TYPE MATCHES Debug)
-        SET( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -rdynamic -pipe -fvisibility=hidden -fvisibility-inlines-hidden -msse -msse2 -mfpmath=sse")
-        SET( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-inline")
-        SET( CMAKE_EXE_LINKER_FLAGS_DEBUG "-Wl,--export-dynamic")
-    ENDIF()
+    MESSAGE( FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} not supported yet")
 ENDIF()
 
-ADD_DEFINITIONS( -DRAMEN_ENABLE_ASSERT_HANDLER)
+####################################################################
+# compiler flags
+
+IF( CMAKE_COMPILER_IS_GNUCXX)
+    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pipe -fvisibility=hidden -fvisibility-inlines-hidden")
+ELSEIF( CMAKE_COMPILER_IS_CLANGXX)
+    MESSAGE( FATAL_ERROR "clang is not supported yet")
+ELSE()
+    MESSAGE( FATAL_ERROR "unknown compiler is not supported yet")
+ENDIF()
 
 ####################################################################
 # dependencies
@@ -103,6 +117,17 @@ FIND_PACKAGE( AGG REQUIRED)
 FIND_PACKAGE( EIGEN REQUIRED)
 FIND_PACKAGE( ZLIB REQUIRED)
 
+######################################################
+# optional dependencies
+
+######################################################
+# definitions
+
+ADD_DEFINITIONS( -DRAMEN_ENABLE_ASSERT_HANDLER)
+
+######################################################
+# includes
+
 INCLUDE_DIRECTORIES(    ${PROJECT_SOURCE_DIR}
                         ${PROJECT_SOURCE_DIR}/ramen/
 
@@ -132,6 +157,9 @@ INCLUDE_DIRECTORIES(    ${PROJECT_SOURCE_DIR}
                         ${ZLIB_INCLUDE_DIRS}
                         )
 
+######################################################
+# libraries
+
 SET( RAMEN_ALL_LIBS	${NEEDED_QT_LIBS}
 
                         ${OPENCOLORIO_LIBRARIES}
@@ -152,15 +180,22 @@ SET( RAMEN_ALL_LIBS	${NEEDED_QT_LIBS}
                         ${ZLIB_LIBRARIES}
                         )
 
+######################################################
+# ramen
+
 ADD_SUBDIRECTORY( ramen)
 
-##########################################################
-###
-### Docs
-###
-##########################################################
+######################################################
+# tests
 
-# Docs
+IF( WITH_TESTS)
+    ENABLE_TESTING()
+    ADD_SUBDIRECTORY( test)
+ENDIF()
+
+######################################################
+# docs
+
 FIND_PACKAGE( Doxygen)
 
 IF( DOXYGEN_FOUND)
