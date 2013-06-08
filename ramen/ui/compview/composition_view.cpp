@@ -9,8 +9,6 @@
 
 #include<boost/foreach.hpp>
 
-#include<adobe/algorithm/for_each.hpp>
-
 #include<QKeyEvent>
 #include<QMouseEvent>
 #include<QPaintEvent>

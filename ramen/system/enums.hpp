@@ -5,6 +5,8 @@
 #ifndef RAMEN_SYSTEM_ENUMS_HPP
 #define RAMEN_SYSTEM_ENUMS_HPP
 
+#include<ramen/config.hpp>
+
 namespace ramen
 {
 namespace system
@@ -23,7 +25,7 @@ enum simd_instruction_set
     // intel
     simd_sse	= 1 << 0,
     simd_sse2	= 1 << 1,
-    simd_sse3	= 1 << 2,
+    simd_sse3	= 1 << 2
 };
 
 } // namespace

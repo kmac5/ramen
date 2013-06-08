@@ -5,13 +5,19 @@
 #ifndef RAMEN_NAME_HPP
 #define RAMEN_NAME_HPP
 
-#include<ramen/name_fwd.hpp>
+#include<ramen/core/name_fwd.hpp>
 
 #include<iostream>
 
 namespace ramen
 {
+namespace core
+{
 
+/*!
+\ingroup core
+\brief Unique string class
+*/
 class RAMEN_API name_t
 {
 public:
@@ -53,6 +59,7 @@ inline std::ostream& operator<<( std::ostream& os, const name_t& name)
     return os << name.c_str();
 }
 
+} // core
 } // ramen
 
 #endif

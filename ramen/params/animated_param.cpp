@@ -7,8 +7,6 @@
 #include<boost/bind.hpp>
 #include<boost/foreach.hpp>
 
-#include<adobe/algorithm/for_each.hpp>
-
 #include<OpenEXR/ImathFun.h>
 
 #include<ramen/params/animated_param_command.hpp>

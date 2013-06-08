@@ -6,8 +6,7 @@
 
 #include<boost/bind.hpp>
 #include<boost/foreach.hpp>
-
-#include<adobe/algorithm/for_each.hpp>
+#include<boost/range/algorithm/for_each.hpp>
 
 #include<QTabWidget>
 
@@ -45,7 +44,7 @@ void tab_group_param_t::do_enable_widgets( bool e)
 
 void tab_group_param_t::do_create_tracks( anim::track_t *parent)
 {
-    adobe::for_each( params(), boost::bind( &param_t::create_tracks, _1, parent));
+    boost::range::for_each( params(), boost::bind( &param_t::create_tracks, _1, parent));
 }
 
 } // namespace

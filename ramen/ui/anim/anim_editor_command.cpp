@@ -6,9 +6,6 @@
 
 #include<boost/bind.hpp>
 
-#include<adobe/algorithm/for_each.hpp>
-#include<adobe/algorithm/find.hpp>
-
 #include<ramen/app/application.hpp>
 
 #include<ramen/nodes/node.hpp>

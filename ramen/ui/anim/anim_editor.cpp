@@ -7,8 +7,6 @@
 #include<boost/bind.hpp>
 #include<boost/foreach.hpp>
 
-#include<adobe/algorithm/for_each.hpp>
-
 #include<QHBoxLayout>
 #include<QSplitter>
 #include<QTreeView>

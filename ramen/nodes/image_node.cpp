@@ -6,8 +6,7 @@
 
 #include<boost/foreach.hpp>
 #include<boost/bind.hpp>
-
-#include<adobe/algorithm/for_each.hpp>
+#include<boost/range/algorithm/for_each.hpp>
 
 #include<ramen/memory/manager.hpp>
 
@@ -62,7 +61,9 @@ bool image_node_t::accept_connection( node_t *src, int port) const
 
 void image_node_t::format_changed()
 {
-    adobe::for_each( param_set(), boost::bind( &param_t::format_changed, _1, format(), aspect_ratio(), proxy_scale()));
+    boost::range::for_each( param_set(),
+                            boost::bind( &param_t::format_changed, _1, format(),
+                                         aspect_ratio(), proxy_scale()));
 }
 
 void image_node_t::set_format( const Imath::Box2i& d) { format_ = d;}

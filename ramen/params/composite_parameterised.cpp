@@ -6,7 +6,7 @@
 
 #include<boost/bind.hpp>
 
-#include<adobe/algorithm/for_each.hpp>
+#include<boost/range/algorithm/for_each.hpp>
 
 #include<ramen/container/ptr_vector_util.hpp>
 
@@ -17,7 +17,7 @@ composite_parameterised_t::composite_parameterised_t() : parameterised_t() {}
 
 composite_parameterised_t::composite_parameterised_t( const composite_parameterised_t& other) : parameterised_t( other), children_( other.children_)
 {
-    adobe::for_each( children_, boost::bind( &parameterised_t::set_parent, _1, this));
+    boost::range::for_each( children_, boost::bind( &parameterised_t::set_parent, _1, this));
 }
 
 composite_parameterised_t::~composite_parameterised_t()

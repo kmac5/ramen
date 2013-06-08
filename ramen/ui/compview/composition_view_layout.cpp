@@ -2,13 +2,9 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-
-
 #include<ramen/ui/compview/composition_view_layout.hpp>
 
 #include<boost/foreach.hpp>
-
-#include<adobe/algorithm/clamp.hpp>
 
 #include<OpenEXR/ImathFun.h>
 

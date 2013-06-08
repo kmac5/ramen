@@ -14,9 +14,9 @@
 #include<boost/foreach.hpp>
 #include<boost/range/algorithm/for_each.hpp>
 
-#include<adobe/algorithm/for_each_position.hpp>
-
 #include<OpenEXR/ImathFun.h>
+
+#include<ramen/algorithm/for_each_position.hpp>
 
 #include<ramen/anim/util.hpp>
 
@@ -238,7 +238,10 @@ void float_curve_t::recalc_tangents_and_coefficients( iterator it)
 
 void float_curve_t::recalc_tangents_and_coefficients()
 {
-    adobe::for_each_position( keys(), boost::bind( &float_curve_t::recalc_tangents_and_coefficients, this, _1));
+    algorithm::for_each_position( keys(),
+                                  boost::bind( &float_curve_t::recalc_tangents_and_coefficients,
+                                               this,
+                                               _1));
 }
 
 Imath::Box2f float_curve_t::bounds() const

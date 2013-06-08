@@ -1,8 +1,10 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/image/agg_renderers.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 namespace ramen
 {
@@ -39,7 +41,7 @@ void agg_rgba32f_renderer_t::blend_hline( int x1, int y, int x2, const color_typ
 		get_color( *p, blue_t())   = ( get_color( *p, blue_t())  * inv_alpha) + ( get_color( c, blue_t())  * alpha);
 		
 		float a = get_color( *p, alpha_t());
-		a = adobe::clamp( a + ( get_color( c, alpha_t()) * alpha), 0.0f, 1.0f);
+        a = algorithm::clamp( a + ( get_color( c, alpha_t()) * alpha), 0.0f, 1.0f);
 		get_color( *p, alpha_t()) = a;
 		++p;
 	}
@@ -83,7 +85,7 @@ void agg_rgba32f_renderer_t::blend_solid_hspan( int x, int y, int len, const col
 		get_color( *p, blue_t())   = ( get_color( *p, blue_t())  * inv_alpha) + ( get_color( c, blue_t())  * alpha);
 		
 		float a = get_color( *p, alpha_t());
-		a = adobe::clamp( a + ( get_color( c, alpha_t()) * alpha), 0.0f, 1.0f);
+        a = algorithm::clamp( a + ( get_color( c, alpha_t()) * alpha), 0.0f, 1.0f);
 		get_color( *p, alpha_t()) = a;
 		
 		++p;
@@ -92,5 +94,5 @@ void agg_rgba32f_renderer_t::blend_solid_hspan( int x, int y, int len, const col
 	while( --len);
 }
 
-} // namespace
-} // namespace
+} // image
+} // ramen

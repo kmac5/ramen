@@ -5,6 +5,7 @@
 // Groups
 /*!
 \defgroup concepts Concepts
+\defgroup core Core
 \defgroup depgraph Dependency Graph
 \defgroup manips Manipulators
 \defgroup params Params
@@ -33,6 +34,4 @@
 
 \section coding_guide Coding Guidelines
 	\subsection nvi Non virtual interface
-	\subsection runtime_poly Runtime concepts
-
 */

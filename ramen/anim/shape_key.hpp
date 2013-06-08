@@ -8,11 +8,11 @@
 #include<vector>
 #include<algorithm>
 
-#include<adobe/copy_on_write.hpp>
-
 #include<OpenEXR/ImathVec.h>
 
 #include<ramen/assert.hpp>
+
+#include<ramen/core/copy_on_write.hpp>
 
 #include<ramen/anim/keyframe.hpp>
 
@@ -123,14 +123,14 @@ public:
 private:
 
     // keyframes should be cheap to copy. Undo is currently based on it.
-    // so we use adobe::copy_on_write for complex keyframes.
-    adobe::copy_on_write<std::vector<T> > value_;
+    // so we use copy_on_write for complex keyframes.
+    core::copy_on_write_t<std::vector<T> > value_;
 };
 
 typedef shape_key_t<Imath::V2f> shape_key2f_t;
 typedef shape_key_t<Imath::V3f> shape_key3f_t;
 
-} // namespace
-} // namespace
+} // anim
+} // ramen
 
 #endif

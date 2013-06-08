@@ -2,7 +2,7 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-#include<ramen/name.hpp>
+#include<ramen/core/name.hpp>
 
 #include<string>
 #include<algorithm>
@@ -14,6 +14,8 @@
 #include<ramen/assert.hpp>
 
 namespace ramen
+{
+namespace core
 {
 namespace
 {
@@ -87,4 +89,5 @@ bool name_t::empty() const
     return c_str() == singleton_name_pool_holder_t::get().g_empty_string;
 }
 
+} // core
 } // ramen

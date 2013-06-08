@@ -4,9 +4,9 @@
 
 #include<gtest/gtest.h>
 
-#include<ramen/name.hpp>
+#include<ramen/core/name.hpp>
 
-using namespace ramen;
+using namespace ramen::core;
 
 name_t global_name( "global_name");
 

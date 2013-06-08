@@ -7,7 +7,7 @@
 #include<boost/foreach.hpp>
 #include<boost/bind.hpp>
 
-#include<adobe/algorithm/for_each.hpp>
+#include<boost/range/algorithm/for_each.hpp>
 
 #include<ramen/app/composition.hpp>
 
@@ -43,7 +43,7 @@ parameterised_t *parameterised_t::clone() const { return do_clone();}
 void parameterised_t::create_params()
 {
     do_create_params();
-    adobe::for_each( param_set(), boost::bind( &param_t::init, _1));
+    boost::range::for_each( param_set(), boost::bind( &param_t::init, _1));
 }
 
 void parameterised_t::set_parent( parameterised_t *parent)
@@ -186,18 +186,18 @@ void parameterised_t::create_tracks( anim::track_t *root)
 
 void parameterised_t::set_frame( float f)
 {
-    adobe::for_each( param_set(), boost::bind( &param_t::set_frame, _1, f));
+    boost::range::for_each( param_set(), boost::bind( &param_t::set_frame, _1, f));
     do_set_frame( f);
 }
 
 void parameterised_t::evaluate_params( float frame)
 {
-    adobe::for_each( param_set(), boost::bind( &param_t::evaluate, _1, frame));
+    boost::range::for_each( param_set(), boost::bind( &param_t::evaluate, _1, frame));
 }
 
 void parameterised_t::update_widgets()
 {
-    adobe::for_each( param_set(), boost::bind( &param_t::update_widgets, _1));
+    boost::range::for_each( param_set(), boost::bind( &param_t::update_widgets, _1));
     do_update_widgets();
 }
 

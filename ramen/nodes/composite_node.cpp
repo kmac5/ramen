@@ -7,7 +7,7 @@
 #include<boost/bind.hpp>
 #include<boost/foreach.hpp>
 
-#include<adobe/algorithm/for_each.hpp>
+#include<boost/range/algorithm/for_each.hpp>
 
 #include<ramen/assert.hpp>
 
@@ -33,7 +33,7 @@ composite_node_t::~composite_node_t() {}
 
 void composite_node_t::cloned()
 {
-    adobe::for_each( graph().nodes(), boost::bind( &node_t::cloned, _1));
+    boost::range::for_each( graph().nodes(), boost::bind( &node_t::cloned, _1));
 }
 
 void composite_node_t::accept( node_visitor& v) { v.visit( this);}
@@ -166,12 +166,14 @@ void composite_node_t::do_write( serialization::yaml_oarchive_t& out) const
         out.begin_map();
             out << YAML::Key << "nodes" << YAML::Value;
             out.begin_seq();
-                adobe::for_each( graph().nodes(), boost::bind( &node_t::write, _1, boost::ref( out)));
+                boost::range::for_each( graph().nodes(),
+                                        boost::bind( &node_t::write, _1, boost::ref( out)));
             out.end_seq();
 
         out << YAML::Key << "edges" << YAML::Value;
             out.begin_seq();
-                adobe::for_each( graph().edges(), boost::bind( &composite_node_t::write_edge, this, boost::ref( out), _1));
+                boost::range::for_each( graph().edges(),
+                                        boost::bind( &composite_node_t::write_edge, this, boost::ref( out), _1));
             out.end_seq();
         out.end_map();
 }

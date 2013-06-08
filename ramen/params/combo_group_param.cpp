@@ -7,8 +7,7 @@
 #include<algorithm>
 
 #include<boost/foreach.hpp>
-
-#include<adobe/algorithm/for_each.hpp>
+#include<boost/range/algorithm/for_each.hpp>
 
 #include<QStackedWidget>
 #include<QComboBox>
@@ -101,7 +100,7 @@ void combo_group_param_t::do_update_widgets()
         menu_->setCurrentIndex( get_value<int>( *this));
         stack_->setCurrentIndex( get_value<int>( *this));
         menu_->blockSignals( false);
-        adobe::for_each( params(), boost::bind( &param_t::update_widgets, _1));
+        boost::range::for_each( params(), boost::bind( &param_t::update_widgets, _1));
     }
 }
 

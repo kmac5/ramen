@@ -10,9 +10,8 @@
 #include<boost/bind.hpp>
 #include<boost/filesystem/operations.hpp>
 #include<boost/range/algorithm/for_each.hpp>
-
-#include<adobe/algorithm/count.hpp>
-#include<adobe/algorithm/find.hpp>
+#include<boost/range/algorithm/count_if.hpp>
+#include<boost/range/algorithm/find_if.hpp>
 
 #include<ramen/app/application.hpp>
 
@@ -269,18 +268,24 @@ render::context_t composition_t::current_context( render::render_mode mode) cons
 }
 
 // selections
-void composition_t::select_all() { boost::range::for_each( nodes(), boost::bind( &node_t::select, _1, true));}
+void composition_t::select_all()
+{
+    boost::range::for_each( nodes(), boost::bind( &node_t::select, _1, true));
+}
 
-void composition_t::deselect_all() { boost::range::for_each( nodes(), boost::bind( &node_t::select, _1, false));}
+void composition_t::deselect_all()
+{
+    boost::range::for_each( nodes(), boost::bind( &node_t::select, _1, false));
+}
 
 bool composition_t::any_selected() const
 {
-    return adobe::find_if( nodes(), boost::bind( &node_t::selected, _1)) != nodes().end();
+    return boost::range::find_if( nodes(), boost::bind( &node_t::selected, _1)) != nodes().end();
 }
 
 node_t *composition_t::selected_node()
 {
-    if( adobe::count_if( nodes(), boost::bind( &node_t::selected, _1)) == 1)
+    if( boost::range::count_if( nodes(), boost::bind( &node_t::selected, _1)) == 1)
     {
         node_iterator it( nodes().begin());
 

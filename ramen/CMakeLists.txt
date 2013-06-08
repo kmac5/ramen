@@ -86,9 +86,7 @@ SET( RAMEN_MOC_CLASSES	params/animated_param.hpp
                         ui/widgets/time_slider.hpp
                         )
 
-SET( RAMEN_SOURCES      name.cpp
-
-                        anim/any_curve.cpp
+SET( RAMEN_SOURCES      anim/any_curve.cpp
                         anim/clipboard.cpp
                         anim/curve_algorithm.cpp
                         anim/curve_to_half_lut.cpp
@@ -106,6 +104,8 @@ SET( RAMEN_SOURCES      name.cpp
                         app/preferences.cpp
 
                         bezier/algorithm.cpp
+
+                        core/name.cpp
 
                         filesystem/path.cpp
                         filesystem/path_sequence.cpp

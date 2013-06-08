@@ -22,4 +22,4 @@ MACRO( ADD_RAMEN_TEST sourcefile)
     ADD_TEST( ${sourcefile} ${CMAKE_CURRENT_BINARY_DIR}/${sourcefile})
 ENDMACRO()
 
-ADD_RAMEN_TEST( name)
+ADD_SUBDIRECTORY( core)

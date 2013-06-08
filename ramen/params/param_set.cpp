@@ -17,7 +17,7 @@
 #include<boost/ptr_container/ptr_vector.hpp>
 #include<boost/ptr_container/ptr_map.hpp>
 
-#include<adobe/algorithm/for_each.hpp>
+#include<boost/range/algorithm/for_each.hpp>
 
 #include<ramen/app/application.hpp>
 #include<ramen/app/document.hpp>
@@ -104,7 +104,7 @@ param_set_t::param_set_t( parameterised_t *p) : parent_( p) {}
 param_set_t::param_set_t( const param_set_t& other) : params_( other.params_)
 {
     parent_ = 0;
-    adobe::for_each( params_, boost::bind( &param_t::set_param_set, _1, this));
+    boost::range::for_each( params_, boost::bind( &param_t::set_param_set, _1, this));
 }
 
 param_set_t::~param_set_t()
@@ -223,7 +223,7 @@ void param_set_t::add_to_hash( hash::generator_t& hash_gen) const
 
 void param_set_t::for_each_param( const boost::function<void ( param_t*)>& f)
 {
-    adobe::for_each( params_, boost::bind( &param_t::apply_function, _1, f));
+    boost::range::for_each( params_, boost::bind( &param_t::apply_function, _1, f));
 }
 
 // serialization

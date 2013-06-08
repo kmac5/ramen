@@ -10,8 +10,6 @@
 #include<string>
 #include<vector>
 
-#include<adobe/string.hpp>
-
 #include<QPointer>
 
 #include<ramen/ui/widgets/ocio_colorspace_combo_fwd.hpp>

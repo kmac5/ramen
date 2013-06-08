@@ -2,14 +2,10 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-
-
 #include<ramen/undo/command.hpp>
 
 #include<boost/bind.hpp>
 #include<boost/range/algorithm/for_each.hpp>
-
-#include<adobe/algorithm/for_each.hpp>
 
 #include<ramen/app/application.hpp>
 #include<ramen/app/document.hpp>

@@ -5,6 +5,8 @@
 #ifndef RAMEN_SYSTEM_HPP
 #define RAMEN_SYSTEM_HPP
 
+#include<ramen/config.hpp>
+
 #include<memory>
 
 #include<ramen/app/application_fwd.hpp>

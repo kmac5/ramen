@@ -6,8 +6,6 @@
 
 #include<boost/foreach.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<OpenEXR/ImathFun.h>
 #include<OpenEXR/ImathVec.h>
 
