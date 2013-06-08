@@ -33,7 +33,7 @@ private:
 	
     virtual void do_enable_widgets( bool e);
 
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;
+    virtual QWidget *do_create_widgets();
 	
     QPointer<QPushButton> button_;
 

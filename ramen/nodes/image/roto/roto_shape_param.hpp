@@ -55,7 +55,7 @@ private:
 
     virtual param_t *do_clone() const;
 
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;	
+    virtual QWidget *do_create_widgets();
 	
 	const image::roto_node_t& roto_node() const;
 	image::roto_node_t& roto_node();

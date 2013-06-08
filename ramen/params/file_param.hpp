@@ -64,7 +64,7 @@ private:
     void update_input_text( const boost::filesystem::path& p);
     void update_input_text();
 
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;
+    virtual QWidget *do_create_widgets();
 
     bool is_input_;
 

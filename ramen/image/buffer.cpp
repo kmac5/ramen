@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/image/buffer.hpp>
 
@@ -234,5 +236,5 @@ bool buffer_t::operator!=( const buffer_t& other) const
     return ( bounds() != other.bounds()) || ( pixels_ != other.pixels_);
 }
 
-} // namespace
-} // namespace
+} // image
+} // ramen

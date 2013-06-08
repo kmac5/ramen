@@ -34,7 +34,7 @@ private:
 
     virtual param_t *do_clone() const { return new group_param_t( *this);}
 
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;
+    virtual QWidget *do_create_widgets();
     virtual void do_enable_widgets( bool e);
 
     QPointer<QGroupBox> group_;

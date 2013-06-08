@@ -1,8 +1,10 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/image/invalid_pixels.hpp>
 
-#include<cmath>
+#include<boost/math/special_functions/fpclassify.hpp>
 
 namespace ramen
 {
@@ -25,7 +27,8 @@ struct count_invalid_pixels_fun
 		float b = boost::gil::get_color( p, boost::gil::blue_t());
 		float a = boost::gil::get_color( p, boost::gil::alpha_t());
 		
-		if( isnan( r) || isnan( g) || isnan( b) || isnan( a))
+        if( boost::math::isnan( r) || boost::math::isnan( g) ||
+            boost::math::isnan( b) || boost::math::isnan( a))
 		{
 			nans++;
 			return;
@@ -53,5 +56,5 @@ void count_invalid_pixels( const image_view_t& img, std::size_t& nan_pixels, std
 	neg_pixels = f.negs;
 }
 
-} // namespace
-} // namespace
+} // image
+} // ramen

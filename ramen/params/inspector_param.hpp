@@ -39,7 +39,7 @@ private:
 	
     virtual param_t *do_clone() const { return new inspector_param_t( *this);}
 
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;
+    virtual QWidget *do_create_widgets();
 	
 	void parameterised_deleted( parameterised_t *p);
 	

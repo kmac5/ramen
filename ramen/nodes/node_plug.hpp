@@ -5,6 +5,8 @@
 #ifndef RAMEN_NODES_PLUG_HPP
 #define RAMEN_NODES_PLUG_HPP
 
+#include<ramen/config.hpp>
+
 #include<utility>
 #include<vector>
 #include<algorithm>
@@ -27,7 +29,7 @@ namespace ramen
 \ingroup nodes
 \brief Base class for node plugs.
 */
-class node_plug_t
+class RAMEN_API node_plug_t
 {
 public:
 
@@ -40,7 +42,11 @@ public:
 	}
 
     /// Copy constructor.
-	node_plug_t( const node_plug_t& other) : tooltip_( other.tooltip_), color_( other.color_), id_( other.id_) {}
+    node_plug_t( const node_plug_t& other) : tooltip_( other.tooltip_),
+                                            color_( other.color_),
+                                            id_( other.id_)
+    {
+    }
 
     /// Returns this plug id.
 	const adobe::name_t& id() const { return id_;}
@@ -69,14 +75,16 @@ private:
 \ingroup nodes
 \brief An input plug to which other node plugs can be connected.
 */
-class node_input_plug_t : public node_plug_t
+class RAMEN_API node_input_plug_t : public node_plug_t
 {
 public:
 
     typedef std::pair<ramen::node_t*,adobe::name_t> connection_t;
 
-    node_input_plug_t( const std::string& id, bool optional,
-					   const Imath::Color3c& color, const std::string& tooltip) : node_plug_t( id, color, tooltip)
+    node_input_plug_t( const std::string& id,
+                       bool optional,
+                       const Imath::Color3c& color,
+                       const std::string& tooltip) : node_plug_t( id, color, tooltip)
 	{
 		input_.first = 0;
 		optional_ = optional;
@@ -131,7 +139,7 @@ private:
 \ingroup nodes
 \brief An output plug to which other node plugs can be connected.
 */
-class node_output_plug_t : public node_plug_t
+class RAMEN_API node_output_plug_t : public node_plug_t
 {
 public:
 

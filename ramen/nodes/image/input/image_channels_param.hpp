@@ -52,7 +52,7 @@ private:
 
     virtual param_t *do_clone() const { return new image_channels_param_t( *this);}
 
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;
+    virtual QWidget *do_create_widgets();
     virtual void do_update_widgets();
     virtual void do_enable_widgets( bool e);
 

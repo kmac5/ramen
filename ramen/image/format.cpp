@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/image/format.hpp>
 
@@ -123,5 +125,5 @@ YAML::Emitter& operator<<( YAML::Emitter& out, const format_t& f)
     return out;
 }
 
-} // namespace
-} // namespace
+} // image
+} // ramen

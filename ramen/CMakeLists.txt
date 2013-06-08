@@ -86,7 +86,9 @@ SET( RAMEN_MOC_CLASSES	params/animated_param.hpp
                         ui/widgets/time_slider.hpp
                         )
 
-SET( RAMEN_SOURCES      anim/any_curve.cpp
+SET( RAMEN_SOURCES      name.cpp
+
+                        anim/any_curve.cpp
                         anim/clipboard.cpp
                         anim/curve_algorithm.cpp
                         anim/curve_to_half_lut.cpp
@@ -120,7 +122,6 @@ SET( RAMEN_SOURCES      anim/any_curve.cpp
 
                         half/halfExpLogTable.cpp
 
-                        hash/goulburn.cpp
                         hash/generator.cpp
 
                         image/accumulator.cpp
@@ -139,10 +140,8 @@ SET( RAMEN_SOURCES      anim/any_curve.cpp
                         image/invalid_pixels.cpp
                         image/ocio_transform.cpp
                         image/percentile_filter.cpp
-                        image/pyramid.cpp
                         image/resize.cpp
                         image/smart_blur.cpp
-                        image/watermark.cpp
 
                         image/processing.cpp
 
@@ -489,8 +488,6 @@ IF( WITH_NODES)
                                         nodes/image/matte/alpha_levels_node.cpp
                                         nodes/image/matte/alpha_ops_node.cpp
 
-                                        nodes/image/noise/add_grain_node.cpp
-
                                         nodes/image/output/output_node.cpp
 
                                         nodes/image/roto/convert_tool.cpp
@@ -533,16 +530,15 @@ ENDIF()
 
 # platform sources
 IF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-   # Mac OS X
+    SET( EXTRA_PLATFORM_LIBS)
 ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    SET( RAMEN_PLATFORM_SOURCES system/system_pvt_linux.cpp)
+    #SET( RAMEN_PLATFORM_SOURCES system/system_pvt_linux.cpp)
+    SET( EXTRA_PLATFORM_LIBS)
 ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-   # Windows
     SET( EXTRA_PLATFORM_LIBS Userenv)
 ELSE()
     MESSAGE( FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} not supported yet")
 ENDIF()
-
 
 ######################################################
 # ui files
@@ -584,7 +580,6 @@ SET( LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/lib/)
 # ramen binary
 
 SET( RAMEN_APP_SOURCES	main.cpp
-                        assert.cpp
                         )
 
 ADD_EXECUTABLE( ramen.bin ${RAMEN_APP_SOURCES})

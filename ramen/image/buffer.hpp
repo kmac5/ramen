@@ -88,7 +88,7 @@ private:
 	bool use_disk_cache_;
 };
 
-} // namespace
-} // namespace
+} // image
+} // ramen
 
 #endif

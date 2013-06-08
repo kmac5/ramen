@@ -44,7 +44,7 @@ OPTION( WITH_TESTS "Build tests" ON)
 # platform specific
 
 IF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    MESSAGE( FATAL_ERROR "OSX not supported yet")
+    # OSX
 ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     # Linux
 ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
@@ -58,8 +58,6 @@ ENDIF()
 
 IF( CMAKE_COMPILER_IS_GNUCXX)
     SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pipe -fvisibility=hidden -fvisibility-inlines-hidden")
-ELSEIF( CMAKE_COMPILER_IS_CLANGXX)
-    MESSAGE( FATAL_ERROR "clang is not supported yet")
 ELSE()
     MESSAGE( FATAL_ERROR "unknown compiler is not supported yet")
 ENDIF()
@@ -76,43 +74,36 @@ SET( Boost_ADDITIONAL_VERSIONS "1.53.0")
 SET( BOOST_NEEDED_LIBS  filesystem
                         thread
                         system
-                        regex
+                        #regex
                         date_time
-                        program_options
+                        #program_options
                         )
 
 FIND_PACKAGE( Boost COMPONENTS ${BOOST_NEEDED_LIBS} REQUIRED)
-ADD_DEFINITIONS( -DBOOST_FILESYSTEM_VERSION=3)
-ADD_DEFINITIONS( -DBOOST_FILESYSTEM_NO_DEPRECATED)
 
-# base libs
 FIND_PACKAGE( TBB REQUIRED)
 FIND_PACKAGE( YamlCpp REQUIRED)
-
 FIND_PACKAGE( ASL REQUIRED)
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ASL_COMPILE_FLAGS}")
 
 # Qt
 SET( QT_MT_REQUIRED false)
-SET( QT_MIN_VERSION "4.0.0")
+SET( QT_MIN_VERSION "4.8.0")
 FIND_PACKAGE( Qt4 REQUIRED)
-ADD_DEFINITIONS( -DQT_NO_KEYWORDS)
 SET( NEEDED_QT_INCLUDES ${QT_INCLUDE_DIR} ${QT_QTCORE_INCLUDE_DIR} ${QT_QTGUI_INCLUDE_DIR} ${QT_QTOPENGL_INCLUDE_DIR})
 SET( NEEDED_QT_LIBS	${QT_QTCORE_LIBRARIES} ${QT_QTGUI_LIBRARIES} ${QT_QTOPENGL_LIBRARIES})
-SET( MOC_EXTRA_ARGS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 
-# imageio libraries
+FIND_PACKAGE( Half REQUIRED)
+FIND_PACKAGE( Imath REQUIRED)
 FIND_PACKAGE( OpenEXR REQUIRED)
+
 FIND_PACKAGE( JPEG REQUIRED)
 FIND_PACKAGE( PNG REQUIRED)
 FIND_PACKAGE( TIFF REQUIRED)
 FIND_PACKAGE( OpenImageIO REQUIRED)
 
-# OpenColorIO
 FIND_PACKAGE( OpenColorIO REQUIRED)
 
-# more libs
-FIND_PACKAGE( AGG REQUIRED)
+FIND_PACKAGE( Agg REQUIRED)
 FIND_PACKAGE( ZLIB REQUIRED)
 
 ######################################################
@@ -121,7 +112,12 @@ FIND_PACKAGE( ZLIB REQUIRED)
 ######################################################
 # definitions
 
-ADD_DEFINITIONS( -DRAMEN_ENABLE_ASSERT_HANDLER)
+ADD_DEFINITIONS( -DBOOST_FILESYSTEM_VERSION=3)
+ADD_DEFINITIONS( -DBOOST_FILESYSTEM_NO_DEPRECATED)
+
+ADD_DEFINITIONS( -DQT_NO_KEYWORDS)
+# we need this, to avoid a moc error
+SET( MOC_EXTRA_ARGS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 
 ######################################################
 # includes
@@ -139,6 +135,8 @@ INCLUDE_DIRECTORIES(    ${PROJECT_SOURCE_DIR}
                         ${OPENGL_INCLUDE_DIR}
                         ${GLEW_INCLUDE_DIRS}
 
+                        ${HALF_INCLUDE_DIRS}
+                        ${IMATH_INCLUDE_DIRS}
                         ${OPENEXR_INCLUDE_DIR}
                         ${OPENEXR_INCLUDE_DIR}/OpenEXR/
 
@@ -160,7 +158,11 @@ SET( RAMEN_ALL_LIBS	${NEEDED_QT_LIBS}
 
                         ${OPENCOLORIO_LIBRARIES}
                         ${OPENIMAGEIO_LIBRARIES}
+
+                        ${HALF_LIBRARIES}
+                        ${IMATH_LIBRARIES}
                         ${OPENEXR_LIBRARIES}
+
                         ${JPEG_LIBRARIES}
                         ${PNG_LIBRARIES}
                         ${TIFF_LIBRARIES}
@@ -185,6 +187,16 @@ ADD_SUBDIRECTORY( ramen)
 # tests
 
 IF( WITH_TESTS)
+
+    INCLUDE_DIRECTORIES(  google_testing_libs/google
+                          google_testing_libs/google/gtest
+                          google_testing_libs/google/gmock
+                          )
+
+    ADD_LIBRARY( gmock STATIC   google_testing_libs/google/gtest/src/gtest-all.cc
+                                google_testing_libs/google/gmock/src/gmock-all.cc
+                                )
+
     ENABLE_TESTING()
     ADD_SUBDIRECTORY( test)
 ENDIF()
@@ -196,6 +208,7 @@ FIND_PACKAGE( Doxygen)
 
 IF( DOXYGEN_FOUND)
 	CONFIGURE_FILE( ${PROJECT_SOURCE_DIR}/docs/Doxyfile.in ${PROJECT_BINARY_DIR}/Doxyfile @ONLY)
-	ADD_CUSTOM_TARGET( doc ${DOXYGEN_EXECUTABLE} ${PROJECT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-						COMMENT "Generating API documentation with Doxygen" VERBATIM)
+        ADD_CUSTOM_TARGET( doc ${DOXYGEN_EXECUTABLE} ${PROJECT_BINARY_DIR}/Doxyfile
+                            WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+                            COMMENT "Generating API documentation with Doxygen" VERBATIM)
 ENDIF()

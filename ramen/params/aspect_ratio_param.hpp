@@ -58,7 +58,7 @@ private:
 
     static presets_type presets_;
 
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;
+    virtual QWidget *do_create_widgets();
 
     QPointer<QComboBox> menu_;
     QPointer<ui::double_spinbox_t> input_;

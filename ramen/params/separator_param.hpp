@@ -26,7 +26,7 @@ private:
 
     virtual param_t *do_clone() const { return new separator_param_t( *this);}
 
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;
+    virtual QWidget *do_create_widgets();
 };
 
 } // namespace

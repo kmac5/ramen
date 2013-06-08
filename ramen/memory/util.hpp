@@ -7,8 +7,6 @@
 
 #include<stdint.h>
 
-#include<boost/cstdint.hpp>
-
 #include<ramen/assert.hpp>
 
 namespace ramen

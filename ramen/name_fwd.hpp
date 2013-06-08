@@ -2,11 +2,16 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-#ifndef RAMEN_ASSERT_HPP
-#define RAMEN_ASSERT_HPP
+#ifndef RAMEN_NAME_FWD_HPP
+#define RAMEN_NAME_FWD_HPP
 
-#include<cassert>
+#include<ramen/config.hpp>
 
-#define RAMEN_ASSERT( expr) assert( expr)
+namespace ramen
+{
+
+class name_t;
+
+} // ramen
 
 #endif

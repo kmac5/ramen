@@ -80,7 +80,7 @@ private:
     virtual void do_read( serialization::yaml_iarchive_t& node);
     virtual void do_write( serialization::yaml_oarchive_t& out) const;
 
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;
+    virtual QWidget *do_create_widgets();
 
     boost::ptr_vector<param_t> params_;
     bool create_track_;

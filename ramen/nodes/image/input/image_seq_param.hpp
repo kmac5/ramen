@@ -43,7 +43,7 @@ private:
 
     virtual param_t *do_clone() const { return new image_seq_param_t( *this);}
 	
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;
+    virtual QWidget *do_create_widgets();
     virtual void do_enable_widgets( bool e);
 
     QPointer<ui::line_edit_t> input_;

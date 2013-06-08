@@ -58,7 +58,7 @@ std::ostream& operator<<( std::ostream& os, const format_t& f);
 void operator>>( const YAML::Node& in, format_t& f);
 YAML::Emitter& operator<<( YAML::Emitter& out, const format_t& f);
 
-} // namespace
-} // namespace
+} // image
+} // ramen
 
 #endif

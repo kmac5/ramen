@@ -1,24 +1,24 @@
-// Copyright (c) 2011 Esteban Tovagliari
+// Copyright (c) 2013 Esteban Tovagliari
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_CONFIG_HPP
 #define RAMEN_CONFIG_HPP
 
-#include<ramen/visibility.hpp>
+#include<ramen/config/os.hpp>
+#include<ramen/config/compiler.hpp>
+#include<ramen/config/visibility.hpp>
 
-#ifndef NDEBUG
-	#if defined(__GNUC__) && __GNUC__ > 3
-		#define RAMEN_FORCEINLINE inline __attribute__ ((always_inline))
-	#else
-		#define RAMEN_FORCEINLINE inline
-	#endif
+#ifdef ramen_EXPORTS
+    #define RAMEN_API RAMEN_EXPORT
 #else
-	#define RAMEN_FORCEINLINE inline
+    #define RAMEN_API RAMEN_IMPORT
 #endif
 
-#if defined(__GNUC__)
-	#define RAMEN_WARN_UNUSED_RESULT __attribute__ (( warn_unused_result))
+// windows specific
+#if defined( RAMEN_CONFIG_OS_WINDOWS)
+     // disable min/max macros on windows.
+    #define NOMINMAX
 #endif
 
 #endif

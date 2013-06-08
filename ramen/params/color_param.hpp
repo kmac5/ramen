@@ -61,7 +61,7 @@ private:
 
     bool is_rgba_;
 
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;
+    virtual QWidget *do_create_widgets();
 
     void set_component_value_from_slot();
 

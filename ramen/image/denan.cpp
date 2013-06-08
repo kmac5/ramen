@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/image/denan.hpp>
 
@@ -44,5 +46,5 @@ void denan( const const_image_view_t& src, const image_view_t& dst, float replac
 	boost::gil::tbb_transform_pixels( src, dst, f);
 }
 
-} // namespace
-} // namespace
+} // image
+} // ramen

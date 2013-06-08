@@ -32,7 +32,7 @@ private:
 
     virtual param_t *do_clone() const { return new tab_group_param_t( *this);}
 
-    virtual QWidget *do_create_widgets() RAMEN_WARN_UNUSED_RESULT;
+    virtual QWidget *do_create_widgets();
     virtual void do_enable_widgets( bool e);
 
     virtual void do_create_tracks( anim::track_t *parent);

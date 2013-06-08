@@ -40,7 +40,7 @@ public:
 
     boost::uint64_t max_size() const { return pool_.pool_size();}
 
-    unsigned char *allocate( std::size_t& s) RAMEN_WARN_UNUSED_RESULT
+    unsigned char *allocate( std::size_t& s)
 	{
 		if( s == 0)
 			return 0;

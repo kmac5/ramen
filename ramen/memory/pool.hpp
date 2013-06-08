@@ -27,7 +27,7 @@ public:
 
     std::size_t pool_size() const;
 
-    unsigned char *allocate( std::size_t& size) RAMEN_WARN_UNUSED_RESULT;
+    unsigned char *allocate( std::size_t& size);
     void deallocate( unsigned char *p, std::size_t size);
 
 private:
