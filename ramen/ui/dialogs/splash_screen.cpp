@@ -8,16 +8,14 @@
 
 #include<boost/filesystem/operations.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<QApplication>
 #include<QSplashScreen>
 
 //#include<SeExpression.h>
 
 #include<ramen/app/application.hpp>
-
 #include<ramen/filesystem/path.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 namespace ramen
 {
@@ -165,9 +163,9 @@ bool splash_screen_t::do_render_splash( const boost::filesystem::path& p)
 				v = ( double) j / image_height();
 				
 				SeVec3d result = expr.evaluate();
-				image_.setPixel( i, j, qRgb( adobe::clamp( result[0], 0.0, 1.0) * 256,
-											 adobe::clamp( result[1], 0.0, 1.0) * 256,
-											 adobe::clamp( result[2], 0.0, 1.0) * 256));
+                image_.setPixel( i, j, qRgb( clamp( result[0], 0.0, 1.0) * 256,
+                                             clamp( result[1], 0.0, 1.0) * 256,
+                                             clamp( result[2], 0.0, 1.0) * 256));
 			}
 		}
 		

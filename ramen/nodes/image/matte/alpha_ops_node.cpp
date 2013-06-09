@@ -5,7 +5,7 @@
 #include<algorithm>
 #include<cmath>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/gil/extension/algorithm/tbb/tbb_transform.hpp>
 
@@ -45,8 +45,8 @@ struct grad_magnitude_fun
             // loop
             for( int i = 0; i < src_.width(); ++i)
             {
-                int x0 = adobe::clamp( i - 1, 0, (int) src_.width()-1);
-                int x1 = adobe::clamp( i + 1, 0, (int) src_.width()-1);
+                int x0 = clamp( i - 1, 0, (int) src_.width()-1);
+                int x1 = clamp( i + 1, 0, (int) src_.width()-1);
 
                 float gx = ( center_it[x1][0] - center_it[x0][0]);
                 float gy = ( top_it[i][0] - bottom_it[i][0]);

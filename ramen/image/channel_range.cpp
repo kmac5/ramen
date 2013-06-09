@@ -2,7 +2,7 @@
 
 #include<ramen/image/channel_range.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 namespace ramen
 {
@@ -27,7 +27,7 @@ float channel_range_t::operator()( float x) const
         if( a == b)
             return 0.0f;
 
-        return 1.0f - adobe::clamp( ( x - a) / ( b - a), 0.0f, 1.0f);
+        return 1.0f - clamp( ( x - a) / ( b - a), 0.0f, 1.0f);
     }
     else
     {
@@ -43,7 +43,7 @@ float channel_range_t::operator()( float x) const
         if( a == b)
             return 0.0f;
 
-        return adobe::clamp( ( x - a) / ( b - a), 0.0f, 1.0f);
+        return clamp( ( x - a) / ( b - a), 0.0f, 1.0f);
     }
 }
 

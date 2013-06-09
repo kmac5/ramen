@@ -2,8 +2,6 @@
 
 #include<ramen/nodes/image/key/spill_suppressor_node.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<ramen/params/combo_group_param.hpp>
 #include<ramen/params/popup_param.hpp>
 #include<ramen/params/float_param.hpp>

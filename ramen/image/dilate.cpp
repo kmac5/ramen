@@ -5,12 +5,12 @@
 #include<algorithm>
 #include<limits>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<tbb/blocked_range.h>
 #include<tbb/parallel_for.h>
 
 #include<ramen/assert.hpp>
+
+#include<ramen/algorithm/clamp.hpp>
 
 using namespace boost::gil;
 
@@ -64,16 +64,16 @@ struct dilate_erode_gray_fn
 		    {
 				PixelFun f;
 
-				int indx = adobe::clamp( x -( radius + 1), 0, (int) src_.width() - 1);
+                int indx = clamp( x -( radius + 1), 0, (int) src_.width() - 1);
 				f( src_it[indx][0], fradius);
 				
 				for ( int i = -radius; i <= radius; i++ )
 				{
-					indx = adobe::clamp( x + i, 0, (int) src_.width() - 1);
+                    indx = clamp( x + i, 0, (int) src_.width() - 1);
 					f( src_it[indx][0]);
 				}
 
-				indx = adobe::clamp( x + radius + 1, 0, (int) src_.width() - 1);
+                indx = clamp( x + radius + 1, 0, (int) src_.width() - 1);
 				f( src_it[indx][0], fradius);
 				
 				dst_it[x][0] = f.value();

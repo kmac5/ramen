@@ -6,12 +6,12 @@
 
 #include<boost/foreach.hpp>
 #include<boost/bind.hpp>
-
-#include<adobe/algorithm/for_each.hpp>
-#include<adobe/algorithm/clamp.hpp>
-#include<adobe/algorithm/count.hpp>
+#include<boost/range/algorithm/for_each.hpp>
+#include<boost/range/algorithm/count_if.hpp>
 
 #include<ramen/assert.hpp>
+
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/app/composition.hpp>
 
@@ -138,7 +138,7 @@ void shape_t::unparent_all_children()
     BOOST_FOREACH( roto::shape_t& s, children())
         childs.push_back( &s);
 
-    adobe::for_each( childs, boost::bind( &shape_t::set_parent, _1, (shape_t *) 0));
+    boost::range::for_each( childs, boost::bind( &shape_t::set_parent, _1, (shape_t *) 0));
 }
 
 bool shape_t::find_in_children( const shape_t *shape) const
@@ -274,7 +274,7 @@ void shape_t::do_create_manipulators() {}
 
 void shape_t::deselect_all_points() const
 {
-    adobe::for_each( triples(), boost::bind( &triple_t::select, _1, false));
+    boost::range::for_each( triples(), boost::bind( &triple_t::select, _1, false));
 }
 
 bool shape_t::any_point_selected() const
@@ -361,7 +361,7 @@ void shape_t::update_xforms( bool motion_blur_only)
     else
         global_ = local_;
 
-    adobe::for_each( children(), boost::bind( &shape_t::update_xforms, _1, motion_blur_only));
+    boost::range::for_each( children(), boost::bind( &shape_t::update_xforms, _1, motion_blur_only));
 
     inv_local_ = Imath::inverse( local_);
     inv_global_ = Imath::inverse( global_);
@@ -584,7 +584,8 @@ bool shape_t::can_delete_selected_points() const
     if( !any_point_selected() || all_points_selected())
         return false;
 
-    int num_selected = adobe::count_if( triples(), boost::bind( &triple_t::selected, _1));
+    int num_selected = boost::range::count_if( triples(),
+                                               boost::bind( &triple_t::selected, _1));
 
     if( size() - num_selected < 3)
         return false;
@@ -834,9 +835,9 @@ void shape_t::read( const serialization::yaml_node_t& node, int version)
     Imath::Color3f col;
     if( node.get_optional_value( "display_color", col))
     {
-        display_color_.x = adobe::clamp( col.x, 0.0f, 1.0f) * 255.0f;
-        display_color_.y = adobe::clamp( col.y, 0.0f, 1.0f) * 255.0f;
-        display_color_.z = adobe::clamp( col.z, 0.0f, 1.0f) * 255.0f;
+        display_color_.x = clamp( col.x, 0.0f, 1.0f) * 255.0f;
+        display_color_.y = clamp( col.y, 0.0f, 1.0f) * 255.0f;
+        display_color_.z = clamp( col.z, 0.0f, 1.0f) * 255.0f;
     }
 
     // parent is read by the scene...
@@ -886,7 +887,7 @@ void shape_t::write( serialization::yaml_oarchive_t& out, int version) const
         {
             out << YAML::Key << "points" << YAML::Value;
                 out.begin_seq();
-                    adobe::for_each( triples(), boost::bind( &triple_t::write, _1, boost::ref( out), version));
+                    boost::range::for_each( triples(), boost::bind( &triple_t::write, _1, boost::ref( out), version));
                 out.end_seq();
 
             if( !curve_.empty())

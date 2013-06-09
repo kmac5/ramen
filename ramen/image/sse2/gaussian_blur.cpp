@@ -10,7 +10,7 @@
 
 #include<emmintrin.h>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<tbb/blocked_range.h>
 #include<tbb/parallel_for.h>
@@ -52,7 +52,7 @@ struct gauss_blur_rgba_fn
 				
 				for( int i = -xoff; i <= xoff; ++i)
 				{
-					int indx = adobe::clamp( x + i, 0, (int) src_.width() - 1);
+                    int indx = clamp( x + i, 0, (int) src_.width() - 1);
 					__m128 p = _mm_load_ps( reinterpret_cast<const float*>( &( src_it[indx])));
 					accum = _mm_add_ps( accum, _mm_mul_ps( p, *k_it++));
 				}

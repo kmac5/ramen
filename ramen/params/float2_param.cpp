@@ -8,8 +8,6 @@
 
 #include<boost/bind.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<QLabel>
 
 #include<ramen/app/application.hpp>
@@ -17,10 +15,11 @@
 
 #include<ramen/nodes/node.hpp>
 
+#include<ramen/algorithm/clamp.hpp>
+
 #include<ramen/ui/user_interface.hpp>
 #include<ramen/ui/anim/anim_editor.hpp>
 #include<ramen/ui/viewer/viewer.hpp>
-
 #include<ramen/ui/widgets/param_spinbox.hpp>
 #include<ramen/ui/inspector/inspector.hpp>
 
@@ -362,13 +361,13 @@ void float2_param_t::spinbox_dragged( double value)
         {
             float inc = value - v.x;
             v.x = value;
-            v.y = adobe::clamp( v.y + ( inc * proportional_factor.y), absolute_min(), absolute_max());
+            v.y = ramen::clamp( v.y + ( inc * proportional_factor.y), absolute_min(), absolute_max());
         }
         else
         {
             float inc = value - v.y;
             v.y = value;
-            v.x = adobe::clamp( v.x + ( inc * proportional_factor.x), absolute_min(), absolute_max());
+            v.x = ramen::clamp( v.x + ( inc * proportional_factor.x), absolute_min(), absolute_max());
         }
 
         set_value( absolute_to_relative( round ( v)));

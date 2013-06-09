@@ -11,7 +11,7 @@
 
 #include<boost/scoped_array.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<OpenEXR/ImathBox.h>
 #include<OpenEXR/ImathFun.h>

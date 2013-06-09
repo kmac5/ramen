@@ -4,8 +4,6 @@
 
 #include<algorithm>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<ramen/gil/extension/algorithm/tbb/tbb_transform.hpp>
 
 #include<ramen/params/combo_group_param.hpp>

@@ -7,7 +7,7 @@
 
 #include<OpenEXR/ImathColor.h>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/image/typedefs.hpp>
 
@@ -47,7 +47,7 @@ inline pixel_t clamp_negative_values( const pixel_t& p)
     return pixel_t( std::max( (float) boost::gil::get_color( p, boost::gil::red_t())  , 0.0f),
                     std::max( (float) boost::gil::get_color( p, boost::gil::green_t()), 0.0f),
                     std::max( (float) boost::gil::get_color( p, boost::gil::blue_t()) , 0.0f),
-                    adobe::clamp( (float) boost::gil::get_color( p, boost::gil::alpha_t()), 0.0f, 1.0f));
+                    clamp( (float) boost::gil::get_color( p, boost::gil::alpha_t()), 0.0f, 1.0f));
 }
 
 inline float luminance( float r, float g, float b)

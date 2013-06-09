@@ -4,8 +4,6 @@
 
 #include<ramen/nodes/image/distort/turbulent_displace_node.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<OpenEXR/ImathFun.h>
 
 #include<ramen/image/processing.hpp>

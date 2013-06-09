@@ -4,7 +4,7 @@
 
 #include<ramen/nodes/image/distort/displace_node.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/image/processing.hpp>
 
@@ -55,8 +55,8 @@ struct displace_fun
                 dx = xmap_( p.x - bounds_.min.x, p.y - bounds_.min.y)[0];
                 dy = ymap_( p.x - bounds_.min.x, p.y - bounds_.min.y)[0];
 
-                dx = ( adobe::clamp( dx, 0.0f, 1.0f) - 0.5f) * 2.0f; // map 0 .. 1 to -1 .. 1
-                dy = ( adobe::clamp( dy, 0.0f, 1.0f) - 0.5f) * 2.0f; // map 0 .. 1 to -1 .. 1
+                dx = ( clamp( dx, 0.0f, 1.0f) - 0.5f) * 2.0f; // map 0 .. 1 to -1 .. 1
+                dy = ( clamp( dy, 0.0f, 1.0f) - 0.5f) * 2.0f; // map 0 .. 1 to -1 .. 1
             }
         }
 

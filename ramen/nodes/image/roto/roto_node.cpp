@@ -6,11 +6,11 @@
 
 #include<boost/foreach.hpp>
 #include<boost/bind.hpp>
-
-#include<adobe/algorithm/clamp.hpp>
-#include<adobe/algorithm/for_each.hpp>
+#include<boost/range/algorithm/for_each.hpp>
 
 #include<ramen/assert.hpp>
+
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/params/popup_param.hpp>
 #include<ramen/params/bool_param.hpp>
@@ -128,7 +128,7 @@ void roto_node_t::do_create_params()
 void roto_node_t::for_each_param( const boost::function<void ( param_t*)>& f)
 {
 	parameterised_t::for_each_param( f);
-	adobe::for_each( scene_, boost::bind( &parameterised_t::for_each_param, _1, f));	
+    boost::range::for_each( scene_, boost::bind( &parameterised_t::for_each_param, _1, f));
 }
 
 void roto_node_t::do_create_manipulators()
@@ -213,8 +213,8 @@ std::auto_ptr<roto::shape_t> roto_node_t::release_shape( roto::shape_t *s)
 
 void roto_node_t::deselect_all()
 {
-	adobe::for_each( scene_, boost::bind( &roto::shape_t::select, _1, false));
-	adobe::for_each( scene_, boost::bind( &roto::shape_t::deselect_all_points, _1));
+    boost::range::for_each( scene_, boost::bind( &roto::shape_t::select, _1, false));
+    boost::range::for_each( scene_, boost::bind( &roto::shape_t::deselect_all_points, _1));
 }
 
 roto::shape_t *roto_node_t::selected()

@@ -10,12 +10,12 @@
 #include<boost/foreach.hpp>
 #include<boost/bind.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<agg/agg_conv_curve.h>
 #include<agg/agg_bounding_rect.h>
 
 #include<ramen/assert.hpp>
+
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/ImathExt/ImathBoxAlgo.h>
 
@@ -43,7 +43,7 @@ public:
 	{
 		float a = fg[0] * opacity_;
 		float a_inv = 1.0f - a;
-		return boost::gil::gray32f_pixel_t( adobe::clamp( ( color_ * a) + ( bg[0] * a_inv), 0.0f, 1.0f));
+        return boost::gil::gray32f_pixel_t( clamp( ( color_ * a) + ( bg[0] * a_inv), 0.0f, 1.0f));
 	}
 	
 private:

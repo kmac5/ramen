@@ -2,7 +2,7 @@
 
 #include<ramen/nodes/image/key/color_diff_keyer_node.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/params/popup_param.hpp>
 #include<ramen/params/color_param.hpp>
@@ -60,8 +60,8 @@ struct color_diff_key_fun
 		    bsc = key_.g;
 		}
 
-		float ax = 1.0f - ( screen_ * adobe::clamp( gix, 0.0f, 1.0f));
-		ax += ( complement_ * std::max( adobe::clamp( rix - rsc, 0.0f, 1.0f), adobe::clamp( bix - bsc, 0.0f, 1.0f)));
+        float ax = 1.0f - ( screen_ * clamp( gix, 0.0f, 1.0f));
+        ax += ( complement_ * std::max( clamp( rix - rsc, 0.0f, 1.0f), clamp( bix - bsc, 0.0f, 1.0f)));
 	
 		if( gsc != 0 && gix < gsc)
 		    ax += shadows_ * ( 1.0f - gix / gsc);

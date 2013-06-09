@@ -4,8 +4,6 @@
 
 #include<ramen/nodes/image/layer/key_mix_layer_node.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<ramen/gil/extension/algorithm/tbb/tbb_transform3.hpp>
 
 #include<ramen/params/popup_param.hpp>

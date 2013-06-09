@@ -4,9 +4,9 @@
 
 #include<ramen/nodes/image/layer/add_mix_layer_node.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<OpenEXR/halfFunction.h>
+
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/gil/extension/algorithm/tbb/tbb_transform2.hpp>
 
@@ -41,7 +41,7 @@ struct add_mix_layer_mode_unpremult_fun
 		return image::pixel_t(  get_color( front, red_t())   * a + get_color( back, red_t())   * a_inv,
 								get_color( front, green_t()) * a + get_color( back, green_t()) * a_inv,
 								get_color( front, blue_t())  * a + get_color( back, blue_t())  * a_inv,
-								adobe::clamp( a + get_color( back, alpha_t()), 0.0f, 1.0f));
+                                clamp( a + get_color( back, alpha_t()), 0.0f, 1.0f));
     }
 
 private:

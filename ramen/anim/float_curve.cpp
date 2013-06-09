@@ -238,10 +238,10 @@ void float_curve_t::recalc_tangents_and_coefficients( iterator it)
 
 void float_curve_t::recalc_tangents_and_coefficients()
 {
-    algorithm::for_each_position( keys(),
-                                  boost::bind( &float_curve_t::recalc_tangents_and_coefficients,
-                                               this,
-                                               _1));
+    for_each_position( keys(),
+                       boost::bind( &float_curve_t::recalc_tangents_and_coefficients,
+                                    this,
+                                    _1));
 }
 
 Imath::Box2f float_curve_t::bounds() const

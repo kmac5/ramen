@@ -10,8 +10,6 @@
 #include<boost/foreach.hpp>
 #include<boost/bind.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<QTreeView>
 #include<QKeyEvent>
 #include<QMouseEvent>
@@ -27,10 +25,11 @@
 #include<ramen/app/application.hpp>
 #include<ramen/app/document.hpp>
 
+#include<ramen/algorithm/clamp.hpp>
+
 #include<ramen/anim/track.hpp>
 
 #include<ramen/ui/user_interface.hpp>
-
 #include<ramen/ui/anim/anim_editor.hpp>
 #include<ramen/ui/anim/anim_editor_toolbar.hpp>
 #include<ramen/ui/anim/draw_curves_visitors.hpp>
@@ -508,7 +507,7 @@ void anim_curves_view_t::frame_area( const Imath::Box2f& area)
 int anim_curves_view_t::span_num_steps( float t0, float t1) const
 {
     float pixel_len = ( t1 - t0) * time_scale();
-    return adobe::clamp( (int) pixel_len / 5, 5, 50);
+    return clamp( (int) pixel_len / 5, 5, 50);
 }
 
 void anim_curves_view_t::draw_small_box( const Imath::V2f& p) const

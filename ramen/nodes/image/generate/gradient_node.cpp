@@ -2,7 +2,7 @@
 
 #include<ramen/nodes/image/generate/gradient_node.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/nodes/node_factory.hpp>
 
@@ -44,13 +44,13 @@ struct gradient_fun
     {
 		Imath::V2f q( p.x * aspect_, p.y);
         float t = ( ( q.x - p1_.x) * ( p2_.x - p1_.x)) + ( ( q.y - p1_.y) * ( p2_.y - p1_.y));
-        t = adobe::clamp( t / length2_, 0.0f, 1.0f);
+        t = clamp( t / length2_, 0.0f, 1.0f);
 		float tg = pow_h( t, gamma_);
 
 		float r = c1_.r * (1.0f - tg) + c2_.r * tg;
 		float g = c1_.g * (1.0f - tg) + c2_.g * tg;
 		float b = c1_.b * (1.0f - tg) + c2_.b * tg;
-		float a = adobe::clamp( c1_.a * (1.0f - t) + c2_.a * t, 0.0f, 1.0f);
+        float a = clamp( c1_.a * (1.0f - t) + c2_.a * t, 0.0f, 1.0f);
         return image::pixel_t( r, g, b, a);
     }
 

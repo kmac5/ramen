@@ -4,7 +4,7 @@
 
 #include<ramen/image/generic/layer_modes.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 using namespace boost::gil;
 
@@ -35,7 +35,7 @@ pixel_t screen_layer_mode_fun::operator()( const pixel_t& back, const pixel_t& f
     pixel_t result( 1.0f - ((1.0f - get_color( front, red_t()))   * (1.0f - get_color( back, red_t()))),
 					1.0f - ((1.0f - get_color( front, green_t())) * (1.0f - get_color( back, green_t()))),
 					1.0f - ((1.0f - get_color( front, blue_t()))  * (1.0f - get_color( back, blue_t()))),
-					adobe::clamp( get_color( front, alpha_t()) + get_color( back, alpha_t()), 0.0f, 1.0f));
+                    clamp( get_color( front, alpha_t()) + get_color( back, alpha_t()), 0.0f, 1.0f));
 
     get_color( result, red_t())     = std::max( get_color( result, red_t())  , get_color( back, red_t()));
     get_color( result, green_t())   = std::max( get_color( result, green_t()), get_color( back, green_t()));
@@ -59,7 +59,7 @@ pixel_t overlay_layer_mode_fun::operator()( const pixel_t& back, const pixel_t& 
     gf = overlay( gf, gb);
     bf = overlay( bf, bb);
 
-    pixel_t result( rf, gf, bf, adobe::clamp( get_color( front, alpha_t()) + get_color( back, alpha_t()), 0.0f, 1.0f));
+    pixel_t result( rf, gf, bf, clamp( get_color( front, alpha_t()) + get_color( back, alpha_t()), 0.0f, 1.0f));
     return lerp_pixel( result, back, opacity_);
 }
 
@@ -86,7 +86,7 @@ pixel_t diff_layer_mode_fun::operator()( const pixel_t& back, const pixel_t& fro
     pixel_t result( abs( get_color( back, red_t())   - get_color( front, red_t())),
 					abs( get_color( back, green_t()) - get_color( front, green_t())),
 					abs( get_color( back, blue_t())  - get_color( front, blue_t())),
-					abs( adobe::clamp( get_color( back, alpha_t()) - get_color( front, alpha_t()), 0.0f, 1.0f)));
+                    abs( clamp( get_color( back, alpha_t()) - get_color( front, alpha_t()), 0.0f, 1.0f)));
 
     return lerp_pixel( result, back, opacity_);
 }

@@ -6,8 +6,6 @@
 
 #include<algorithm>
 
-#include<adobe/algorithm/clamp.hpp>
-
 using namespace boost::gil;
 
 namespace ramen

@@ -9,11 +9,10 @@
 
 #include<emmintrin.h>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<tbb/blocked_range.h>
 #include<tbb/parallel_for.h>
 
+#include<ramen/algorithm/clamp.hpp>
 #include<ramen/image/color.hpp>
 
 using namespace boost::gil;
@@ -53,18 +52,18 @@ struct box_blur_rgba_fn
 			const_image_view_t::x_iterator src_it( src_.row_begin( y));
 			image_view_t::y_iterator dst_it( dst_.col_begin( y));
 
-			int indx = adobe::clamp( -( radius + 1), 0, (int) src_.width() - 1);
+            int indx = clamp( -( radius + 1), 0, (int) src_.width() - 1);
 			__m128 p = _mm_load_ps( reinterpret_cast<const float*>( &( src_it[indx])));
 			__m128 accum = _mm_mul_ps( p, fractw);
 	
 			for ( int i = -radius; i <= radius; i++ )
 			{
-				indx = adobe::clamp( i, 0, (int) src_.width() - 1);
+                indx = clamp( i, 0, (int) src_.width() - 1);
 				p = _mm_load_ps( reinterpret_cast<const float*>( &( src_it[indx])));
 				accum = _mm_add_ps( accum, p);
 			}
 
-			indx = adobe::clamp( radius + 1, 0, (int) src_.width() - 1);
+            indx = clamp( radius + 1, 0, (int) src_.width() - 1);
 			p = _mm_load_ps( reinterpret_cast<const float*>( &( src_it[indx])));
 			accum = _mm_add_ps( accum, _mm_mul_ps( p, fractw));
 			

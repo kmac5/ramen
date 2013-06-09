@@ -6,10 +6,10 @@
 
 #include<algorithm>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<tbb/blocked_range.h>
 #include<tbb/parallel_for.h>
+
+#include<ramen/algorithm/clamp.hpp>
 
 using namespace boost::gil;
 
@@ -40,16 +40,16 @@ struct box_blur_gray_fn
 			typename ConstGrayView::x_iterator src_it( src_.row_begin( y));
 			typename GrayView::y_iterator dst_it( dst_.col_begin( y));
 
-			int indx = adobe::clamp( -( radius + 1), 0, (int) src_.width() - 1);
+            int indx = clamp( -( radius + 1), 0, (int) src_.width() - 1);
 			float accum = src_it[indx][0] * fradius;
 	
 			for ( int i = -radius; i <= radius; i++ )
 			{
-				indx = adobe::clamp( i, 0, (int) src_.width() - 1);
+                indx = clamp( i, 0, (int) src_.width() - 1);
 				accum += src_it[indx][0];
 			}
 
-			indx = adobe::clamp( radius + 1, 0, (int) src_.width() - 1);
+            indx = clamp( radius + 1, 0, (int) src_.width() - 1);
 			accum += src_it[indx][0] * fradius;
 
 		    for( int x = 0, e = src_.width(); x < e; ++x)

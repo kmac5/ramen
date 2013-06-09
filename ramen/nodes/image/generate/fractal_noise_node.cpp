@@ -4,7 +4,7 @@
 
 #include<OpenEXR/ImathFun.h>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/assert.hpp>
 
@@ -58,7 +58,7 @@ struct fractal_noise_fun
         val = (val + 1.0f) * 0.5f;
         val = Imath::lerp( 0.5f, val, contrast_);
         val *= brightness_;
-        val = adobe::clamp( val, 0.0f, 1.0f);
+        val = clamp( val, 0.0f, 1.0f);
         val = invert_ ? 1.0f - val : val;
         return image::pixel_t( val, val, val, val);
     }

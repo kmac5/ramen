@@ -8,7 +8,7 @@
 
 #include<boost/bind.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/nodes/node.hpp>
 
@@ -392,23 +392,23 @@ void float3_param_t::spinbox_dragged( double value)
         {
             float inc = value - v.x;
             v.x = value;
-            v.y = adobe::clamp( v.y + ( inc * proportional_factor.y), get_min(), get_max());
-            v.z = adobe::clamp( v.z + ( inc * proportional_factor.z), get_min(), get_max());
+            v.y = ramen::clamp( v.y + ( inc * proportional_factor.y), get_min(), get_max());
+            v.z = ramen::clamp( v.z + ( inc * proportional_factor.z), get_min(), get_max());
         }
         else
         {
             if( sender() == input1_)
             {
                 float inc = value - v.y;
-                v.x = adobe::clamp( v.x + ( inc * proportional_factor.x), get_min(), get_max());
+                v.x = ramen::clamp( v.x + ( inc * proportional_factor.x), get_min(), get_max());
                 v.y = value;
-                v.z = adobe::clamp( v.z + ( inc * proportional_factor.z), get_min(), get_max());
+                v.z = ramen::clamp( v.z + ( inc * proportional_factor.z), get_min(), get_max());
             }
             else
             {
                 float inc = value - v.z;
-                v.x = adobe::clamp( v.x + ( inc * proportional_factor.x), get_min(), get_max());
-                v.y = adobe::clamp( v.y + ( inc * proportional_factor.y), get_min(), get_max());
+                v.x = ramen::clamp( v.x + ( inc * proportional_factor.x), get_min(), get_max());
+                v.y = ramen::clamp( v.y + ( inc * proportional_factor.y), get_min(), get_max());
                 v.z = value;
             }
         }

@@ -7,7 +7,7 @@
 #include<algorithm>
 #include<cmath>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<tbb/blocked_range.h>
 #include<tbb/parallel_for.h>
@@ -77,7 +77,7 @@ struct gaussian_blur_gray_fn
 				
 				for( int i = -xoff; i <= xoff; ++i)
 				{
-					int indx = adobe::clamp( x + i, 0, (int) src_.width() - 1);
+                    int indx = clamp( x + i, 0, (int) src_.width() - 1);
 					float p = src_it[indx][0];
 					accum += ( p * ( *k_it++));
 				}

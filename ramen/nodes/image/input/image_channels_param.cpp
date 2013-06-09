@@ -4,7 +4,7 @@
 
 #include<algorithm>
 
-#include<adobe/algorithm/find.hpp>
+#include<boost/range/algorithm/find.hpp>
 
 #include<QPushButton>
 #include<QVBoxLayout>
@@ -111,7 +111,7 @@ void image_channels_param_t::set_channels( const std::string& red, const std::st
     std::vector<std::string>::const_iterator it;
 
     // red
-    it = adobe::find( channel_list_, red);
+    it = boost::range::find( channel_list_, red);
 
     if( it != channel_list_.end())
 		c0 = it - channel_list_.begin();
@@ -119,7 +119,7 @@ void image_channels_param_t::set_channels( const std::string& red, const std::st
 		c0 = channel_list_.size();
 
     // green
-    it = adobe::find( channel_list_, green);
+    it = boost::range::find( channel_list_, green);
 
     if( it != channel_list_.end())
 		c1 = it - channel_list_.begin();
@@ -127,7 +127,7 @@ void image_channels_param_t::set_channels( const std::string& red, const std::st
 		c1 = channel_list_.size();
 
     // blue
-    it = adobe::find( channel_list_, blue);
+    it = boost::range::find( channel_list_, blue);
 
     if( it != channel_list_.end())
 		c2 = it - channel_list_.begin();
@@ -135,7 +135,7 @@ void image_channels_param_t::set_channels( const std::string& red, const std::st
 		c2 = channel_list_.size();
 
     // alpha
-    it = adobe::find( channel_list_, alpha);
+    it = boost::range::find( channel_list_, alpha);
 
     if( it != channel_list_.end())
 		c3 = it - channel_list_.begin();

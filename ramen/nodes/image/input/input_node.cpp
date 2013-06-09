@@ -10,8 +10,6 @@
 
 #include<boost/bind.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<OpenEXR/ImathFun.h>
 
 #include<QGridLayout>
@@ -21,6 +19,7 @@
 #include<ramen/app/application.hpp>
 
 #include<ramen/assert.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/image/ocio_transform.hpp>
 #include<ramen/image/color_bars.hpp>
@@ -296,7 +295,7 @@ boost::optional<int> input_node_t::map_frame_to_sequence( float t) const
 		switch( get_value<int>( param( "out_range")))
 		{
 			case hold_frame:
-				fnum = adobe::clamp( fnum, readers_[0]->start_frame(), readers_[0]->end_frame());
+                fnum = clamp( fnum, readers_[0]->start_frame(), readers_[0]->end_frame());
 			break;
 			
 			case loop_frame:

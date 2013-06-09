@@ -6,8 +6,7 @@
 
 #include<boost/bind.hpp>
 #include<boost/foreach.hpp>
-
-#include<adobe/algorithm/for_each.hpp>
+#include<boost/range/algorithm/for_each.hpp>
 
 #include<ramen/assert.hpp>
 
@@ -42,7 +41,7 @@ void manipulator_t::do_draw_overlay( const ui::paint_event_t& event) const
 	gl_scalef( event.aspect_ratio, 1);
 	
 	glEnable( GL_MAP1_VERTEX_3);
-	adobe::for_each( roto->scene(), boost::bind( &roto::manipulator_t::draw_shape, _1, boost::cref( event), roto->aspect_ratio(), true));
+    boost::range::for_each( roto->scene(), boost::bind( &roto::manipulator_t::draw_shape, _1, boost::cref( event), roto->aspect_ratio(), true));
 	glDisable( GL_MAP1_VERTEX_3);
 	
 	// clear errors
@@ -154,7 +153,7 @@ void manipulator_t::draw_axes( const shape_t& s, const ui::paint_event_t& event,
 
 void manipulator_t::draw_control_polygon( const shape_t& s, float pixel_scale)
 {
-    adobe::for_each( s.triples(), boost::bind( &manipulator_t::draw_triple, _1,
+    boost::range::for_each( s.triples(), boost::bind( &manipulator_t::draw_triple, _1,
 												boost::cref( s.global_xform()),
 												s.offset(), pixel_scale));
 }

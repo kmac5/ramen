@@ -6,8 +6,6 @@
 
 #include<boost/foreach.hpp>
 
-#include<adobe/empty.hpp>
-
 #include<ramen/params/animated_param.hpp>
 #include<ramen/nodes/node.hpp>
 

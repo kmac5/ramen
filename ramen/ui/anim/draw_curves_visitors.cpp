@@ -4,13 +4,12 @@
 
 #include<ramen/ui/anim/draw_curves_visitors.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<QPainter>
+
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/anim/float_curve.hpp>
 #include<ramen/anim/shape_curve.hpp>
-
 #include<ramen/anim/fwd_diff_cubic_evaluator.hpp>
 
 #include<ramen/ui/palette.hpp>
@@ -69,7 +68,7 @@ void draw_span( const anim_curves_view_t& view, const anim::float_curve_t *c,
 
     for( int i = 1; i <= steps; ++i)
     {
-        float v = c->relative_to_absolute( adobe::clamp( eval(), lo, hi));
+        float v = c->relative_to_absolute( clamp( eval(), lo, hi));
         view.painter()->drawLine( QPointF( h0, v0), QPointF( h, v));
 
         h0 = h;
@@ -189,7 +188,7 @@ void draw_curve_visitor::operator()( const anim::float_curve_t *c)
         default:
         {
             float pixel_len = ( c->start_time() - view_.viewport().world().min.x) * view_.time_scale();
-            int steps = adobe::clamp( (int) pixel_len / 4, 5, 150);
+            int steps = clamp( (int) pixel_len / 4, 5, 150);
 
             float h0 = view_.viewport().world().min.x;
             float v0 = c->relative_to_absolute( c->evaluate( h0));
@@ -251,7 +250,7 @@ void draw_curve_visitor::operator()( const anim::float_curve_t *c)
         default:
         {
             float pixel_len = ( c->start_time() - view_.viewport().world().min.x) * view_.time_scale();
-            int steps = adobe::clamp( (int) pixel_len / 4, 5, 300);
+            int steps = clamp( (int) pixel_len / 4, 5, 300);
 
             float h0 = c->end_time();
             float v0 = c->relative_to_absolute( c->evaluate( h0));

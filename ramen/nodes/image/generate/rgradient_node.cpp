@@ -5,10 +5,9 @@
 #include<algorithm>
 #include<cmath>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<OpenEXR/ImathMatrix.h>
 
+#include<ramen/algorithm/clamp.hpp>
 #include<ramen/math/constants.hpp>
 
 #include<ramen/nodes/node_factory.hpp>
@@ -79,7 +78,7 @@ struct rgradient_fun
 		float r = c1_.r * (1.0f - tg) + c2_.r * tg;
 		float g = c1_.g * (1.0f - tg) + c2_.g * tg;
 		float b = c1_.b * (1.0f - tg) + c2_.b * tg;
-		float a = adobe::clamp( c1_.a * (1.0f - t) + c2_.a * t, 0.0f, 1.0f);
+        float a = clamp( c1_.a * (1.0f - t) + c2_.a * t, 0.0f, 1.0f);
         return image::pixel_t( r, g, b, a);
     }
 

@@ -31,7 +31,7 @@ __m128 bicubic_sample( int x, int y, const image::const_image_view_t& src, const
 
     for( int j = -1; j <= 2; ++j)
     {
-        image::const_image_view_t::x_iterator src_it( src.row_begin( adobe::clamp( y - src_area.min.y + j, 0, height - 1)));
+        image::const_image_view_t::x_iterator src_it( src.row_begin( clamp( y - src_area.min.y + j, 0, height - 1)));
 		int sx = x - src_area.min.x - 1;
 
         __m128 yw = _mm_set_ps( yweights[j+1], yweights[j+1], yweights[j+1], yweights[j+1]);
@@ -39,7 +39,7 @@ __m128 bicubic_sample( int x, int y, const image::const_image_view_t& src, const
 
         for( int i = 0; i < 4; ++i)
         {
-            __m128 pix = _mm_load_ps( reinterpret_cast<const float*>( &(src_it[ adobe::clamp( sx + i, 0, width - 1)])));
+            __m128 pix = _mm_load_ps( reinterpret_cast<const float*>( &(src_it[ clamp( sx + i, 0, width - 1)])));
 			__m128 xw = _mm_set1_ps( xweights[i]);
             row = _mm_add_ps( row, _mm_mul_ps( pix, xw));
         }
@@ -59,7 +59,7 @@ __m128 lanczos3_sample( int x, int y, const image::const_image_view_t& src, cons
 
     for( int j = -5; j <= 4; ++j)
     {
-        image::const_image_view_t::x_iterator src_it( src.row_begin( adobe::clamp( y - src_area.min.y + j, 0, height - 1)));
+        image::const_image_view_t::x_iterator src_it( src.row_begin( clamp( y - src_area.min.y + j, 0, height - 1)));
 		int sx = x - src_area.min.x - 1;
 
         __m128 yw = _mm_set_ps( yweights[j+5], yweights[j+1], yweights[j+5], yweights[j+5]);
@@ -67,7 +67,7 @@ __m128 lanczos3_sample( int x, int y, const image::const_image_view_t& src, cons
 
         for( int i = 0; i < 10; ++i)
         {
-            __m128 pix = _mm_load_ps( reinterpret_cast<const float*>( &(src_it[ adobe::clamp( sx + i, 0, width - 1)])));
+            __m128 pix = _mm_load_ps( reinterpret_cast<const float*>( &(src_it[ clamp( sx + i, 0, width - 1)])));
 			__m128 xw = _mm_set1_ps( xweights[i]);
             row = _mm_add_ps( row, _mm_mul_ps( pix, xw));
         }

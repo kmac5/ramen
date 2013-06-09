@@ -11,8 +11,6 @@
 
 namespace ramen
 {
-namespace algorithm
-{
 
 template<class T>
 inline T clamp( T x, T lo, T hi)
@@ -29,6 +27,5 @@ inline T clamp( T x, T lo, T hi)
 }
 
 } // algorithm
-} // ramen
 
 #endif

@@ -9,13 +9,12 @@
 
 #include<boost/bind.hpp>
 
-#include<adobe/algorithm/clamp.hpp>
-
 #include<QLabel>
 
 #include<ramen/app/application.hpp>
 
 #include<ramen/assert.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<ramen/nodes/node.hpp>
 #include<ramen/app/document.hpp>
@@ -74,7 +73,7 @@ poly_param_value_t color_param_t::value_at_frame(float frame) const
     if( is_rgba())
     {
         eval_curve( 3, frame, v.a);
-        v.a = adobe::clamp( v.a, 0.0f, 1.0f);
+        v.a = ramen::clamp( v.a, 0.0f, 1.0f);
     }
     else
         v.a = 1.0f;

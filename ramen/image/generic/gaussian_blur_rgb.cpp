@@ -7,7 +7,7 @@
 #include<algorithm>
 #include<cmath>
 
-#include<adobe/algorithm/clamp.hpp>
+#include<ramen/algorithm/clamp.hpp>
 
 #include<tbb/blocked_range.h>
 #include<tbb/parallel_for.h>
@@ -78,7 +78,7 @@ struct gaussian_blur_rgb_fn
 				
 				for( int i = -xoff; i <= xoff; ++i)
 				{
-					int indx = adobe::clamp( x + i, 0, (int) src_.width() - 1);
+                    int indx = clamp( x + i, 0, (int) src_.width() - 1);
 					
 					float r = boost::gil::get_color( src_it[indx], boost::gil::red_t());
 					float g = boost::gil::get_color( src_it[indx], boost::gil::green_t());

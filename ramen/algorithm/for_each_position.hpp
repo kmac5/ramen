@@ -13,8 +13,6 @@
 
 namespace ramen
 {
-namespace algorithm
-{
 
 template<class InputIterator, class UnaryFunction>
 inline void for_each_position( InputIterator first, InputIterator last, UnaryFunction f)
@@ -38,7 +36,6 @@ inline void for_each_position( const InputRange& range, UnaryFunction f)
     for_each_position( boost::begin( range), boost::end( range), f);
 }
 
-} // algorithm
 } // ramen
 
 #endif
