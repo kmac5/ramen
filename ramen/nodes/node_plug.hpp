@@ -14,11 +14,11 @@
 #include<boost/noncopyable.hpp>
 #include<boost/tuple/tuple.hpp>
 
-#include<adobe/name.hpp>
-
 #include<OpenEXR/ImathColor.h>
 
 #include<ramen/assert.hpp>
+
+#include<ramen/core/name.hpp>
 
 #include<ramen/nodes/node_fwd.hpp>
 
@@ -34,11 +34,13 @@ class RAMEN_API node_plug_t
 public:
 
     /// Constructor.
-	node_plug_t( const std::string& id, const Imath::Color3c& color, const std::string& tooltip)
+    node_plug_t( const std::string& id,
+                 const Imath::Color3c& color,
+                 const std::string& tooltip)
 	{
-		id_ = adobe::name_t( id.c_str());
+        id_ = core::name_t( id.c_str());
 		color_ = color;
-		tooltip_ = adobe::name_t( tooltip.c_str());
+        tooltip_ = core::name_t( tooltip.c_str());
 	}
 
     /// Copy constructor.
@@ -49,13 +51,13 @@ public:
     }
 
     /// Returns this plug id.
-	const adobe::name_t& id() const { return id_;}
+    const core::name_t& id() const { return id_;}
 
     /// Returns this plug color. Used in the UI.
 	const Imath::Color3c& color() const	{ return color_;}
 
     /// Returns this plug tooltip. Used in the UI.
-    const adobe::name_t& tooltip() const	{ return tooltip_;}
+    const core::name_t& tooltip() const	{ return tooltip_;}
 
     /// Operator less, for assoc. containers (future).
     bool operator<( const node_plug_t& other) const
@@ -66,9 +68,9 @@ public:
 
 private:
 
-	adobe::name_t id_;
+    core::name_t id_;
 	Imath::Color3c color_;
-	adobe::name_t tooltip_;
+    core::name_t tooltip_;
 };
 
 /*!
@@ -79,7 +81,7 @@ class RAMEN_API node_input_plug_t : public node_plug_t
 {
 public:
 
-    typedef std::pair<ramen::node_t*,adobe::name_t> connection_t;
+    typedef std::pair<node_t*,core::name_t> connection_t;
 
     node_input_plug_t( const std::string& id,
                        bool optional,
@@ -104,23 +106,23 @@ public:
 	bool connected() const	{ return input_.first != 0;}
 
     /// Returns the node connected to this plug, or null.
-    const ramen::node_t *input_node() const { return input_.first;}
+    const node_t *input_node() const { return input_.first;}
 
     /// Returns the node connected to this plug, or null.
-    ramen::node_t *input_node() { return input_.first;}
+    node_t *input_node() { return input_.first;}
 
     /// Returns the output plug id of the input node this plug is connected to.
-    const adobe::name_t& input_node_out_plug() const { return input_.second;}
+    const core::name_t& input_node_out_plug() const { return input_.second;}
 
     /// Sets the node and plug this plug is connected to.
-	void set_input( ramen::node_t *n)
+    void set_input( node_t *n)
     {
         input_.first = n;
-        input_.second = adobe::name_t( "unused");
+        input_.second = core::name_t( "unused");
     }
 
     /// Sets the node and plug this plug is connected to.
-	void set_input( ramen::node_t *n, const adobe::name_t& plug)
+    void set_input( node_t *n, const core::name_t& plug)
     {
         input_.first = n;
         input_.second = plug;
@@ -143,20 +145,20 @@ class RAMEN_API node_output_plug_t : public node_plug_t
 {
 public:
 
-    typedef boost::tuples::tuple<ramen::node_t*,adobe::name_t, int> connection_t;
+    typedef boost::tuples::tuple<node_t*,core::name_t, int> connection_t;
 
     /// Constructor.
-	node_output_plug_t( ramen::node_t *parent, const std::string& id,
+    node_output_plug_t( node_t *parent, const std::string& id,
 						const Imath::Color3c& color, const std::string& tooltip);
 
     virtual ~node_output_plug_t();
 
     node_output_plug_t *clone() const { return do_clone();}
 
-    const ramen::node_t *parent_node() const { return parent_;}
-    ramen::node_t *parent_node()             { return parent_;}
+    const node_t *parent_node() const { return parent_;}
+    node_t *parent_node()             { return parent_;}
 
-    void set_parent_node( ramen::node_t *parent)
+    void set_parent_node( node_t *parent)
     {
         RAMEN_ASSERT( parent);
 
@@ -164,16 +166,16 @@ public:
     }
 
     /// Adds a connection to this plug.
-	void add_output( ramen::node_t *n, const adobe::name_t& plug);
+    void add_output( node_t *n, const core::name_t& plug);
 
     /// Adds a connection to this plug.
-	void add_output( ramen::node_t *n, int port);
+    void add_output( node_t *n, int port);
 
     /// Removes a connection to this plug.
-    void remove_output( ramen::node_t *n, const adobe::name_t& plug);
+    void remove_output( node_t *n, const core::name_t& plug);
 
     /// Removes a connection to this plug.
-    void remove_output( ramen::node_t *n, int port);
+    void remove_output( node_t *n, int port);
 
     typedef std::vector<connection_t >::const_iterator  const_iterator;
     typedef std::vector<connection_t >::iterator        iterator;
@@ -192,13 +194,13 @@ private:
 
     node_output_plug_t *do_clone() const;
 
-	ramen::node_t *parent_;
+    node_t *parent_;
 	std::vector<connection_t > connections_;
 };
 
 RAMEN_API node_output_plug_t *new_clone( const node_output_plug_t& other);
 
-} // namespace
+} // ramen
 
 #endif
 

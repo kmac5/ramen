@@ -202,7 +202,7 @@ public:
     point_type p[Degree+1];
 };
 
-} // namespace
-} // namespace
+} // bezier
+} // ramen
 
 #endif

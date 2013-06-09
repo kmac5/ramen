@@ -37,5 +37,5 @@ Imath::V2f nearest_point_on_curve( const curve_t<Imath::V2f>& c, const Imath::V2
 	return nearest_point_on_curve( c, p, t);
 }
 
-} // namespace
-} // namespace
+} // bezier
+} // ramen

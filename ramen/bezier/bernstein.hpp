@@ -53,7 +53,7 @@ void all_bernstein( T u, boost::array<T, Degree+1>& B)
     }
 }
 
-} // namespace
-} // namespace
+} // bezier
+} // ramen
 
 #endif

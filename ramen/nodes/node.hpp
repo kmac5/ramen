@@ -7,6 +7,8 @@
 
 #include<ramen/nodes/node_fwd.hpp>
 
+#include<ramen/config.hpp>
+
 #include<vector>
 #include<string>
 #include<memory>
@@ -67,7 +69,7 @@ public:
     const std::vector<node_input_plug_t>& input_plugs() const { return inputs_;}
     std::vector<node_input_plug_t>& input_plugs()             { return inputs_;}
 
-    int find_input( const adobe::name_t& id) const;
+    int find_input( const core::name_t& id) const;
 
     const node_t *input( std::size_t i = 0) const;
     node_t *input( std::size_t i = 0);
@@ -285,6 +287,6 @@ private:
 /// Makes a copy of a node.
 RAMEN_API node_t *new_clone( const node_t& other);
 
-} // namespace
+} // ramen
 
 #endif

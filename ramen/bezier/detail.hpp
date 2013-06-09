@@ -24,7 +24,7 @@ T bilerp( const T& a, const T& b, const T& c, const T& d, Q u, Q v)
 
 	
 } // detail
-} // namespace
-} // namespace
+} // bezier
+} // ramen
 
 #endif

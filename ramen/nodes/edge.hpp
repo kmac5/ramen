@@ -5,7 +5,9 @@
 #ifndef RAMEN_NODES_EDGE_HPP
 #define RAMEN_NODES_EDGE_HPP
 
-#include<adobe/name.hpp>
+#include<ramen/config.hpp>
+
+#include<ramen/core/name.hpp>
 
 #include<ramen/nodes/graph_color.hpp>
 #include<ramen/nodes/node_fwd.hpp>
@@ -17,16 +19,16 @@ struct edge_t
 {
     edge_t();
     edge_t( node_t *s=0, node_t *d=0, int p=-1);
-    edge_t( node_t *s, const adobe::name_t& splug, node_t *d, const adobe::name_t& dplug);
+    edge_t( node_t *s, const core::name_t& splug, node_t *d, const core::name_t& dplug);
 
     bool operator==( const edge_t& other) const;
     bool operator!=( const edge_t& other) const { return !(*this == other);}
 
     node_t *src;
-    adobe::name_t src_plug;
+    core::name_t src_plug;
 
     node_t *dst;
-    adobe::name_t dst_plug;
+    core::name_t dst_plug;
 
     int port;
 	
@@ -37,6 +39,6 @@ struct edge_t
     mutable graph_color_t graph_color_;
 };
 
-} // namespace
+} // ramen
 
 #endif
