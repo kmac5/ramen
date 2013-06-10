@@ -5,15 +5,15 @@
 #ifndef RAMEN_UI_ANIM_EDITOR_TOOLBAR_HPP
 #define	RAMEN_UI_ANIM_EDITOR_TOOLBAR_HPP
 
-#include<ramen/ui/anim/anim_editor_toolbar_fwd.hpp>
-
 #include<QWidget>
 
-#include<ramen/ui/anim/anim_editor_tool.hpp>
-
-#include<ramen/ui/widgets/double_spinbox_fwd.hpp>
-
-#include<ramen/ui/anim/drag_keys_command.hpp>
+// avoid a moc error, when including boost
+#ifndef QT_MOC_RUN
+    #include<ramen/ui/anim/anim_editor_toolbar_fwd.hpp>
+    #include<ramen/ui/anim/anim_editor_tool.hpp>
+    #include<ramen/ui/widgets/double_spinbox_fwd.hpp>
+    #include<ramen/ui/anim/drag_keys_command.hpp>
+#endif
 
 class QButtonGroup;
 class QToolButton;

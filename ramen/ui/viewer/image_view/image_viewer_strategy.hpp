@@ -1,21 +1,24 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_UI_VIEWER_IMAGE_VIEW_STRATEGY_HPP
 #define	RAMEN_UI_VIEWER_IMAGE_VIEW_STRATEGY_HPP
 
-
-
 #include<ramen/ui/viewer/viewer_strategy.hpp>
 
-#include<memory>
+// avoid a moc error, when including boost
+#ifndef QT_MOC_RUN
+    #include<memory>
 
-#include<ramen/nodes/image_node.hpp>
+    #include<ramen/nodes/image_node.hpp>
 
-#include<ramen/ocio/gl_display_manager.hpp>
+    #include<ramen/ocio/gl_display_manager.hpp>
 
-#include<ramen/ui/viewer/image_view/image.hpp>
-#include<ramen/ui/viewport.hpp>
-#include<ramen/ui/events.hpp>
+    #include<ramen/ui/viewer/image_view/image.hpp>
+    #include<ramen/ui/viewport.hpp>
+    #include<ramen/ui/events.hpp>
+#endif
 
 class QWidget;
 

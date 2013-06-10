@@ -3,4 +3,5 @@ CMakeLists.txt.user*
 /backup
 /reference
 *.pyc
+.DS_Store
 

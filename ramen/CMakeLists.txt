@@ -7,10 +7,21 @@
 ######################################################
 # ramen lib sources
 
-CONFIGURE_FILE( ${PROJECT_SOURCE_DIR}/ramen/version.hpp.in
-                ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/include/ramen/version.hpp)
+IF( CMAKE_SYSTEM_NAME MATCHES "Linux")
+    CONFIGURE_FILE( ${PROJECT_SOURCE_DIR}/ramen/version.hpp.in
+                    ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/include/ramen/version.hpp)
 
-INCLUDE_DIRECTORIES( ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/include)
+    INCLUDE_DIRECTORIES( ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/include)
+ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    CONFIGURE_FILE( ${PROJECT_SOURCE_DIR}/ramen/version.hpp.in
+                    ${PROJECT_BINARY_DIR}/Ramen-${RAMEN_VERSION}.app/Contents/include/ramen/version.hpp)
+
+    INCLUDE_DIRECTORIES( ${PROJECT_BINARY_DIR}/Ramen-${RAMEN_VERSION}.app/Contents/include)
+ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    MESSAGE( FATAL_ERROR "Windows not supported yet")
+ELSE()
+    MESSAGE( FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} not supported yet")
+ENDIF()
 
 FILE(GLOB_RECURSE RAMEN_HEADERS ./*.h*)
 
@@ -86,7 +97,9 @@ SET( RAMEN_MOC_CLASSES	params/animated_param.hpp
                         ui/widgets/time_slider.hpp
                         )
 
-SET( RAMEN_SOURCES      anim/any_curve.cpp
+SET( RAMEN_SOURCES      system/system.cpp
+
+                        anim/any_curve.cpp
                         anim/clipboard.cpp
                         anim/curve_algorithm.cpp
                         anim/curve_to_half_lut.cpp
@@ -390,8 +403,6 @@ SET( RAMEN_SOURCES      anim/any_curve.cpp
                         util/edit_distance.cpp
                         util/error_log.cpp
                         util/string.cpp
-
-                        system/system.cpp
                         )
 
 IF( WITH_NODES)
@@ -529,10 +540,9 @@ ENDIF()
 # platform specific
 
 # platform sources
-IF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+IF( ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     SET( EXTRA_PLATFORM_LIBS)
-ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    #SET( RAMEN_PLATFORM_SOURCES system/system_pvt_linux.cpp)
+ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     SET( EXTRA_PLATFORM_LIBS)
 ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     SET( EXTRA_PLATFORM_LIBS Userenv)
@@ -568,13 +578,12 @@ ADD_LIBRARY( ramen SHARED   ${RAMEN_HEADERS}
                             ${RAMEN_PLATFORM_SOURCES}
                             ${RAMEN_RESOURCES}
                             )
+
 SET_TARGET_PROPERTIES( ramen PROPERTIES
                              VERSION ${RAMEN_VERSION_MAJOR}.${RAMEN_VERSION_MINOR}.${RAMEN_VERSION_PATCH}
-                             SOVERSION ${RAMEN_VERSION_MAJOR}
-                            )
+                             SOVERSION ${RAMEN_VERSION_MAJOR})
 
 TARGET_LINK_LIBRARIES( ramen ${RAMEN_ALL_LIBS} ${EXTRA_PLATFORM_LIBS})
-SET( LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/lib/)
 
 ######################################################
 # ramen binary
@@ -583,6 +592,24 @@ SET( RAMEN_APP_SOURCES	main.cpp
                         )
 
 ADD_EXECUTABLE( ramen.bin ${RAMEN_APP_SOURCES})
-
 TARGET_LINK_LIBRARIES( ramen.bin ramen ${RAMEN_ALL_LIBS} ${EXTRA_PLATFORM_LIBS})
-SET( EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/bin/)
+
+IF( CMAKE_SYSTEM_NAME MATCHES "Linux")
+    SET_TARGET_PROPERTIES( ramen PROPERTIES LIBRARY_OUTPUT_DIRECTORY
+                            ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/lib/)
+
+    SET_TARGET_PROPERTIES( ramen.bin PROPERTIES RUNTIME_OUTPUT_DIRECTORY
+                            ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/bin/)
+ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    SET_TARGET_PROPERTIES( ramen PROPERTIES LIBRARY_OUTPUT_DIRECTORY
+                            ${PROJECT_BINARY_DIR}/Ramen-${RAMEN_VERSION}.app/Contents/lib/)
+
+    SET_TARGET_PROPERTIES( ramen.bin PROPERTIES RUNTIME_OUTPUT_DIRECTORY
+                            ${PROJECT_BINARY_DIR}/Ramen-${RAMEN_VERSION}.app/Contents/MacOS/)
+
+    SET_TARGET_PROPERTIES( ramen.bin PROPERTIES OUTPUT_NAME ramen)
+ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    MESSAGE( FATAL_ERROR "Windows not supported yet")
+ELSE()
+    MESSAGE( FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} not supported yet")
+ENDIF()

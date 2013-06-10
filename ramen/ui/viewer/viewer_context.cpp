@@ -2,8 +2,6 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-
-
 #include<ramen/ui/viewer/viewer_context.hpp>
 
 #include<boost/bind.hpp>
@@ -336,6 +334,6 @@ void viewer_context_t::draw_checks_background() const
 
 Imath::Color4f viewer_context_t::color_at( int x, int y) const { return strategy().color_at( x, y);}
 
-} // namespace
-} // namespace
-} // namespace
+} // viewer
+} // ui
+} // ramen

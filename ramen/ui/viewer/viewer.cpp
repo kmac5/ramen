@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
-
-
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/ui/viewer/viewer.hpp>
 
@@ -344,5 +344,5 @@ void viewer_t::change_display_transform( int index)
 void viewer_t::change_exposure( double d)	{ view_->exposure_changed();}
 void viewer_t::change_gamma( double d)		{ view_->gamma_changed();}
 
-} // namespace
-} // namespace
+} // ui
+} // ramen

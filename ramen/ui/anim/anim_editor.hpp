@@ -10,20 +10,23 @@
 #include<set>
 #include<memory>
 
-#include<boost/shared_ptr.hpp>
-
 #include<QObject>
 
-#include<ramen/nodes/node_fwd.hpp>
+// avoid a moc error, when including boost
+#ifndef QT_MOC_RUN
+    #include<boost/shared_ptr.hpp>
 
-#include<ramen/anim/track_fwd.hpp>
-#include<ramen/anim/keyframe.hpp>
-#include<ramen/anim/any_curve.hpp>
+    #include<ramen/nodes/node_fwd.hpp>
 
-#include<ramen/ui/anim/track_model_fwd.hpp>
-#include<ramen/ui/anim/anim_editor_command.hpp>
-#include<ramen/ui/anim/anim_editor_toolbar_fwd.hpp>
-#include<ramen/ui/anim/anim_curves_view_fwd.hpp>
+    #include<ramen/anim/track_fwd.hpp>
+    #include<ramen/anim/keyframe.hpp>
+    #include<ramen/anim/any_curve.hpp>
+
+    #include<ramen/ui/anim/track_model_fwd.hpp>
+    #include<ramen/ui/anim/anim_editor_command.hpp>
+    #include<ramen/ui/anim/anim_editor_toolbar_fwd.hpp>
+    #include<ramen/ui/anim/anim_curves_view_fwd.hpp>
+#endif
 
 class QWidget;
 class QSplitter;

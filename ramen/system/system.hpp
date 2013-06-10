@@ -7,11 +7,11 @@
 
 #include<ramen/config.hpp>
 
-#include<memory>
+#include<string>
 
 #include<ramen/app/application_fwd.hpp>
 
-#include<ramen/system/system_pvt.hpp>
+#include<boost/filesystem/path.hpp>
 
 namespace ramen
 {
@@ -22,35 +22,72 @@ namespace system
 \ingroup app
 \brief class that contains os & hardware related data and methods
 */
-class system_t : boost::noncopyable
+class RAMEN_API system_t
 {
 public:
 
-    const std::string& system_name() const;
-    const std::string& user_name() const;
-	
+    const std::string& system_name() const
+    {
+        return system_name_;
+    }
+
+    const std::string& user_name() const
+    {
+        return user_name_;
+    }
+
+    const boost::filesystem::path& home_path() const
+    {
+        return home_path_;
+    }
+
+    const boost::filesystem::path& executable_path() const
+    {
+        return executable_path_;
+    }
+
+    const boost::filesystem::path& application_path() const
+    {
+        return application_path_;
+    }
+
     // paths
-    const boost::filesystem::path& home_path() const;
+    /*
     const boost::filesystem::path& app_user_path() const;
-    const boost::filesystem::path& executable_path() const;
-    const boost::filesystem::path& app_bundle_path() const;
     const boost::filesystem::path& preferences_path() const;
     const boost::filesystem::path& tmp_path() const;
-
-    // cpu
-    cpu_family_type cpu_type() const;
-    int simd_type() const;
+    */
 
     // ram
-    boost::uint64_t ram_size() const;
-	
+    boost::uint64_t ram_size() const
+    {
+        return ram_size_;
+    }
+
 private:
 
     friend class ramen::application_t;
 
     system_t();
+    ~system_t();
 
-	std::auto_ptr<system_pvt> pimpl_;
+    // non-copyable
+    system_t( const system_t&);
+    system_t& operator=( const system_t&);
+
+    std::string system_name_;
+    std::string user_name_;
+
+    boost::uint64_t ram_size_;
+
+    // paths
+    boost::filesystem::path home_path_;
+
+    boost::filesystem::path executable_path_;
+    boost::filesystem::path application_path_;
+
+    struct impl;
+    impl *pimpl_;
 };
 
 } // system

@@ -31,15 +31,13 @@ void preferences_t::set_defaults()
 
     default_format_ = image::format_t();
     frame_rate_ = 25; // PAL by default.
-	
-	tmp_dir_ = app().system().tmp_path();
-	flipbook_ = "internal";
-	
+		
 	pick_distance_ = 5;
 }
 
 void preferences_t::load()
 {
+    /*
     boost::filesystem::path p = app().system().preferences_path() / "preferences.yaml";
     boost::filesystem::ifstream ifs( p);
     if( !ifs.is_open() || !ifs.good())
@@ -70,10 +68,12 @@ void preferences_t::load()
         set_defaults();
         save();
     }
+    */
 }
 
 void preferences_t::save()
 {
+    /*
     boost::filesystem::path p = app().system().preferences_path() / "preferences.yaml";
     boost::filesystem::ofstream ofs( p);
 
@@ -101,6 +101,7 @@ void preferences_t::save()
     ofs << out.c_str();
 	std::flush( ofs);
     ofs.close();
+    */
 }
 
 void preferences_t::set_default_format( const image::format_t& format)
@@ -108,10 +109,4 @@ void preferences_t::set_default_format( const image::format_t& format)
     default_format_ = format;
 }
 
-const boost::filesystem::path& preferences_t::tmp_dir() const { return tmp_dir_;}
-
-const std::string& preferences_t::default_flipbook() const { return flipbook_;}
-
-void preferences_t::set_default_flipbook( const std::string& f) { flipbook_ = f;}
-
-} // namespace
+} // ramen

@@ -5,13 +5,16 @@
 #ifndef RAMEN_TRANSFORM3_PARAM_HPP
 #define	RAMEN_TRANSFORM3_PARAM_HPP
 
-#include<ramen/params/composite_param.hpp>
+// avoid a moc error, when including boost
+#ifndef QT_MOC_RUN
+    #include<ramen/params/composite_param.hpp>
 
-#include<OpenEXR/ImathMatrix.h>
+    #include<OpenEXR/ImathMatrix.h>
 
-#include<ramen/nodes/node_fwd.hpp>
+    #include<ramen/nodes/node_fwd.hpp>
 
-#include<ramen/image/typedefs.hpp>
+    #include<ramen/image/typedefs.hpp>
+#endif
 
 namespace ramen
 {

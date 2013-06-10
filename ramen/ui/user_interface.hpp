@@ -5,31 +5,34 @@
 #ifndef RAMEN_UI_HPP
 #define RAMEN_UI_HPP
 
-#include<ramen/config.hpp>
-
-#include<ramen/ui/user_interface_fwd.hpp>
-
-#include<memory>
-
-#include<boost/noncopyable.hpp>
-#include<boost/signals.hpp>
-#include<boost/thread/future.hpp>
-
 #include<QObject>
 #include<QString>
 #include<QFont>
 
-#include<ramen/filesystem/path.hpp>
-#include<boost/filesystem/fstream.hpp>
+// avoid a moc error, when including boost
+#ifndef QT_MOC_RUN
+    #include<ramen/config.hpp>
 
-#include<ramen/render/image_node_renderer.hpp>
+    #include<ramen/ui/user_interface_fwd.hpp>
 
-#include<ramen/ui/main_window_fwd.hpp>
-#include<ramen/ui/viewer/viewer_fwd.hpp>
-#include<ramen/ui/inspector/inspector_fwd.hpp>
-#include<ramen/ui/anim/anim_editor_fwd.hpp>
+    #include<memory>
 
-#include<ramen/serialization/archive_fwd.hpp>
+    #include<boost/noncopyable.hpp>
+    #include<boost/signals.hpp>
+    #include<boost/thread/future.hpp>
+
+    #include<ramen/filesystem/path.hpp>
+    #include<boost/filesystem/fstream.hpp>
+
+    #include<ramen/render/image_node_renderer.hpp>
+
+    #include<ramen/ui/main_window_fwd.hpp>
+    #include<ramen/ui/viewer/viewer_fwd.hpp>
+    #include<ramen/ui/inspector/inspector_fwd.hpp>
+    #include<ramen/ui/anim/anim_editor_fwd.hpp>
+
+    #include<ramen/serialization/archive_fwd.hpp>
+#endif
 
 namespace ramen
 {
@@ -141,6 +144,7 @@ public Q_SLOTS:
 private:
 	
 	void init_ui_style();
+    void save_window_state();
 	void restore_window_state();
 	
     main_window_t *window_;

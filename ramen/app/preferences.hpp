@@ -45,14 +45,7 @@ public:
 	// image limits
 	int max_image_width() const;
 	int max_image_height() const;
-	
-	// paths
-	const boost::filesystem::path& tmp_dir() const;
-	
-	// flip
-	const std::string& default_flipbook()  const;
-	void set_default_flipbook( const std::string& f);
-	
+
 	// user interface
 	int pick_distance() const { return pick_distance_;}
 
@@ -83,11 +76,9 @@ private:
     image::format_t default_format_;
     int frame_rate_;
     int max_image_memory_;
-	boost::filesystem::path tmp_dir_;
-	std::string flipbook_;
 	int pick_distance_;
 };
 
-} // namespace
+} // ramen
 
 #endif

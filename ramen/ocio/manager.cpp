@@ -1,4 +1,6 @@
 // Copyright (c) 2011 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/ocio/manager.hpp>
 
@@ -43,13 +45,7 @@ void manager_t::init()
 	}
 
 	// try more paths here...
-	boost::filesystem::path ocio_path = app().system().app_user_path() / "ocio/config.ocio";
-
-	if( init_from_file( ocio_path))
-		return;
-
-	ocio_path = app().system().app_bundle_path() / "ocio/config.ocio";
-
+    boost::filesystem::path ocio_path = app().system().application_path() / "ocio/config.ocio";
 	if( init_from_file( ocio_path))
 		return;
 
@@ -97,7 +93,9 @@ void manager_t::get_displays()
     }
 }
 
-void manager_t::get_views( const std::string& display, std::vector<std::string>& views, int& default_index) const
+void manager_t::get_views( const std::string& display,
+                           std::vector<std::string>& views,
+                           int& default_index) const
 {
     OCIO::ConstConfigRcPtr cfg = config();
     int num_views = cfg->getNumViews( display.c_str());

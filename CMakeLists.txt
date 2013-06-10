@@ -58,6 +58,8 @@ ENDIF()
 
 IF( CMAKE_COMPILER_IS_GNUCXX)
     SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pipe -fvisibility=hidden -fvisibility-inlines-hidden")
+ELSEIF( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    MESSAGE( FATAL_ERROR "clang is not supported yet")
 ELSE()
     MESSAGE( FATAL_ERROR "unknown compiler is not supported yet")
 ENDIF()
@@ -74,9 +76,7 @@ SET( Boost_ADDITIONAL_VERSIONS "1.53.0")
 SET( BOOST_NEEDED_LIBS  filesystem
                         thread
                         system
-                        #regex
                         date_time
-                        #program_options
                         )
 
 FIND_PACKAGE( Boost COMPONENTS ${BOOST_NEEDED_LIBS} REQUIRED)
@@ -116,8 +116,9 @@ ADD_DEFINITIONS( -DBOOST_FILESYSTEM_VERSION=3)
 ADD_DEFINITIONS( -DBOOST_FILESYSTEM_NO_DEPRECATED)
 
 ADD_DEFINITIONS( -DQT_NO_KEYWORDS)
-# we need this, to avoid a moc error
-SET( MOC_EXTRA_ARGS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
+
+# looks like we need to set this manually...
+SET( MOC_EXTRA_ARGS -DQT_MOC_RUN)
 
 ######################################################
 # includes

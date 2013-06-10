@@ -55,7 +55,6 @@ namespace ui
 
 user_interface_t::user_interface_t() : QObject()
 {
-	// RAMEN_ASSERT( !app().command_line());
     active_ = 0;
 	context_ = 0;
 	rendering_ = false;
@@ -111,8 +110,21 @@ void user_interface_t::init_ui_style()
 	palette_t::instance();
 }
 
+void user_interface_t::save_window_state()
+{
+    /*
+    QByteArray window_state = window_->saveState();
+    boost::filesystem::path p = app().system().preferences_path() / "wstate.ui";
+    QFile file( filesystem::file_cstring( p));
+
+    if( file.open( QIODevice::WriteOnly))
+        file.write( window_state);
+    */
+}
+
 void user_interface_t::restore_window_state()
 {
+    /*
     boost::filesystem::path p = app().system().preferences_path() / "wstate.ui";
 	{
 	    QFile file(filesystem::file_cstring( p));
@@ -124,8 +136,7 @@ void user_interface_t::restore_window_state()
 			return;
 	    }
 	}
-	
-	// try a default state here...
+    */
 }
 
 void user_interface_t::show() { window_->show();}
@@ -141,14 +152,7 @@ int user_interface_t::run( const boost::filesystem::path& p)
 void user_interface_t::quit()
 {
     app().set_quitting( true);
-
-    QByteArray window_state = window_->saveState();
-    boost::filesystem::path p = app().system().preferences_path() / "wstate.ui";
-    QFile file( filesystem::file_cstring( p));
-
-    if( file.open( QIODevice::WriteOnly))
-        file.write( window_state);
-
+    save_window_state();
     qApp->quit();
 }
 

@@ -12,7 +12,7 @@ namespace ui
 
 class anim_editor_t;
 
-} // namespace
-} // namespace
+} // ui
+} // ramen
 
 #endif

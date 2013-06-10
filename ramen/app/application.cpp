@@ -48,8 +48,12 @@
 
 namespace ramen
 {
+namespace
+{
 
 application_t *g_app = 0;
+
+} // unnamed
 
 application_t::application_t( int argc, char **argv) : system_(), preferences_()
 {
@@ -65,14 +69,11 @@ application_t::application_t( int argc, char **argv) : system_(), preferences_()
 
     // Create QApplication
     QApplication *q_app = new QApplication( cmd_parser_->argc, cmd_parser_->argv);
-    boost::filesystem::path bundle_path( system().app_bundle_path());
-    bundle_path /= "lib/Qt_plugins";
-    qApp->setLibraryPaths( QStringList( QString( ramen::filesystem::file_cstring( bundle_path))));
+    //boost::filesystem::path bundle_path( system().app_bundle_path());
+    //bundle_path /= "lib/Qt_plugins";
+    //qApp->setLibraryPaths( QStringList( QString( ramen::filesystem::file_cstring( bundle_path))));
 
     parse_command_line( cmd_parser_->argc, cmd_parser_->argv);
-
-    if( !system().simd_type() & system::simd_sse2)
-        fatal_error( "No SSE2 instruction set, exiting", true);
 
     // init prefs
     preferences_.reset( new preferences_t());
@@ -140,13 +141,9 @@ application_t::~application_t()
 void application_t::create_dirs()
 {
     // home
-    boost::filesystem::path base( system().app_user_path());
-    boost::filesystem::create_directories( base / "ocio");
-    boost::filesystem::create_directories( base / "prefs");
-    boost::filesystem::create_directories( base / "ui");
-
-    // tmp
-    boost::filesystem::create_directories( preferences().tmp_dir());
+    //boost::filesystem::path base( system().app_user_path());
+    //boost::filesystem::create_directories( base / "prefs");
+    //boost::filesystem::create_directories( base / "ui");
 }
 
 int application_t::run()
@@ -295,7 +292,7 @@ void application_t::parse_command_line( int argc, char **argv)
     if( matches_option( argv[1], "-version"))
     {
         std::cout << RAMEN_NAME_FULL_VERSION_STR << ", " << __DATE__ << std::endl;
-        std::exit( 0);
+        std::exit( EXIT_SUCCESS);
     }
 
     int i = 1;
@@ -363,7 +360,7 @@ void application_t::usage()
                     "-threads n:      Use n threads.\n\n"
                     "-render:         Render composition. Run ramen -render -help for more information.\n"
                     << std::endl;
-    std::exit( 0);
+    std::exit( EXIT_SUCCESS);
 }
 
 void application_t::render_usage()
@@ -375,48 +372,17 @@ void application_t::render_usage()
                     "-threads n:      Use n threads.\n\n"
                     "-frames n m:     Render frames n to m.\n"
                     << std::endl;
-    std::exit( 0);
+    std::exit( EXIT_SUCCESS);
 }
 
 void application_t::print_app_info()
 {
     std::cout << RAMEN_NAME_FULL_VERSION_STR << ", " << __DATE__ << std::endl;
     std::cout << "System = " << system().system_name() << std::endl;
-
-    switch( system().cpu_type())
-    {
-        case system::cpu_x86:
-        {
-            std::cout << "CPU = Intel compatible\n";
-
-            #ifdef RAMEN_SSE_SUPPORT
-                int sset = system().simd_type();
-
-                if( sset == system::simd_none)
-                    std::cout << "SIMD = None\n";
-                else
-                {
-                    std::cout << "SIMD = SSE ";
-
-                    if( sset & system::simd_sse2)
-                        std::cout << "SSE2 ";
-
-                    if( sset & system::simd_sse3)
-                        std::cout << "SSE3 ";
-
-                    std::cout << std::endl;
-                }
-            #endif
-        }
-        break;
-
-        default:
-            std::cout << "CPU = Unknown\n";
-    }
-
-    std::cout << "Using " << max_threads_ << " threads\n";
-    std::cout << "Ram Size = " << system().ram_size() / 1024 / 1024 << " Mb\n";
-    std::cout << "Image Cache Memory = " << mem_manager_->image_allocator().max_size() / 1024 / 1024 << " Mb\n";
+    std::cout << "Executable = " << system().executable_path().c_str() << std::endl;
+    std::cout << "Using " << max_threads_ << " threads" << std::endl;
+    std::cout << "Ram Size = " << system().ram_size() / 1024 / 1024 << " Mb" << std::endl;
+    std::cout << "Image Cache Memory = " << mem_manager_->image_allocator().max_size() / 1024 / 1024 << " Mb" << std::endl;
 }
 
 // document handling
@@ -464,10 +430,9 @@ void application_t::fatal_error( const std::string& message, bool no_gui) const
     if( !command_line_ && ui() && !ui()->rendering() && !no_gui)
         ui()->fatal_error( message);
     else
-    {
         std::cerr << "Fatal error: " << message << "\n";
-        abort();
-    }
+
+    std::exit( EXIT_FAILURE);
 }
 
 void application_t::error( const std::string& message, bool no_gui) const
@@ -485,9 +450,7 @@ void application_t::inform( const std::string& message, bool no_gui) const
     if( !command_line_ && ui() && !ui()->rendering() && !no_gui)
         ui()->inform( message);
     else
-    {
         std::cerr << "Info: " << message << "\n";
-    }
 }
 
 bool application_t::question( const std::string& what, bool default_answer) const
@@ -511,4 +474,4 @@ application_t& app()
     return *g_app;
 }
 
-} // namespace
+} // ramen

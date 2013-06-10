@@ -1,23 +1,28 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_UI_VIEWER_STRATEGY_HPP
 #define	RAMEN_UI_VIEWER_STRATEGY_HPP
 
 #include<ramen/ui/viewer/viewer_strategy_fwd.hpp>
 
-#include<boost/function.hpp>
-
-#include<OpenEXR/ImathBox.h>
-#include<OpenEXR/ImathColor.h>
-
 #include<QObject>
 #include<QKeyEvent>
 #include<QMouseEvent>
 
-#include<ramen/assert.hpp>
+// avoid a moc error, when including boost
+#ifndef QT_MOC_RUN
+    #include<boost/function.hpp>
 
-#include<ramen/nodes/node_fwd.hpp>
-#include<ramen/ui/viewer/viewer_context_fwd.hpp>
+    #include<OpenEXR/ImathBox.h>
+    #include<OpenEXR/ImathColor.h>
+
+    #include<ramen/assert.hpp>
+
+    #include<ramen/nodes/node_fwd.hpp>
+    #include<ramen/ui/viewer/viewer_context_fwd.hpp>
+#endif
 
 class QWidget;
 

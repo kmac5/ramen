@@ -2,11 +2,7 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-
-
 #include<ramen/ui/main_window.hpp>
-
-#include<ramen/version.hpp>
 
 #include<iostream>
 #include<map>
@@ -37,8 +33,6 @@
 #include<ramen/app/document.hpp>
 #include<ramen/app/export_selected_nodes.hpp>
 #include<ramen/app/import_composition.hpp>
-
-#include<ramen/system/system.hpp>
 
 #include<ramen/memory/manager.hpp>
 
