@@ -37,6 +37,7 @@ void preferences_t::set_defaults()
 
 void preferences_t::load()
 {
+    // TODO: re-enable this...
     /*
     boost::filesystem::path p = app().system().preferences_path() / "preferences.yaml";
     boost::filesystem::ifstream ifs( p);
@@ -73,6 +74,7 @@ void preferences_t::load()
 
 void preferences_t::save()
 {
+    // TODO: re-enable this...
     /*
     boost::filesystem::path p = app().system().preferences_path() / "preferences.yaml";
     boost::filesystem::ofstream ofs( p);

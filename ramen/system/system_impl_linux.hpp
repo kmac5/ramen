@@ -43,10 +43,11 @@ struct system_t::impl
             char linkname[128];
             if( snprintf( linkname, sizeof( linkname), "/proc/%i/exe", getpid()) >= 0)
             {
-                char buf[ 1024];
-                if( int ret = readlink( linkname, buf, sizeof( buf)) >= sizeof( buf))
+                char buf[1024];
+                int ret = readlink( linkname, buf, sizeof( buf));
+                if( ret < sizeof( buf))
                 {
-                    buf[ ret] = 0;
+                    buf[ret] = 0;
                     self.executable_path_ = boost::filesystem::path( buf);
                 }
             }

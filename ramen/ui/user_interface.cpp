@@ -96,8 +96,6 @@ void user_interface_t::init()
     inspector_ = new inspector_t();
     anim_editor_ = new anim_editor_t();
     window_ = new main_window_t();
-
-    // restore the last saved window state
 	restore_window_state();
 }
 
@@ -112,6 +110,7 @@ void user_interface_t::init_ui_style()
 
 void user_interface_t::save_window_state()
 {
+    // TODO: re-enable this...
     /*
     QByteArray window_state = window_->saveState();
     boost::filesystem::path p = app().system().preferences_path() / "wstate.ui";
@@ -124,6 +123,7 @@ void user_interface_t::save_window_state()
 
 void user_interface_t::restore_window_state()
 {
+    // TODO: re-enable this...
     /*
     boost::filesystem::path p = app().system().preferences_path() / "wstate.ui";
 	{

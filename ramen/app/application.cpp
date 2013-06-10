@@ -69,6 +69,7 @@ application_t::application_t( int argc, char **argv) : system_(), preferences_()
 
     // Create QApplication
     QApplication *q_app = new QApplication( cmd_parser_->argc, cmd_parser_->argv);
+    //TODO: re-eanble this...
     //boost::filesystem::path bundle_path( system().app_bundle_path());
     //bundle_path /= "lib/Qt_plugins";
     //qApp->setLibraryPaths( QStringList( QString( ramen::filesystem::file_cstring( bundle_path))));
@@ -140,7 +141,7 @@ application_t::~application_t()
 
 void application_t::create_dirs()
 {
-    // home
+    //TODO: re-eanble this...
     //boost::filesystem::path base( system().app_user_path());
     //boost::filesystem::create_directories( base / "prefs");
     //boost::filesystem::create_directories( base / "ui");
