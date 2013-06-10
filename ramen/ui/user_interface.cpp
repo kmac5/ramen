@@ -110,22 +110,17 @@ void user_interface_t::init_ui_style()
 
 void user_interface_t::save_window_state()
 {
-    // TODO: re-enable this...
-    /*
     QByteArray window_state = window_->saveState();
-    boost::filesystem::path p = app().system().preferences_path() / "wstate.ui";
+    boost::filesystem::path p = app().system().application_user_path() / "wstate.ui";
     QFile file( filesystem::file_cstring( p));
 
     if( file.open( QIODevice::WriteOnly))
         file.write( window_state);
-    */
 }
 
 void user_interface_t::restore_window_state()
 {
-    // TODO: re-enable this...
-    /*
-    boost::filesystem::path p = app().system().preferences_path() / "wstate.ui";
+    boost::filesystem::path p = app().system().application_user_path() / "wstate.ui";
 	{
 	    QFile file(filesystem::file_cstring( p));
 
@@ -136,7 +131,6 @@ void user_interface_t::restore_window_state()
 			return;
 	    }
 	}
-    */
 }
 
 void user_interface_t::show() { window_->show();}

@@ -90,8 +90,6 @@ public:
 
 private:
 
-	void create_dirs();
-
 	// command line
 	bool matches_option( char *arg, const char *opt) const;
 	boost::optional<int> parse_int( int num, int argc, char **argv) const;

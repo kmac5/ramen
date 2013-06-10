@@ -37,9 +37,7 @@ void preferences_t::set_defaults()
 
 void preferences_t::load()
 {
-    // TODO: re-enable this...
-    /*
-    boost::filesystem::path p = app().system().preferences_path() / "preferences.yaml";
+    boost::filesystem::path p = app().system().application_user_path() / "prefs.yaml";
     boost::filesystem::ifstream ifs( p);
     if( !ifs.is_open() || !ifs.good())
     {
@@ -69,14 +67,11 @@ void preferences_t::load()
         set_defaults();
         save();
     }
-    */
 }
 
 void preferences_t::save()
 {
-    // TODO: re-enable this...
-    /*
-    boost::filesystem::path p = app().system().preferences_path() / "preferences.yaml";
+    boost::filesystem::path p = app().system().application_user_path() / "prefs.yaml";
     boost::filesystem::ofstream ofs( p);
 
     if( !ofs.is_open() || !ofs.good())
@@ -84,8 +79,6 @@ void preferences_t::save()
         app().error( "Couldn't open preferences file for writting. file = " + filesystem::file_string( p));
         return;
     }
-
-	// TODO: save pick distance
 	
     YAML::Emitter out;
     out << YAML::Comment( "Ramen preferences") << YAML::Newline;
@@ -93,17 +86,14 @@ void preferences_t::save()
     out << YAML::BeginMap;
         out << YAML::Key << "version" << YAML::Value << 1
             << YAML::Key << "max_image_memory" << YAML::Value << max_image_memory_
-
 			<< YAML::Key << "default_format" << YAML::Value << default_format_
             << YAML::Key << "frame_rate" << YAML::Value << frame_rate_
-			<< YAML::Key << "default_flipbook" << YAML::Value << YAML::DoubleQuoted << flipbook_
             ;
 
     out << YAML::EndMap;
     ofs << out.c_str();
 	std::flush( ofs);
     ofs.close();
-    */
 }
 
 void preferences_t::set_default_format( const image::format_t& format)

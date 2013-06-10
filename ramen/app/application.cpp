@@ -74,12 +74,13 @@ application_t::application_t( int argc, char **argv) : system_(), preferences_()
     //bundle_path /= "lib/Qt_plugins";
     //qApp->setLibraryPaths( QStringList( QString( ramen::filesystem::file_cstring( bundle_path))));
 
+    // create the application user path, if needed
+    boost::filesystem::create_directories( system().application_user_path());
+
     parse_command_line( cmd_parser_->argc, cmd_parser_->argv);
 
     // init prefs
     preferences_.reset( new preferences_t());
-
-    create_dirs();
 
     if( max_threads_ == 0)
         max_threads_ = boost::thread::hardware_concurrency();
@@ -133,19 +134,7 @@ application_t::application_t( int argc, char **argv) : system_(), preferences_()
     }
 }
 
-application_t::~application_t()
-{
-    //	TODO: implement this.
-    //delete_tmp_files();
-}
-
-void application_t::create_dirs()
-{
-    //TODO: re-eanble this...
-    //boost::filesystem::path base( system().app_user_path());
-    //boost::filesystem::create_directories( base / "prefs");
-    //boost::filesystem::create_directories( base / "ui");
-}
+application_t::~application_t() {}
 
 int application_t::run()
 {
