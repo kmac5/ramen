@@ -60,7 +60,6 @@ void preferences_t::load()
         get_value( doc, "max_image_memory", max_image_memory_);
 		get_value( doc, "default_format", default_format_);
         get_value( doc, "frame_rate", frame_rate_);
-		get_value( doc, "default_flipbook", flipbook_);
     }
     catch( ...)
     {
