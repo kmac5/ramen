@@ -31,6 +31,13 @@ struct system_t::impl
         self.user_name_ = p->pw_name;
         self.home_path_ = boost::filesystem::path( p->pw_dir);
 
+        // app user path
+        {
+            std::string dir_name( ".ramen");
+            dir_name.append( RAMEN_VERSION_MAJOR_STR);
+            self.application_user_path_ = self.home_path_ / dir_name;
+        }
+
         // ram size
         {
             struct sysinfo info;

@@ -51,12 +51,10 @@ public:
         return application_path_;
     }
 
-    // paths
-    /*
-    const boost::filesystem::path& app_user_path() const;
-    const boost::filesystem::path& preferences_path() const;
-    const boost::filesystem::path& tmp_path() const;
-    */
+    const boost::filesystem::path& application_user_path() const
+    {
+        return application_user_path_;
+    }
 
     // ram
     boost::uint64_t ram_size() const
@@ -82,9 +80,9 @@ private:
 
     // paths
     boost::filesystem::path home_path_;
-
     boost::filesystem::path executable_path_;
     boost::filesystem::path application_path_;
+    boost::filesystem::path application_user_path_;
 
     struct impl;
     impl *pimpl_;

@@ -4,8 +4,13 @@
 
 #include<ramen/system/system.hpp>
 
+#include<stdexcept>
+
+#include<boost/filesystem/convenience.hpp>
+
 #include<ramen/config/os.hpp>
 
+#include<ramen/version.hpp>
 #include<ramen/assert.hpp>
 
 #if defined( RAMEN_CONFIG_OS_LINUX)
@@ -17,10 +22,6 @@
 #else
     #error "OS not supported"
 #endif
-
-#include<stdexcept>
-
-#include<boost/filesystem/convenience.hpp>
 
 namespace ramen
 {
@@ -47,6 +48,9 @@ system_t::system_t() : ram_size_( 0)
     if( home_path_.empty())
         throw std::runtime_error( "Error creating system class");
 
+    if( application_user_path_.empty())
+        throw std::runtime_error( "Error creating system class");
+
     application_path_ = boost::filesystem::canonical( executable_path_.parent_path() / "..");
 }
 
@@ -54,28 +58,6 @@ system_t::~system_t()
 {
     delete pimpl_;
 }
-
-/*
-const boost::filesystem::path& system_t::app_user_path() const
-{
-    return pimpl_->app_user_path();
-}
-
-const boost::filesystem::path& system_t::app_bundle_path() const
-{
-	return pimpl_->app_bundle_path();
-}
-
-const boost::filesystem::path& system_t::preferences_path() const
-{
-    return pimpl_->preferences_path();
-}
-
-const boost::filesystem::path& system_t::tmp_path() const
-{
-	return pimpl_->tmp_path();
-}
-*/
 
 } // system
 } // ramen

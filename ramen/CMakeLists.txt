@@ -197,11 +197,6 @@ SET( RAMEN_SOURCES      system/system.cpp
                         imageio/exr/exr_format.cpp
                         imageio/exr/exr_reader.cpp
                         imageio/exr/exr_writer.cpp
-                        imageio/imf_memory_stream.cpp
-
-                        imageio/flo/flo_format.cpp
-                        imageio/flo/flo_reader.cpp
-                        imageio/flo/flo_writer.cpp
 
                         imageio/hdr/hdr_format.cpp
                         imageio/hdr/hdr_writer.cpp
@@ -541,11 +536,11 @@ ENDIF()
 
 # platform sources
 IF( ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    SET( EXTRA_PLATFORM_LIBS)
+    # Linux
 ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    SET( EXTRA_PLATFORM_LIBS)
+    # OSX
 ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-    SET( EXTRA_PLATFORM_LIBS Userenv)
+    # Windows
 ELSE()
     MESSAGE( FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} not supported yet")
 ENDIF()
@@ -583,16 +578,15 @@ SET_TARGET_PROPERTIES( ramen PROPERTIES
                              VERSION ${RAMEN_VERSION_MAJOR}.${RAMEN_VERSION_MINOR}.${RAMEN_VERSION_PATCH}
                              SOVERSION ${RAMEN_VERSION_MAJOR})
 
-TARGET_LINK_LIBRARIES( ramen ${RAMEN_ALL_LIBS} ${EXTRA_PLATFORM_LIBS})
+TARGET_LINK_LIBRARIES( ramen ${RAMEN_ALL_LIBS})
 
 ######################################################
 # ramen binary
 
-SET( RAMEN_APP_SOURCES	main.cpp
-                        )
+SET( RAMEN_APP_SOURCES	main.cpp)
 
 ADD_EXECUTABLE( ramen.bin ${RAMEN_APP_SOURCES})
-TARGET_LINK_LIBRARIES( ramen.bin ramen ${RAMEN_ALL_LIBS} ${EXTRA_PLATFORM_LIBS})
+TARGET_LINK_LIBRARIES( ramen.bin ramen ${RAMEN_ALL_LIBS})
 
 IF( CMAKE_SYSTEM_NAME MATCHES "Linux")
     SET_TARGET_PROPERTIES( ramen PROPERTIES LIBRARY_OUTPUT_DIRECTORY

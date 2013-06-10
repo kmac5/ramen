@@ -46,8 +46,11 @@ OPTION( WITH_TESTS "Build tests" ON)
 IF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     # OSX
 ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    # Linux
+    ADD_DEFINITIONS( -pthread)
+    FIND_PACKAGE( Threads REQUIRED)
+    SET( RAMEN_ALL_LIBS ${CMAKE_THREAD_LIBS_INIT})
 ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    SET( RAMEN_ALL_LIBS Userenv)
     MESSAGE( FATAL_ERROR "Windows not supported yet")
 ELSE()
     MESSAGE( FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} not supported yet")
@@ -177,6 +180,8 @@ SET( RAMEN_ALL_LIBS	${NEEDED_QT_LIBS}
                         ${YAMLCPP_LIBRARIES}
                         ${AGG_LIBRARIES}
                         ${ZLIB_LIBRARIES}
+
+                        ${RAMEN_ALL_LIBS}
                         )
 
 ######################################################
