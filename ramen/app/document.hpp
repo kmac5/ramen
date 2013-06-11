@@ -11,6 +11,8 @@
 
 #include<boost/noncopyable.hpp>
 
+#include<ramen/core/memory.hpp>
+
 #include<ramen/app/composition.hpp>
 
 #include<ramen/undo/stack_fwd.hpp>
@@ -53,10 +55,10 @@ private:
 
     composition_t comp_;
     mutable bool dirty_;
-    std::auto_ptr<undo::stack_t> undo_;
+    core::auto_ptr_t<undo::stack_t> undo_;
     boost::filesystem::path file_;
 };
 
-} // namespace
+} // ramen
 
 #endif

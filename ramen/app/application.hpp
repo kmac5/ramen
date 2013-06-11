@@ -17,6 +17,8 @@
 
 #include<tbb/task_scheduler_init.h>
 
+#include<ramen/core/memory.hpp>
+
 #include<ramen/system/system.hpp>
 
 #include<ramen/app/preferences.hpp>
@@ -110,7 +112,7 @@ private:
 	bool init_ocio_config_from_file( const boost::filesystem::path& p);
 
 	// data
-    std::auto_ptr<util::command_line_parser_t> cmd_parser_;
+    core::auto_ptr_t<util::command_line_parser_t> cmd_parser_;
 	boost::uint64_t img_cache_size_;
 	int max_threads_;
 	bool command_line_;
@@ -119,26 +121,26 @@ private:
 
 	tbb::task_scheduler_init task_scheduler_;
 	system::system_t system_;
-	std::auto_ptr<preferences_t> preferences_;
-	std::auto_ptr<memory::manager_t> mem_manager_;
+    core::auto_ptr_t<preferences_t> preferences_;
+    core::auto_ptr_t<memory::manager_t> mem_manager_;
 	render::render_thread_t render_thread_;
-	std::auto_ptr<ocio::manager_t> ocio_manager_;
-	std::auto_ptr<ui::user_interface_t> ui_;
+    core::auto_ptr_t<ocio::manager_t> ocio_manager_;
+    core::auto_ptr_t<ui::user_interface_t> ui_;
 
-	std::auto_ptr<document_t> document_;
+    core::auto_ptr_t<document_t> document_;
 
 	boost::optional<int> start_frame_, end_frame_, proxy_level_,
 						subsample_, mb_extra_samples_;
 
 	boost::optional<float> mb_shutter_factor_;
 
-	std::auto_ptr<ui::splash_screen_t> splash_;
+    core::auto_ptr_t<ui::splash_screen_t> splash_;
 
 	bool quitting_;
 };
 
 RAMEN_API application_t& app();
 
-} // namespace
+} // ramen
 
 #endif

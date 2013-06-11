@@ -16,7 +16,7 @@ namespace ramen
 
 std::auto_ptr<serialization::yaml_iarchive_t> import_composition( const boost::filesystem::path& p);
 
-} // namespace
+} // ramen
 
 #endif
 

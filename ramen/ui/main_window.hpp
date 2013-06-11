@@ -17,6 +17,8 @@
 
 #include<boost/filesystem/fstream.hpp>
 
+#include<ramen/core/memory.hpp>
+
 #include<ramen/serialization/archive_fwd.hpp>
 
 #include<ramen/ui/node_menu.hpp>
@@ -129,7 +131,7 @@ private:
 
     time_slider_t *time_slider_;
     composition_view_t *comp_view_;
-    std::auto_ptr<time_controls_t> time_controls_;
+    core::auto_ptr_t<time_controls_t> time_controls_;
 
     QDockWidget *inspector_dock_;
     QDockWidget *composition_dock_;

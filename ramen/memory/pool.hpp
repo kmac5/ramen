@@ -7,7 +7,7 @@
 
 #include<ramen/config.hpp>
 
-#include<memory>
+#include<ramen/core/memory.hpp>
 
 #include<boost/noncopyable.hpp>
 
@@ -34,11 +34,11 @@ private:
 
     // implementation is private...
     struct implementation_t;
-    std::auto_ptr<implementation_t> pimpl_;	
+    core::auto_ptr_t<implementation_t> pimpl_;
 	std::size_t allocated_;
 };
 
-} // namespace
-} // namespace
+} // memory
+} // ramen
 
 #endif

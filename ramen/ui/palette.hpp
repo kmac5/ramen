@@ -1,16 +1,19 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_UI_PALETTE_HPP
 #define	RAMEN_UI_PALETTE_HPP
 
 #include<map>
-#include<memory>
 
 #include<boost/noncopyable.hpp>
 
 #include<OpenEXR/ImathColor.h>
 
 #include<QColor>
+
+#include<ramen/core/memory.hpp>
 
 namespace ramen
 {
@@ -39,7 +42,7 @@ private:
 	~palette_t();
 
 	struct impl;
-	std::auto_ptr<impl> pimpl_;
+    core::auto_ptr_t<impl> pimpl_;
 };
 
 } // namespace

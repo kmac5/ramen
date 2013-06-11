@@ -392,7 +392,7 @@ void application_t::open_document( const boost::filesystem::path& p)
     if( !ifs.is_open() || !ifs.good())
         throw std::runtime_error( std::string( "Couldn't open input file ") + filesystem::file_string( p));
 
-    std::auto_ptr<serialization::yaml_iarchive_t> in;
+    core::auto_ptr_t<serialization::yaml_iarchive_t> in;
     in.reset( new serialization::yaml_iarchive_t( ifs));
 
     if( !in->read_composition_header())
