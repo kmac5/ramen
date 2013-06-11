@@ -22,4 +22,6 @@ MACRO( ADD_RAMEN_TEST sourcefile)
     ADD_TEST( ${sourcefile} ${CMAKE_CURRENT_BINARY_DIR}/${sourcefile})
 ENDMACRO()
 
+ADD_SUBDIRECTORY( color)
 ADD_SUBDIRECTORY( core)
+ADD_SUBDIRECTORY( math)

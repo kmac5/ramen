@@ -6,6 +6,8 @@
 /*!
 \defgroup concepts Concepts
 \defgroup core Core
+\defgroup math Math
+\defgroup color Color
 \defgroup depgraph Dependency Graph
 \defgroup manips Manipulators
 \defgroup params Params

@@ -119,6 +119,7 @@ SET( RAMEN_SOURCES      system/system.cpp
                         bezier/algorithm.cpp
 
                         core/name.cpp
+                        core/types.cpp
 
                         filesystem/path.cpp
                         filesystem/path_sequence.cpp

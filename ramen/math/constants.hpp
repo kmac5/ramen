@@ -5,6 +5,8 @@
 #ifndef RAMEN_MATH_CONSTANTS_HPP
 #define RAMEN_MATH_CONSTANTS_HPP
 
+#include<ramen/config.hpp>
+
 namespace ramen
 {
 namespace math
@@ -34,7 +36,7 @@ template<> struct constants<double>
 	static double sqrt3()	 { return 1.732050807568877293527446341505872366940;}
 };
 
-} // namespace
-} // namespace
+} // math
+} // ramen
 
 #endif

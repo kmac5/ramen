@@ -4,6 +4,5 @@
 # See CDDL_LICENSE.txt for a copy of the license.                    #
 ######################################################################
 
-ADD_RAMEN_TEST( copy_on_write)
-ADD_RAMEN_TEST( name)
-ADD_RAMEN_TEST( types)
+ADD_RAMEN_TEST( color3)
+ADD_RAMEN_TEST( color4)

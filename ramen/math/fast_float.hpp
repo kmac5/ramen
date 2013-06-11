@@ -35,13 +35,15 @@
 #ifndef RAMEN_MATH_FAST_FLOAT_HPP
 #define RAMEN_MATH_FAST_FLOAT_HPP
 
+#include<ramen/config.hpp>
+
 namespace ramen
 {
 namespace math
 {
 
-#define BASE_DOUBLEMAGICROUNDEPS (.5-1.4e-11)
-#define BASE_DOUBLEMAGIC double (6755399441055744.0)
+#define RAMEN_DOUBLEMAGICROUNDEPS ( .5-1.4e-11)
+#define RAMEN_DOUBLEMAGIC double ( 6755399441055744.0)
 
 union fast_float_double_long
 {
@@ -52,27 +54,27 @@ union fast_float_double_long
 inline int fast_float_round( double v)
 {
 	fast_float_double_long vv;
-	vv.d = v + BASE_DOUBLEMAGIC;
+    vv.d = v + RAMEN_DOUBLEMAGIC;
 	return vv.l;
 }
 
 inline int fast_float_to_int( double v)
 {
-	return ( v < 0.0) ? fast_float_round( v + BASE_DOUBLEMAGICROUNDEPS) : fast_float_round( v - BASE_DOUBLEMAGICROUNDEPS);
+    return ( v < 0.0) ? fast_float_round( v + RAMEN_DOUBLEMAGICROUNDEPS) : fast_float_round( v - RAMEN_DOUBLEMAGICROUNDEPS);
 }
 
 inline int fast_float_floor( double v)
 {
-	return fast_float_round( v - BASE_DOUBLEMAGICROUNDEPS);
+    return fast_float_round( v - RAMEN_DOUBLEMAGICROUNDEPS);
 }
 
 inline int fast_float_ceil( double v)
 {
-	return fast_float_round( v + BASE_DOUBLEMAGICROUNDEPS);
+    return fast_float_round( v + RAMEN_DOUBLEMAGICROUNDEPS);
 }
 
-} // namespace
-} // namespace
+} // math
+} // ramen
 
 #endif
 
