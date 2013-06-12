@@ -11,9 +11,8 @@
 
 #include<boost/cstdint.hpp>
 
-#include<adobe/dictionary.hpp>
-
 #include<ramen/assert.hpp>
+#include<ramen/core/dictionary.hpp>
 #include<ramen/algorithm/clamp.hpp>
 #include<ramen/filesystem/path.hpp>
 #include<ramen/math/fast_float.hpp>
@@ -36,7 +35,7 @@ public:
 
     void write_image( const boost::filesystem::path& p,
 						const image::const_image_view_t& view,
-						const adobe::dictionary_t& params) const
+                        const core::dictionary_t& params) const
     {
         do_write_image( p, view, params);
     }
@@ -73,7 +72,7 @@ private:
 
     virtual void do_write_image( const boost::filesystem::path& p,
                                  const image::const_image_view_t& view,
-                                 const adobe::dictionary_t& params) const = 0;
+                                 const core::dictionary_t& params) const = 0;
 };
 
 } // imageio

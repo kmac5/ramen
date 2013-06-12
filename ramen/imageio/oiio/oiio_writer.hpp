@@ -25,13 +25,14 @@ public:
 
 protected:
 
-    void do_write( const boost::filesystem::path& p, const OIIO::ImageSpec& spec,
-					 const image::const_image_view_t& view);
+    void do_write( const boost::filesystem::path& p,
+                   const OIIO::ImageSpec& spec,
+                   const image::const_image_view_t& view);
 	
 	void add_common_attributes( OIIO::ImageSpec& spec) const;
 };
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen
 
 #endif

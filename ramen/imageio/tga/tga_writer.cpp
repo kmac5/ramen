@@ -13,11 +13,11 @@ namespace imageio
 {
 
 void tga_writer_t::do_write_image( const boost::filesystem::path& p,
-				const image::const_image_view_t& view,
-				const adobe::dictionary_t& params) const
+                                    const image::const_image_view_t& view,
+                                    const core::dictionary_t& params) const
 {
-    int channels    = adobe::get_value( params, adobe::name_t( "channels")).cast<int>();
-    int compress    = adobe::get_value( params, adobe::name_t( "compress")).cast<int>();
+    int channels    = core::get<int>( params, core::name_t( "channels"));
+    int compress    = core::get<int>( params, core::name_t( "compress"));
     
     std::auto_ptr<OIIO::ImageOutput> out( OIIO::ImageOutput::create( filesystem::file_string( p)));
 
@@ -63,5 +63,5 @@ void tga_writer_t::do_write_image( const boost::filesystem::path& p,
 		throw exception( "Write image: Can't close file");
 }
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen

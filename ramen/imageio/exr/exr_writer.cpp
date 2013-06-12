@@ -15,19 +15,36 @@ namespace ramen
 {
 namespace imageio
 {
+namespace
+{
+
+Imath::Box2i convert_box( const math::box2i_t& box)
+{
+    return Imath::Box2i( Imath::V2i( box.min.x, box.min.y),
+                         Imath::V2i( box.max.x, box.max.y));
+}
+
+} // unnamed
 
 void exr_writer_t::do_write_image( const boost::filesystem::path& p,
 				const image::const_image_view_t& view,
-				const adobe::dictionary_t& params) const
-{	
-    int channels    = adobe::get_value( params, adobe::name_t( "channels")).cast<int>();
-    int type	    = adobe::get_value( params, adobe::name_t( "type")).cast<int>();
-    int compress    = adobe::get_value( params, adobe::name_t( "compress")).cast<int>();
-	float aspect	= adobe::get_value( params, adobe::name_t( "aspect")).cast<float>();
+                const core::dictionary_t& params) const
+{
+    int channels    = core::get<int>( params, core::name_t( "channels"));
+    int type	    = core::get<int>( params, core::name_t( "type"));
+    int compress    = core::get<int>( params, core::name_t( "compress"));
+    float aspect	= core::get<float>( params, core::name_t( "aspect"));
 
-    Imath::Box2i display_window = adobe::get_value( params, adobe::name_t( "format")).cast<Imath::Box2i>();
+    Imath::Box2i display_window = convert_box( core::get<math::box2i_t>( params,
+                                                                         core::name_t( "format")));
     Imath::Box2i data_window = display_window;
-	adobe::get_value( params, adobe::name_t( "bounds"), data_window);
+    {
+        const math::box2i_t *tmp = core::get<math::box2i_t>( &params,
+                                                             core::name_t( "bounds"));
+
+        if( tmp)
+            data_window = convert_box( *tmp);
+    }
 
 	RAMEN_ASSERT( display_window.intersects( data_window));
 
@@ -98,7 +115,10 @@ void exr_writer_t::do_write_image( const boost::filesystem::path& p,
 	}
 }
 
-void exr_writer_t::write_half( const boost::filesystem::path& p, Imf::Header& header, const image::const_image_view_t& view, bool save_alpha) const
+void exr_writer_t::write_half( const boost::filesystem::path& p,
+                               Imf::Header& header,
+                               const image::const_image_view_t& view,
+                               bool save_alpha) const
 {
     boost::gil::rgba16f_image_t img( view.width(), view.height());
     boost::gil::copy_and_convert_pixels( view, boost::gil::view( img));
@@ -129,7 +149,9 @@ void exr_writer_t::write_half( const boost::filesystem::path& p, Imf::Header& he
     out_file.writePixels( img.height());
 }
 
-void exr_writer_t::write_half_alpha( const boost::filesystem::path& p, Imf::Header& header, const image::const_image_view_t& view) const
+void exr_writer_t::write_half_alpha( const boost::filesystem::path& p,
+                                     Imf::Header& header,
+                                     const image::const_image_view_t& view) const
 {
     boost::gil::gray16f_image_t img( view.width(), view.height());
     boost::gil::copy_and_convert_pixels( boost::gil::nth_channel_view( view, 3), boost::gil::view( img));
@@ -149,7 +171,10 @@ void exr_writer_t::write_half_alpha( const boost::filesystem::path& p, Imf::Head
     out_file.writePixels( img.height());
 }
 
-void exr_writer_t::write_float( const boost::filesystem::path& p, Imf::Header& header, const image::const_image_view_t& view, bool save_alpha) const
+void exr_writer_t::write_float( const boost::filesystem::path& p,
+                                Imf::Header& header,
+                                const image::const_image_view_t& view,
+                                bool save_alpha) const
 {
     header.channels().insert( "R", Imf::FLOAT);
     header.channels().insert( "G", Imf::FLOAT);
@@ -177,7 +202,9 @@ void exr_writer_t::write_float( const boost::filesystem::path& p, Imf::Header& h
     out_file.writePixels( view.height());
 }
 
-void exr_writer_t::write_float_alpha( const boost::filesystem::path& p, Imf::Header& header, const image::const_image_view_t& view) const
+void exr_writer_t::write_float_alpha( const boost::filesystem::path& p,
+                                      Imf::Header& header,
+                                      const image::const_image_view_t& view) const
 {
     header.channels().insert( "A", Imf::FLOAT);
 
@@ -196,5 +223,5 @@ void exr_writer_t::write_float_alpha( const boost::filesystem::path& p, Imf::Hea
     out_file.writePixels( view.height());
 }
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen

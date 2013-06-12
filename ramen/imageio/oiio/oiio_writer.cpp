@@ -13,8 +13,9 @@ namespace ramen
 namespace imageio
 {
 
-void oiio_writer_t::do_write( const boost::filesystem::path& p, const OIIO::ImageSpec& spec,
-								const image::const_image_view_t& view)
+void oiio_writer_t::do_write( const boost::filesystem::path& p,
+                              const OIIO::ImageSpec& spec,
+                              const image::const_image_view_t& view)
 {
     std::auto_ptr<OIIO::ImageOutput> out( OIIO::ImageOutput::create( filesystem::file_string( p)));
 
@@ -44,5 +45,5 @@ void oiio_writer_t::add_common_attributes( OIIO::ImageSpec& spec) const
 	spec.attribute( "oiio:UnassociatedAlpha", ( int) 0);	
 }
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen

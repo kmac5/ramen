@@ -7,8 +7,7 @@
 
 #include<ramen/config.hpp>
 
-#include<adobe/dictionary.hpp>
-
+#include<ramen/core/dictionary.hpp>
 #include<ramen/filesystem/path.hpp>
 #include<ramen/image/typedefs.hpp>
 
@@ -27,7 +26,7 @@ public:
     virtual ~writer_t();
 	
     void write_frame( const image::const_image_view_t& view,
-						const adobe::dictionary_t& params) const;
+                        const core::dictionary_t& params) const;
 
 private:
 
@@ -36,10 +35,10 @@ private:
     writer_t& operator=( const writer_t&);
 
     virtual void do_write_frame( const image::const_image_view_t& view,
-								const adobe::dictionary_t& params) const = 0;
+                                const core::dictionary_t& params) const = 0;
 	
 	boost::filesystem::path p_;
-	adobe::dictionary_t metadata_;
+    core::dictionary_t metadata_;
 };
 
 } // movieio

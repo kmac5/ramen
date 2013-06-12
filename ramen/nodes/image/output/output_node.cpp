@@ -234,6 +234,17 @@ void output_node_t::do_calc_defined( const render::context_t& context)
     set_defined( input_as<image_node_t>()->format());
 }
 
+namespace
+{
+
+math::box2i_t convert_box( const Imath::Box2i& box)
+{
+    return math::box2i_t( math::point2i_t( box.min.x, box.min.y),
+                          math::point2i_t( box.max.x, box.max.y));
+}
+
+} // unnamed
+
 void output_node_t::write( const render::context_t& context)
 {
     boost::filesystem::path p( get_value<boost::filesystem::path>( param( "output")));
@@ -247,24 +258,23 @@ void output_node_t::write( const render::context_t& context)
         throw( std::runtime_error( "Image output empty path"));
 
     std::string tag;
-    adobe::dictionary_t params;
-
-    params[ adobe::name_t( "format")]	= adobe::any_regular_t( format());
-    params[ adobe::name_t( "bounds")]	= adobe::any_regular_t( input_defined());
-	params[ adobe::name_t( "aspect")]	= adobe::any_regular_t( aspect_ratio());
+    core::dictionary_t params;
+    params[ core::name_t( "format")] = core::variant_t( convert_box( format()));
+    params[ core::name_t( "bounds")] = core::variant_t( convert_box( input_defined()));
+    params[ core::name_t( "aspect")] = core::variant_t( aspect_ratio());
 
     switch( get_value<int>( param( "format")))
 	{
 		case exr_format:
 			tag = "exr";
-			params[ adobe::name_t( "channels")]	= adobe::any_regular_t( get_value<int>( param( "exr_channels")));
-			params[ adobe::name_t( "type")]		= adobe::any_regular_t( get_value<int>( param( "exr_type")));
-			params[ adobe::name_t( "compress")]	= adobe::any_regular_t( get_value<int>( param( "exr_compress")));
+            params[ core::name_t( "channels")]	= core::variant_t( get_value<int>( param( "exr_channels")));
+            params[ core::name_t( "type")]		= core::variant_t( get_value<int>( param( "exr_type")));
+            params[ core::name_t( "compress")]	= core::variant_t( get_value<int>( param( "exr_compress")));
 		break;
 	
 		case jpg_format:
 			tag = "jpg";
-			params[ adobe::name_t( "quality")]  = adobe::any_regular_t( get_value<float>( param( "jpg_quality")));
+            params[ core::name_t( "quality")]  = core::variant_t( get_value<float>( param( "jpg_quality")));
 		break;
 	
 		case cin_format:
@@ -281,20 +291,20 @@ void output_node_t::write( const render::context_t& context)
 	
 		case tiff_format:
 			tag = "tiff";
-			params[ adobe::name_t( "channels")]  = adobe::any_regular_t( get_value<int>( param( "tiff_channels")));
+            params[ core::name_t( "channels")]  = core::variant_t( get_value<int>( param( "tiff_channels")));
 			
 			switch( get_value<int>( param( "tiff_type")))
 			{
 				case 0:
-					params[ adobe::name_t( "type")]	= adobe::any_regular_t( (int) imageio::ubyte_channel_type);
+                    params[ core::name_t( "type")]	= core::variant_t( (int) imageio::ubyte_channel_type);
 				break;
 		
 				case 1:
-					params[ adobe::name_t( "type")]	= adobe::any_regular_t( (int) imageio::ushort_channel_type);
+                    params[ core::name_t( "type")]	= core::variant_t( (int) imageio::ushort_channel_type);
 				break;
 		
 				case 2:
-					params[ adobe::name_t( "type")] = adobe::any_regular_t( (int) imageio::float_channel_type);
+                    params[ core::name_t( "type")] = core::variant_t( (int) imageio::float_channel_type);
 				break;
 				
 				default:
@@ -304,15 +314,15 @@ void output_node_t::write( const render::context_t& context)
 			switch( get_value<int>( param( "tiff_compress")))
 			{
 				case 0:
-					params[ adobe::name_t( "compress")]  = adobe::any_regular_t( (int) imageio::none_compression);
+                    params[ core::name_t( "compress")]  = core::variant_t( (int) imageio::none_compression);
 				break;
 	
 				case 1:
-					params[ adobe::name_t( "compress")]  = adobe::any_regular_t( (int) imageio::lzw_compression);
+                    params[ core::name_t( "compress")]  = core::variant_t( (int) imageio::lzw_compression);
 				break;
 		
 				case 2:
-					params[ adobe::name_t( "compress")]  = adobe::any_regular_t( (int) imageio::zip_compression);
+                    params[ core::name_t( "compress")]  = core::variant_t( (int) imageio::zip_compression);
 				break;
 		
 				default:
@@ -323,16 +333,16 @@ void output_node_t::write( const render::context_t& context)
 	
 		case tga_format:
 			tag = "tga";
-			params[ adobe::name_t( "channels")]  = adobe::any_regular_t( get_value<int>( param( "tga_channels")));
+            params[ core::name_t( "channels")]  = core::variant_t( get_value<int>( param( "tga_channels")));
 			
 			switch( get_value<int>( param( "tga_compress")))
 			{
 				case 0:
-					params[ adobe::name_t( "compress")]  = adobe::any_regular_t( (int) imageio::none_compression);
+                    params[ core::name_t( "compress")]  = core::variant_t( (int) imageio::none_compression);
 				break;
 				
 				case 1:
-					params[ adobe::name_t( "compress")]  = adobe::any_regular_t( (int) imageio::rle_compression);				
+                    params[ core::name_t( "compress")]  = core::variant_t( (int) imageio::rle_compression);
 				break;
 	
 				default:
@@ -343,7 +353,7 @@ void output_node_t::write( const render::context_t& context)
 	
 		case png_format:
 			tag = "png";
-			params[ adobe::name_t( "channels")]  = adobe::any_regular_t( get_value<int>( param( "png_channels")));
+            params[ core::name_t( "channels")]  = core::variant_t( get_value<int>( param( "png_channels")));
 		break;
 		
 		default:

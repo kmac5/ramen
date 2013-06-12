@@ -22,10 +22,10 @@ private:
 
     virtual void do_write_image( const boost::filesystem::path& p,
 				const image::const_image_view_t& view,
-				const adobe::dictionary_t& params) const;
+                const core::dictionary_t& params) const;
 };
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen
 
 #endif

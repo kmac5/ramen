@@ -28,8 +28,8 @@ struct FILE_deleter
 } // unamed
 
 void jpg_writer_t::do_write_image( const boost::filesystem::path& p,
-				const image::const_image_view_t& view,
-				const adobe::dictionary_t& params) const
+                                    const image::const_image_view_t& view,
+                                    const core::dictionary_t& params) const
 {
     struct jpeg_compress_struct cinfo;
     struct jpeg_error_mgr jerr;
@@ -48,7 +48,8 @@ void jpg_writer_t::do_write_image( const boost::filesystem::path& p,
     cinfo.input_components = 3;
     cinfo.in_color_space = JCS_RGB;
     jpeg_set_defaults( &cinfo);
-    jpeg_set_quality( &cinfo, adobe::get_value( params, adobe::name_t( "quality")).cast<int>(),
+    jpeg_set_quality( &cinfo,
+                      core::get<int>( params, core::name_t( "quality")),
                       TRUE);
 
     jpeg_start_compress( &cinfo, TRUE);
