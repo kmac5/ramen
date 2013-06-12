@@ -4,6 +4,8 @@
 
 #include<ramen/imageio/jpg/jpg_reader.hpp>
 
+#include<stdio.h>
+
 extern "C"
 {
 #include <jpeglib.h>
