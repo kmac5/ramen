@@ -12,14 +12,11 @@
 #include<boost/cstdint.hpp>
 
 #include<adobe/dictionary.hpp>
-#include<adobe/algorithm/clamp.hpp>
 
 #include<ramen/assert.hpp>
-
+#include<ramen/algorithm/clamp.hpp>
 #include<ramen/filesystem/path.hpp>
-
 #include<ramen/math/fast_float.hpp>
-
 #include<ramen/image/typedefs.hpp>
 
 #include<ramen/imageio/exceptions.hpp>
@@ -48,12 +45,12 @@ protected:
 
     boost::uint8_t convert8( float x) const
     {
-       return math::fast_float_to_int( adobe::clamp( x, 0.0f, 1.0f) * 255.0);
+       return math::fast_float_to_int( ramen::clamp( x, 0.0f, 1.0f) * 255.0);
     }
 
     boost::uint16_t convert16( float x) const
     {
-       return math::fast_float_to_int( adobe::clamp( x, 0.0f, 1.0f) * 65535.0);
+       return math::fast_float_to_int( ramen::clamp( x, 0.0f, 1.0f) * 65535.0);
     }
 
     template<class PixelIter>
@@ -61,10 +58,10 @@ protected:
     {
         for( PixelIter it( start); it != end; ++it)
         {
-            boost::gil::get_color( *it, boost::gil::red_t())   = adobe::clamp( (float) boost::gil::get_color( *it, boost::gil::red_t()), 0.0f, 1.0f);
-            boost::gil::get_color( *it, boost::gil::green_t()) = adobe::clamp( (float) boost::gil::get_color( *it, boost::gil::green_t()), 0.0f, 1.0f);
-            boost::gil::get_color( *it, boost::gil::blue_t())  = adobe::clamp( (float) boost::gil::get_color( *it, boost::gil::blue_t()), 0.0f, 1.0f);
-            boost::gil::get_color( *it, boost::gil::alpha_t()) = adobe::clamp( (float) boost::gil::get_color( *it, boost::gil::alpha_t()), 0.0f, 1.0f);
+            boost::gil::get_color( *it, boost::gil::red_t())   = ramen::clamp( (float) boost::gil::get_color( *it, boost::gil::red_t()), 0.0f, 1.0f);
+            boost::gil::get_color( *it, boost::gil::green_t()) = ramen::clamp( (float) boost::gil::get_color( *it, boost::gil::green_t()), 0.0f, 1.0f);
+            boost::gil::get_color( *it, boost::gil::blue_t())  = ramen::clamp( (float) boost::gil::get_color( *it, boost::gil::blue_t()), 0.0f, 1.0f);
+            boost::gil::get_color( *it, boost::gil::alpha_t()) = ramen::clamp( (float) boost::gil::get_color( *it, boost::gil::alpha_t()), 0.0f, 1.0f);
         }
     }
 
@@ -75,11 +72,11 @@ private:
     writer_t& operator=( const writer_t&);
 
     virtual void do_write_image( const boost::filesystem::path& p,
-				const image::const_image_view_t& view,
-				const adobe::dictionary_t& params) const = 0;
+                                 const image::const_image_view_t& view,
+                                 const adobe::dictionary_t& params) const = 0;
 };
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen
 
 #endif

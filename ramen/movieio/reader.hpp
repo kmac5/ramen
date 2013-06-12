@@ -5,17 +5,18 @@
 #ifndef RAMEN_MOVIEIO_READER_HPP
 #define	RAMEN_MOVIEIO_READER_HPP
 
+#include<ramen/config.hpp>
+
 #include<vector>
 #include<string>
 
 #include<boost/tuple/tuple.hpp>
 
-#include<adobe/dictionary.hpp>
-
 #include<OpenEXR/ImathBox.h>
 
 #include<ramen/assert.hpp>
 
+#include<ramen/core/dictionary.hpp>
 #include<ramen/core/memory.hpp>
 
 #include<ramen/filesystem/path.hpp>
@@ -47,11 +48,11 @@ public:
 	virtual std::string string_for_current_frame() const;
 	
 	// metadata
-    const adobe::dictionary_t& movie_info() const;
+    const core::dictionary_t& movie_info() const;
 	
 	// format
-    Imath::Box2i format() const;
-    virtual Imath::Box2i bounds() const;
+    math::box2i_t format() const;
+    math::box2i_t bounds() const;
 	float aspect_ratio() const;
 
 	// channels
@@ -65,11 +66,13 @@ public:
 	// read
     void read_frame( const image::image_view_t& view) const;
     void read_frame( const image::image_view_t& view,
-                     const Imath::Box2i& crop,
+                     const math::box2i_t& crop,
                      int subsample) const;
 
-    void read_frame( const image::image_view_t& view, const Imath::Box2i& crop, 
-					 int subsample, const boost::tuple<int, int, int, int>& channels) const;
+    void read_frame( const image::image_view_t& view,
+                     const math::box2i_t& crop,
+                     int subsample,
+                     const boost::tuple<int, int, int, int>& channels) const;
 	
 private:
 
@@ -80,18 +83,18 @@ private:
 	virtual void do_set_frame( int frame);
 	
     virtual void do_read_frame( const image::image_view_t& view,
-                                const Imath::Box2i& crop,
+                                const math::box2i_t& crop,
                                 int subsample) const = 0;
 
     virtual void do_read_frame( const image::image_view_t& view,
-                                const Imath::Box2i& crop,
+                                const math::box2i_t& crop,
                                 int subsample,
                                 const boost::tuple<int, int, int, int>& channels) const;
 	
 protected:
 	
 	boost::filesystem::path p_;
-    adobe::dictionary_t info_;
+    core::dictionary_t info_;
 	std::vector<std::string> channels_;
 	int frame_;
 };

@@ -5,16 +5,16 @@
 #ifndef RAMEN_IMAGEIO_READER_HPP
 #define	RAMEN_IMAGEIO_READER_HPP
 
+#include<ramen/config.hpp>
+
 #include<vector>
 #include<string>
 
 #include<boost/cstdint.hpp>
 
-#include<OpenEXR/ImathBox.h>
-
-#include<adobe/dictionary.hpp>
-
 #include<ramen/assert.hpp>
+
+#include<ramen/core/dictionary.hpp>
 
 #include<ramen/filesystem/path.hpp>
 
@@ -35,17 +35,17 @@ public:
     reader_t( const boost::filesystem::path& p);
     virtual ~reader_t() {}
 
-    const adobe::dictionary_t& image_info() const;
+    const core::dictionary_t& image_info() const;
 
-    Imath::Box2i format() const;
-    Imath::Box2i bounds() const;
+    math::box2i_t format() const;
+    math::box2i_t bounds() const;
 
 	float aspect_ratio() const;
 	
     void read_image( const image::image_view_t& view) const;
 
     void read_image( const image::image_view_t& view,
-                     const Imath::Box2i& crop,
+                     const math::box2i_t& crop,
                      int subsample) const;
 
 private:
@@ -55,7 +55,7 @@ private:
     reader_t& operator=( const reader_t&);
 
     virtual void do_read_image( const image::image_view_t& view,
-                                const Imath::Box2i& crop,
+                                const math::box2i_t& crop,
                                 int subsample) const = 0;
 	
 protected:
@@ -63,7 +63,7 @@ protected:
     void repeat_scanline_until_end( const image::image_view_t& view, int y) const;
 		
     boost::filesystem::path path_;
-    adobe::dictionary_t info_;
+    core::dictionary_t info_;
 };
 
 } // imageio

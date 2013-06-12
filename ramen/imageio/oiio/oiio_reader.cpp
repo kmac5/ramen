@@ -5,6 +5,7 @@
 #include<ramen/imageio/oiio/oiio_reader.hpp>
 
 #include<boost/scoped_array.hpp>
+#include<boost/range.hpp>
 
 #include<ramen/imageio/algorithm.hpp>
 
@@ -23,15 +24,15 @@ oiio_reader_t::oiio_reader_t( const boost::filesystem::path& p) : reader_t( p), 
 				
 		if( in->open( filesystem::file_string( p), spec))
 		{
-			info_[ adobe::name_t( "format")] = adobe::any_regular_t( Imath::Box2i( Imath::V2i( spec.full_x, spec.full_y), 
-																				   Imath::V2i( spec.full_x + spec.full_width - 1, 
-																							   spec.full_y + spec.full_height - 1)));
+            info_[core::name_t( "format")] = core::variant_t( math::box2i_t( math::point2i_t( spec.full_x, spec.full_y),
+                                                                             math::point2i_t( spec.full_x + spec.full_width - 1,
+                                                                                               spec.full_y + spec.full_height - 1)));
 
-			info_[ adobe::name_t( "bounds")] = adobe::any_regular_t( Imath::Box2i( Imath::V2i( spec.x, spec.y), 
-																				   Imath::V2i( spec.x + spec.width - 1,
+            info_[core::name_t( "bounds")] = core::variant_t( math::box2i_t( math::point2i_t( spec.x, spec.y),
+                                                                             math::point2i_t( spec.x + spec.width - 1,
 																							   spec.y + spec.height - 1)));
 			
-			info_[ adobe::name_t( "aspect")] = adobe::any_regular_t( spec.get_float_attribute( "pixelAspectRatio", 1.0f));
+            info_[core::name_t( "aspect")] = core::variant_t( spec.get_float_attribute( "pixelAspectRatio", 1.0f));
 			
 			if( spec.tile_width != 0)
 				is_tiled_  = true;
@@ -45,7 +46,9 @@ oiio_reader_t::oiio_reader_t( const boost::filesystem::path& p) : reader_t( p), 
 		throw unknown_image_format();
 }
 
-void oiio_reader_t::do_read_image( const image::image_view_t& view, const Imath::Box2i& crop, int subsample) const
+void oiio_reader_t::do_read_image( const image::image_view_t& view,
+                                   const math::box2i_t& crop,
+                                   int subsample) const
 {
 	if( is_tiled_)
 	{
@@ -130,7 +133,9 @@ void oiio_reader_t::do_read_image( const image::image_view_t& view, const Imath:
     }
 }
 
-void oiio_reader_t::do_read_tiled_image( const image::image_view_t& view, const Imath::Box2i& crop, int subsample) const
+void oiio_reader_t::do_read_tiled_image( const image::image_view_t& view,
+                                         const math::box2i_t& crop,
+                                         int subsample) const
 {
     std::auto_ptr<OIIO::ImageInput> in( OIIO::ImageInput::create( filesystem::file_string( path_)));
 
@@ -166,8 +171,13 @@ void oiio_reader_t::do_read_tiled_image( const image::image_view_t& view, const 
 	}
 }
 
-void oiio_reader_t::copy_tile( int x, int y, const OIIO::ImageSpec& spec, float *data, 
-							   const Imath::Box2i& crop, const image::image_view_t& view, int subsample) const
+void oiio_reader_t::copy_tile( int x,
+                               int y,
+                               const OIIO::ImageSpec& spec,
+                               float *data,
+                               const math::box2i_t& crop,
+                               const image::image_view_t& view,
+                               int subsample) const
 {
 	std::size_t xstride = spec.nchannels;
 	std::size_t ystride = spec.tile_width * xstride;
@@ -209,5 +219,5 @@ void oiio_reader_t::copy_tile( int x, int y, const OIIO::ImageSpec& spec, float 
 	}
 }
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen

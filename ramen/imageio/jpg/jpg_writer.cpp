@@ -4,12 +4,28 @@
 
 #include<ramen/imageio/jpg/jpg_writer.hpp>
 
-#include<ramen/imageio/jpg/jpg_memory.hpp>
+extern "C"
+{
+#include <jpeglib.h>
+}
 
 namespace ramen
 {
 namespace imageio
 {
+namespace
+{
+
+struct FILE_deleter
+{
+    void operator()( FILE *x) const
+    {
+        if( x)
+            fclose( x);
+    }
+};
+
+} // unamed
 
 void jpg_writer_t::do_write_image( const boost::filesystem::path& p,
 				const image::const_image_view_t& view,
@@ -18,7 +34,8 @@ void jpg_writer_t::do_write_image( const boost::filesystem::path& p,
     struct jpeg_compress_struct cinfo;
     struct jpeg_error_mgr jerr;
 
-    adobe::auto_ptr<FILE> fp( fopen( filesystem::file_cstring( p), "wb"));
+    boost::shared_ptr<FILE> fp( fopen( filesystem::file_cstring( p), "wb"),
+                                 FILE_deleter());
 
     if( !fp)
 		throw exception( "Can't open file");
@@ -31,7 +48,8 @@ void jpg_writer_t::do_write_image( const boost::filesystem::path& p,
     cinfo.input_components = 3;
     cinfo.in_color_space = JCS_RGB;
     jpeg_set_defaults( &cinfo);
-    jpeg_set_quality( &cinfo, adobe::get_value( params, adobe::name_t( "quality")).cast<int>(), TRUE);
+    jpeg_set_quality( &cinfo, adobe::get_value( params, adobe::name_t( "quality")).cast<int>(),
+                      TRUE);
 
     jpeg_start_compress( &cinfo, TRUE);
 
@@ -58,5 +76,5 @@ void jpg_writer_t::do_write_image( const boost::filesystem::path& p,
     jpeg_destroy_compress(&cinfo);
 }
     
-} // namespace
-} // namespace
+} // imageio
+} // ramen

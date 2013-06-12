@@ -345,7 +345,9 @@ void input_node_t::do_calc_hash_str( const render::context_t& context)
 
 void input_node_t::do_calc_format( const render::context_t& context)
 {
-	Imath::Box2i format( readers_[index_for_proxy_level( context.proxy_level)]->format());
+    math::box2i_t tmp( readers_[index_for_proxy_level( context.proxy_level)]->format());
+    Imath::Box2i format( Imath::V2i( tmp.min.x, tmp.min.y),
+                         Imath::V2i( tmp.max.x, tmp.max.y));
 	
 	if( format.isEmpty())
 	{
@@ -357,7 +359,9 @@ void input_node_t::do_calc_format( const render::context_t& context)
 		return;
 	}
 	
-	Imath::Box2i full_format( readers_[0]->format());
+    tmp = readers_[0]->format();
+    Imath::Box2i full_format( Imath::V2i( tmp.min.x, tmp.min.y),
+                              Imath::V2i( tmp.max.x, tmp.max.y));
 	
     set_format( format);
 	set_aspect_ratio( get_value<float>( param( "aspect")));
@@ -367,8 +371,10 @@ void input_node_t::do_calc_format( const render::context_t& context)
 
 void input_node_t::do_calc_bounds( const render::context_t& context)
 {
-	Imath::Box2i bounds( readers_[index_for_proxy_level( context.proxy_level)]->bounds());
-	
+    math::box2i_t tmp( readers_[index_for_proxy_level( context.proxy_level)]->bounds());
+    Imath::Box2i bounds( Imath::V2i( tmp.min.x, tmp.min.y),
+                         Imath::V2i( tmp.max.x, tmp.max.y));
+
 	if( bounds.isEmpty())
 		bounds = format();
 	
@@ -393,29 +399,28 @@ void input_node_t::do_process( const render::context_t& context)
 
     try
     {
+        math::box2i_t read_area( math::point2i_t( real_defined_.min.x, real_defined_.min.y),
+                                 math::point2i_t( real_defined_.max.x, real_defined_.max.y));
+
 		int level = index_for_proxy_level( context.proxy_level);
 		
 		if( readers_[level]->is_multichannel() && readers_[level]->has_extra_channels())
 		{
 			tuple4i_t channels = get_value<tuple4i_t>( param( "channels"));
-			readers_[level]->read_frame( image_view(), real_defined_, context.subsample, channels);
+            readers_[level]->read_frame( image_view(), read_area, context.subsample, channels);
 		}
 		else
-			readers_[level]->read_frame( image_view(), real_defined_, context.subsample);
+            readers_[level]->read_frame( image_view(), read_area, context.subsample);
 
         // transform to linear colorspace here.
         OCIO::ConstConfigRcPtr config = app().ocio_manager().config();
         OCIO::ConstProcessorRcPtr proc = config->getProcessor( get_value<std::string>( param( "colorspace")).c_str(), OCIO::ROLE_SCENE_LINEAR);
         image::ocio_transform( image_view(), proc);
     }
-	catch( movieio::exception& e)
+    catch( ...)
 	{
 		image::make_color_bars( image_view());
 	}
-    catch( OCIO::Exception& e)
-    {
-		// ????
-    }
 }
 
 void input_node_t::do_read( const serialization::yaml_node_t& node, const std::pair<int,int>& version)
@@ -544,8 +549,11 @@ void input_node_t::create_reader( int proxy_level, const boost::filesystem::path
 			seq->set_input_text( clips_[0].format_string());
 			
 			std::stringstream ss;
-			Imath::Box2i format( readers_[0]->format());
-						
+
+            math::box2i_t tmp( readers_[0]->format());
+            Imath::Box2i format( Imath::V2i( tmp.min.x, tmp.min.y),
+                                 Imath::V2i( tmp.max.x, tmp.max.y));
+
 			if( readers_[0]->is_sequence())
 				ss << "frames " << readers_[0]->start_frame() << "..." << readers_[0]->end_frame() << " ";
 
@@ -563,11 +571,7 @@ void input_node_t::create_reader( int proxy_level, const boost::filesystem::path
 				ch->clear_channel_list();
 			
 			set_aspect_param_value( readers_[0]->aspect_ratio());
-						
-			// ocio_colorspace_param_t *cs = dynamic_cast<ocio_colorspace_param_t*>( &param( ""));
-			// RAMEN_ASSERT( cs);
-			// cs->...( ...);			
-		}
+        }
 	}
 	else
 	{
@@ -586,7 +590,10 @@ void input_node_t::create_reader( int proxy_level, const boost::filesystem::path
 	}
 }
 
-void input_node_t::file_picked( const boost::filesystem::path& p, int level, bool sequence, bool relative)
+void input_node_t::file_picked( const boost::filesystem::path& p,
+                                int level,
+                                bool sequence,
+                                bool relative)
 {
 	std::auto_ptr<undo::image_input_command_t> c( new undo::image_input_command_t( *this, level));
 	
@@ -660,5 +667,5 @@ const node_metaclass_t& input_node_t::image_input_node_metaclass()
 
 static bool registered = node_factory_t::instance().register_node( input_node_t::image_input_node_metaclass());
 
-} // namespace
-} // namespace
+} // image
+} // ramen

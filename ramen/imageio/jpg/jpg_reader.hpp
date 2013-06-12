@@ -20,10 +20,12 @@ public:
 
 private:
 
-    virtual void do_read_image( const image::image_view_t& view, const Imath::Box2i& crop, int subsample) const;
+    virtual void do_read_image( const image::image_view_t& view,
+                                const math::box2i_t& crop,
+                                int subsample) const;
 };
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen
 
 #endif

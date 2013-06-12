@@ -15,24 +15,27 @@ namespace imageio
 	
 reader_t::reader_t( const boost::filesystem::path& p) : path_(p) {}
 
-const adobe::dictionary_t& reader_t::image_info() const { return info_;}
-
-Imath::Box2i reader_t::format() const
+const core::dictionary_t& reader_t::image_info() const
 {
-    return adobe::get_value( info_, adobe::name_t( "format")).cast<Imath::Box2i>();
+    return info_;
 }
 
-Imath::Box2i reader_t::bounds() const
+math::box2i_t reader_t::format() const
 {
-    Imath::Box2i bounds( format());
-    adobe::get_value( info_, adobe::name_t( "bounds"), bounds);
+    return core::get<math::box2i_t>( info_, core::name_t( "format"));
+}
+
+math::box2i_t reader_t::bounds() const
+{
+    math::box2i_t bounds( format());
+    core::get<math::box2i_t>( info_, core::name_t( "bounds"), bounds);
     return bounds;
 }
 
 float reader_t::aspect_ratio() const
 {
 	float aspect = 1.0f;
-	adobe::get_value( info_, adobe::name_t( "aspect"), aspect);
+    core::get<float>( info_, core::name_t( "aspect"), aspect);
 	return aspect;
 }
 
@@ -41,7 +44,9 @@ void reader_t::read_image( const image::image_view_t& view) const
     read_image( view, bounds(), 1);
 }
 
-void reader_t::read_image( const image::image_view_t& view, const Imath::Box2i& crop, int subsample) const
+void reader_t::read_image( const image::image_view_t& view,
+                           const math::box2i_t& crop,
+                           int subsample) const
 {
     do_read_image( view, crop, subsample);
 }
@@ -58,5 +63,5 @@ void reader_t::repeat_scanline_until_end(const image::image_view_t& view, int y)
     }
 }
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen

@@ -73,17 +73,10 @@ std::string image_seq_reader_t::string_for_current_frame() const
 	return filesystem::hash_string( seq_( frame_));
 }
 
-Imath::Box2i image_seq_reader_t::bounds() const
-{
-    Imath::Box2i bounds( format());
-    adobe::get_value( frame_info_, adobe::name_t( "bounds"), bounds);
-    return bounds;
-}
-
 void image_seq_reader_t::do_set_frame( int frame) { create_reader();}
 
 void image_seq_reader_t::do_read_frame( const image::image_view_t& view,
-                                        const Imath::Box2i& crop,
+                                        const math::box2i_t& crop,
                                         int subsample) const
 {
 	if( !reader_)
@@ -109,7 +102,7 @@ void image_seq_reader_t::do_read_frame( const image::image_view_t& view,
 }
 
 void image_seq_reader_t::do_read_frame( const image::image_view_t& view,
-                                        const Imath::Box2i& crop,
+                                        const math::box2i_t& crop,
                                         int subsample,
                                         const boost::tuple<int, int, int, int>& channels) const
 {
@@ -193,7 +186,7 @@ void image_seq_reader_t::create_reader()
 	catch( imageio::exception& e)
 	{
 		reader_.reset();
-		frame_info_ = adobe::dictionary_t();
+        frame_info_ = core::dictionary_t();
 		return;
 	}
 

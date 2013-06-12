@@ -3,14 +3,33 @@
 // See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/imageio/jpg/jpg_reader.hpp>
-#include<ramen/imageio/jpg/jpg_size.hpp>
 
-#include<ramen/imageio/jpg/jpg_memory.hpp>
+extern "C"
+{
+#include <jpeglib.h>
+}
+
+#include<boost/shared_ptr.hpp>
+
+#include<ramen/imageio/jpg/jpg_size.hpp>
 
 namespace ramen
 {
 namespace imageio
 {
+namespace
+{
+
+struct FILE_deleter
+{
+    void operator()( FILE *x) const
+    {
+        if( x)
+            fclose( x);
+    }
+};
+
+} // unamed
 
 jpg_reader_t::jpg_reader_t( const boost::filesystem::path& p) : reader_t( p)
 {
@@ -19,10 +38,13 @@ jpg_reader_t::jpg_reader_t( const boost::filesystem::path& p) : reader_t( p)
     if( !get_jpeg_size( filesystem::file_cstring( p), width, height ))
 		throw unknown_image_format();
 
-    info_[ adobe::name_t( "format")] = adobe::any_regular_t( Imath::Box2i( Imath::V2i( 0, 0), Imath::V2i( width-1, height-1)));
+    info_[core::name_t( "format")] = core::variant_t( math::box2i_t( math::point2i_t( 0, 0),
+                                                                     math::point2i_t( width - 1, height - 1)));
 }
 
-void jpg_reader_t::do_read_image( const image::image_view_t& view, const Imath::Box2i& crop, int subsample) const
+void jpg_reader_t::do_read_image( const image::image_view_t& view,
+                                  const math::box2i_t& crop,
+                                  int subsample) const
 {
     struct jpeg_decompress_struct cinfo;
     struct jpeg_error_mgr jerr;
@@ -30,7 +52,8 @@ void jpg_reader_t::do_read_image( const image::image_view_t& view, const Imath::
     cinfo.err = jpeg_std_error( &jerr);
     jpeg_create_decompress( &cinfo);
 
-    adobe::auto_ptr<FILE> fp( fopen( filesystem::file_cstring( path_), "rb"));
+    boost::shared_ptr<FILE> fp( fopen( filesystem::file_cstring( path_), "rb"),
+                                FILE_deleter());
 
     if ( !fp)
     {
@@ -126,5 +149,5 @@ void jpg_reader_t::do_read_image( const image::image_view_t& view, const Imath::
     jpeg_destroy_decompress( &cinfo);
 }
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen

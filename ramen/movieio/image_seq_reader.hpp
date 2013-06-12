@@ -34,19 +34,21 @@ public:
 	
 	virtual std::string format_string() const;
 	virtual std::string string_for_current_frame() const;
-	
-    virtual Imath::Box2i bounds() const;
-	
+
 private:
 
 	void init();
 	
 	virtual void do_set_frame( int frame);
 	
-	virtual void do_read_frame( const image::image_view_t& view, const Imath::Box2i& crop, int subsample) const;
+    virtual void do_read_frame( const image::image_view_t& view,
+                                const math::box2i_t& crop,
+                                int subsample) const;
 
-	virtual void do_read_frame( const image::image_view_t& view, const Imath::Box2i& crop, 
-								int subsample, const boost::tuple<int, int, int, int>& channels) const;
+    virtual void do_read_frame( const image::image_view_t& view,
+                                const math::box2i_t& crop,
+                                int subsample,
+                                const boost::tuple<int, int, int, int>& channels) const;
 	
 	void get_sequence_info();
 	
@@ -54,11 +56,11 @@ private:
 	
 	filesystem::path_sequence_t seq_;
 	boost::shared_ptr<imageio::reader_t> reader_;
-    adobe::dictionary_t frame_info_;
+    core::dictionary_t frame_info_;
 	bool has_extra_channels_;
 };
 
-} // namespace
-} // namespace
+} // movieio
+} // ramen
 
 #endif
