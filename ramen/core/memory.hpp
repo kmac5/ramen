@@ -7,6 +7,8 @@
 
 #include<ramen/config.hpp>
 
+#include<stdint.h>
+
 #include<boost/move/move.hpp>
 #include<boost/static_assert.hpp>
 #include<boost/swap.hpp>
@@ -147,6 +149,18 @@ template<class T>
 inline void swap( auto_ptr_t<T>& x, auto_ptr_t<T>& y)
 {
     x.swap( y);
+}
+
+template<class T>
+T *aligned_ptr( T *p, int alignment)
+{
+    RAMEN_ASSERT( (( alignment - 1) & alignment) == 0);
+
+    uintptr_t ptr = reinterpret_cast<uintptr_t>( p);
+    uintptr_t align = alignment - 1;
+    uintptr_t aligned = ( ptr + align + 1) & ~align;
+
+    return reinterpret_cast<unsigned char *>( aligned);
 }
 
 } // core

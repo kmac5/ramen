@@ -14,10 +14,10 @@
 
 #include<yaml-cpp/yaml.h>
 
-#include<adobe/empty.hpp>
-
 #include<OpenEXR/ImathVec.h>
 #include<OpenEXR/ImathColor.h>
+
+#include<ramen/core/empty.hpp>
 
 #include<ramen/filesystem/path.hpp>
 
@@ -55,8 +55,8 @@ const YAML::Node *get_optional_node( const YAML::Node& node, const std::string& 
 
 // YAML overloads for common types
 
-void operator>>( const YAML::Node& in, adobe::empty_t& x);
-YAML::Emitter& operator<<( YAML::Emitter& out, const adobe::empty_t& x);
+void operator>>( const YAML::Node& in, core::empty_t& x);
+YAML::Emitter& operator<<( YAML::Emitter& out, const core::empty_t& x);
 
 void operator>>( const YAML::Node& in, boost::filesystem::path& p);
 YAML::Emitter& operator<<( YAML::Emitter& out, const boost::filesystem::path& p);
@@ -121,6 +121,6 @@ YAML::Emitter& operator<<( YAML::Emitter& out, const Imath::Color4<T>& c)
     return out;
 }
 
-} // namespace
+} // ramen
 
 #endif

@@ -12,6 +12,8 @@
 
 #include<ramen/params/Concepts/ParamValueConcept.hpp>
 
+#include<ramen/core/empty.hpp>
+
 namespace ramen
 {
 
@@ -43,14 +45,14 @@ struct param_value : adobe::poly_base<poly_param_value_interface, poly_param_val
 {
     typedef adobe::poly_base<poly_param_value_interface, poly_param_value_instance> base_t;
 
-    param_value() : base_t( adobe::empty_t()) {}
+    param_value() : base_t( core::empty_t()) {}
 
     template <typename T>
     explicit param_value( const T& s) : base_t( s) {}
 
     param_value( adobe::move_from<param_value> x) : base_t( adobe::move_from<base_t>(x.source)) {}
 
-    bool is_empty() const { return type_info() == typeid( adobe::empty_t);}
+    bool is_empty() const { return type_info() == typeid( core::empty_t);}
 };
 
 typedef adobe::poly<param_value> poly_param_value_t;
@@ -83,7 +85,7 @@ public:
 
     float get_component( int index) const
     {
-        assert( this->type_info() != typeid( adobe::empty_t()));
+        assert( this->type_info() != typeid( core::empty_t()));
         assert( index >= 0);
         assert( index * sizeof( float) < sizeof( T));
 
@@ -93,7 +95,7 @@ public:
 
     void set_component( int index, float x)
     {
-        assert( this->type_info() != typeid( adobe::empty_t()));
+        assert( this->type_info() != typeid( core::empty_t()));
         assert( index >= 0);
         assert( index * sizeof( float) < sizeof( T));
 
@@ -106,14 +108,14 @@ struct param_indexable_value : adobe::poly_base<poly_param_indexable_value_inter
 {
     typedef adobe::poly_base<poly_param_indexable_value_interface, poly_param_indexable_value_instance> base_t;
 
-    param_indexable_value() : base_t( adobe::empty_t()) {}
+    param_indexable_value() : base_t( core::empty_t()) {}
 
     template <typename T>
     explicit param_indexable_value( const T& s) : base_t( s) {}
 
     param_indexable_value( adobe::move_from<param_indexable_value> x) : base_t( adobe::move_from<base_t>(x.source)) {}
 
-    bool is_empty() const { return type_info() == typeid( adobe::empty_t);}
+    bool is_empty() const { return type_info() == typeid( core::empty_t);}
 
     float get_component( int index) const   { return interface_ref().get_component( index);}
     void set_component( int index, float x) { interface_ref().set_component( index, x);}
@@ -121,6 +123,6 @@ struct param_indexable_value : adobe::poly_base<poly_param_indexable_value_inter
 
 typedef adobe::poly<param_indexable_value> poly_param_indexable_value_t;
 
-} // namespace
+} // ramen
 
 #endif

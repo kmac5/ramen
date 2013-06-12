@@ -12,10 +12,11 @@
 
 #include<ramen/assert.hpp>
 
+#include<ramen/core/memory.hpp>
+
 #include<ramen/ImathExt/ImathBoxAlgo.h>
 
 #include<ramen/memory/manager.hpp>
-#include<ramen/memory/util.hpp>
 
 #include<ramen/app/application.hpp>
 
@@ -95,7 +96,7 @@ void buffer_t::alloc_pixels()
 
 unsigned char *buffer_t::aligned_ptr() const
 {
-	return memory::aligned_ptr( pixels_.get(), alignment);
+    return core::aligned_ptr( pixels_.get(), alignment);
 }
 
 int buffer_t::channels() const { return channels_;}

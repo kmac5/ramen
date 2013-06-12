@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/serialization/yaml.hpp>
 
@@ -32,14 +34,14 @@ const YAML::Node *get_optional_node( const YAML::Node& node, const std::string& 
 	return node.FindValue( key);
 }
 
-void operator>>( const YAML::Node& in, adobe::empty_t& x)
+void operator>>( const YAML::Node& in, core::empty_t& x)
 {
-    RAMEN_ASSERT( 0 && "Trying to read an adobe::empty_t from a YAML::Node");
+    RAMEN_ASSERT( 0 && "Trying to read an core::empty_t from a YAML::Node");
 }
 
-YAML::Emitter& operator<<( YAML::Emitter& out, const adobe::empty_t& x)
+YAML::Emitter& operator<<( YAML::Emitter& out, const core::empty_t& x)
 {
-    RAMEN_ASSERT( 0 && "Trying to write an adobe::empty_t to a YAML::Emitter");
+    RAMEN_ASSERT( 0 && "Trying to write an core::empty_t to a YAML::Emitter");
     return out;
 }
 
@@ -56,4 +58,4 @@ YAML::Emitter& operator<<( YAML::Emitter& out, const boost::filesystem::path& p)
     return out;
 }
 
-} // namespace
+} // ramen

@@ -7,7 +7,7 @@
 
 #include<boost/any.hpp>
 
-#include<adobe/empty.hpp>
+#include<ramen/core/empty.hpp>
 
 #include<ramen/Concepts/RegularConcept.hpp>
 
@@ -66,7 +66,7 @@ private:
         boost::any anything( x[0]);
     }
 
-    static void checkIndexOperator( const adobe::empty_t& x) {}
+    static void checkIndexOperator( const core::empty_t& x) {}
 };
 
 } // ramen
