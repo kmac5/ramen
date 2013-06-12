@@ -118,8 +118,10 @@ SET( RAMEN_SOURCES      system/system.cpp
 
                         bezier/algorithm.cpp
 
+                        core/exceptions.cpp
                         core/name.cpp
                         core/types.cpp
+                        core/string.cpp
 
                         filesystem/path.cpp
                         filesystem/path_sequence.cpp

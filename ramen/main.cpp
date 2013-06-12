@@ -11,9 +11,9 @@
 #include<boost/version.hpp>
 #include<boost/static_assert.hpp>
 
-#include<ramen/app/application.hpp>
+#include<ramen/core/exceptions.hpp>
 
-#include<ramen/filesystem/path.hpp>
+#include<ramen/app/application.hpp>
 
 void ramen_terminate( void)
 {
@@ -22,8 +22,7 @@ void ramen_terminate( void)
 	
 void ramen_unexpected( void)
 {
-	ramen::app().error( "Ramen has encountered an unexpected exception");
-	throw std::runtime_error( "Ramen has encountered an unexpected exception.\nPlease report this bug." );
+    ramen::app().fatal_error( "Ramen has encountered an unexpected exception");
 }
 
 int main( int argc, char **argv)
@@ -37,6 +36,10 @@ int main( int argc, char **argv)
 		int result = r_app.run();
 		return result;
 	}
+    catch( ramen::core::exception& e)
+    {
+        std::cerr << "Exception: " << e.what() << "\n";
+    }
 	catch( std::exception& e)
 	{
 		std::cerr << "Exception: " << e.what() << "\n";
@@ -45,4 +48,6 @@ int main( int argc, char **argv)
 	{
 		std::cerr << "Unknown exception" << std::endl;
     }
+
+    return EXIT_FAILURE;
 }
