@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari.
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/nodes/image/output/output_node.hpp>
 
@@ -350,7 +352,7 @@ void output_node_t::write( const render::context_t& context)
 
 	// TODO: catch exceptions here.
 
-    std::auto_ptr<imageio::writer_t> writer( imageio::factory_t::instance().writer_for_tag( tag));
+    core::auto_ptr_t<imageio::writer_t> writer( imageio::factory_t::instance().writer_for_tag( tag));
 
     if( writer.get())
         writer->write_image( p, const_image_view(), params);
@@ -360,40 +362,40 @@ std::string output_node_t::extension_for_format( int format) const
 {
     switch( format)
     {
-    case exr_format:
-        return std::string( ".exr");
-    break;
+        case exr_format:
+            return std::string( ".exr");
+        break;
 
-    case jpg_format:
-        return std::string( ".jpg");
-    break;
+        case jpg_format:
+            return std::string( ".jpg");
+        break;
 
-    case cin_format:
-        return std::string( ".cin");
-    break;
+        case cin_format:
+            return std::string( ".cin");
+        break;
 
-    case dpx_format:
-        return std::string( ".dpx");
-    break;
+        case dpx_format:
+            return std::string( ".dpx");
+        break;
 
-    case hdr_format:
-        return std::string( ".hdr");
-    break;
+        case hdr_format:
+            return std::string( ".hdr");
+        break;
 
-    case tiff_format:
-        return std::string( ".tif");
-    break;
+        case tiff_format:
+            return std::string( ".tif");
+        break;
 
-    case tga_format:
-        return std::string( ".tga");
-    break;
+        case tga_format:
+            return std::string( ".tga");
+        break;
 
-    case png_format:
-        return std::string( ".png");
-    break;
+        case png_format:
+            return std::string( ".png");
+        break;
 
-    default:
-        return std::string(); // to keep MSVC happy
+        default:
+            return std::string(); // to keep MSVC happy
     }
 }
 
@@ -504,5 +506,5 @@ const node_metaclass_t& output_node_t::output_node_metaclass()
 
 static bool registered = node_factory_t::instance().register_node( output_node_t::output_node_metaclass());
 
-} // namespace
-} // namespace
+} // image
+} // ramen

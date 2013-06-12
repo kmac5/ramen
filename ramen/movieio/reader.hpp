@@ -8,7 +8,6 @@
 #include<vector>
 #include<string>
 
-#include<boost/noncopyable.hpp>
 #include<boost/tuple/tuple.hpp>
 
 #include<adobe/dictionary.hpp>
@@ -17,7 +16,10 @@
 
 #include<ramen/assert.hpp>
 
+#include<ramen/core/memory.hpp>
+
 #include<ramen/filesystem/path.hpp>
+
 #include<ramen/image/typedefs.hpp>
 
 #include<ramen/movieio/exceptions.hpp>
@@ -27,7 +29,7 @@ namespace ramen
 namespace movieio
 {
 
-class RAMEN_API reader_t : boost::noncopyable
+class RAMEN_API reader_t
 {
 public:
 
@@ -62,19 +64,29 @@ public:
 	
 	// read
     void read_frame( const image::image_view_t& view) const;
-    void read_frame( const image::image_view_t& view, const Imath::Box2i& crop, int subsample) const;
+    void read_frame( const image::image_view_t& view,
+                     const Imath::Box2i& crop,
+                     int subsample) const;
 
     void read_frame( const image::image_view_t& view, const Imath::Box2i& crop, 
 					 int subsample, const boost::tuple<int, int, int, int>& channels) const;
 	
 private:
 
+    // non-copyable
+    reader_t( const reader_t&);
+    reader_t& operator=( const reader_t&);
+
 	virtual void do_set_frame( int frame);
 	
-	virtual void do_read_frame( const image::image_view_t& view, const Imath::Box2i& crop, int subsample) const = 0;
+    virtual void do_read_frame( const image::image_view_t& view,
+                                const Imath::Box2i& crop,
+                                int subsample) const = 0;
 
-    virtual void do_read_frame( const image::image_view_t& view, const Imath::Box2i& crop, 
-								 int subsample, const boost::tuple<int, int, int, int>& channels) const;
+    virtual void do_read_frame( const image::image_view_t& view,
+                                const Imath::Box2i& crop,
+                                int subsample,
+                                const boost::tuple<int, int, int, int>& channels) const;
 	
 protected:
 	
@@ -84,7 +96,7 @@ protected:
 	int frame_;
 };
 
-} // namespace
-} // namespace
+} // movieio
+} // ramen
 
 #endif

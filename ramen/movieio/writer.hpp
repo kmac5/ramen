@@ -5,7 +5,7 @@
 #ifndef RAMEN_MOVIEIO_WRITER_HPP
 #define	RAMEN_MOVIEIO_WRITER_HPP
 
-#include<boost/noncopyable.hpp>
+#include<ramen/config.hpp>
 
 #include<adobe/dictionary.hpp>
 
@@ -19,7 +19,7 @@ namespace ramen
 namespace movieio
 {
 
-class RAMEN_API writer_t : boost::noncopyable
+class RAMEN_API writer_t
 {
 public:
 
@@ -28,10 +28,12 @@ public:
 	
     void write_frame( const image::const_image_view_t& view,
 						const adobe::dictionary_t& params) const;
-	
-protected:
-	
+
 private:
+
+    // non-copyable
+    writer_t( const writer_t&);
+    writer_t& operator=( const writer_t&);
 
     virtual void do_write_frame( const image::const_image_view_t& view,
 								const adobe::dictionary_t& params) const = 0;
@@ -40,7 +42,7 @@ private:
 	adobe::dictionary_t metadata_;
 };
 
-} // namespace
-} // namespace
+} // movieio
+} // ramen
 
 #endif

@@ -82,7 +82,9 @@ Imath::Box2i image_seq_reader_t::bounds() const
 
 void image_seq_reader_t::do_set_frame( int frame) { create_reader();}
 
-void image_seq_reader_t::do_read_frame( const image::image_view_t& view, const Imath::Box2i& crop, int subsample) const
+void image_seq_reader_t::do_read_frame( const image::image_view_t& view,
+                                        const Imath::Box2i& crop,
+                                        int subsample) const
 {
 	if( !reader_)
 		throw movieio::unknown_movie_format();
@@ -106,8 +108,10 @@ void image_seq_reader_t::do_read_frame( const image::image_view_t& view, const I
 	}
 }
 
-void image_seq_reader_t::do_read_frame( const image::image_view_t& view, const Imath::Box2i& crop, 
-										int subsample, const boost::tuple<int, int, int, int>& channels) const
+void image_seq_reader_t::do_read_frame( const image::image_view_t& view,
+                                        const Imath::Box2i& crop,
+                                        int subsample,
+                                        const boost::tuple<int, int, int, int>& channels) const
 {
 	if( !reader_)
 		throw movieio::unknown_movie_format();
@@ -141,7 +145,7 @@ void image_seq_reader_t::get_sequence_info()
 		{
 			try
 			{
-				std::auto_ptr<imageio::reader_t> r( imageio::factory_t::instance().reader_for_image( seq_( i)));
+                core::auto_ptr_t<imageio::reader_t> r( imageio::factory_t::instance().reader_for_image( seq_( i)));
 				reader_.reset( r.release());
 			
 				if( reader_)
@@ -156,7 +160,7 @@ void image_seq_reader_t::get_sequence_info()
 	{
 		try
 		{
-			std::auto_ptr<imageio::reader_t> r( imageio::factory_t::instance().reader_for_image( seq_()));
+            core::auto_ptr_t<imageio::reader_t> r( imageio::factory_t::instance().reader_for_image( seq_()));
 			reader_.reset( r.release());
 		}
 		catch( ...)
@@ -183,7 +187,7 @@ void image_seq_reader_t::create_reader()
 {
 	try
 	{
-		std::auto_ptr<imageio::reader_t> r( imageio::factory_t::instance().reader_for_image( seq_( frame_)));
+        core::auto_ptr_t<imageio::reader_t> r( imageio::factory_t::instance().reader_for_image( seq_( frame_)));
 		reader_.reset( r.release());
 	}
 	catch( imageio::exception& e)
@@ -207,5 +211,5 @@ void image_seq_reader_t::create_reader()
 	}
 }
 
-} // namespace
-} // namespace
+} // movieio
+} // ramen

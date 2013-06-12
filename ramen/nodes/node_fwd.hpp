@@ -5,6 +5,8 @@
 #ifndef RAMEN_NODE_FWD_HPP
 #define	RAMEN_NODE_FWD_HPP
 
+#include<ramen/config.hpp>
+
 namespace ramen
 {
 

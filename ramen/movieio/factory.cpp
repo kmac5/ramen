@@ -32,11 +32,11 @@ factory_t::factory_t() : detect_size_(0), detect_buffer_(0)
 
 factory_t::~factory_t() { delete detect_buffer_;}
 
-bool factory_t::register_movie_format( std::auto_ptr<format_t> format)
+bool factory_t::register_movie_format( core::auto_ptr_t<format_t> format)
 {
     detect_size_ = std::max( detect_size_, format->detect_size());
     format->add_extensions( extensions_);
-    formats_.push_back( format);
+    formats_.push_back( format.release());
     return true;
 }
 
@@ -53,14 +53,14 @@ const std::vector<std::string>& factory_t::extensions() const
 	return extensions_;
 }
 
-std::auto_ptr<reader_t> factory_t::create_reader( const boost::filesystem::path& p, bool sequence) const
+core::auto_ptr_t<reader_t> factory_t::create_reader( const boost::filesystem::path& p,
+                                                     bool sequence) const
 {
 	RAMEN_ASSERT( p.is_absolute());
 	
 	if( imageio::factory_t::instance().is_image_file( p))
 	{
-		std::auto_ptr<reader_t> result( new image_seq_reader_t( p, sequence));
-		return result;
+        return core::auto_ptr_t<reader_t>( new image_seq_reader_t( p, sequence));
 	}
 
     const_iterator it = format_for_extension( p);
@@ -74,20 +74,20 @@ std::auto_ptr<reader_t> factory_t::create_reader( const boost::filesystem::path&
 		return it->reader( p);
 	
 	throw unknown_movie_format();
-	return std::auto_ptr<reader_t>();
+    return core::auto_ptr_t<reader_t>();
 }
 
-std::auto_ptr<reader_t> factory_t::create_reader( const filesystem::path_sequence_t& seq) const
+core::auto_ptr_t<reader_t> factory_t::create_reader( const filesystem::path_sequence_t& seq) const
 {
 	// TODO: we need to do something better when we add movie formats.
-	std::auto_ptr<reader_t> result( new image_seq_reader_t( seq));
-	return result;
+    return core::auto_ptr_t<reader_t>( new image_seq_reader_t( seq));
 }
 
-std::auto_ptr<writer_t> factory_t::writer_for_tag( const std::string& tag) const
+core::auto_ptr_t<writer_t> factory_t::writer_for_tag( const std::string& tag) const
 {
 	if( imageio::factory_t::instance().is_image_format_tag( tag))
 	{
+        // what here???
 	}
 
     const_iterator it = format_for_tag( tag);
@@ -96,7 +96,7 @@ std::auto_ptr<writer_t> factory_t::writer_for_tag( const std::string& tag) const
 		return it->writer();
 
 	throw unknown_movie_format();
-	return std::auto_ptr<writer_t>();	
+    return core::auto_ptr_t<writer_t>();
 }
 
 factory_t::const_iterator factory_t::format_for_extension( const boost::filesystem::path& p) const

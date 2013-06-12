@@ -7,7 +7,8 @@
 
 #include<string>
 #include<vector>
-#include<memory>
+
+#include<ramen/core/memory.hpp>
 
 #include<ramen/movieio/reader.hpp>
 #include<ramen/movieio/writer.hpp>
@@ -33,11 +34,17 @@ struct RAMEN_API format_t
     virtual std::size_t detect_size() const;
     virtual bool detect( const char *p) const;
 	
-    virtual std::auto_ptr<reader_t> reader( const boost::filesystem::path& p) const;
-    virtual std::auto_ptr<writer_t> writer() const;
+    virtual core::auto_ptr_t<reader_t> reader( const boost::filesystem::path& p) const;
+    virtual core::auto_ptr_t<writer_t> writer() const;
+
+private:
+
+    // non-copyable
+    format_t( const format_t&);
+    format_t& operator=( const format_t&);
 };
 
-} // namespace
-} // namespace
+} // movieio
+} // ramen
 
 #endif

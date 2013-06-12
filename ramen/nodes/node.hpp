@@ -7,8 +7,6 @@
 
 #include<ramen/nodes/node_fwd.hpp>
 
-#include<ramen/config.hpp>
-
 #include<vector>
 #include<string>
 #include<memory>

@@ -23,7 +23,7 @@ private:
 	std::string tag_;
 };
 
-} // namespace
-} // namespace
+} // movieio
+} // ramen
 
 #endif

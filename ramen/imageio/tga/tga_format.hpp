@@ -30,11 +30,11 @@ public:
 
     virtual bool is_multichannel() const { return false;}
 
-    virtual std::auto_ptr<reader_t> reader( const boost::filesystem::path& p) const;
-    virtual std::auto_ptr<writer_t> writer() const;
+    virtual core::auto_ptr_t<reader_t> reader( const boost::filesystem::path& p) const;
+    virtual core::auto_ptr_t<writer_t> writer() const;
 };
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen
 
-#endif	/* _EXR_IMAGE_FORMAT_HPP */
+#endif

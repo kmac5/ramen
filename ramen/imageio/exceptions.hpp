@@ -41,7 +41,7 @@ struct RAMEN_API unsupported_image : public exception
 	explicit unsupported_image( const std::string& msg);
 };
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen
 
 #endif

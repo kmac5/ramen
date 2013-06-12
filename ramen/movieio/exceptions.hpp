@@ -46,7 +46,7 @@ struct RAMEN_API frame_out_of_bounds : public exception
 	explicit frame_out_of_bounds( int num);
 };
 
-} // namespace
-} // namespace
+} // movieio
+} // ramen
 
 #endif

@@ -95,5 +95,5 @@ void reader_t::do_read_frame( const image::image_view_t& view, const Imath::Box2
 	throw movieio::exception( "Movie format does not support multichannel reading");	
 }
 
-} // namespace
-} // namespace
+} // movieio
+} // ramen

@@ -5,11 +5,12 @@
 #ifndef RAMEN_IMAGEIO_FORMAT_HPP
 #define	RAMEN_IMAGEIO_FORMAT_HPP
 
+#include<ramen/config.hpp>
+
 #include<string>
 #include<vector>
-#include<memory>
 
-//#include<boost/cstdint.hpp>
+#include<ramen/core/memory.hpp>
 
 #include<ramen/imageio/reader.hpp>
 #include<ramen/imageio/writer.hpp>
@@ -37,11 +38,17 @@ struct RAMEN_API format_t
 
     virtual bool is_multichannel() const;
 
-    virtual std::auto_ptr<reader_t> reader( const boost::filesystem::path& p) const;
-    virtual std::auto_ptr<writer_t> writer() const;
+    virtual core::auto_ptr_t<reader_t> reader( const boost::filesystem::path& p) const;
+    virtual core::auto_ptr_t<writer_t> writer() const;
+
+private:
+
+    // non-copyable
+    format_t( const format_t&);
+    format_t& operator=( const format_t&);
 };
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen
 
 #endif

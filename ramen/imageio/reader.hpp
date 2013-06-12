@@ -44,11 +44,19 @@ public:
 	
     void read_image( const image::image_view_t& view) const;
 
-    void read_image( const image::image_view_t& view, const Imath::Box2i& crop, int subsample) const;
+    void read_image( const image::image_view_t& view,
+                     const Imath::Box2i& crop,
+                     int subsample) const;
 
 private:
 
-    virtual void do_read_image( const image::image_view_t& view, const Imath::Box2i& crop, int subsample) const = 0;
+    // non-copyable
+    reader_t( const reader_t&);
+    reader_t& operator=( const reader_t&);
+
+    virtual void do_read_image( const image::image_view_t& view,
+                                const Imath::Box2i& crop,
+                                int subsample) const = 0;
 	
 protected:
 
@@ -58,7 +66,7 @@ protected:
     adobe::dictionary_t info_;
 };
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen
 
 #endif

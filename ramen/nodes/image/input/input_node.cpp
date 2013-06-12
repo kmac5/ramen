@@ -528,7 +528,7 @@ void input_node_t::create_reader( int proxy_level, const boost::filesystem::path
 {
 	RAMEN_ASSERT( proxy_level >= 0 && proxy_level < num_proxy_levels);
 
-	std::auto_ptr<movieio::reader_t> r( clips_[proxy_level].reader( from_dir));
+    core::auto_ptr_t<movieio::reader_t> r( clips_[proxy_level].reader( from_dir));
 	readers_[proxy_level].reset( r.release());
 	
 	if( proxy_level == 0)

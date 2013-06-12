@@ -5,10 +5,13 @@
 #ifndef RAMEN_IMAGEIO_FACTORY_HPP
 #define	RAMEN_IMAGEIO_FACTORY_HPP
 
+#include<ramen/config.hpp>
+
 #include<vector>
 #include<string>
 
-#include<boost/noncopyable.hpp>
+#include<ramen/core/memory.hpp>
+
 #include<boost/ptr_container/ptr_vector.hpp>
 
 #include<ramen/imageio/exceptions.hpp>
@@ -22,7 +25,7 @@ namespace ramen
 namespace imageio
 {
 
-class factory_t : boost::noncopyable
+class RAMEN_API factory_t
 {
 public:
 
@@ -37,19 +40,23 @@ public:
     const_iterator begin() const    { return formats_.begin();}
     const_iterator end() const	    { return formats_.end();}
 
-    bool register_image_format( std::auto_ptr<format_t> format);
+    bool register_image_format( core::auto_ptr_t<format_t> format);
 
     const std::vector<std::string>& extensions() const  { return extensions_;}
 
 	bool is_image_file( const boost::filesystem::path& p) const;
 	bool is_image_format_tag( const std::string& tag) const;
 	
-    std::auto_ptr<reader_t> reader_for_image( const boost::filesystem::path& p) const;
-    std::auto_ptr<writer_t> writer_for_tag( const std::string& tag) const;
+    core::auto_ptr_t<reader_t> reader_for_image( const boost::filesystem::path& p) const;
+    core::auto_ptr_t<writer_t> writer_for_tag( const std::string& tag) const;
 
 private:
 
     factory_t();
+
+    // non-copyable
+    factory_t( const factory_t&);
+    factory_t& operator=( const factory_t&);
 
     const_iterator format_for_tag( const std::string& tag) const;
     const_iterator format_for_extension( const boost::filesystem::path& p) const;
@@ -62,7 +69,7 @@ private:
     mutable char *detect_buffer_;
 };
 
-} // namespace
-} // namespace
+} // imageio
+} // ramen
 
 #endif

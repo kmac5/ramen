@@ -133,6 +133,6 @@ private:
     image::buffer_t image_;
 };
 
-} // namespace
+} // ramen
 
 #endif

@@ -1,4 +1,6 @@
 // Copyright (c) 2011 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<stdio.h>
 
@@ -21,7 +23,7 @@ void input_clip_t::swap( input_clip_t& other)
 	sequence_.swap( other.sequence_);
 }
 
-std::auto_ptr<movieio::reader_t> input_clip_t::reader( const boost::filesystem::path& cwd) const
+core::auto_ptr_t<movieio::reader_t> input_clip_t::reader( const boost::filesystem::path& cwd) const
 {
 	if( valid())
 	{
@@ -33,11 +35,12 @@ std::auto_ptr<movieio::reader_t> input_clip_t::reader( const boost::filesystem::
 		return movieio::factory_t::instance().create_reader( new_seq);
 	}
 	
-	return std::auto_ptr<movieio::reader_t>();
+    return core::auto_ptr_t<movieio::reader_t>();
 }
 
 // paths
-void input_clip_t::convert_relative_paths( const boost::filesystem::path& old_base, const boost::filesystem::path& new_base)
+void input_clip_t::convert_relative_paths( const boost::filesystem::path& old_base,
+                                           const boost::filesystem::path& new_base)
 {
 	if( valid())
 		sequence_.convert_relative_paths( old_base, new_base);
@@ -55,6 +58,5 @@ void input_clip_t::make_paths_relative( const::boost::filesystem::path& from_dir
 		sequence_.make_paths_relative( from_dir);
 }
 
-} // namespace
-} // namespace
-
+} // image
+} // ramen
