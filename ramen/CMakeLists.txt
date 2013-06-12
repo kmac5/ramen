@@ -122,6 +122,7 @@ SET( RAMEN_SOURCES      system/system.cpp
                         core/name.cpp
                         core/types.cpp
                         core/string.cpp
+                        core/variant.cpp
 
                         filesystem/path.cpp
                         filesystem/path_sequence.cpp

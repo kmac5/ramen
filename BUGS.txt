@@ -2,6 +2,5 @@
     Bugs
     ----
 
-        - exception when prefs dir does not exist.
         - opencolorio displays are not correct.
         - crash when duplicating nodes.

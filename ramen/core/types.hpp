@@ -18,6 +18,8 @@
 #include<ramen/color/color3.hpp>
 #include<ramen/color/color4.hpp>
 
+#include<ramen/core/string.hpp>
+
 namespace ramen
 {
 namespace core
@@ -25,9 +27,12 @@ namespace core
 
 enum type_t
 {
-    bool_k,
+    bool_k = 0,
+
+    half_k,
     float_k,
     double_k,
+
     int8_k,
     uint8_k,
     int16_k,
@@ -35,29 +40,36 @@ enum type_t
     int32_k,
     uint32_k,
     int64_k,
-    uint64_k,
+    uint64_k,    
+
     point2i_k,
+    point2h_k,
     point2f_k,
+
+    point3h_k,
     point3f_k,
+
     vector2i_k,
+    vector2h_k,
     vector2f_k,
+
+    vector3h_k,
     vector3f_k,
+
+    normalh_k,
     normalf_k,
 
     hpoint2f_k,
     hpoint3f_k,
 
-    box2i_k,
-
     color3f_k,
     color4f_k,
 
-    half_k,
-    point2h_k,
-    point3h_k,
-    vector2h_k,
-    vector3h_k,
-    normalh_k
+    box2i_k,
+
+    string_k,
+
+    num_types_k
 };
 
 template<class T>
@@ -72,6 +84,7 @@ struct type_traits {};
     }
 
 RAMEN_CORE_TYPE_TRAITS_SPECIALIZATION( bool, bool_k);
+
 RAMEN_CORE_TYPE_TRAITS_SPECIALIZATION( half, half_k);
 RAMEN_CORE_TYPE_TRAITS_SPECIALIZATION( float, float_k);
 RAMEN_CORE_TYPE_TRAITS_SPECIALIZATION( double, double_k);
@@ -117,6 +130,14 @@ struct type_traits<math::box2i_t>
 {
     static type_t type() { return box2i_k;}
     static math::box2i_t default_value() { return math::box2i_t();}
+};
+
+// special cases for strings
+template<>
+struct type_traits<string_t>
+{
+    static type_t type()            { return string_k;}
+    static string_t default_value() { return string_t();}
 };
 
 RAMEN_API const char *type_to_string( type_t t);

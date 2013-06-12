@@ -52,10 +52,12 @@ const char *type_to_string( type_t t)
 
         RAMEN_CORE_TYPE2STRING_CASE( hpoint3f_k, "hpoint3f_t")
 
-        RAMEN_CORE_TYPE2STRING_CASE( box2i_k, "box2i_t")
-
         RAMEN_CORE_TYPE2STRING_CASE( color3f_k, "color3f_t")
         RAMEN_CORE_TYPE2STRING_CASE( color4f_k, "color4f_t")
+
+        RAMEN_CORE_TYPE2STRING_CASE( box2i_k, "box2i_t")
+
+        RAMEN_CORE_TYPE2STRING_CASE( string_k, "string_t")
 
         default:
             RAMEN_ASSERT( false && "Unknown type in type_to_string");

@@ -5,11 +5,11 @@
         - remove adobe source libs dependency.
         - remove unused code.
         - remove half done code.
-        - remove some dependencies, like CImg, ...
         - unit tests.
         - image processing code needs a review.
         - viewer code is a mess.
         - add a dependency graph.
-        - switch to more modern OpenGL code.
         - switch the file format to json or update to new yaml-cpp api.
-        
+        - windows port.
+        - port to Qt5.
+        - switch to more modern OpenGL code.
