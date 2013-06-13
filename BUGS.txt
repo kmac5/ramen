@@ -1,6 +1,0 @@
-
-    Bugs
-    ----
-
-        - opencolorio displays are not correct.
-        - crash when duplicating nodes.
