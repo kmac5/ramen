@@ -43,7 +43,7 @@ void float2_param_t::private_init()
 void float2_param_t::set_default_value( const Imath::V2f& x)
 {
     poly_param_indexable_value_t v( x);
-    value() = adobe::poly_cast<poly_param_value_t&>( v);
+    value() = core::poly_cast<poly_param_value_t&>( v);
 }
 
 poly_param_value_t float2_param_t::value_at_frame( float frame) const
@@ -52,7 +52,7 @@ poly_param_value_t float2_param_t::value_at_frame( float frame) const
     eval_curve( 0, frame, v.x);
     eval_curve( 1, frame, v.y);
     poly_param_indexable_value_t val( v);
-    return adobe::poly_cast<poly_param_value_t&>( val);
+    return core::poly_cast<poly_param_value_t&>( val);
 }
 
 void float2_param_t::set_value( const Imath::V2f& x, change_reason reason)
@@ -71,7 +71,7 @@ void float2_param_t::set_value_at_frame( const Imath::V2f& x, float frame, chang
         param_set()->add_command( this);
 
     poly_param_indexable_value_t v( x);
-    value() = adobe::poly_cast<poly_param_value_t&>( v);
+    value() = core::poly_cast<poly_param_value_t&>( v);
 
     bool autokey = param_set()->autokey();
 
@@ -164,7 +164,7 @@ void float2_param_t::do_read( const serialization::yaml_node_t& node)
     if( node.get_optional_value( "value", val))
     {
         poly_param_indexable_value_t v( val);
-        value().assign( adobe::poly_cast<poly_param_value_t&>( v));
+        value().assign( core::poly_cast<poly_param_value_t&>( v));
     }
 }
 

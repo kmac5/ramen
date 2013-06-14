@@ -94,7 +94,7 @@ S get_absolute_value( const param_t& p)
 			S v = any.cast<S>();
 			return q->relative_to_absolute( v);
 		}
-		catch( adobe::bad_cast& e)
+        catch( core::bad_cast& e)
 		{
 			RAMEN_ASSERT( 0 && "Bad cast exception in get_value");
 		}
@@ -118,7 +118,7 @@ S get_absolute_value_at_frame( const param_t& p, float frame)
 			S v = any.cast<S>();
 			return q->relative_to_absolute( v);
 		}
-		catch( adobe::bad_cast& e)
+        catch( core::bad_cast& e)
 		{
 			RAMEN_ASSERT( 0 && "Bad cast exception in get_value");
 		}

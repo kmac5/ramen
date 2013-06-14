@@ -5,8 +5,6 @@
 #ifndef RAMEN_PARAM_VALUE_CONCEPT_HPP
 #define RAMEN_PARAM_VALUE_CONCEPT_HPP
 
-#include<boost/any.hpp>
-
 #include<ramen/core/empty.hpp>
 
 #include<ramen/Concepts/RegularConcept.hpp>
@@ -61,9 +59,12 @@ public:
 private:
 
     template<class X>
+    static void nothing( const X& x) {}
+
+    template<class X>
     static void checkIndexOperator( const X& x)
     {
-        boost::any anything( x[0]);
+        nothing( x[0]);
     }
 
     static void checkIndexOperator( const core::empty_t& x) {}
