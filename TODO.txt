@@ -1,4 +1,3 @@
-
     TODO
     ----
 
@@ -8,13 +7,18 @@
         - remove half done code.
         - add unit tests.
         - add doxygen docs.
-        - image viewer code is a mess.
+
         - review base classes.
-        - switch from floats to doubles for non-image processing code.
         - add a dependency graph.
-        - switch the file format to json or update to new yaml-cpp api.
-        - windows port.
-        - image processing code needs a rewrite. Evaluate Halide as a replacement.
-        - switch to more modern OpenGL code.
+
+        - review color management code.
+
+        - switch to planar image representation.
+        - image processing code needs a rewrite. Evaluate Intel ispc and Halide as replacements.
+        - viewer code is a mess. Rewrite.
         
+        - switch from floats to doubles for non-image processing code.
+        - update to the new yaml-cpp api.
+        - switch to more modern OpenGL code.
+        - windows port.
         - reintroduce old features, like OFX plugins or the tracker.
