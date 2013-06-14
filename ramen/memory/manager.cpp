@@ -35,12 +35,15 @@ void manager_t::clear_caches()
     image_cache().clear();
 }
 
-void manager_t::insert_in_cache( node_t *n, const adobe::md5_t::digest_t& key, image::buffer_t& img)
+void manager_t::insert_in_cache( node_t *n,
+                                 const digest_type& key,
+                                 image::buffer_t& img)
 {
 	image_cache().insert( n, key, img);
 }
 
-boost::optional<image::buffer_t> manager_t::find_in_cache( const adobe::md5_t::digest_t& key, const Imath::Box2i& area)
+boost::optional<image::buffer_t> manager_t::find_in_cache( const digest_type& key,
+                                                           const Imath::Box2i& area)
 {
 	boost::optional<image::buffer_t> result = image_cache().find( key, area);
 	return result;

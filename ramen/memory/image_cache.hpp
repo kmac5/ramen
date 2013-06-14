@@ -10,7 +10,6 @@
 #include<map>
 #include<list>
 
-#include<boost/noncopyable.hpp>
 #include<boost/optional.hpp>
 
 #include<ramen/nodes/node_fwd.hpp>
@@ -22,7 +21,7 @@ namespace ramen
 namespace memory
 {
 
-class image_cache_t : public lru_cache_interface, boost::noncopyable
+class image_cache_t : public lru_cache_interface
 {
 public:
 
@@ -38,12 +37,17 @@ public:
     void end_interaction();
 
     void insert( node_t *n, const digest_type& key, image::buffer_t& img);
+
     boost::optional<image::buffer_t> find( const digest_type& key, const Imath::Box2i& area);
 
     virtual void erase_lru();
     virtual boost::posix_time::ptime lru_time() const;
 
 private:
+
+    // non-copyable
+    image_cache_t( const image_cache_t&);
+    image_cache_t& operator=( const image_cache_t&);
 
     struct entry_t
     {

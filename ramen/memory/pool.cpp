@@ -23,7 +23,7 @@ struct pool_t::implementation_t
 {
     const static std::size_t size_tolerance = 128 * 1024; // 128 Kb?
 
-    struct mem_block_t : public bi::list_base_hook<bi::link_mode<bi::safe_link> >, boost::noncopyable
+    struct mem_block_t : public bi::list_base_hook<bi::link_mode<bi::safe_link> >
     {
         mem_block_t( std::size_t s) : size( s), free( true) {}
 
@@ -92,6 +92,12 @@ struct pool_t::implementation_t
 
         std::size_t size;
         bool free;
+
+    private:
+
+        // non-copyable
+        mem_block_t( const mem_block_t&);
+        mem_block_t& operator=( const mem_block_t&);
     };
 
     implementation_t( std::size_t size_in_bytes) : pool_size( size_in_bytes)

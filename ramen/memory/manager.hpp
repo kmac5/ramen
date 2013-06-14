@@ -7,8 +7,6 @@
 
 #include<ramen/memory/manager_fwd.hpp>
 
-#include<boost/noncopyable.hpp>
-
 #include<memory>
 
 #include<ramen/app/application_fwd.hpp>
@@ -23,7 +21,7 @@ namespace ramen
 namespace memory
 {
 
-class manager_t : boost::noncopyable
+class manager_t
 {
 public:
 
@@ -39,7 +37,9 @@ public:
     void clear_caches();
 
     void insert_in_cache( node_t *n, const digest_type& key, image::buffer_t& img);
-    boost::optional<image::buffer_t> find_in_cache( const digest_type& key, const Imath::Box2i& area);
+
+    boost::optional<image::buffer_t> find_in_cache( const digest_type& key,
+                                                    const Imath::Box2i& area);
 
     image_allocator_type& image_allocator() { return *img_alloc_;}
 
@@ -48,6 +48,10 @@ private:
     friend class ramen::application_t;
 
     explicit manager_t( boost::uint64_t img_cache_size);
+
+    // non-copyable
+    manager_t( const manager_t&);
+    manager_t& operator=( const manager_t&);
 
     image_cache_t& image_cache() { return *img_cache_;}
 	

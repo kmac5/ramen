@@ -9,14 +9,12 @@
 
 #include<ramen/core/memory.hpp>
 
-#include<boost/noncopyable.hpp>
-
 namespace ramen
 {
 namespace memory
 {
 
-class pool_t : boost::noncopyable
+class pool_t
 {
 public:
 
@@ -31,6 +29,10 @@ public:
     void deallocate( unsigned char *p, std::size_t size);
 
 private:
+
+    // non-copyable
+    pool_t( const pool_t&);
+    pool_t& operator=( const pool_t&);
 
     // implementation is private...
     struct implementation_t;

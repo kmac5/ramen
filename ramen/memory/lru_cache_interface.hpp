@@ -25,7 +25,7 @@ public:
 	virtual boost::posix_time::ptime lru_time() const = 0;
 };
 
-} // namespace
-} // namespace
+} // memory
+} // ramen
 
 #endif

@@ -5,11 +5,13 @@
 #ifndef RAMEN_HASH_GENERATOR_HPP
 #define	RAMEN_HASH_GENERATOR_HPP
 
+#include<ramen/config.hpp>
+
 #include<sstream>
 
+#include<boost/cstdint.hpp>
+#include<boost/array.hpp>
 #include<boost/optional.hpp>
-
-#include<adobe/md5.hpp>
 
 #include<ramen/assert.hpp>
 
@@ -18,11 +20,11 @@ namespace ramen
 namespace hash
 {
 
-class generator_t
+class RAMEN_API generator_t
 {
 public:
 
-    typedef adobe::md5_t::digest_t digest_type;
+    typedef boost::array<boost::uint64_t, 2> digest_type;
 
     generator_t();
 
@@ -35,12 +37,13 @@ public:
 
     std::string str() const;
 
-    bool finalized() const { return digest_;}
+    bool finalized() const
+    {
+        return digest_;
+    }
 
     const digest_type& digest() const;
     std::string digest_as_string() const;
-
-    static digest_type digest_from_string( const std::string& s);
 
 private:
 
@@ -59,8 +62,7 @@ generator_t& operator<<( generator_t& hash_gen, const T& x)
     return hash_gen;
 }
 
-} // util
+} // hash
 } // ramen
 
 #endif
-

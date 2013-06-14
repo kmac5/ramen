@@ -142,6 +142,7 @@ SET( RAMEN_SOURCES      system/system.cpp
                         half/halfExpLogTable.cpp
 
                         hash/generator.cpp
+                        hash/MurmurHash3.cpp
 
                         image/accumulator.cpp
                         image/agg_renderers.cpp
