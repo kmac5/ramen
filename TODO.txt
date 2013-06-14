@@ -1,4 +1,3 @@
-
     TODO
     ----
 
@@ -14,6 +13,7 @@
 
         - review color management code.
 
+        - switch to planar image representation.
         - image processing code needs a rewrite. Evaluate Intel ispc and Halide as replacements.
         - viewer code is a mess. Rewrite.
         
