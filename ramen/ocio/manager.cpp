@@ -119,6 +119,7 @@ std::string manager_t::default_view( const std::string& display) const
 	return cfg->getDefaultView( display.c_str());
 }
 
+/*
 OCIO::ConstContextRcPtr manager_t::get_context( const context_t *ctx) const
 {
 	OCIO::ConstConfigRcPtr cfg = config();
@@ -147,6 +148,7 @@ OCIO::ConstContextRcPtr manager_t::get_context( const context_t *ctx) const
 
 	return context;
 }
+*/
 
 } // ocio
 } // ramen

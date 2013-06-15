@@ -47,14 +47,14 @@ public:
 
     virtual void test_gl_extensions() const {}
     virtual void init() {}
-	
+
     virtual QWidget *toolbar();
 
     void begin_active_view();
     void end_active_view();
 
-	bool is_active() const		{ return active_;}
-	void set_active( bool b)	{ active_ = b;}
+    bool is_active() const		{ return active_;}
+    void set_active( bool b)	{ active_ = b;}
 
     // nodes
     virtual void node_added( node_t *n)     {}
@@ -72,14 +72,14 @@ public:
     // time
     virtual void frame_changed() {}
 
-	// display
-	virtual void display_transform_changed() {}
-	virtual void exposure_changed() {}
-	virtual void gamma_changed() {}
+    // display
+    virtual void display_transform_changed() {}
+    virtual void exposure_changed() {}
+    virtual void gamma_changed() {}
 
     // redraw
     void update();
-	
+
     // events
     virtual void resize( int w, int h) {}
     virtual void paint();
@@ -94,13 +94,13 @@ public:
     virtual void mouse_press_event( QMouseEvent *event);
     virtual void mouse_release_event( QMouseEvent *event);
 
-	// eyedropper & color picking
-	virtual Imath::Color4f color_at( int x, int y) const;
-	virtual void pick_colors_in_box( const Imath::Box2i& b, boost::function<void ( const Imath::Color4f&)> f) const;
-	
-	// utils
-	virtual void frame_rect( const Imath::Box2f& b) const;
-	virtual void frame_rect( const Imath::Box2i& b) const;
+    // eyedropper & color picking
+    virtual Imath::Color4f color_at( int x, int y) const;
+    virtual void pick_colors_in_box( const Imath::Box2i& b, boost::function<void ( const Imath::Color4f&)> f) const;
+
+    // utils
+    virtual void frame_rect( const Imath::Box2f& b) const;
+    virtual void frame_rect( const Imath::Box2i& b) const;
 
 private:
 
@@ -108,7 +108,7 @@ private:
     virtual void do_end_active_view()   {}
 
     viewer_context_t *parent_;
-	bool active_;
+    bool active_;
 };
 
 class default_viewer_strategy_t : public viewer_strategy_t

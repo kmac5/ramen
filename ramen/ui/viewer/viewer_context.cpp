@@ -51,15 +51,19 @@ viewer_context_t::viewer_context_t( QWidget *parent) : QGLWidget( parent)
 
     // get the palette colors
     QColor col( palette().color( QPalette::Base));
-    back_color_ = Imath::Color3f( col.red() / 255.0f, col.green() / 255.0f, col.blue() / 255.0f);
+    back_color_ = Imath::Color3f( col.red() / 255.0f,
+                                  col.green() / 255.0f,
+                                  col.blue() / 255.0f);
 
     col = palette().color( QPalette::ButtonText);
-    fg_color_ = Imath::Color3f( col.red() / 255.0f, col.green() / 255.0f, col.blue() / 255.0f);
+    fg_color_ = Imath::Color3f( col.red() / 255.0f,
+                                col.green() / 255.0f,
+                                col.blue() / 255.0f);
 }
 
 viewer_context_t::~viewer_context_t()
 {
-	strategy().end_active_view();
+    strategy().end_active_view();
 }
 
 void viewer_context_t::set_view_mode( view_mode_t m)
@@ -89,12 +93,14 @@ void viewer_context_t::set_autoupdate( bool b)
 
 void viewer_context_t::node_added( node_t *n)
 {
-    boost::range::for_each( strategies_, boost::bind( &viewer_strategy_t::node_added, _1, n));
+    boost::range::for_each( strategies_,
+                            boost::bind( &viewer_strategy_t::node_added, _1, n));
 }
 
 void viewer_context_t::node_released( node_t *n)
 {
-    boost::range::for_each( strategies_, boost::bind( &viewer_strategy_t::node_released, _1, n));
+    boost::range::for_each( strategies_,
+                            boost::bind( &viewer_strategy_t::node_released, _1, n));
 }
 
 void viewer_context_t::set_active_node( node_t *n)
@@ -147,7 +153,7 @@ bool viewer_context_t::set_strategy_for_node( node_t *n)
 
     if( it != current_)
     {
-		set_strategy( it);
+        set_strategy( it);
         return true;
     }
 
@@ -167,7 +173,7 @@ void viewer_context_t::frame_changed() { strategy().frame_changed();}
 // ocio
 OCIO::ConstConfigRcPtr viewer_context_t::ocio_config() const
 {
-	return app().ocio_manager().config();
+    return app().ocio_manager().config();
 }
 
 OCIO::DisplayTransformRcPtr viewer_context_t::ocio_transform()
@@ -176,39 +182,62 @@ OCIO::DisplayTransformRcPtr viewer_context_t::ocio_transform()
     transform->setInputColorSpaceName( OCIO::ROLE_SCENE_LINEAR);
     transform->setDisplay( display_device().c_str());
     transform->setView( display_transform().c_str());
-	return transform;
+    return transform;
 }
 
-std::pair<std::string, std::string>  viewer_context_t::get_context_pair( int index)
+boost::shared_ptr<ocio::gl_lut3d_t>& viewer_context_t::display_lut()
 {
-	return app().document().composition().ocio_context_pairs()[ index];
+    return display_lut_;
 }
 
-boost::shared_ptr<ocio::gl_lut3d_t>& viewer_context_t::display_lut() { return display_lut_;}
+const std::string& viewer_context_t::display_device() const
+{
+    return app().ui()->viewer().display_device();
+}
 
-const std::string& viewer_context_t::display_device() const		{ return app().ui()->viewer().display_device();}
-const std::string& viewer_context_t::display_transform() const	{ return app().ui()->viewer().display_transform();}
+const std::string& viewer_context_t::display_transform() const
+{
+    return app().ui()->viewer().display_transform();
+}
 
-float viewer_context_t::exposure() const	{ return app().ui()->viewer().exposure();}
-float viewer_context_t::gamma() const		{ return app().ui()->viewer().gamma();}
+float viewer_context_t::exposure() const
+{
+    return app().ui()->viewer().exposure();
+}
 
-void viewer_context_t::display_transform_changed()	{ strategy().display_transform_changed();}
+float viewer_context_t::gamma() const
+{
+    return app().ui()->viewer().gamma();
+}
 
-void viewer_context_t::exposure_changed()	{ strategy().exposure_changed();}
-void viewer_context_t::gamma_changed()		{ strategy().gamma_changed();}
+void viewer_context_t::display_transform_changed()
+{
+    strategy().display_transform_changed();
+}
+
+void viewer_context_t::exposure_changed()
+{
+    strategy().exposure_changed();
+}
+
+void viewer_context_t::gamma_changed()
+{
+    strategy().gamma_changed();
+}
 
 // QGLWidget
 void viewer_context_t::initializeGL()
 {
-	clear_gl_errors();
+    clear_gl_errors();
 
     gl_clear_color( back_color_.x, back_color_.y, back_color_.z, 0);
 
     if( first_time_)
     {
         test_gl_extensions();
-		display_lut_.reset( new ocio::gl_lut3d_t());
-        boost::range::for_each( strategies_, boost::bind( &viewer_strategy_t::init, _1));
+        display_lut_.reset( new ocio::gl_lut3d_t());
+        boost::range::for_each( strategies_,
+                                boost::bind( &viewer_strategy_t::init, _1));
         strategy().begin_active_view();
         first_time_ = false;
     }
@@ -221,27 +250,53 @@ void viewer_context_t::initializeGL()
 
 void viewer_context_t::resizeGL( int w, int h)
 {
-    boost::range::for_each( strategies_, boost::bind( &viewer_strategy_t::resize, _1, w, h));
+    boost::range::for_each( strategies_,
+                            boost::bind( &viewer_strategy_t::resize, _1, w, h));
 }
 
 void viewer_context_t::paintGL() { strategy().paint();}
 
-void viewer_context_t::enterEvent( QEvent *event)   { strategy().enter_event( event);}
-void viewer_context_t::leaveEvent( QEvent *event)   { strategy().leave_event( event);}
+void viewer_context_t::enterEvent( QEvent *event)
+{
+    strategy().enter_event( event);
+}
 
-void viewer_context_t::keyPressEvent( QKeyEvent *event)     { strategy().key_press_event( event);}
-void viewer_context_t::keyReleaseEvent( QKeyEvent *event)   { strategy().key_release_event( event);}
+void viewer_context_t::leaveEvent( QEvent *event)
+{
+    strategy().leave_event( event);
+}
 
-void viewer_context_t::mousePressEvent( QMouseEvent *event)     { strategy().mouse_press_event( event);}
-void viewer_context_t::mouseMoveEvent( QMouseEvent *event)      { strategy().mouse_move_event( event);}
-void viewer_context_t::mouseReleaseEvent( QMouseEvent *event)   { strategy().mouse_release_event( event);}
+void viewer_context_t::keyPressEvent( QKeyEvent *event)
+{
+    strategy().key_press_event( event);
+}
+
+void viewer_context_t::keyReleaseEvent( QKeyEvent *event)
+{
+    strategy().key_release_event( event);
+}
+
+void viewer_context_t::mousePressEvent( QMouseEvent *event)
+{
+    strategy().mouse_press_event( event);
+}
+
+void viewer_context_t::mouseMoveEvent( QMouseEvent *event)
+{
+    strategy().mouse_move_event( event);
+}
+
+void viewer_context_t::mouseReleaseEvent( QMouseEvent *event)
+{
+    strategy().mouse_release_event( event);
+}
 
 void viewer_context_t::test_gl_extensions()
 {
     GLenum err = glewInit();
 
     if( GLEW_OK != err)
-		app().fatal_error( "Video card not supported: Error initializing GLEW");
+        app().fatal_error( "Video card not supported: Error initializing GLEW");
 
     // test common extensions here
     if( !glewIsSupported("GL_VERSION_2_0"))
@@ -256,20 +311,21 @@ void viewer_context_t::test_gl_extensions()
     if( !GLEW_ARB_fragment_shader)
         app().fatal_error( "Video card not supported: Not fragment programs");
 
-	// OCIO GPU path support
+    // OCIO GPU path support
     if( !GLEW_EXT_texture3D)
         app().fatal_error( "Video card not supported: No 3D textures");
 
     if( !GLEW_ARB_multitexture)
         app().fatal_error( "Video card not supported: No multitexture");
 
-	GLint tx_units;
-	glGetIntegerv( GL_MAX_TEXTURE_UNITS, &tx_units);
-	if( tx_units < 2)
+    GLint tx_units;
+    glGetIntegerv( GL_MAX_TEXTURE_UNITS, &tx_units);
+    if( tx_units < 2)
         app().fatal_error( "Video card not supported: Not enough texture units");
-	
+
     // let each implementation test other extensions
-    boost::range::for_each( strategies_, boost::bind( &viewer_strategy_t::test_gl_extensions, _1));
+    boost::range::for_each( strategies_,
+                            boost::bind( &viewer_strategy_t::test_gl_extensions, _1));
 }
 
 // utils
@@ -300,7 +356,7 @@ void viewer_context_t::set_screen_projection()
 
 void viewer_context_t::draw_checks_background() const
 {
-	// TODO: this is better done with a texture.
+    // TODO: this is better done with a texture.
     const int checks_size = 12;
 
     for( int j = 0; j < height(); j += checks_size)
@@ -323,17 +379,27 @@ void viewer_context_t::draw_checks_background() const
             }
 
             gl_begin( GL_QUADS);
-				gl_vertex2i( i, j);
-				gl_vertex2i( i+checks_size, j);
-				gl_vertex2i( i+checks_size, j+checks_size);
-				gl_vertex2i( i, j+checks_size);
+            gl_vertex2i( i, j);
+            gl_vertex2i( i+checks_size, j);
+            gl_vertex2i( i+checks_size, j+checks_size);
+            gl_vertex2i( i, j+checks_size);
             gl_end();
         }
     }
 }
 
-Imath::Color4f viewer_context_t::color_at( int x, int y) const { return strategy().color_at( x, y);}
+Imath::Color4f viewer_context_t::color_at( int x, int y) const
+{
+    return strategy().color_at( x, y);
+}
 
 } // viewer
 } // ui
 } // ramen
+
+/*
+std::pair<std::string, std::string>  viewer_context_t::get_context_pair( int index)
+{
+    return app().document().composition().ocio_context_pairs()[ index];
+}
+*/

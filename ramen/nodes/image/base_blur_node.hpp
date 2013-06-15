@@ -1,4 +1,6 @@
 // Copyright (c) 2011 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_IMAGE_BASE_BLUR_NODE_HPP
 #define	RAMEN_IMAGE_BASE_BLUR_NODE_HPP
@@ -43,8 +45,8 @@ protected:
 	void copy_src_image( int in, const Imath::Box2i& area, blur_border_mode bmode);
 };
 
-} // namespace
-} // namespace
+} // image
+} // ramen
 
 #endif
 

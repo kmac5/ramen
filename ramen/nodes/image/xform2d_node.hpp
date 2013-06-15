@@ -59,7 +59,7 @@ public:
     matrix3_type global_matrix_at_frame( float frame, int subsample = 1) const;
 };
 
-} // namespace
-} // namespace
+} // image
+} // ramen
 
 #endif

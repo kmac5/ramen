@@ -45,9 +45,12 @@ struct frames_needed_less
 
 node_t::node_t() : composite_parameterised_t(), flags_( 0), composition_( 0) {}
 
-node_t::node_t( const node_t& other) : composite_parameterised_t( other), outputs_( other.outputs_)
+node_t::node_t( const node_t& other) : composite_parameterised_t( other),
+                                        outputs_( other.outputs_)
 {
-    boost::range::for_each( outputs_, boost::bind( &node_output_plug_t::set_parent_node, _1, this));
+    boost::range::for_each( outputs_, boost::bind( &node_output_plug_t::set_parent_node,
+                                                   _1,
+                                                   this));
     flags_ = other.flags_;
     loc_ = other.loc_;
     composition_ = other.composition_;
@@ -87,22 +90,22 @@ void node_t::select( bool state)
 void node_t::toggle_selection()	{ select( !selected());}
 
 bool node_t::ignored() const        { return util::test_flag( flags_, ignored_bit);}
-void node_t::set_ignored( bool b)   { util::set_flag( flags_, ignored_bit, b );}
+void node_t::set_ignored( bool b)   { util::set_flag( flags_, ignored_bit, b);}
 
 bool node_t::plugin_error() const       { return util::test_flag( flags_, plugin_error_bit);}
-void node_t::set_plugin_error( bool b)  { util::set_flag( flags_, plugin_error_bit, b );}
+void node_t::set_plugin_error( bool b)  { util::set_flag( flags_, plugin_error_bit, b);}
 
 bool node_t::autolayout() const         { return util::test_flag( flags_, autolayout_bit);}
-void node_t::set_autolayout( bool b)    { util::set_flag( flags_, autolayout_bit, b );}
+void node_t::set_autolayout( bool b)    { util::set_flag( flags_, autolayout_bit, b);}
 
 bool node_t::cacheable() const          { return flags_ & cacheable_bit;}
-void node_t::set_cacheable( bool b)     { util::set_flag( flags_, cacheable_bit, b );}
+void node_t::set_cacheable( bool b)     { util::set_flag( flags_, cacheable_bit, b);}
 
 bool node_t::notify_dirty() const       { return util::test_flag( flags_, notify_dirty_bit);}
-void node_t::set_notify_dirty( bool b)  { util::set_flag( flags_, notify_dirty_bit, b );}
+void node_t::set_notify_dirty( bool b)  { util::set_flag( flags_, notify_dirty_bit, b);}
 
 bool node_t::ui_invisible() const       { return flags_ & ui_invisible_bit;}
-void node_t::set_ui_invisible( bool b)  { util::set_flag( flags_, ui_invisible_bit, b );}
+void node_t::set_ui_invisible( bool b)  { util::set_flag( flags_, ui_invisible_bit, b);}
 
 bool node_t::is_active() const     { return util::test_flag( flags_, active_bit);}
 bool node_t::is_context() const    { return util::test_flag( flags_, context_bit);}
@@ -135,9 +138,12 @@ node_t *node_t::input( std::size_t i)
     return inputs_[i].input_node();
 }
 
-void node_t::add_input_plug( const std::string &id, bool optional, const Imath::Color3c &color, const std::string &tooltip)
+void node_t::add_input_plug( const std::string &id,
+                             bool optional,
+                             const Imath::Color3c &color,
+                             const std::string &tooltip)
 {
-    inputs_.push_back( node_input_plug_t( id, optional, color, tooltip ));
+    inputs_.push_back( node_input_plug_t( id, optional, color, tooltip));
 }
 
 std::size_t node_t::num_outputs() const
@@ -164,20 +170,22 @@ const node_t *node_t::output( std::size_t i) const
 {
     RAMEN_ASSERT( has_output_plug());
     RAMEN_ASSERT( i < num_outputs());
-    return boost::get<0>( outputs_[0].connections()[i] );
+    return boost::get<0>( outputs_[0].connections()[i]);
 }
 
 node_t *node_t::output( std::size_t i)
 {
     RAMEN_ASSERT( has_output_plug());
     RAMEN_ASSERT( i < num_outputs());
-    return boost::get<0>( outputs_[0].connections()[i] );
+    return boost::get<0>( outputs_[0].connections()[i]);
 }
 
-void node_t::add_output_plug( const std::string &id, const Imath::Color3c& color, const std::string& tooltip )
+void node_t::add_output_plug( const std::string &id,
+                              const Imath::Color3c& color,
+                              const std::string& tooltip)
 {
     RAMEN_ASSERT( !has_output_plug());
-    outputs_.push_back( new node_output_plug_t( this, id, color, tooltip ));
+    outputs_.push_back( new node_output_plug_t( this, id, color, tooltip));
 }
 
 bool node_t::accept_connection( node_t *src, int port) const { return true;}
@@ -194,7 +202,7 @@ void node_t::do_connected( node_t *src, int port) {}
 
 void node_t::add_new_input_plug()
 {
-    RAMEN_ASSERT( 0 );
+    RAMEN_ASSERT( 0);
     /*
     add_input_plug( input_plug_info_t( ui::palette_t::instance().color("back plug")), true);
     reconnect_node();
@@ -478,13 +486,16 @@ bool node_t::is_frame_varying() const { return false;}
 const char *node_t::help_string() const
 {
     RAMEN_ASSERT( metaclass());
+
     return metaclass()->help;
 }
 
-void node_t::convert_relative_paths( const boost::filesystem::path& old_base, const boost::filesystem::path& new_base)
+void node_t::convert_relative_paths( const boost::filesystem::path& old_base,
+                                     const boost::filesystem::path& new_base)
 {
     boost::range::for_each( param_set(),
-                            boost::bind( &param_t::convert_relative_paths, _1, old_base, new_base));
+                            boost::bind( &param_t::convert_relative_paths,
+                                         _1, old_base, new_base));
 }
 
 void node_t::make_paths_absolute()
@@ -534,15 +545,18 @@ void node_t::read(const serialization::yaml_node_t& in, const std::pair<int,int>
     do_read( in, version);
 }
 
-void node_t::do_read( const serialization::yaml_node_t& in, const std::pair<int,int>& version) {}
+void node_t::do_read( const serialization::yaml_node_t& in,
+                      const std::pair<int,int>& version)
+{
+}
 
 void node_t::write( serialization::yaml_oarchive_t& out) const
 {
     RAMEN_ASSERT( metaclass() && "Trying to serialize an abstract node");
     out.begin_map();
-        write_node_info( out);
-        param_set().write( out);
-        do_write( out);
+    write_node_info( out);
+    param_set().write( out);
+    do_write( out);
     out.end_map();
 }
 
@@ -552,10 +566,10 @@ void node_t::write_node_info( serialization::yaml_oarchive_t& out) const
 {
     out << YAML::Key << "class" << YAML::Value;
     out.flow();
-        out.begin_seq();
-        out << metaclass()->id
-            << metaclass()->major_version << metaclass()->minor_version;
-        out.end_seq();
+    out.begin_seq();
+    out << metaclass()->id
+        << metaclass()->major_version << metaclass()->minor_version;
+    out.end_seq();
 
     out << YAML::Key << "name"  << YAML::DoubleQuoted << YAML::Value << name();
     out << YAML::Key << "comp_pos" << YAML::Value << location();
@@ -572,4 +586,4 @@ node_t *new_clone( const node_t& other)
     return dynamic_cast<node_t*>( new_clone( dynamic_cast<const parameterised_t&>( other)));
 }
 
-} // namespace
+} // ramen

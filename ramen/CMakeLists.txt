@@ -266,7 +266,6 @@ SET( RAMEN_SOURCES      system/system.cpp
                         noise/simplex_noise.cpp
                         noise/simplex_noise_generator.cpp
 
-                        ocio/context.cpp
                         ocio/manager.cpp
                         ocio/gl_display_manager.cpp
                         ocio/gl_lut3d.cpp

@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/nodes/image/areaop_node.hpp>
 
@@ -59,5 +61,5 @@ void areaop_node_t::get_expand_radius( int& hradius, int& vradius) const
 	hradius = vradius = 0;
 }
 
-} // namespace
-} // namespace
+} // image
+} // ramen

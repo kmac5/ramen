@@ -5,6 +5,8 @@
 #ifndef RAMEN_COMP_SETTINGS_DIALOG_HPP
 #define	RAMEN_COMP_SETTINGS_DIALOG_HPP
 
+#include<ramen/config.hpp>
+
 #include<QDialog>
 
 #include"ui_composition_settings.h"
@@ -33,7 +35,7 @@ private:
 	Ui::composition_settings ui_;
 };
 
-} // namespace
-} // namespace
+} // ui
+} // ramen
 
 #endif

@@ -60,9 +60,6 @@ composition_t::composition_t()
     default_format_ = app().preferences().default_format();
     frame_rate_ = app().preferences().frame_rate();
     autokey_ = true;
-	
-	ocio_context_pairs_ = std::vector<std::pair<std::string, std::string> >( num_ocio_context_pairs(), 
-																			 std::make_pair( std::string(), std::string()));
 }
 
 composition_t::~composition_t()
@@ -76,26 +73,6 @@ const unique_name_map_t<node_t*>& composition_t::node_map() const { return node_
 std::string composition_t::make_name_unique( const std::string& s) const
 {
 	return node_map().make_name_unique( s);
-}
-
-int composition_t::num_ocio_context_pairs() const { return 4;}
-
-const std::vector<std::pair<std::string, std::string> >& composition_t::ocio_context_pairs() const
-{
-	return ocio_context_pairs_;
-}
-
-bool composition_t::set_ocio_context_key_value( int index, const std::string& key, const std::string& value)
-{
-	RAMEN_ASSERT( index >= 0 && index < num_ocio_context_pairs());
-	
-	if( ocio_context_pairs_[index].first != key || ocio_context_pairs_[index].second != value)
-	{
-		ocio_context_pairs_[index] = std::make_pair( key, value);
-		return true;
-	}
-	
-	return false;
 }
 
 void composition_t::add_node( std::auto_ptr<node_t> n)
@@ -367,29 +344,6 @@ void composition_t::read( serialization::yaml_iarchive_t& in)
 	in.get_optional_value( "frame", frame_);
 	in.get_optional_value( "autokey", autokey_);
 	in.get_optional_value( "format", default_format_);
-
-	serialization::optional_yaml_node_t context = in.get_optional_node( "ocio_display_context");
-	
-	if( context)
-	{
-		std::string key, value;
-		int size = context.get().size(), j = 0;
-		
-		for( int i = 0; i < num_ocio_context_pairs(); ++i)
-		{
-			if( j == size)
-				break;
-			
-			context.get()[j++] >> key;
-
-			if( j == size)
-				break;
-
-			context.get()[j++] >> value;
-			
-			set_ocio_context_key_value( i, key, value);
-		}
-	}
 	
 	read_nodes( in);
 	read_edges( in);
@@ -547,15 +501,6 @@ void composition_t::write( serialization::yaml_oarchive_t& out) const
     out << YAML::Key << "autokey"       << YAML::Value << autokey_;
     out << YAML::Key << "format"        << YAML::Value << default_format_;
 	out.check_errors();
-
-	out << YAML::Key << "ocio_display_context" << YAML::Value;
-	out.begin_seq();
-		for( int i = 0; i < num_ocio_context_pairs(); ++i)
-		{
-			out << ocio_context_pairs_[i].first << 
-					ocio_context_pairs_[i].second;
-		}
-	out.end_seq();
 	
     out << YAML::Key << "nodes" << YAML::Value;
 		out.begin_seq();
@@ -576,4 +521,4 @@ void composition_t::write_edge( serialization::yaml_oarchive_t& out, const edge_
     out.end_seq();
 }
 
-} // namespace
+} // ramen

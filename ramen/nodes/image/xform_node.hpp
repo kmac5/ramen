@@ -113,7 +113,7 @@ private:
 	virtual void do_begin_interaction();
 };
 
-} // namespace
-} // namespace
+} // image
+} // ramen
 
 #endif

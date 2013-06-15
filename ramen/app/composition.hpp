@@ -128,13 +128,6 @@ public:
 
     int frame_rate() const        { return frame_rate_;}
     void set_frame_rate( int f)   { frame_rate_ = f;}
-
-	// color management
-	int num_ocio_context_pairs() const;
-	const std::vector<std::pair<std::string, std::string> >& ocio_context_pairs() const;
-	bool set_ocio_context_key_value( int index, const std::string& key, const std::string& value);
-
-	boost::signals2::signal<void ()> ocio_context_changed;
 	
     // selections
     typedef boost::signals2::signal<void ()> selection_signal_type;
@@ -197,11 +190,9 @@ private:
     float frame_;
     image::format_t default_format_;
     int frame_rate_;
-    bool autokey_;
-	
-	std::vector<std::pair<std::string, std::string> > ocio_context_pairs_;
+    bool autokey_;	
 };
 
-} // namespace
+} // ramen
 
 #endif

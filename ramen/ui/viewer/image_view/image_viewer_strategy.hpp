@@ -98,7 +98,8 @@ public:
     virtual void mouse_release_event( QMouseEvent *event);
 
 	virtual Imath::Color4f color_at( int x, int y) const;
-	virtual void pick_colors_in_box( const Imath::Box2i& b, boost::function<void ( const Imath::Color4f&)> f) const;
+    virtual void pick_colors_in_box( const Imath::Box2i& b,
+                                     boost::function<void ( const Imath::Color4f&)> f) const;
 	
 public Q_SLOTS:
 

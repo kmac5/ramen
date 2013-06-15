@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_IMAGE_GENERATOR_NODE_HPP
 #define RAMEN_IMAGE_GENERATOR_NODE_HPP
@@ -76,7 +78,7 @@ protected:
 	virtual void do_calc_hash_str( const render::context_t& context);
 };
 
-} // namespace
-} // namespace
+} // image
+} // ramen
 
 #endif

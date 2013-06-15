@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_UI_VIEWER_EMPTY_IMAGE_STRATEGY_HPP
 #define	RAMEN_UI_VIEWER_EMPTY_IMAGE_STRATEGY_HPP
@@ -18,7 +20,9 @@ public:
 
 	empty_image_strategy_t( const Imath::Box2i& display_window);
 
-	virtual bool update_pixels( const image::buffer_t& pixels, const Imath::Box2i& display_window, const Imath::Box2i& data_window);
+    virtual bool update_pixels( const image::buffer_t& pixels,
+                                const Imath::Box2i& display_window,
+                                const Imath::Box2i& data_window);
 
 	virtual void draw() const;
 

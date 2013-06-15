@@ -10,6 +10,6 @@ namespace ramen
 
 class composition_t;
 
-} // namespace
+} // ramen
 
 #endif

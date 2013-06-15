@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
-
-
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/ui/viewer/image_view/empty_image_strategy.hpp>
 
@@ -15,7 +15,9 @@ empty_image_strategy_t::empty_image_strategy_t( const Imath::Box2i& display_wind
 {
 }
 
-bool empty_image_strategy_t::update_pixels( const image::buffer_t& pixels, const Imath::Box2i& display_window, const Imath::Box2i& data_window)
+bool empty_image_strategy_t::update_pixels( const image::buffer_t& pixels,
+                                            const Imath::Box2i& display_window,
+                                            const Imath::Box2i& data_window)
 {
 	if( data_window.isEmpty())
 		return true;
