@@ -84,36 +84,6 @@ node_t *parameterised_t::node()
     return 0;
 }
 
-const world_node_t *parameterised_t::world() const
-{
-    const parameterised_t *p = this;
-
-    while( p != 0)
-    {
-        if( const world_node_t *world = dynamic_cast<const world_node_t*>( p))
-            return world;
-
-        p = p->parent();
-    }
-
-    return 0;
-}
-
-world_node_t *parameterised_t::world()
-{
-    parameterised_t *p = this;
-
-    while( p != 0)
-    {
-        if( world_node_t *world = dynamic_cast<world_node_t*>( p))
-            return world;
-
-        p = p->parent();
-    }
-
-    return 0;
-}
-
 // composition
 const composition_t *parameterised_t::composition() const
 {

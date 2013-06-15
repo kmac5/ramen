@@ -255,7 +255,6 @@ SET( RAMEN_SOURCES      system/system.cpp
                         nodes/node_plug.cpp
                         nodes/node_output_interface.cpp
                         nodes/node_visitor.cpp
-                        nodes/world_node.cpp
 
                         noise/global_noise.cpp
                         noise/noise_base.cpp

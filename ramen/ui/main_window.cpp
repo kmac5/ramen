@@ -31,8 +31,6 @@
 
 #include<ramen/app/application.hpp>
 #include<ramen/app/document.hpp>
-#include<ramen/app/export_selected_nodes.hpp>
-#include<ramen/app/import_composition.hpp>
 
 #include<ramen/memory/manager.hpp>
 
@@ -81,7 +79,7 @@ main_window_t::main_window_t() : QMainWindow()
     create_actions();
     create_menus();
 
-   // docks
+    // docks
     setCorner( Qt::TopRightCorner, Qt::RightDockWidgetArea);
     setCorner( Qt::BottomRightCorner, Qt::RightDockWidgetArea);
 
@@ -355,9 +353,8 @@ void main_window_t::create_menus()
 
 void main_window_t::create_import_export_menus()
 {
-    import_->addAction( import_comp_);
-
-    export_->addAction( export_sel_);
+    //import_->addAction( import_comp_);
+    //export_->addAction( export_sel_);
 }
 
 node_menu_t *main_window_t::find_node_menu( const std::string& s)
@@ -378,25 +375,25 @@ void main_window_t::create_node_actions()
     // Add some default menus & submenus
     node_menu_t *m = new node_menu_t( "Image");
     node_menus_.push_back( m);
-        m->add_submenu( "Input");
-        m->add_submenu( "Channel");
-        m->add_submenu( "Color");
-        m->add_submenu( "Key");
-        m->add_submenu( "Matte");
-        m->add_submenu( "Filter");
-        m->add_submenu( "Noise");
-        m->add_submenu( "Distort");
-        //m->add_submenu( "Inpaint");
-        m->add_submenu( "Transform");
-        m->add_submenu( "Track");
-        m->add_submenu( "Layer");
-        //m->add_submenu( "Render");
-        m->add_submenu( "Lighting");
-        m->add_submenu( "Tonemap");
-        m->add_submenu( "Time");
-        m->add_submenu( "Util");
-        //m->add_submenu( "Video");
-        m->add_submenu( "Output");
+    m->add_submenu( "Input");
+    m->add_submenu( "Channel");
+    m->add_submenu( "Color");
+    m->add_submenu( "Key");
+    m->add_submenu( "Matte");
+    m->add_submenu( "Filter");
+    m->add_submenu( "Noise");
+    m->add_submenu( "Distort");
+    //m->add_submenu( "Inpaint");
+    m->add_submenu( "Transform");
+    m->add_submenu( "Track");
+    m->add_submenu( "Layer");
+    //m->add_submenu( "Render");
+    m->add_submenu( "Lighting");
+    m->add_submenu( "Tonemap");
+    m->add_submenu( "Time");
+    m->add_submenu( "Util");
+    //m->add_submenu( "Video");
+    m->add_submenu( "Output");
 
     // sort the list of registered nodes
     node_factory_t::instance().sort_by_menu_item();
@@ -426,8 +423,8 @@ bool main_window_t::can_close_document()
     if( app().document().dirty())
     {
         int r = QMessageBox::warning( this, "Ramen", "The composition has been modified.\n"
-                                        "Do you want to save your changes?", QMessageBox::Yes | QMessageBox::Default,
-                                        QMessageBox::No, QMessageBox::Cancel | QMessageBox::Escape);
+                                      "Do you want to save your changes?", QMessageBox::Yes | QMessageBox::Default,
+                                      QMessageBox::No, QMessageBox::Cancel | QMessageBox::Escape);
 
         if (r == QMessageBox::Yes)
         {
@@ -554,6 +551,7 @@ void main_window_t::import_composition()
 
 void main_window_t::export_selection()
 {
+    /*
     QString fname = QFileDialog::getSaveFileName( 0, "Save Composition As", QString::null, file_dialog_extension(),
                                                   0, QFileDialog::DontUseNativeDialog);
 
@@ -566,18 +564,20 @@ void main_window_t::export_selection()
 
         export_selected_nodes( p);
     }
+    */
 }
 
 void main_window_t::quit()
 {
     if( app().document().dirty())
     {
-        int r = QMessageBox::warning( this, "Ramen",
-                        "The composition has been modified.\n"
-                            "Do you want to save your changes before quitting?",
-                        QMessageBox::Yes | QMessageBox::Default,
-                        QMessageBox::No,
-                        QMessageBox::Cancel | QMessageBox::Escape);
+        int r = QMessageBox::warning( this,
+                                      "Ramen",
+                                      "The composition has been modified.\n"
+                                      "Do you want to save your changes before quitting?",
+                                      QMessageBox::Yes | QMessageBox::Default,
+                                      QMessageBox::No,
+                                      QMessageBox::Cancel | QMessageBox::Escape);
 
         switch( r)
         {
@@ -585,8 +585,8 @@ void main_window_t::quit()
             {
                 save_document();
 
-                    // if the document is still dirty, it means
-                    // save was cancelled, so we return without quitting
+                // if the document is still dirty, it means
+                // save was cancelled, so we return without quitting
                 if( app().document().dirty())
                     return;
             }
@@ -683,14 +683,19 @@ void main_window_t::delete_nodes()
 
                 if( src)
                 {
-                    breadth_first_out_edges_apply( n, boost::bind( &undo::delete_command_t::add_candidate_edge,
-                                                                              _1, src, boost::ref( edges_to_add)));
+                    breadth_first_out_edges_apply( n,
+                                                   boost::bind( &undo::delete_command_t::add_candidate_edge,
+                                                   _1,
+                                                   src,
+                                                   boost::ref( edges_to_add)));
                 }
             }
         }
 
-        std::stable_sort( edges_to_add.begin(), edges_to_add.end(), &undo::delete_command_t::edge_less);
-        std::unique( edges_to_add.begin(), edges_to_add.end(), &undo::delete_command_t::edge_compare);
+        std::stable_sort( edges_to_add.begin(), edges_to_add.end(),
+                          &undo::delete_command_t::edge_less);
+        std::unique( edges_to_add.begin(), edges_to_add.end(),
+                     &undo::delete_command_t::edge_compare);
 
         for( int i = 0; i < edges_to_add.size(); ++i)
             c->add_edge_to_add( edges_to_add[i]);
@@ -774,12 +779,19 @@ void main_window_t::extract_nodes()
                 }
 
                 if( src)
-                    breadth_first_out_edges_apply( n, boost::bind( &undo::delete_command_t::add_candidate_edge, _1, src, boost::ref( edges_to_add)));
+                    breadth_first_out_edges_apply( n,
+                                                   boost::bind( &undo::delete_command_t::add_candidate_edge,
+                                                                _1,
+                                                                src,
+                                                                boost::ref( edges_to_add)));
             }
         }
 
-        std::stable_sort( edges_to_add.begin(), edges_to_add.end(), &undo::delete_command_t::edge_less);
-        std::unique( edges_to_add.begin(), edges_to_add.end(), &undo::delete_command_t::edge_compare);
+        std::stable_sort( edges_to_add.begin(), edges_to_add.end(),
+                          &undo::delete_command_t::edge_less);
+
+        std::unique( edges_to_add.begin(), edges_to_add.end(),
+                     &undo::delete_command_t::edge_compare);
 
         for( int i = 0; i < edges_to_add.size(); ++i)
             c->add_edge_to_add( edges_to_add[i]);
@@ -815,7 +827,6 @@ void main_window_t::render_composition()
     render_composition_dialog_t::instance().set_any_output_selected( any_output_selected);
 
     int result = render_composition_dialog_t::instance().exec();
-
     if( result == QDialog::Accepted)
     {
         int start = render_composition_dialog_t::instance().start_frame();
@@ -892,7 +903,7 @@ void main_window_t::create_node()
     catch( std::exception& e)
     {
         app().ui()->error( std::string( "Couldn't create node ") + id
-                                            + std::string( " ") + e.what());
+                           + std::string( " ") + e.what());
         return;
     }
 
@@ -921,13 +932,9 @@ void main_window_t::create_node()
     app().ui()->update();
 }
 
-void main_window_t::show_about_box()
-{
-}
+void main_window_t::show_about_box() {}
 
-void main_window_t::go_to_project_website()
-{
-}
+void main_window_t::go_to_project_website() {}
 
 void main_window_t::update()
 {
@@ -938,8 +945,8 @@ void main_window_t::update()
 
     update_menus();
     time_slider_->update( app().document().composition().start_frame(),
-             app().document().composition().frame(),
-             app().document().composition().end_frame());
+                          app().document().composition().frame(),
+                          app().document().composition().end_frame());
 
     composition_view().update();
     time_controls_->update();

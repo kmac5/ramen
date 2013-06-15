@@ -59,11 +59,10 @@ void composition_t::add_node( std::auto_ptr<node_t> n)
     n->set_composition( this);
     n->set_frame( frame_);
 
-    render::context_t context = current_context();
-
     if( image_node_t *nn = dynamic_cast<image_node_t*>( n.get()))
     {
-        nn->calc_format( context_);
+        render::context_t context = current_context();
+        nn->calc_format( context);
         nn->format_changed();
     }
 
