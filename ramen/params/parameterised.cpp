@@ -11,8 +11,6 @@
 
 #include<ramen/app/composition.hpp>
 
-#include<ramen/nodes/world_node.hpp>
-
 #include<ramen/anim/track.hpp>
 
 #include<ramen/serialization/yaml_oarchive.hpp>
