@@ -125,6 +125,6 @@ S get_absolute_value_at_frame( const param_t& p, float frame)
 	#endif
 }
 
-} // namespace
+} // ramen
 
 #endif

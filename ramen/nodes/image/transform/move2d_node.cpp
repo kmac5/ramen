@@ -6,6 +6,7 @@
 
 #include<ramen/assert.hpp>
 
+#include<ramen/params/numeric_param.hpp>
 #include<ramen/params/transform2_param.hpp>
 #include<ramen/params/separator_param.hpp>
 #include<ramen/params/button_param.hpp>

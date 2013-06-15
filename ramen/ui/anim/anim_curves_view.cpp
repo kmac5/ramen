@@ -384,7 +384,6 @@ void anim_curves_view_t::draw_grid() const
         double d = nice_num(range/( nticks-1), 1);
         double graphmin = std::floor( (double) viewport_.world().min.y / d) * d;
         double graphmax = std::ceil( (double) viewport_.world().max.y / d) * d;
-        double nfrac = std::max( -std::floor( std::log10( (double) d)), 0.0);
 
         for( double y = graphmin; y < graphmax + 0.5 * d; y += d)
         {

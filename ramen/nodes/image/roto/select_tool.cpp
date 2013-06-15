@@ -56,7 +56,8 @@ void select_tool_t::key_press_event( const ui::key_press_event_t& event)
 		event.key == ui::key_event_t::delete_key)
 	{
 		// delete shapes or points here.
-		if( selected_ = parent().selected())
+        selected_ = parent().selected();
+        if( selected_)
 		{
 			std::auto_ptr<undo::command_t> cmd;
 			
@@ -89,7 +90,8 @@ void select_tool_t::mouse_press_event( const ui::mouse_press_event_t& event)
     left_tangent_ = false;
 	inv_xf_ = Imath::M33f();
 
-	if( selected_ = parent().selected())
+    selected_ = parent().selected();
+    if( selected_)
 	{
 		if( pick_axes( *selected_, event, drag_curve_x_, drag_curve_y_))
 		{
@@ -114,7 +116,8 @@ void select_tool_t::mouse_press_event( const ui::mouse_press_event_t& event)
 		}
 		
 		// pick points
-		if( active_point_ = pick_point( selected_, event))
+        active_point_ = pick_point( selected_, event);
+        if( active_point_)
 		{
 		    if( !active_point_->selected())
 		    {
@@ -131,7 +134,8 @@ void select_tool_t::mouse_press_event( const ui::mouse_press_event_t& event)
 		}
 
 		// pick tangents
-		if( active_point_ = pick_tangent( *selected_, event, left_tangent_))
+        active_point_ = pick_tangent( *selected_, event, left_tangent_);
+        if( active_point_)
 		{
 		    drag_tangents_mode_ = true;
 			goto finish;
@@ -140,7 +144,8 @@ void select_tool_t::mouse_press_event( const ui::mouse_press_event_t& event)
 
 	parent().deselect_all();
 	
-	if( selected_ = pick_nulls( event, drag_curve_x_, drag_curve_y_))
+    selected_ = pick_nulls( event, drag_curve_x_, drag_curve_y_);
+    if( selected_)
 	{
 		drag_curve_mode_ = true;
 

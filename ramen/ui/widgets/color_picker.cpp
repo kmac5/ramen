@@ -31,7 +31,7 @@ color_picker_t::color_picker_t( QWidget *parent, const color_t& c) : QDialog( pa
     double h, s, v, e;
     color_.to_hsv( h, s, v);
 
-    for( int i = 0; i < exposure_picker_t::max_exposure(); ++i)
+    for( int i = 0, ie = static_cast<int>( exposure_picker_t::max_exposure()); i < ie; ++i)
     {
         double ex = std::pow( 2.0, (double) i);
         double x = v / ex;
@@ -45,9 +45,7 @@ color_picker_t::color_picker_t( QWidget *parent, const color_t& c) : QDialog( pa
     }
 
     setWindowTitle( tr( "Color Picker"));
-
     QVBoxLayout *vlayout = new QVBoxLayout( this);
-
     QHBoxLayout *hlayout = new QHBoxLayout();
 
     sv_picker_ = new saturation_value_picker_t();

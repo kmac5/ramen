@@ -92,6 +92,6 @@ private:
     float step_;
 };
 
-} // namespace
+} // ramen
 
 #endif

@@ -1,7 +1,11 @@
 // Copyright (c) 2011 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_UI_WIDGETS_PARAM_SPINBOX_HPP
 #define RAMEN_UI_WIDGETS_PARAM_SPINBOX_HPP
+
+#include<ramen/config.hpp>
 
 #include<ramen/ui/widgets/param_spinbox_fwd.hpp>
 #include<ramen/ui/widgets/spinbox.hpp>
