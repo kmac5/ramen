@@ -29,28 +29,6 @@
 
 namespace ramen
 {
-namespace
-{
-
-struct add_node_visitor : public node_visitor
-{
-	add_node_visitor( render::context_t& context) : context_( context){}
-
-    virtual void visit( node_t *n) {}
-    virtual void visit( composite_node_t *n) {}
-
-	virtual void visit( image_node_t *n)
-	{
-		n->calc_format( context_);
-		n->format_changed();
-	}
-
-private:
-
-	render::context_t& context_;
-};
-
-} // unnamed
 
 composition_t::composition_t()
 {
@@ -82,8 +60,12 @@ void composition_t::add_node( std::auto_ptr<node_t> n)
     n->set_frame( frame_);
 
     render::context_t context = current_context();
-	add_node_visitor v( context);
-	n->accept( v);
+
+    if( image_node_t *nn = dynamic_cast<image_node_t*>( n.get()))
+    {
+        nn->calc_format( context_);
+        nn->format_changed();
+    }
 
     g_.add_node( n);
     added_( n.get());

@@ -112,8 +112,6 @@ SET( RAMEN_SOURCES      system/system.cpp
                         app/application.cpp
                         app/composition.cpp
                         app/document.cpp
-                        app/export_selected_nodes.cpp
-                        app/import_composition.cpp
                         app/preferences.cpp
 
                         bezier/algorithm.cpp
