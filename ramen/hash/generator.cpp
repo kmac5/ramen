@@ -31,7 +31,6 @@ const generator_t::digest_type& generator_t::digest() const
     if( !digest_)
     {
         digest_ = digest_type();
-
         MurmurHash3_x64_128( reinterpret_cast<void*>( const_cast<char*>( ss_.str().c_str())),
                              ss_.str().size(),
                              0, // seed
@@ -43,12 +42,17 @@ const generator_t::digest_type& generator_t::digest() const
 
 std::string generator_t::digest_as_string() const
 {
-    RAMEN_ASSERT( finalized());
+    const generator_t::digest_type& d( digest());
 
-    const char *ptr = reinterpret_cast<const char*>( digest().begin());
     std::stringstream s;
+    for( int i = 0; i < d.size(); ++i)
+        s << std::setfill( '0') << std::setw( 2) << std::hex << d[i];
+
+    /*
+    const char *ptr = reinterpret_cast<const char*>( digest().begin());
     for( int i = 0; i < sizeof( digest_type); ++i)
         s << std::setfill( '0') << std::setw( 2) << std::hex << static_cast<int>( ptr[i]);
+    */
 
     return s.str();
 }

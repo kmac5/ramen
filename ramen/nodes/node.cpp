@@ -361,6 +361,7 @@ void node_t::clear_hash()
 void node_t::calc_hash_str( const render::context_t& context)
 {
     RAMEN_ASSERT( hash_generator().empty());
+    RAMEN_ASSERT( !hash_generator().finalized());
 
     if( !cacheable())
         return;
