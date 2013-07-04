@@ -112,8 +112,6 @@ SET( RAMEN_SOURCES      system/system.cpp
                         app/application.cpp
                         app/composition.cpp
                         app/document.cpp
-                        app/export_selected_nodes.cpp
-                        app/import_composition.cpp
                         app/preferences.cpp
 
                         bezier/algorithm.cpp
@@ -257,7 +255,6 @@ SET( RAMEN_SOURCES      system/system.cpp
                         nodes/node_plug.cpp
                         nodes/node_output_interface.cpp
                         nodes/node_visitor.cpp
-                        nodes/world_node.cpp
 
                         noise/global_noise.cpp
                         noise/noise_base.cpp
@@ -266,7 +263,6 @@ SET( RAMEN_SOURCES      system/system.cpp
                         noise/simplex_noise.cpp
                         noise/simplex_noise_generator.cpp
 
-                        ocio/context.cpp
                         ocio/manager.cpp
                         ocio/gl_display_manager.cpp
                         ocio/gl_lut3d.cpp

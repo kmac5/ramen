@@ -37,6 +37,6 @@ private:
 	bool dragx_, dragy_;
 };
 
-} // namespace
+} // ramen
 
 #endif

@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
-
-
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/ui/viewer/image_view/tiled_image_strategy.hpp>
 
@@ -19,7 +19,8 @@ namespace ui
 namespace viewer
 {
 
-tiled_image_strategy_t::tile_t::tile_t( const image::buffer_t& pixels, const Imath::Box2i& area) : texture_id_( 0)
+tiled_image_strategy_t::tile_t::tile_t( const image::buffer_t& pixels,
+                                        const Imath::Box2i& area) : texture_id_( 0)
 {
 	RAMEN_ASSERT( !area.isEmpty());
 
@@ -46,7 +47,9 @@ void tiled_image_strategy_t::tile_t::alloc_tile( int width, int height)
 	gl_tex_image2d( GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, 0);
 }
 
-void tiled_image_strategy_t::tile_t::update_texture( const Imath::Box2i& area, char *ptr, std::size_t rowsize)
+void tiled_image_strategy_t::tile_t::update_texture( const Imath::Box2i& area,
+                                                     char *ptr,
+                                                     std::size_t rowsize)
 {
 	RAMEN_ASSERT( texture_id_ != 0);
 	RAMEN_ASSERT( area_.size() == area.size());
@@ -113,7 +116,9 @@ tiled_image_strategy_t::tiled_image_strategy_t( const image::buffer_t& pixels,
 	gl_bind_texture( GL_TEXTURE_2D, 0);
 }
 
-bool tiled_image_strategy_t::update_pixels( const image::buffer_t& pixels, const Imath::Box2i& display_window, const Imath::Box2i& data_window)
+bool tiled_image_strategy_t::update_pixels( const image::buffer_t& pixels,
+                                            const Imath::Box2i& display_window,
+                                            const Imath::Box2i& data_window)
 {
 	//if( pixels.width() == width() && pixels.height() == height())
 	if( data_window.size().x + 1 == width() && data_window.size().y + 1 == height())

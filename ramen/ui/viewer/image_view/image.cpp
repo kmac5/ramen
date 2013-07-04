@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
-
-
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/ui/viewer/image_view/image.hpp>
 
@@ -26,7 +26,9 @@ bool image_t::valid() const
 
 void image_t::reset() { strategy_.reset();}
 
-void image_t::reset( image::buffer_t pixels, const Imath::Box2i& display_window, const Imath::Box2i& data_window)
+void image_t::reset( image::buffer_t pixels,
+                     const Imath::Box2i& display_window,
+                     const Imath::Box2i& data_window)
 {
 	if( strategy_.get() && strategy_->update_pixels( pixels, display_window, data_window))
 		return;
@@ -34,7 +36,9 @@ void image_t::reset( image::buffer_t pixels, const Imath::Box2i& display_window,
 	create_strategy( pixels, display_window, data_window);
 }
 
-void image_t::create_strategy( const image::buffer_t& pixels, const Imath::Box2i& display_window, const Imath::Box2i& data_window)
+void image_t::create_strategy( const image::buffer_t& pixels,
+                               const Imath::Box2i& display_window,
+                               const Imath::Box2i& data_window)
 {
 	if( display_window.isEmpty())
 	{

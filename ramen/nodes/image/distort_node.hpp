@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_IMAGE_DISTORT_NODE_HPP
 #define RAMEN_IMAGE_DISTORT_NODE_HPP
@@ -20,7 +22,7 @@ protected:
     void operator=( const distort_node_t&);
 };
 
-} // namespace
-} // namespace
+} // image
+} // ramen
 
 #endif

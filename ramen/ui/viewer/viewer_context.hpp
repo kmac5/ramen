@@ -65,36 +65,34 @@ public:
     void frame_changed();
 
     // ocio
-	OCIO::ConstConfigRcPtr ocio_config() const;
-	OCIO::DisplayTransformRcPtr ocio_transform();
+    OCIO::ConstConfigRcPtr ocio_config() const;
+    OCIO::DisplayTransformRcPtr ocio_transform();
 
-	static std::pair<std::string, std::string>  get_context_pair( int index);
-	
     boost::shared_ptr<ocio::gl_lut3d_t>& display_lut();
-	const std::string& display_device() const;
-	const std::string& display_transform() const;
-	float exposure() const;
-	float gamma() const;
+    const std::string& display_device() const;
+    const std::string& display_transform() const;
+    float exposure() const;
+    float gamma() const;
 
-	void display_transform_changed();
-	void exposure_changed();
-	void gamma_changed();
+    void display_transform_changed();
+    void exposure_changed();
+    void gamma_changed();
 
     // util
     const Imath::Color3f& background_color() const { return back_color_;}
     const Imath::Color3f& foreground_color() const { return fg_color_;}
 
-	void save_projection();
-	void restore_projection();
-	void set_screen_projection();
+    void save_projection();
+    void restore_projection();
+    void set_screen_projection();
 
-	void draw_checks_background() const;
+    void draw_checks_background() const;
 
-	Imath::Color4f color_at( int x, int y) const;
+    Imath::Color4f color_at( int x, int y) const;
 
-	const viewer_strategy_t& strategy() const	{ return *current_;}
-	viewer_strategy_t& strategy()				{ return *current_;}
-	
+    const viewer_strategy_t& strategy() const	{ return *current_;}
+    viewer_strategy_t& strategy()				{ return *current_;}
+
 protected:
 
     virtual void initializeGL();
@@ -117,8 +115,8 @@ private:
 
     void test_gl_extensions();
 
-    bool set_strategy_for_node( node_t *n);	
-	void set_strategy( strategy_iterator it);
+    bool set_strategy_for_node( node_t *n);
+    void set_strategy( strategy_iterator it);
 
     bool first_time_;
 

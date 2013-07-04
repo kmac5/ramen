@@ -108,5 +108,5 @@ void xform_node_t::do_begin_interaction()
 	}
 }
 
-} // namespace
-} // namespace
+} // image
+} // ramen

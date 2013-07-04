@@ -49,7 +49,7 @@ void multiline_alert_t::show_alert( const std::string& title, const std::string&
 {
 	setWindowTitle( title.c_str());
 	text_->setText( text.c_str());
-	int result = exec();
+    exec();
 }
 
 } // namespace

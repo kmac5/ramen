@@ -62,7 +62,7 @@ ENDIF()
 IF( CMAKE_COMPILER_IS_GNUCXX)
     SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pipe -fvisibility=hidden -fvisibility-inlines-hidden")
 ELSEIF( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    MESSAGE( FATAL_ERROR "clang is not supported yet")
+    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pipe")
 ELSE()
     MESSAGE( FATAL_ERROR "unknown compiler is not supported yet")
 ENDIF()
@@ -86,7 +86,6 @@ FIND_PACKAGE( Boost COMPONENTS ${BOOST_NEEDED_LIBS} REQUIRED)
 
 FIND_PACKAGE( TBB REQUIRED)
 FIND_PACKAGE( YamlCpp REQUIRED)
-FIND_PACKAGE( ASL REQUIRED)
 
 # Qt
 SET( QT_MT_REQUIRED false)
@@ -133,7 +132,6 @@ INCLUDE_DIRECTORIES(    ${PROJECT_SOURCE_DIR}
 
                         ${Boost_INCLUDE_DIR}
                         ${TBB_INCLUDE_DIRS}
-                        ${ASL_INCLUDE_DIRS}
                         ${YAMLCPP_INCLUDE_DIRS}
 
                         ${OPENGL_INCLUDE_DIR}
@@ -174,7 +172,6 @@ SET( RAMEN_ALL_LIBS	${NEEDED_QT_LIBS}
                         ${GLEW_LIBRARIES}
                         ${OPENGL_LIBRARIES}
 
-                        ${ASL_LIBRARIES}
                         ${Boost_LIBRARIES}
                         ${TBB_LIBRARIES}
                         ${YAMLCPP_LIBRARIES}

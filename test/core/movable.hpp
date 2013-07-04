@@ -1,11 +1,10 @@
-/**********************************************************************
- * Copyright (C) 2013 Esteban Tovagliari. All Rights Reserved.        *
- **********************************************************************/
+// Copyright (c) 2013 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
-#ifndef TAKO_CORE_TEST_MOVABLE_HPP
-#define TAKO_CORE_TEST_MOVABLE_HPP
+#ifndef RAMEN_CORE_TEST_MOVABLE_HPP
+#define RAMEN_CORE_TEST_MOVABLE_HPP
 
-#include<iostream>
 #include<cassert>
 
 #include<boost/move/move.hpp>
@@ -19,19 +18,16 @@ public:
 
     movable_t()
     {
-        std::cout << "default ctor" << std::endl;
         ptr_ = new int( 0);
     }
 
     explicit movable_t( int x)
     {
-        std::cout << "ctor" << std::endl;
         ptr_ = new int( x);
     }
 
     movable_t( const movable_t& other)
     {
-        std::cout << "copy" << std::endl;
         ptr_ = new int( other.value());
     }
 
@@ -40,13 +36,11 @@ public:
         assert( ptr_);
         assert( other.ptr_);
 
-        std::cout << "move" << std::endl;
         other.ptr_ = 0;
    }
 
     ~movable_t()
     {
-        std::cout << "dtor" << std::endl;
         delete ptr_;
     }
 
@@ -57,7 +51,6 @@ public:
 
         if( this != &other)
         {
-            std::cout << "assign" << std::endl;
             int *tmp_p = other.ptr_ ? new int( other.value()) : 0;
             delete ptr_;
             ptr_ = tmp_p;
@@ -73,7 +66,6 @@ public:
 
        if (this != &other)
        {
-           std::cout << "move assign" << std::endl;
            delete ptr_;
            ptr_ = other.ptr_;
            other.ptr_ = 0;
@@ -85,15 +77,14 @@ public:
     int value() const
     {
         assert( ptr_);
+
         return *ptr_;
     }
 
     bool operator==( const movable_t& other)
     {
         if( ptr_ == 0 || other.ptr_ == 0)
-        {
             return ptr_ == other.ptr_;
-        }
 
         return *ptr_ == *other.ptr_;
     }

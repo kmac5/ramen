@@ -15,8 +15,6 @@
 #include<OpenColorIO/OpenColorIO.h>
 namespace OCIO = OCIO_NAMESPACE;
 
-#include<ramen/ocio/context.hpp>
-
 namespace ramen
 {
 namespace ocio
@@ -50,8 +48,6 @@ public:
                     std::vector<std::string>& views,
                     int& default_index) const;
 	std::string default_view( const std::string& display) const;
-
-	OCIO::ConstContextRcPtr get_context( const context_t *ctx = 0) const;
 
 private:
 

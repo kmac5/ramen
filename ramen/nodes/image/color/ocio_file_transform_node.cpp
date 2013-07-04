@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/nodes/image/color/ocio_file_transform_node.hpp>
 
@@ -19,7 +21,10 @@ namespace ramen
 namespace image
 {
 
-ocio_file_transform_node_t::ocio_file_transform_node_t() : pointop_node_t() { set_name( "ocio_file");}
+ocio_file_transform_node_t::ocio_file_transform_node_t() : pointop_node_t()
+{
+    set_name( "ocio_file");
+}
 
 void ocio_file_transform_node_t::do_create_params()
 {
@@ -50,7 +55,9 @@ bool ocio_file_transform_node_t::do_is_valid() const
 	return p->file_exists();
 }
 
-void ocio_file_transform_node_t::do_process( const image::const_image_view_t& src, const image::image_view_t& dst, const render::context_t& context)
+void ocio_file_transform_node_t::do_process( const image::const_image_view_t& src,
+                                             const image::image_view_t& dst,
+                                             const render::context_t& context)
 {
     boost::gil::copy_pixels( src, dst);
 
@@ -75,7 +82,8 @@ void ocio_file_transform_node_t::do_process( const image::const_image_view_t& sr
         else
 			transform->setInterpolation(OCIO::INTERP_LINEAR);
         
-        OCIO::ConstProcessorRcPtr proc = config->getProcessor( transform, OCIO::TRANSFORM_DIR_FORWARD);
+        OCIO::ConstProcessorRcPtr proc = config->getProcessor( transform,
+                                                               OCIO::TRANSFORM_DIR_FORWARD);
 		image::ocio_transform( dst, proc);
     }
     catch(OCIO::Exception &e)
@@ -87,9 +95,15 @@ void ocio_file_transform_node_t::do_process( const image::const_image_view_t& sr
 }
 
 // factory
-node_t *create_ocio_file_transform_node() { return new ocio_file_transform_node_t();}
+node_t *create_ocio_file_transform_node()
+{
+    return new ocio_file_transform_node_t();
+}
 
-const node_metaclass_t *ocio_file_transform_node_t::metaclass() const { return &ocio_file_transform_node_metaclass();}
+const node_metaclass_t *ocio_file_transform_node_t::metaclass() const
+{
+    return &ocio_file_transform_node_metaclass();
+}
 
 const node_metaclass_t& ocio_file_transform_node_t::ocio_file_transform_node_metaclass()
 {
@@ -114,5 +128,5 @@ const node_metaclass_t& ocio_file_transform_node_t::ocio_file_transform_node_met
 
 static bool registered = node_factory_t::instance().register_node( ocio_file_transform_node_t::ocio_file_transform_node_metaclass());
 
-} // namespace
-} // namespace
+} // image
+} // ramen

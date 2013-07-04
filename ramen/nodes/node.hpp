@@ -84,8 +84,10 @@ public:
         return dynamic_cast<T*>( input( i));
     }
 
-    void add_input_plug( const std::string& id, bool optional,
-                         const Imath::Color3c& color, const std::string& tooltip );
+    void add_input_plug( const std::string& id,
+                         bool optional,
+                         const Imath::Color3c& color,
+                         const std::string& tooltip);
 
     // outputs
 
@@ -99,7 +101,9 @@ public:
     const node_t *output( std::size_t i) const;
     node_t *output( std::size_t i);
 
-    void add_output_plug( const std::string& id, const Imath::Color3c& color, const std::string& tooltip );
+    void add_output_plug( const std::string& id,
+                          const Imath::Color3c& color,
+                          const std::string& tooltip);
 
     graph_color_t graph_color() const            { return graph_color_;}
     void set_graph_color( graph_color_t c) const { graph_color_ = c;}
@@ -113,8 +117,8 @@ public:
     virtual void accept( node_visitor& v);
 
     // ui
-    const Imath::V2f& location() const		{ return loc_;}
-    void set_location( const Imath::V2f& p)	{ loc_ = p;}
+    const Imath::V2f& location() const          { return loc_;}
+    void set_location( const Imath::V2f& p)     { loc_ = p;}
     void offset_location( const Imath::V2f& v)	{ loc_ += v;}
 
     // selection & flags
@@ -165,8 +169,15 @@ public:
 
     void calc_frames_needed( const render::context_t& context);
 
-    const std::vector<std::pair<int, float> >& frames_needed() const	{ return frames_needed_;}
-    std::vector<std::pair<int, float> >& frames_needed()				{ return frames_needed_;}
+    const std::vector<std::pair<int, float> >& frames_needed() const
+    {
+        return frames_needed_;
+    }
+
+    std::vector<std::pair<int, float> >& frames_needed()
+    {
+        return frames_needed_;
+    }
 
     typedef std::vector<std::pair<int, float> >::const_iterator const_frames_needed_iterator;
 
@@ -208,7 +219,7 @@ public:
 
     // paths
     virtual void convert_relative_paths( const boost::filesystem::path& old_base,
-                                            const boost::filesystem::path& new_base);
+                                         const boost::filesystem::path& new_base);
 
     virtual void make_paths_absolute();
     virtual void make_paths_relative();
@@ -253,7 +264,8 @@ private:
         \brief Customization hook for node_t::read.
         Implement in subclasses to read extra data from node.
     */
-    virtual void do_read(const serialization::yaml_node_t& in, const std::pair<int,int>& version);
+    virtual void do_read( const serialization::yaml_node_t& in,
+                          const std::pair<int,int>& version);
 
     /*!
         \brief Customization hook for node_t::write.

@@ -59,7 +59,10 @@ Imath::Color4f viewer_strategy_t::color_at( int x, int y) const
 	return Imath::Color4f( 0, 0, 0, 0);
 }
 
-void viewer_strategy_t::pick_colors_in_box( const Imath::Box2i& b, boost::function<void ( const Imath::Color4f&)> f) const {}
+void viewer_strategy_t::pick_colors_in_box( const Imath::Box2i& b,
+                                            boost::function<void ( const Imath::Color4f&)> f) const
+{
+}
 
 void viewer_strategy_t::frame_rect( const Imath::Box2f& b) const
 {
@@ -81,9 +84,11 @@ void viewer_strategy_t::frame_rect( const Imath::Box2i& b) const
 	gl_end();
 }
 
-///////////////////////////////
+/*****************************************************/
 
-default_viewer_strategy_t::default_viewer_strategy_t( viewer_context_t *p) : viewer_strategy_t( p) {}
+default_viewer_strategy_t::default_viewer_strategy_t( viewer_context_t *p) : viewer_strategy_t( p)
+{
+}
 
 bool default_viewer_strategy_t::can_display_node( node_t *n) const { return true;}
 

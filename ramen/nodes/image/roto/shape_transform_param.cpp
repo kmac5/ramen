@@ -52,7 +52,10 @@ shape_transform_param_t::shape_transform_param_t( const std::string& name, const
 
 shape_transform_param_t::shape_transform_param_t( const shape_transform_param_t& other) : composite_param_t( other) {}
 
-const param_t& shape_transform_param_t::center_param() const     { return params()[0];}
+const param_t& shape_transform_param_t::center_param() const
+{
+    return params()[0];
+}
 
 void shape_transform_param_t::set_center( const Imath::V2f& c, change_reason reason)
 {

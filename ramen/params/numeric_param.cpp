@@ -310,16 +310,16 @@ poly_param_value_t numeric_param_t::relative_to_absolute( const poly_param_value
 		v = relative_to_absolute( v);
 		return poly_param_value_t( v);
 	}
-	catch( adobe::bad_cast& e) {}
+    catch( core::bad_cast& e) {}
 
 	try
 	{
 		Imath::V2f v = val.cast<Imath::V2f>();
 		v = relative_to_absolute( v);
 		poly_param_indexable_value_t result( v);
-		return adobe::poly_cast<poly_param_value_t&>( result);
+        return core::poly_cast<poly_param_value_t&>( result);
 	}
-	catch( adobe::bad_cast& e) {}
+    catch( core::bad_cast& e) {}
 
 	try
 	{
@@ -327,7 +327,7 @@ poly_param_value_t numeric_param_t::relative_to_absolute( const poly_param_value
 		v = relative_to_absolute( v);
 		return poly_param_value_t( v);
 	}
-	catch( adobe::bad_cast& e) {}
+    catch( core::bad_cast& e) {}
 
 	RAMEN_ASSERT( 0);
 }
@@ -340,16 +340,16 @@ poly_param_value_t numeric_param_t::absolute_to_relative( const poly_param_value
 		v = absolute_to_relative( v);
 		return poly_param_value_t( v);
 	}
-	catch( adobe::bad_cast& e) {}
+    catch( core::bad_cast& e) {}
 
 	try
 	{
 		Imath::V2f v = val.cast<Imath::V2f>();
 		v = absolute_to_relative( v);
 		poly_param_indexable_value_t result( v);
-		return adobe::poly_cast<poly_param_value_t&>( result);
+        return core::poly_cast<poly_param_value_t&>( result);
 	}
-	catch( adobe::bad_cast& e) {}
+    catch( core::bad_cast& e) {}
 
 	try
 	{
@@ -357,7 +357,7 @@ poly_param_value_t numeric_param_t::absolute_to_relative( const poly_param_value
 		v = absolute_to_relative( v);
 		return poly_param_value_t( v);
 	}
-	catch( adobe::bad_cast& e) {}
+    catch( core::bad_cast& e) {}
 
 	RAMEN_ASSERT( 0);
 }

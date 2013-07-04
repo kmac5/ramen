@@ -1,4 +1,6 @@
 // Copyright (c) 2011 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/nodes/image/color/cdl_node.hpp>
 
@@ -26,7 +28,11 @@ namespace ramen
 namespace image
 {
 
-cdl_node_t::cdl_node_t() : pointop_node_t() { set_name("cdl");}
+cdl_node_t::cdl_node_t() : pointop_node_t()
+{
+    set_name("cdl");
+}
+
 cdl_node_t::cdl_node_t( const cdl_node_t& other) : pointop_node_t( other) {}
 
 void cdl_node_t::do_create_params()
@@ -74,7 +80,9 @@ void cdl_node_t::do_create_params()
 	add_param( b);
 }
 
-void cdl_node_t::do_process( const image::const_image_view_t& src, const image::image_view_t& dst, const render::context_t& context)
+void cdl_node_t::do_process( const image::const_image_view_t& src,
+                             const image::image_view_t& dst,
+                             const render::context_t& context)
 {
 	boost::gil::copy_pixels( src, dst);
 
@@ -124,7 +132,9 @@ void cdl_node_t::read_from_file( const boost::filesystem::path& p)
 	ifs >> std::noskipws;
 	
 	std::string contents;
-	std::copy( std::istream_iterator<char>( ifs), std::istream_iterator<char>(), std::back_inserter( contents));
+    std::copy( std::istream_iterator<char>( ifs),
+               std::istream_iterator<char>(),
+               std::back_inserter( contents));
 	
 	OCIO::CDLTransformRcPtr transform = OCIO::CDLTransform::Create();
 	transform->setXML( contents.c_str());
@@ -169,7 +179,7 @@ void cdl_node_t::write_to_file( const boost::filesystem::path& p) const
 	boost::filesystem::ofstream ofs( p);
 
 	if( !ofs.is_open() || !ofs.good())
-		throw std::runtime_error( "Can't write to file");
+        throw core::runtime_error( "Can't write to file");
 
 	ofs << transform->getXML();
 	std::flush( ofs);
@@ -179,7 +189,10 @@ void cdl_node_t::write_to_file( const boost::filesystem::path& p) const
 // factory
 node_t *create_cdl_node() { return new cdl_node_t();}
 
-const node_metaclass_t *cdl_node_t::metaclass() const { return &cdl_node_metaclass();}
+const node_metaclass_t *cdl_node_t::metaclass() const
+{
+    return &cdl_node_metaclass();
+}
 
 const node_metaclass_t& cdl_node_t::cdl_node_metaclass()
 {
@@ -203,5 +216,5 @@ const node_metaclass_t& cdl_node_t::cdl_node_metaclass()
 
 static bool registered = node_factory_t::instance().register_node( cdl_node_t::cdl_node_metaclass());
 
-} // namespace
-} // namespace
+} // image
+} // ramen

@@ -13,6 +13,8 @@
 
 #include<ramen/nodes/image_node.hpp>
 
+#include<ramen/params/numeric_param.hpp>
+
 #include<ramen/app/application.hpp>
 #include<ramen/app/document.hpp>
 

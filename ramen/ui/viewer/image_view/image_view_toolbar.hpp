@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_UI_VIEWER_IMAGE_VIEW_TOOLBAR_HPP
 #define	RAMEN_UI_VIEWER_IMAGE_VIEW_TOOLBAR_HPP
@@ -36,15 +38,14 @@ private:
     QComboBox *resolution_combo_;
     QComboBox *proxy_combo_;
     QComboBox *channels_combo_;
-    //QToolButton *aspect_btn_;
     QToolButton *mblur_btn_;
     QToolButton *show_checks_btn_;
     QToolButton *show_interest_btn_;
     QToolButton *show_overlay_btn_;
 };
 
-} // namespace
-} // namespace
-} // namespace
+} // viewer
+} // ui
+} // ramen
 
 #endif

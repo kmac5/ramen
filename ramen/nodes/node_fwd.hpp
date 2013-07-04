@@ -12,10 +12,8 @@ namespace ramen
 
 class node_t;
 class composite_node_t;
-class group_node_t;
-class world_node_t;
 class image_node_t;
 
-} // namespace
+} // ramen
 
 #endif

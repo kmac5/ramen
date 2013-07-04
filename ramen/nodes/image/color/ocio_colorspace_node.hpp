@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_OCIO_COLORSPACE_NODE_HPP
 #define RAMEN_OCIO_COLORSPACE_NODE_HPP
@@ -32,15 +34,13 @@ private:
     node_t *do_clone() const { return new ocio_colorspace_node_t( *this);}
 
     virtual void do_create_params();
-
-	virtual void do_calc_hash_str( const render::context_t& context);
 	
-    virtual void do_process( const image::const_image_view_t& src, const image::image_view_t& dst, const render::context_t& context);
-	
-	OCIO::ConstContextRcPtr get_local_context();
+    virtual void do_process( const image::const_image_view_t& src,
+                             const image::image_view_t& dst,
+                             const render::context_t& context);
 };
 
-} // namespace
-} // namespace
+} // image
+} // ramen
 
 #endif

@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #ifndef RAMEN_UI_VIEWER_IMAGE_HPP
 #define	RAMEN_UI_VIEWER_IMAGE_HPP
@@ -23,7 +25,9 @@ public:
 	bool valid() const;
 
     void reset();
-    void reset( image::buffer_t pixels, const Imath::Box2i& display_window, const Imath::Box2i& data_window);
+    void reset( image::buffer_t pixels,
+                const Imath::Box2i& display_window,
+                const Imath::Box2i& data_window);
 
 	Imath::Box2i display_window() const;
 	Imath::Box2i data_window() const;
@@ -41,7 +45,9 @@ public:
 
 private:
 
-	void create_strategy( const image::buffer_t& pixels, const Imath::Box2i& display_window, const Imath::Box2i& data_window);
+    void create_strategy( const image::buffer_t& pixels,
+                          const Imath::Box2i& display_window,
+                          const Imath::Box2i& data_window);
 
 	void frame_rect( const Imath::Box2i& b) const;
 	void gl_vertices_for_box( const Imath::Box2i& b) const;

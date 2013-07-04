@@ -11,7 +11,6 @@
 
 #include<ramen/assert.hpp>
 
-#include<ramen/nodes/world_node.hpp>
 #include<ramen/nodes/node_factory.hpp>
 
 #include<ramen/ui/graph_layout.hpp>

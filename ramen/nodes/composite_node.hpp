@@ -127,6 +127,6 @@ private:
 	std::auto_ptr<ui::graph_layout_t> layout_;
 };
 
-} // namespace
+} // ramen
 
 #endif

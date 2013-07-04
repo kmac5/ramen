@@ -2,8 +2,6 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-
-
 #include<ramen/ui/widgets/param_spinbox.hpp>
 
 #include<QAction>
@@ -126,7 +124,7 @@ void param_spinbox_t::keyPressEvent( QKeyEvent *event)
 
 void param_spinbox_t::keyReleaseEvent( QKeyEvent *event)
 {
-	if( value_.which() == 0 && event->key() == Qt::Key_Up || event->key() == Qt::Key_Down)
+    if( value_.which() == 0 && ( event->key() == Qt::Key_Up || event->key() == Qt::Key_Down))
 		spinBoxReleased();
 	else
 		QLineEdit::keyReleaseEvent( event);

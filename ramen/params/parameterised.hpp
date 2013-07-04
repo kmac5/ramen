@@ -81,12 +81,6 @@ public:
     /// Returns the node this parameterised belongs to.
     node_t *node();
 
-    /// Returns the world node this parameterised belongs to.
-    const world_node_t *world() const;
-
-    /// Returns the world node this parameterised belongs to.
-    world_node_t *world();
-
     /// Creates the params for this parameterised.
     void create_params();
 

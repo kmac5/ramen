@@ -2,8 +2,6 @@
 // Licensed under the terms of the CDDL License.
 // See CDDL_LICENSE.txt for a copy of the license.
 
-
-
 #include<ramen/ui/viewer/image_view/image_viewer_strategy.hpp>
 
 #include<sstream>
@@ -216,9 +214,6 @@ node_t *image_viewer_strategy_t::visible_node()
 
 void image_viewer_strategy_t::render_visible_node()
 {
-    node_t *active_node  = app().ui()->active_node();
-    node_t *context_node = app().ui()->context_node();
-
     render::context_t context = app().document().composition().current_context( render::interface_render);
 	context.result_node = visible_node();
 	

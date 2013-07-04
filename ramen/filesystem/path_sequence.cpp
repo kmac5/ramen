@@ -265,7 +265,7 @@ std::string path_sequence_t::get_frame_number( const std::string& str) const
     try
     {
 		// this is a quick fix, if all str are nums
-		int num = boost::lexical_cast<int>( str);
+        boost::lexical_cast<int>( str);
 		return str;
     }
     catch( ...) {}
