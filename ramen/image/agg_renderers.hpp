@@ -7,7 +7,7 @@
 
 #include<algorithm>
 
-#include<agg/agg_basics.h>
+#include<agg2/agg_basics.h>
 
 #include<ramen/image/typedefs.hpp>
 

@@ -10,8 +10,8 @@
 #include<boost/foreach.hpp>
 #include<boost/bind.hpp>
 
-#include<agg/agg_conv_curve.h>
-#include<agg/agg_bounding_rect.h>
+#include<agg2/agg_conv_curve.h>
+#include<agg2/agg_bounding_rect.h>
 
 #include<ramen/assert.hpp>
 
