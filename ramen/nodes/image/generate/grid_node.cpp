@@ -4,11 +4,11 @@
 
 #include<OpenEXR/ImathMath.h>
 
-#include<agg/agg_renderer_scanline.h>
-#include<agg/agg_rasterizer_scanline_aa.h>
-#include<agg/agg_scanline_u.h>
-#include<agg/agg_path_storage.h>
-#include<agg/agg_conv_stroke.h>
+#include<agg2/agg_renderer_scanline.h>
+#include<agg2/agg_rasterizer_scanline_aa.h>
+#include<agg2/agg_scanline_u.h>
+#include<agg2/agg_path_storage.h>
+#include<agg2/agg_conv_stroke.h>
 
 #include<ramen/nodes/node_factory.hpp>
 

@@ -4,7 +4,7 @@
 #  AGG_LIBRARIES    - List of libraries when using agg.
 #  AGG_FOUND        - True if agg found.
 
-FIND_PATH( AGG_INCLUDE_DIR NAMES agg/agg_bspline.h)
+FIND_PATH( AGG_INCLUDE_DIR NAMES agg2/agg_bspline.h)
 FIND_LIBRARY( AGG_LIBRARY NAMES agg)
 
 INCLUDE( FindPackageHandleStandardArgs)
