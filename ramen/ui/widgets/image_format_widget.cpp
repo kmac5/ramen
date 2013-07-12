@@ -45,6 +45,7 @@ image_format_widget_t::image_format_widget_t( QWidget *parent) : QWidget( parent
     format_width_->setValue( format.width);
     format_width_->setSuffix( " px");
     connect( format_width_, SIGNAL( valueChanged( int)), this, SLOT( width_changed( int)));
+    connect( format_width_, SIGNAL( valueChanged( int)), parentWidget(), SLOT( dialog_changed()));
     format_layout->addWidget( format_width_, 1, 1, 1, 1);
 
     format_height_ = new QSpinBox();
@@ -53,6 +54,7 @@ image_format_widget_t::image_format_widget_t( QWidget *parent) : QWidget( parent
     format_height_->setValue( format.height);
     format_height_->setSuffix( " px");
     connect( format_height_, SIGNAL( valueChanged( int)), this, SLOT( height_changed( int)));
+    connect( format_height_, SIGNAL( valueChanged( int)), parentWidget(), SLOT( dialog_changed()));
     format_layout->addWidget( format_height_, 1, 2, 1, 1);
 
     label = new QLabel( "Aspect");
@@ -64,6 +66,7 @@ image_format_widget_t::image_format_widget_t( QWidget *parent) : QWidget( parent
     format_aspect_->setValue( format.aspect);
 	format_aspect_->setSingleStep( 0.05);
     connect( format_aspect_, SIGNAL( valueChanged( double)), this, SLOT( aspect_changed( double)));
+    connect( format_aspect_, SIGNAL( valueChanged( double)), parentWidget(), SLOT( dialog_changed()));
     format_layout->addWidget( format_aspect_, 2, 2, 1, 1);
 }
 

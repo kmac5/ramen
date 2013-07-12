@@ -28,7 +28,13 @@ public:
 
     void exec_dialog();
 
+public Q_SLOTS:
+
+	void dialog_changed();
+
 private:
+
+	bool dialog_dirty;
 
     composition_settings_dialog_t();
 

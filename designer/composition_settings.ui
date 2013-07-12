@@ -136,6 +136,22 @@
  <resources/>
  <connections>
   <connection>
+   <sender>rate_</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>composition_settings</receiver>
+   <slot>dialog_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
    <receiver>composition_settings</receiver>
