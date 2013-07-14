@@ -28,19 +28,24 @@ composition_settings_dialog_t::composition_settings_dialog_t() : QDialog( app().
 	ui_.setupUi( this);
 }
 
+void composition_settings_dialog_t::dialog_changed()	{ dialog_dirty = true;}
+
 void composition_settings_dialog_t::exec_dialog()
 {
+	dialog_dirty = false;
+
 	// update widgets here...
 	ui_.format_->set_value( app().document().composition().default_format());
 	ui_.rate_->setValue( app().document().composition().frame_rate());
 	
     int result = exec();
 
-    if( result == QDialog::Accepted)
+    if( result == QDialog::Accepted && dialog_dirty)
     {
 		app().document().composition().set_default_format( ui_.format_->value());
 		app().document().composition().set_frame_rate( ui_.rate_->value());		
 		app().document().set_dirty( true);
+		app().ui()->update();
     }
 }
 
