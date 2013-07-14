@@ -25,27 +25,29 @@ composition_settings_dialog_t& composition_settings_dialog_t::instance()
 composition_settings_dialog_t::composition_settings_dialog_t() : QDialog( app().ui()->main_window())
 {
     setWindowTitle( "Composition Settings");
-	ui_.setupUi( this);
+    ui_.setupUi( this);
 }
 
 void composition_settings_dialog_t::dialog_changed()	{ dialog_dirty = true;}
 
 void composition_settings_dialog_t::exec_dialog()
 {
-	dialog_dirty = false;
+    dialog_dirty = false;
 
-	// update widgets here...
-	ui_.format_->set_value( app().document().composition().default_format());
-	ui_.rate_->setValue( app().document().composition().frame_rate());
-	
+    // update widgets here...
+    ui_.format_->set_value( app().document().composition().default_format());
+    ui_.rate_->setValue( app().document().composition().frame_rate());
+
+    connect( ui_.format_, SIGNAL( value_changed()), this, SLOT( dialog_changed()));
+
     int result = exec();
 
     if( result == QDialog::Accepted && dialog_dirty)
     {
-		app().document().composition().set_default_format( ui_.format_->value());
-		app().document().composition().set_frame_rate( ui_.rate_->value());		
-		app().document().set_dirty( true);
-		app().ui()->update();
+        app().document().composition().set_default_format( ui_.format_->value());
+        app().document().composition().set_frame_rate( ui_.rate_->value());
+        app().document().set_dirty( true);
+        app().ui()->update();
     }
 }
 

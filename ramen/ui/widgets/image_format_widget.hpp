@@ -24,10 +24,14 @@ class image_format_widget_t : public QWidget
 
 public:
 
-	image_format_widget_t( QWidget *parent = 0);
+    image_format_widget_t( QWidget *parent = 0);
 
-	image::format_t value() const;
-	void set_value( const image::format_t& format);
+    image::format_t value() const;
+    void set_value( const image::format_t& format);
+
+Q_SIGNALS:
+
+    void value_changed();
 
 private Q_SLOTS:
 
@@ -38,11 +42,11 @@ private Q_SLOTS:
 
 private:
 
-	void update_presets_menu();
+    void update_presets_menu();
 
     QComboBox *format_combo_;
-	QSpinBox *format_width_, *format_height_;
-	QDoubleSpinBox *format_aspect_;
+    QSpinBox *format_width_, *format_height_;
+    QDoubleSpinBox *format_aspect_;
 };
 
 } // ui
