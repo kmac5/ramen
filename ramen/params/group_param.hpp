@@ -22,8 +22,8 @@ public:
 
     explicit group_param_t( const std::string& name);
 
-	bool can_collapse() const		{ return can_collapse_;}
-	void set_can_collapse( bool b)	{ can_collapse_ = b;}
+    bool can_collapse() const		{ return can_collapse_;}
+    void set_can_collapse( bool b)	{ can_collapse_ = b;}
 
 protected:
 
@@ -38,9 +38,9 @@ private:
     virtual void do_enable_widgets( bool e);
 
     QPointer<QGroupBox> group_;
-	bool can_collapse_;
+    bool can_collapse_;
 };
 
-} // namespace
+} // ramen
 
 #endif

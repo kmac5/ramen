@@ -244,7 +244,6 @@ SET( RAMEN_SOURCES      system/system.cpp
                         movieio/reader.cpp
                         movieio/writer.cpp
 
-                        nodes/composite_node.cpp
                         nodes/edge.cpp
                         nodes/graph_algorithm.cpp
                         nodes/image_node.cpp

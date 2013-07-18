@@ -1,4 +1,6 @@
 // Copyright (c) 2010 Esteban Tovagliari
+// Licensed under the terms of the CDDL License.
+// See CDDL_LICENSE.txt for a copy of the license.
 
 #include<ramen/nodes/node_factory.hpp>
 
@@ -8,7 +10,7 @@
 #include<ramen/nodes/node.hpp>
 
 #ifndef NDEBUG
-	#include<iostream>
+    #include<iostream>
 #endif
 
 namespace ramen
@@ -18,18 +20,18 @@ namespace
 
 struct compare_menu_items
 {
-	bool operator()( const node_metaclass_t& a, const node_metaclass_t& b) const
-	{
-		return a.menu_item < b.menu_item;
-	}
+    bool operator()( const node_metaclass_t& a, const node_metaclass_t& b) const
+    {
+        return a.menu_item < b.menu_item;
+    }
 };
 
 bool check_node_class( const std::string& c)
 {
-	if( boost::starts_with( c, "image."))
-		return true;
+    if( boost::starts_with( c, "image."))
+        return true;
 
-	return false;
+    return false;
 }
 
 } // unnamed
@@ -44,30 +46,30 @@ node_factory_t::node_factory_t() {}
 
 node_factory_t::~node_factory_t()
 {
-	for( int i = 0; i < metaclasses_.size(); ++i)
-	{
-		if( !metaclasses_[i].first_time_ && metaclasses_[i].cleanup)
-			metaclasses_[i].cleanup();
-	}
+    for( int i = 0; i < metaclasses_.size(); ++i)
+    {
+        if( !metaclasses_[i].first_time_ && metaclasses_[i].cleanup)
+            metaclasses_[i].cleanup();
+    }
 }
 
 bool node_factory_t::register_node( const node_metaclass_t& m)
 {
-	#ifndef NDEBUG
-		if( !check_node_class( m.id))
-		{
-			std::cout << "Registered node class with unknown prefix " << m.id << "\n";
-			RAMEN_ASSERT( 0);
-		}
-	#endif
+    #ifndef NDEBUG
+        if( !check_node_class( m.id))
+        {
+            std::cout << "Registered node class with unknown prefix " << m.id << "\n";
+            RAMEN_ASSERT( 0);
+        }
+    #endif
 
-	RAMEN_ASSERT( m.major_version >= 0);
-	RAMEN_ASSERT( m.minor_version >= 0);
-	RAMEN_ASSERT( m.create);
-	RAMEN_ASSERT( !m.menu.empty());
-	RAMEN_ASSERT( !m.submenu.empty());
-	RAMEN_ASSERT( !m.menu_item.empty());
-		
+    RAMEN_ASSERT( m.major_version >= 0);
+    RAMEN_ASSERT( m.minor_version >= 0);
+    RAMEN_ASSERT( m.create);
+    RAMEN_ASSERT( !m.menu.empty());
+    RAMEN_ASSERT( !m.submenu.empty());
+    RAMEN_ASSERT( !m.menu_item.empty());
+
     BOOST_FOREACH( const node_metaclass_t& metaclass, metaclasses_)
     {
         if( metaclass.id == m.id && metaclass.major_version == m.major_version && metaclass.minor_version == m.minor_version)
@@ -103,7 +105,7 @@ bool node_factory_t::register_node( const node_metaclass_t& m)
 
 void node_factory_t::sort_by_menu_item()
 {
-	std::sort( metaclasses_.begin(), metaclasses_.end(), compare_menu_items());
+    std::sort( metaclasses_.begin(), metaclasses_.end(), compare_menu_items());
 }
 
 std::auto_ptr<node_t> node_factory_t::create_by_id( const std::string& id, bool ui)
@@ -113,24 +115,24 @@ std::auto_ptr<node_t> node_factory_t::create_by_id( const std::string& id, bool 
 
     if( it != newest_node_infos_.end())
     {
-		try
-		{
-			if( it->second.first_time_)
-			{
-				it->second.first_time_ = false;
-				
-				if( it->second.init)
-					it->second.init();
-			}
-			
-	        if( it->second.create_gui && ui)
-	            n.reset( it->second.create_gui());
-	        else
-	            n.reset( it->second.create());
-		}
-		catch( ...)
-		{
-		}
+        try
+        {
+            if( it->second.first_time_)
+            {
+                it->second.first_time_ = false;
+
+                if( it->second.init)
+                    it->second.init();
+            }
+
+            if( it->second.create_gui && ui)
+                n.reset( it->second.create_gui());
+            else
+                n.reset( it->second.create());
+        }
+        catch( ...)
+        {
+        }
     }
 
     return n;
@@ -140,48 +142,48 @@ std::auto_ptr<node_t> node_factory_t::create_by_id_with_version( const std::stri
 {
     std::vector<node_metaclass_t>::iterator best( metaclasses_.end());
     std::vector<node_metaclass_t>::iterator it( metaclasses_.begin());
-	int best_minor = -1;
-	
-	for( ; it != metaclasses_.end(); ++it)
-	{
-		if( it->id == id)
-		{
-			if( it->major_version == version.first)
-			{
-				if( it->minor_version > best_minor)
-				{
-					best = it;
-					best_minor = it->minor_version;
-				}
-			}
-		}
-	}
-	
-	std::auto_ptr<node_t> n;
+    int best_minor = -1;
 
-	if( best_minor < version.second)
-		return n;
-	
-	if( best != metaclasses_.end())
-	{
-		try
-		{
-			if( best->first_time_)
-			{
-				best->first_time_ = false;
-				
-				if( best->init)
-					best->init();
-			}
-			
-			n.reset( best->create());
-		}
-		catch( ...)
-		{
-		}
-	}
-	
-	return n;
+    for( ; it != metaclasses_.end(); ++it)
+    {
+        if( it->id == id)
+        {
+            if( it->major_version == version.first)
+            {
+                if( it->minor_version > best_minor)
+                {
+                    best = it;
+                    best_minor = it->minor_version;
+                }
+            }
+        }
+    }
+
+    std::auto_ptr<node_t> n;
+
+    if( best_minor < version.second)
+        return n;
+
+    if( best != metaclasses_.end())
+    {
+        try
+        {
+            if( best->first_time_)
+            {
+                best->first_time_ = false;
+
+                if( best->init)
+                    best->init();
+            }
+
+            n.reset( best->create());
+        }
+        catch( ...)
+        {
+        }
+    }
+
+    return n;
 }
 
 bool node_factory_t::is_latest_version( const std::string& id) const
@@ -190,4 +192,4 @@ bool node_factory_t::is_latest_version( const std::string& id) const
     return it != latest_versions_end();
 }
 
-} // namespace
+} // ramen

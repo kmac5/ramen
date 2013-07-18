@@ -171,4 +171,4 @@ void parameterised_t::update_widgets()
 
 parameterised_t *new_clone( const parameterised_t& other) { return other.clone();}
 
-} // namespace
+} // ramen

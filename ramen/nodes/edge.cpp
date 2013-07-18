@@ -34,6 +34,5 @@ bool edge_t::operator==( const edge_t& other) const
     return src == other.src && dst == other.dst && port == other.port;
 }
 
-
-} // namespace
+} // ramen
 

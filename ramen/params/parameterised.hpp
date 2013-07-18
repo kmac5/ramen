@@ -170,6 +170,6 @@ private:
 /// Makes a copy of a parameterised
 RAMEN_API parameterised_t *new_clone( const parameterised_t& other);
 
-} // namespace
+} // ramen
 
 #endif

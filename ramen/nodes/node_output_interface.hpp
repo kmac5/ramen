@@ -14,13 +14,13 @@ class node_output_interface
 {
 public:
 
-	virtual int priority() const { return 100;}
-	
+    virtual int priority() const { return 100;}
+
     virtual void begin_output( float start_frame, float end_frame);
-	virtual void process_and_write( const render::context_t& context) = 0;
+    virtual void process_and_write( const render::context_t& context) = 0;
     virtual void end_output( bool success);
 };
 
-} // namespace
+} // ramen
 
 #endif

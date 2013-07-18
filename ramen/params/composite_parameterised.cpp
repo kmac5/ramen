@@ -22,8 +22,8 @@ composite_parameterised_t::composite_parameterised_t( const composite_parameteri
 
 composite_parameterised_t::~composite_parameterised_t()
 {
-	// empty destructor to allow auto_prt to use an incomplete type.
-	// Do not remove.
+    // empty destructor to allow auto_prt to use an incomplete type.
+    // Do not remove.
 }
 
 void composite_parameterised_t::add_parameterised( std::auto_ptr<parameterised_t> p)
@@ -38,4 +38,4 @@ std::auto_ptr<parameterised_t> composite_parameterised_t::remove_parameterised( 
     return container::release_ptr( p, children_);
 }
 
-} // namespace
+} // ramen

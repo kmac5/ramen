@@ -29,7 +29,7 @@ public:
 
     bool register_node( const node_metaclass_t& m);
 
-	void sort_by_menu_item();
+    void sort_by_menu_item();
 
     // all metaclasses
     const std::vector<node_metaclass_t>& registered_nodes() const   { return metaclasses_;}
@@ -38,7 +38,7 @@ public:
     // latest versions
     typedef std::map<std::string, node_metaclass_t>::const_iterator const_iterator;
     typedef std::map<std::string, node_metaclass_t>::iterator       iterator;
-	
+
     const_iterator latest_versions_begin() const    { return newest_node_infos_.begin();}
     const_iterator latest_versions_end() const	    { return newest_node_infos_.end();}
 
@@ -60,6 +60,6 @@ private:
     std::map<std::string, node_metaclass_t> newest_node_infos_;
 };
 
-}
+} // ramen
 
 #endif

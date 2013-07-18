@@ -10,6 +10,6 @@ namespace ramen
 
 class parameterised_t;
 
-} // namespace
+} // ramen
 
 #endif
