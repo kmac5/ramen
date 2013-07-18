@@ -89,6 +89,6 @@ private:
     std::vector<edge_t> edges_;
 };
 
-} // namespace
+} // ramen
 
 #endif

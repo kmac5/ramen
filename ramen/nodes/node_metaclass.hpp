@@ -46,7 +46,7 @@ public:
 
     /// Menu item, for example "Blur"
     std::string menu_item;
-    
+
     /// Hotkey for menu item
     std::string hotkey;
 
@@ -54,41 +54,41 @@ public:
     const char *help;
 
     /*!
-		\brief Called before the first instance of this node is created.
-		Use this function to allocate resources shared by all nodes of this class
-	*/
-	void (*init)();
+        \brief Called before the first instance of this node is created.
+        Use this function to allocate resources shared by all nodes of this class
+    */
+    void (*init)();
 
-	/*!
-		\brief Called at application exit if an instance of this node was created.
-		Use this function to deallocate resources shared by all nodes of this class
-	*/
-	void (*cleanup)();
+    /*!
+        \brief Called at application exit if an instance of this node was created.
+        Use this function to deallocate resources shared by all nodes of this class
+    */
+    void (*cleanup)();
 
-	/*!
-		\brief Creates a new node
+    /*!
+        \brief Creates a new node
 
-		This function is called to create an instance of this node.
-		It can also return a null pointer, or even better, throw an exception
-		derived from std::exception if the node couldn't be created.
-	*/
-	node_t *(*create)();
+        This function is called to create an instance of this node.
+        It can also return a null pointer, or even better, throw an exception
+        derived from std::exception if the node couldn't be created.
+    */
+    node_t *(*create)();
 
-	/*!
-		\brief Creates a new node
+    /*!
+        \brief Creates a new node
 
-		This function is called to create an instance of this node, when
-		the user interface is active. It can show dialog boxes, file dialogs, ...
-		It can also return a null pointer, or even better, throw an exception
-		derived from std::exception if the node couldn't be created.
-	*/
-	node_t *(*create_gui)();
+        This function is called to create an instance of this node, when
+        the user interface is active. It can show dialog boxes, file dialogs, ...
+        It can also return a null pointer, or even better, throw an exception
+        derived from std::exception if the node couldn't be created.
+    */
+    node_t *(*create_gui)();
 
 // private:
-	
-	bool first_time_;
+
+    bool first_time_;
 };
 
-} // namespace
+} // ramen
 
 #endif
