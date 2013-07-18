@@ -583,6 +583,25 @@ SET_TARGET_PROPERTIES( ramen PROPERTIES
 TARGET_LINK_LIBRARIES( ramen ${RAMEN_ALL_LIBS})
 
 ######################################################
+# copy files
+
+#IF( CMAKE_SYSTEM_NAME MATCHES "Linux")
+#    ADD_CUSTOM_COMMAND( PRE_BUILD
+#                        COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/ocio ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/ocio
+#                        OUTPUT ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/ocio/config.ocio
+#                        )
+#ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+#    ADD_CUSTOM_COMMAND( PRE_BUILD
+#                        COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/ocio ${PROJECT_BINARY_DIR}/Ramen-${RAMEN_VERSION}.app/Contents/ocio
+#                        OUTPUT ${PROJECT_BINARY_DIR}/Ramen-${RAMEN_VERSION}.app/Contents/ocio/config.ocio
+#                        )
+#ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+#    MESSAGE( FATAL_ERROR "Windows not supported yet")
+#ELSE()
+#    MESSAGE( FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} not supported yet")
+#ENDIF()
+
+######################################################
 # ramen binary
 
 SET( RAMEN_APP_SOURCES	main.cpp)
@@ -591,11 +610,22 @@ ADD_EXECUTABLE( ramen.bin ${RAMEN_APP_SOURCES})
 TARGET_LINK_LIBRARIES( ramen.bin ramen ${RAMEN_ALL_LIBS})
 
 IF( CMAKE_SYSTEM_NAME MATCHES "Linux")
+
+    CONFIGURE_FILE( ${PROJECT_SOURCE_DIR}/linux/ramen
+                    ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/bin/ramen COPYONLY)
+
     SET_TARGET_PROPERTIES( ramen PROPERTIES LIBRARY_OUTPUT_DIRECTORY
                             ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/lib/)
 
     SET_TARGET_PROPERTIES( ramen.bin PROPERTIES RUNTIME_OUTPUT_DIRECTORY
                             ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/bin/)
+
+    SET_PROPERTY( SOURCE main.cpp APPEND PROPERTY OBJECT_DEPENDS
+                    ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/bin/ramen)
+
+    #SET_PROPERTY( SOURCE main.cpp APPEND PROPERTY OBJECT_DEPENDS
+    #                ${PROJECT_BINARY_DIR}/ramen-${RAMEN_VERSION}/ocio/config.ocio)
+
 ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     SET_TARGET_PROPERTIES( ramen PROPERTIES LIBRARY_OUTPUT_DIRECTORY
                             ${PROJECT_BINARY_DIR}/Ramen-${RAMEN_VERSION}.app/Contents/lib/)
@@ -603,7 +633,7 @@ ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     SET_TARGET_PROPERTIES( ramen.bin PROPERTIES RUNTIME_OUTPUT_DIRECTORY
                             ${PROJECT_BINARY_DIR}/Ramen-${RAMEN_VERSION}.app/Contents/MacOS/)
 
-    SET_TARGET_PROPERTIES( ramen.bin PROPERTIES OUTPUT_NAME ramen)
+    SET_TARGET_PROPERTIES( ramen.bin PROPERTIES OUTPUT_NAME Ramen)
 ELSEIF( ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     MESSAGE( FATAL_ERROR "Windows not supported yet")
 ELSE()
