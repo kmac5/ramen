@@ -46,11 +46,10 @@ struct frames_needed_less
 node_t::node_t() : composite_parameterised_t(), flags_( 0), composition_( 0) {}
 
 node_t::node_t( const node_t& other) : composite_parameterised_t( other),
+                                        inputs_( other.inputs_),
                                         outputs_( other.outputs_)
 {
-    boost::range::for_each( outputs_, boost::bind( &node_output_plug_t::set_parent_node,
-                                                   _1,
-                                                   this));
+    boost::range::for_each( outputs_, boost::bind( &node_output_plug_t::set_parent_node, _1, this));
     flags_ = other.flags_;
     loc_ = other.loc_;
     composition_ = other.composition_;

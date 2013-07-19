@@ -717,8 +717,8 @@ void main_window_t::duplicate_nodes()
         {
             std::auto_ptr<node_t> nclone( new_clone( n));
             nclone->offset_location( Imath::V2f( 20, 20));
-            c->add_node( nclone);
             relation[ &n] = nclone.get();
+            c->add_node( nclone);
         }
     }
 
