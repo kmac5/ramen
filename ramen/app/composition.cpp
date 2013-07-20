@@ -323,6 +323,7 @@ void composition_t::read( serialization::yaml_iarchive_t& in)
 	in.get_optional_value( "start_frame", start_frame_);
 	in.get_optional_value( "end_frame", end_frame_);
 	in.get_optional_value( "frame", frame_);
+	in.get_optional_value( "frame_rate", frame_rate_);
 	in.get_optional_value( "autokey", autokey_);
 	in.get_optional_value( "format", default_format_);
 	
@@ -479,6 +480,7 @@ void composition_t::write( serialization::yaml_oarchive_t& out) const
     out << YAML::Key << "start_frame"   << YAML::Value << start_frame_;
     out << YAML::Key << "end_frame"     << YAML::Value << end_frame_;
     out << YAML::Key << "frame"         << YAML::Value << frame_;
+    out << YAML::Key << "frame_rate"    << YAML::Value << frame_rate_;
     out << YAML::Key << "autokey"       << YAML::Value << autokey_;
     out << YAML::Key << "format"        << YAML::Value << default_format_;
 	out.check_errors();
