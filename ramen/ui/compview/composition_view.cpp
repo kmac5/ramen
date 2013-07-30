@@ -37,6 +37,7 @@
 
 #include<ramen/ui/compview/composition_view_commands.hpp>
 #include<ramen/ui/compview/draw_pick_visitors.hpp>
+#include<ramen/ui/compview/draw_pick_generic_node.hpp>
 
 namespace ramen
 {
@@ -165,6 +166,14 @@ void composition_view_t::keyPressEvent( QKeyEvent *event)
 		}
 		break;
 	
+		case Qt::Key_C:
+		{
+			center_selected_nodes();
+			update();
+			event->accept();
+		}
+		break;
+	
 		default:
 			event->ignore();
     }
@@ -206,7 +215,7 @@ void composition_view_t::mouseDoubleClickEvent( QMouseEvent *event)
 }
 
 void composition_view_t::mousePressEvent( QMouseEvent *event)
-{
+{	
     event->accept();
 
     drag_handler_    = boost::function<void ( QMouseEvent *)>();
@@ -239,7 +248,6 @@ void composition_view_t::mousePressEvent( QMouseEvent *event)
 		    drag_handler_ = boost::bind( &composition_view_t::scroll_drag_handler, this, _1);
 			release_handler_ = boost::bind( &composition_view_t::scroll_zoom_release_handler, this, _1);
 		}
-
         return;
     }
 
@@ -364,6 +372,43 @@ void composition_view_t::move_nodes_drag_handler( QMouseEvent *event)
     }
 
     update();
+}
+
+void composition_view_t::center_selected_nodes()
+{
+	int count = 0;
+	float max_x;
+	float max_y;
+	float min_x;
+	float min_y;
+
+    for( composition_t::node_iterator it( app().document().composition().nodes().begin());
+		    it != app().document().composition().nodes().end(); ++it)
+    {
+		// If no nodes are selected center all nodes
+        if( it->selected() || !app().document().composition().any_selected())
+		{
+			if( count == 0)
+			{
+				min_x = it->location()[0];
+				min_y = it->location()[1];
+				max_x = it->location()[0];
+				max_y = it->location()[1];
+				count++;
+			}
+			if( it->location()[0] < min_x)
+				min_x = it->location()[0];
+			if( it->location()[1] < min_y)
+				min_y = it->location()[1];
+			if( it->location()[0] + generic_node_width(&(*it)) > max_x)
+				max_x = it->location()[0] + generic_node_width(&(*it));
+			if( it->location()[1] + generic_node_height() > max_y)
+				max_y = it->location()[1] + generic_node_height();
+		}
+    }
+	
+	Imath::V2f q( ( max_x - min_x)/2 + min_x, ( max_y - min_y)/2 + min_y);
+	viewport_.scroll_to_center_point( q);
 }
 
 void composition_view_t::connect_drag_handler( QMouseEvent *event) { update();}

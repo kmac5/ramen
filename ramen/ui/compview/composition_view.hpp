@@ -74,6 +74,7 @@ private:
 	void scroll_zoom_release_handler( QMouseEvent *event);
 
     void move_nodes_drag_handler( QMouseEvent *event);
+    void center_selected_nodes( );
 
     void connect_drag_handler( QMouseEvent *event);
     void connect_release_handler( QMouseEvent *event);
