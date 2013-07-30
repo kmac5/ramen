@@ -215,7 +215,7 @@ void composition_view_t::mouseDoubleClickEvent( QMouseEvent *event)
 }
 
 void composition_view_t::mousePressEvent( QMouseEvent *event)
-{	
+{
     event->accept();
 
     drag_handler_    = boost::function<void ( QMouseEvent *)>();
@@ -248,6 +248,7 @@ void composition_view_t::mousePressEvent( QMouseEvent *event)
 		    drag_handler_ = boost::bind( &composition_view_t::scroll_drag_handler, this, _1);
 			release_handler_ = boost::bind( &composition_view_t::scroll_zoom_release_handler, this, _1);
 		}
+
         return;
     }
 
