@@ -10,6 +10,7 @@
 
 
 #include<boost/function.hpp>
+#include<boost/tuple/tuple.hpp>
 
 #include<QWidget>
 #include<QFont>
@@ -63,6 +64,7 @@ protected:
     virtual void mouseMoveEvent( QMouseEvent *event);
     virtual void mousePressEvent( QMouseEvent *event);
     virtual void mouseReleaseEvent( QMouseEvent *event);
+    virtual void wheelEvent( QWheelEvent *event);
     virtual void paintEvent ( QPaintEvent *event);
     virtual void resizeEvent( QResizeEvent *event);
 	virtual void contextMenuEvent( QContextMenuEvent *event);
@@ -75,6 +77,7 @@ private:
 
     void move_nodes_drag_handler( QMouseEvent *event);
     void center_selected_nodes( );
+    void frame_selected_nodes( );
 
     void connect_drag_handler( QMouseEvent *event);
     void connect_release_handler( QMouseEvent *event);
@@ -95,6 +98,10 @@ private:
     void bezier_edge( const Imath::V2f& p0, const Imath::V2f& p1, bezier::curve_t<Imath::V2f>& c) const;
 
 	void delete_selected_nodes();
+
+	Imath::Box2f nodes_bounding_box();
+	
+	
 	
 	composition_view_toolbar_t *toolbar_;
 
