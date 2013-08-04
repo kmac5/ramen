@@ -105,6 +105,7 @@ public:
                                      boost::function<void ( const Imath::Color4f&)> f) const;
 
 	virtual void center_image();
+	virtual void frame_image();
 	
 public Q_SLOTS:
 

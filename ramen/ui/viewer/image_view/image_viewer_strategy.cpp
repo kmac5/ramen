@@ -544,14 +544,7 @@ void image_viewer_strategy_t::key_press_event( QKeyEvent *event)
 		{
 			viewport_.reset();
 	
-			if( image_.valid())
-			{
-// 				Imath::V2i p( image_.display_window().center());
-// 				Imath::V2f q( p.x * aspect_ratio() * subsample(), p.y * subsample());
-// 				viewport_.scroll_to_center_point( q);
-				center_image();
-			}
-	
+			center_image();
 			update();
 			event->accept();
 		}
@@ -577,25 +570,18 @@ void image_viewer_strategy_t::key_press_event( QKeyEvent *event)
 	
 		case Qt::Key_C:
 		{
-			if( image_.valid())
-			{
-// 				Imath::V2i p( image_.display_window().center());
-// 				Imath::V2f q( p.x * aspect_ratio() * subsample(), p.y * subsample());
-// 				viewport_.scroll_to_center_point( q);
-				center_image();
-			}
-	
+			center_image();
 			update();
 			event->accept();
 		}
 		break;
 	
-// 		case Qt::Key_F:
-// 		{
-// 			frame_image();
-// 			update();
-// 			event->accept();
-// 		}
+		case Qt::Key_F:
+		{
+			frame_image();
+			update();
+			event->accept();
+		}
 		break;
 	
 		default:
@@ -913,9 +899,23 @@ void image_viewer_strategy_t::pick_colors_in_box( const Imath::Box2i& b, boost::
 
 void image_viewer_strategy_t::center_image()
 {
-	Imath::V2i p( image_.display_window().center());
-	Imath::V2f q( p.x * aspect_ratio() * subsample(), p.y * subsample());
-	viewport_.scroll_to_center_point( q);
+	if( image_.valid())
+	{
+		Imath::V2i p( image_.display_window().center());
+		Imath::V2f q( p.x * aspect_ratio() * subsample(), p.y * subsample());
+		viewport_.scroll_to_center_point( q);
+	}
+}
+
+void image_viewer_strategy_t::frame_image()
+{
+	center_image();
+	float xzf = ( ( viewport_.world().max.x - viewport_.world().min.x)
+			/ ( image_.data_window().max.x - image_.data_window().min.x)); 
+	float yzf = ( ( viewport_.world().max.y - viewport_.world().min.y)
+			/ ( image_.data_window().max.y - image_.data_window().min.y)); 
+	float zf = ( ( xzf < yzf) ? xzf : yzf);
+	viewport_.zoom( viewport_.world().center(), ( 1.0/zf)); 
 }
 
 } // viewer
