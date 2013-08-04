@@ -54,6 +54,8 @@ void viewer_strategy_t::mouse_move_event( QMouseEvent *event)     { event->ignor
 void viewer_strategy_t::mouse_press_event( QMouseEvent *event)    { event->ignore();}
 void viewer_strategy_t::mouse_release_event( QMouseEvent *event)  { event->ignore();}
 
+void viewer_strategy_t::wheel_event( QWheelEvent *event)  { event->ignore();}
+
 Imath::Color4f viewer_strategy_t::color_at( int x, int y) const
 {
 	return Imath::Color4f( 0, 0, 0, 0);

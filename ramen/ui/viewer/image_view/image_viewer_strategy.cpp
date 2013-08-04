@@ -546,9 +546,10 @@ void image_viewer_strategy_t::key_press_event( QKeyEvent *event)
 	
 			if( image_.valid())
 			{
-				Imath::V2i p( image_.display_window().center());
-				Imath::V2f q( p.x * aspect_ratio() * subsample(), p.y * subsample());
-				viewport_.scroll_to_center_point( q);
+// 				Imath::V2i p( image_.display_window().center());
+// 				Imath::V2f q( p.x * aspect_ratio() * subsample(), p.y * subsample());
+// 				viewport_.scroll_to_center_point( q);
+				center_image();
 			}
 	
 			update();
@@ -572,6 +573,29 @@ void image_viewer_strategy_t::key_press_event( QKeyEvent *event)
 			update();
 			event->accept();
 		}
+		break;
+	
+		case Qt::Key_C:
+		{
+			if( image_.valid())
+			{
+// 				Imath::V2i p( image_.display_window().center());
+// 				Imath::V2f q( p.x * aspect_ratio() * subsample(), p.y * subsample());
+// 				viewport_.scroll_to_center_point( q);
+				center_image();
+			}
+	
+			update();
+			event->accept();
+		}
+		break;
+	
+// 		case Qt::Key_F:
+// 		{
+// 			frame_image();
+// 			update();
+// 			event->accept();
+// 		}
 		break;
 	
 		default:
@@ -607,6 +631,8 @@ void image_viewer_strategy_t::key_release_event( QKeyEvent *event)
 		case Qt::Key_Home:
 		case Qt::Key_Comma:
 		case Qt::Key_Period:
+		case Qt::Key_C:
+		case Qt::Key_F:
 			event->accept();
 		break;
 	
@@ -837,6 +863,17 @@ void image_viewer_strategy_t::mouse_release_event( QMouseEvent *event)
     event_accepted_by_node_ = false;
 }
 
+void image_viewer_strategy_t::wheel_event( QWheelEvent *event)
+{
+	Imath::V2f wpos = screen_to_world( Imath::V2i( event->x(), event->y()));
+	if ( event->delta() > 0)
+		viewport_.zoom( wpos, 1.10f);
+	else
+		viewport_.zoom( wpos, (1.0/1.10f));
+    update();
+    event->accept();
+}
+
 Imath::Color4f image_viewer_strategy_t::color_at( int x, int y) const
 {
 	Imath::V2i pos( x, y);
@@ -872,6 +909,13 @@ void image_viewer_strategy_t::pick_colors_in_box( const Imath::Box2i& b, boost::
 				f( c.get());
 		}
 	}
+}
+
+void image_viewer_strategy_t::center_image()
+{
+	Imath::V2i p( image_.display_window().center());
+	Imath::V2f q( p.x * aspect_ratio() * subsample(), p.y * subsample());
+	viewport_.scroll_to_center_point( q);
 }
 
 } // viewer

@@ -291,6 +291,11 @@ void viewer_context_t::mouseReleaseEvent( QMouseEvent *event)
     strategy().mouse_release_event( event);
 }
 
+void viewer_context_t::wheelEvent( QWheelEvent *event)
+{
+    strategy().wheel_event( event);
+}
+
 void viewer_context_t::test_gl_extensions()
 {
     GLenum err = glewInit();
