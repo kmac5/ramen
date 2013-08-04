@@ -196,6 +196,8 @@ void composition_view_t::keyReleaseEvent( QKeyEvent *event)
 		case Qt::Key_Home:
 		case Qt::Key_Comma:
 		case Qt::Key_Period:
+		case Qt::Key_C:
+		case Qt::Key_F:
 			event->accept();
 		break;
 	
