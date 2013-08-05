@@ -932,7 +932,22 @@ void main_window_t::create_node()
     app().ui()->update();
 }
 
-void main_window_t::show_about_box() {}
+void main_window_t::show_about_box()
+{
+	QMessageBox msgBox;
+	msgBox.setTextFormat(Qt::RichText);
+	msgBox.setWindowTitle( "About Ramen");
+	QString text = QString( "<html><p style=\" font-size:16pt;"
+					        "font-weight:bold;\">%1</p></html>").arg(RAMEN_NAME_FULL_VERSION_STR);
+	msgBox.setText( text);
+	QString itext = QString( "For full license details please read the LICENSE.txt file");
+	msgBox.setInformativeText( itext);
+	// Add spacer to force width of QMessageBox
+	QSpacerItem* horizontalSpacer = new QSpacerItem( 400, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+	QGridLayout* layout = (QGridLayout*)msgBox.layout();
+	layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+	msgBox.exec();
+}
 
 void main_window_t::go_to_project_website() {}
 
