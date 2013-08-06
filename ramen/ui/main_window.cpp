@@ -940,8 +940,7 @@ void main_window_t::show_about_box()
 	QString text = QString( "<html><p style=\" font-size:16pt;"
 					        "font-weight:bold;\">%1</p></html>").arg(RAMEN_NAME_FULL_VERSION_STR);
 	msgBox.setText( text);
-	QString itext = QString( "For full license details please read the LICENSE.txt file");
-	msgBox.setInformativeText( itext);
+	msgBox.setInformativeText( "For full license details please read the LICENSE.txt file");
 	// Add spacer to force width of QMessageBox
 	QSpacerItem* horizontalSpacer = new QSpacerItem( 400, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
 	QGridLayout* layout = (QGridLayout*)msgBox.layout();
@@ -949,7 +948,11 @@ void main_window_t::show_about_box()
 	msgBox.exec();
 }
 
-void main_window_t::go_to_project_website() {}
+void main_window_t::go_to_project_website()
+{
+	QDesktopServices::openUrl(QUrl("http://ramencomp.blogspot.com/",
+									QUrl::TolerantMode));
+}
 
 void main_window_t::update()
 {
