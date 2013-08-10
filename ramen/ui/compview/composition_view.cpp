@@ -51,19 +51,19 @@ composition_view_t::composition_view_t( QWidget *parent) : QWidget( parent)
     scroll_mode_ = false;
     first_resize_ = true;
     connect_mode_ = false;
-	box_pick_mode_ = false;
+    box_pick_mode_ = false;
     setMouseTracking( true);
-	toolbar_ = 0;
+    toolbar_ = 0;
 }
 
 composition_view_t::~composition_view_t() {}
 
 composition_view_toolbar_t *composition_view_t::create_toolbar()
 {
-	RAMEN_ASSERT( toolbar_ == 0);
+    RAMEN_ASSERT( toolbar_ == 0);
 
-	toolbar_ = new composition_view_toolbar_t( this);
-	return toolbar_;
+    toolbar_ = new composition_view_toolbar_t( this);
+    return toolbar_;
 }
 
 const viewport_t& composition_view_t::viewport() const	{ return viewport_;}
@@ -83,7 +83,7 @@ void composition_view_t::place_node( node_t *n) const { layout_.place_node( n);}
 
 void composition_view_t::place_node_near_node( node_t *n, node_t *other) const
 {
-	layout_.place_node_near_node( n, other);
+    layout_.place_node_near_node( n, other);
 }
 
 bool composition_view_t::event( QEvent *event)
@@ -134,82 +134,82 @@ void composition_view_t::keyPressEvent( QKeyEvent *event)
 {
     switch( event->key())
     {
-		case Qt::Key_Backspace:
-		case Qt::Key_Delete:
-			delete_selected_nodes();
-		break;
-	
-		case Qt::Key_Home:
-			viewport().reset();
-			layout_.set_world( viewport().world());
-			update();
-			event->accept();
-		break;
-	
-		case Qt::Key_Comma:
-		{
-			Imath::V2f p( screen_to_world( viewport().device().center()));
-			viewport().zoom( p, 1.33f);
-			layout_.set_world( viewport().world());
-			update();
-			event->accept();
-		}
-		break;
-	
-		case Qt::Key_Period:
-		{
-			Imath::V2f p( screen_to_world( viewport().device().center()));
-			viewport().zoom( p, 0.66f);
-			layout_.set_world( viewport().world());
-			update();
-			event->accept();
-		}
-		break;
-	
-		case Qt::Key_C:
-		{
-			center_selected_nodes();
-			update();
-			event->accept();
-		}
-		break;
+        case Qt::Key_Backspace:
+        case Qt::Key_Delete:
+            delete_selected_nodes();
+        break;
 
-		case Qt::Key_F:
-		{
-			frame_selected_nodes();
-			update();
-			event->accept();
-		}
-		break;
-	
-		default:
-			event->ignore();
+        case Qt::Key_Home:
+            viewport().reset();
+            layout_.set_world( viewport().world());
+            update();
+            event->accept();
+        break;
+
+        case Qt::Key_Comma:
+        {
+            Imath::V2f p( screen_to_world( viewport().device().center()));
+            viewport().zoom( p, 1.33f);
+            layout_.set_world( viewport().world());
+            update();
+            event->accept();
+        }
+        break;
+
+        case Qt::Key_Period:
+        {
+            Imath::V2f p( screen_to_world( viewport().device().center()));
+            viewport().zoom( p, 0.66f);
+            layout_.set_world( viewport().world());
+            update();
+            event->accept();
+        }
+        break;
+
+        case Qt::Key_C:
+        {
+            center_selected_nodes();
+            update();
+            event->accept();
+        }
+        break;
+
+        case Qt::Key_F:
+        {
+            frame_selected_nodes();
+            update();
+            event->accept();
+        }
+        break;
+
+        default:
+            event->ignore();
     }
 }
 
 void composition_view_t::keyReleaseEvent( QKeyEvent *event)
-{ 
+{
     switch( event->key())
     {
-		case Qt::Key_Backspace:
-		case Qt::Key_Delete:
-		case Qt::Key_Home:
-		case Qt::Key_Comma:
-		case Qt::Key_Period:
-		case Qt::Key_C:
-		case Qt::Key_F:
-			event->accept();
-		break;
-	
-		default:
-			event->ignore();
+        case Qt::Key_Backspace:
+        case Qt::Key_Delete:
+        case Qt::Key_Home:
+        case Qt::Key_Comma:
+        case Qt::Key_Period:
+        case Qt::Key_C:
+        case Qt::Key_F:
+            event->accept();
+        break;
+
+        default:
+            event->ignore();
     }
 }
 
 void composition_view_t::mouseDoubleClickEvent( QMouseEvent *event)
 {
-	Imath::V2f wpos = screen_to_world( Imath::V2i( event->x(), event->y()));
-	layout_.set_interest_point( wpos);
+    Imath::V2f wpos = screen_to_world( Imath::V2i( event->x(), event->y()));
+    layout_.set_interest_point( wpos);
 
     if( last_pick_.component == pick_result_t::body_picked)
     {
@@ -240,8 +240,8 @@ void composition_view_t::mousePressEvent( QMouseEvent *event)
 
     scroll_mode_ = false;
     zoom_mode_ = false;
-	
-	Imath::V2f wpos = screen_to_world( Imath::V2i( push_x_, push_y_));
+
+    Imath::V2f wpos = screen_to_world( Imath::V2i( push_x_, push_y_));
 
     if( event->modifiers() & Qt::AltModifier)
     {
@@ -250,14 +250,14 @@ void composition_view_t::mousePressEvent( QMouseEvent *event)
             zoom_mode_ = true;
             zoom_center_ = wpos;
             drag_handler_ = boost::bind( &composition_view_t::zoom_drag_handler, this, _1);
-			release_handler_ = boost::bind( &composition_view_t::scroll_zoom_release_handler, this, _1);
+            release_handler_ = boost::bind( &composition_view_t::scroll_zoom_release_handler, this, _1);
         }
-		else
-		{
-	        scroll_mode_ = true;
-		    drag_handler_ = boost::bind( &composition_view_t::scroll_drag_handler, this, _1);
-			release_handler_ = boost::bind( &composition_view_t::scroll_zoom_release_handler, this, _1);
-		}
+        else
+        {
+            scroll_mode_ = true;
+            drag_handler_ = boost::bind( &composition_view_t::scroll_drag_handler, this, _1);
+            release_handler_ = boost::bind( &composition_view_t::scroll_zoom_release_handler, this, _1);
+        }
 
         return;
     }
@@ -339,8 +339,8 @@ void composition_view_t::mouseMoveEvent( QMouseEvent *event)
 
 void composition_view_t::mouseReleaseEvent( QMouseEvent *event)
 {
-	Imath::V2f wpos = screen_to_world( Imath::V2i( event->x(), event->y()));
-	layout_.set_interest_point( wpos);
+    Imath::V2f wpos = screen_to_world( Imath::V2i( event->x(), event->y()));
+    layout_.set_interest_point( wpos);
 
     if( release_handler_)
         release_handler_( event);
@@ -352,12 +352,12 @@ void composition_view_t::mouseReleaseEvent( QMouseEvent *event)
 
 void composition_view_t::wheelEvent( QWheelEvent *event)
 {
-	Imath::V2f wpos = screen_to_world( Imath::V2i( event->x(), event->y()));
-	layout_.set_interest_point( wpos);
-	if ( event->delta() > 0)
-		viewport().zoom( wpos, 1.10f);
-	else
-		viewport().zoom( wpos, (1.0/1.10f));
+    Imath::V2f wpos = screen_to_world( Imath::V2i( event->x(), event->y()));
+    layout_.set_interest_point( wpos);
+    if ( event->delta() > 0)
+        viewport().zoom( wpos, 1.10f);
+    else
+        viewport().zoom( wpos, 1.0f / 1.10f);
     update();
     event->accept();
 }
@@ -378,7 +378,7 @@ void composition_view_t::zoom_drag_handler( QMouseEvent *event)
 
 void composition_view_t::scroll_zoom_release_handler( QMouseEvent *event)
 {
-	layout_.set_world( viewport().world());
+    layout_.set_world( viewport().world());
 }
 
 void composition_view_t::move_nodes_drag_handler( QMouseEvent *event)
@@ -388,7 +388,7 @@ void composition_view_t::move_nodes_drag_handler( QMouseEvent *event)
     Imath::V2f offset( xoffset, yoffset);
 
     for( composition_t::node_iterator it( app().document().composition().nodes().begin());
-		    it != app().document().composition().nodes().end(); ++it)
+            it != app().document().composition().nodes().end(); ++it)
     {
         if( it->selected())
             it->offset_location( offset);
@@ -399,25 +399,21 @@ void composition_view_t::move_nodes_drag_handler( QMouseEvent *event)
 
 void composition_view_t::center_selected_nodes()
 {
-	Imath::Box2f box;
-
-	box = nodes_bounding_box();
-	viewport_.scroll_to_center_point( box.center());
+    viewport_.scroll_to_center_point( nodes_bounding_box().center());
 }
 
 void composition_view_t::frame_selected_nodes()
 {
-	Imath::Box2f box;
-	float edge_offset = 10.0; // keep nodes offset 5 pixels from edges
+    Imath::Box2f box;
+    float edge_offset = 10.0; // keep nodes offset 5 pixels from edges
 
-	box = nodes_bounding_box();
-	viewport_.scroll_to_center_point( box.center());
-	float xzf = ( ( viewport().world().max.x - viewport().world().min.x)
-					/ ( box.max.x - box.min.x + edge_offset)); 
-	float yzf = ( ( viewport().world().max.y - viewport().world().min.y)
-					/ ( box.max.y - box.min.y + edge_offset)); 
-	float zf = ( ( xzf < yzf) ? xzf : yzf);
-	viewport().zoom( viewport().world().center(), ( 1.0/zf));
+    box = nodes_bounding_box();
+    viewport_.scroll_to_center_point( box.center());
+
+    float xzf = viewport().world().size().x / ( box.size().x + edge_offset);
+    float yzf = viewport().world().size().y / ( box.size().y + edge_offset);
+    float zf = xzf < yzf ? xzf : yzf;
+    viewport().zoom( viewport().world().center(), 1.0f / zf);
 }
 
 void composition_view_t::connect_drag_handler( QMouseEvent *event) { update();}
@@ -499,20 +495,20 @@ void composition_view_t::resizeEvent( QResizeEvent *event)
 {
     if( first_resize_)
     {
-		if( event->size().width() == 0 || event->size().height() == 0)
-		{
-			event->accept();
-			return;
-		}
+        if( event->size().width() == 0 || event->size().height() == 0)
+        {
+            event->accept();
+            return;
+        }
 
         first_resize_ = false;
         viewport().reset( event->size().width(), event->size().height());
     }
-	else
-	    viewport().resize( event->size().width(), event->size().height());
+    else
+        viewport().resize( event->size().width(), event->size().height());
 
-	event->accept();
-	layout_.set_world( viewport().world());
+    event->accept();
+    layout_.set_world( viewport().world());
 }
 
 void composition_view_t::paintEvent ( QPaintEvent *event)
@@ -546,7 +542,7 @@ void composition_view_t::paintEvent ( QPaintEvent *event)
 
     if( connect_mode_)
     {
-		pen.setColor( palette_t::instance().qcolor( "text"));
+        pen.setColor( palette_t::instance().qcolor( "text"));
         p.setPen( pen);
         Imath::V2f q0( screen_to_world( Imath::V2i( push_x_, push_y_)));
         Imath::V2f q1( screen_to_world( Imath::V2i( last_x_, last_y_)));
@@ -557,7 +553,7 @@ void composition_view_t::paintEvent ( QPaintEvent *event)
         if( box_pick_mode_)
         {
             p.resetTransform();
-			pen.setColor( palette_t::instance().qcolor( "box_pick"));
+            pen.setColor( palette_t::instance().qcolor( "box_pick"));
             p.setPen( pen);
             p.drawLine( push_x_, push_y_, last_x_, push_y_);
             p.drawLine( last_x_, push_y_, last_x_, last_y_);
@@ -605,22 +601,22 @@ void composition_view_t::pick_node( const Imath::V2f& p, pick_result_t& result) 
 
     pick_node_visitor visitor( *this, p, result);
 
-	composition_t::reverse_node_iterator it( app().document().composition().nodes().rbegin());
-	composition_t::reverse_node_iterator last( app().document().composition().nodes().rend());
+    composition_t::reverse_node_iterator it( app().document().composition().nodes().rbegin());
+    composition_t::reverse_node_iterator last( app().document().composition().nodes().rend());
 
-	for( ; it != last; ++it)
+    for( ; it != last; ++it)
     {
         it->accept( visitor);
 
-		if( result.component != pick_result_t::no_pick)
-			break;
+        if( result.component != pick_result_t::no_pick)
+            break;
     }
 }
 
 bool composition_view_t::box_pick_node( node_t *n, const Imath::Box2f& b) const
 {
     box_pick_node_visitor visitor( b);
-	n->accept( visitor);
+    n->accept( visitor);
     return visitor.result;
 }
 
@@ -687,27 +683,23 @@ void composition_view_t::contextMenuEvent( QContextMenuEvent *event) { event->ac
 
 void composition_view_t::delete_selected_nodes()
 {
-	app().ui()->main_window()->delete_nodes();
+    app().ui()->main_window()->delete_nodes();
 }
 
 Imath::Box2f composition_view_t::nodes_bounding_box()
 {
-	Imath::Box2f box;
-	float min_x, min_y, max_x, max_y;
+    Imath::Box2f box;
+
+    bool any_selected = app().document().composition().any_selected();
 
     for( composition_t::node_iterator it( app().document().composition().nodes().begin());
-		    it != app().document().composition().nodes().end(); ++it)
+            it != app().document().composition().nodes().end(); ++it)
     {
-        if( it->selected() || !app().document().composition().any_selected())
-		{
-			min_x = it->location()[0];
-			min_y = it->location()[1];
-			max_x = it->location()[0] + generic_node_width(&(*it));
-			max_y = it->location()[1] + generic_node_height();
-			box.extendBy(Imath::Box2f( Imath::V2f( min_x, min_y), Imath::V2f( max_x, max_y)));
-		}
+        if( it->selected() || !any_selected)
+            box.extendBy( generic_node_bbox( &(*it)));
     }
-	return box;
+
+    return box;
 }
 
 } // namespace

@@ -7,10 +7,7 @@
 
 #include<ramen/ui/compview/composition_view_fwd.hpp>
 
-
-
 #include<boost/function.hpp>
-#include<boost/tuple/tuple.hpp>
 
 #include<QWidget>
 #include<QFont>
@@ -38,15 +35,15 @@ class composition_view_t : public QWidget
 public:
 
     composition_view_t( QWidget *parent = 0);
-	~composition_view_t();
+    ~composition_view_t();
 
-	composition_view_toolbar_t *create_toolbar();
+    composition_view_toolbar_t *create_toolbar();
 
     Imath::V2f screen_to_world( const Imath::V2i& p) const;
     Imath::V2i world_to_screen( const Imath::V2f& p) const;
 
     const viewport_t& viewport() const;
-	viewport_t& viewport();
+    viewport_t& viewport();
 
     void place_node( node_t *n) const;
     void place_node_near_node( node_t *n, node_t *other) const;
@@ -67,13 +64,13 @@ protected:
     virtual void wheelEvent( QWheelEvent *event);
     virtual void paintEvent ( QPaintEvent *event);
     virtual void resizeEvent( QResizeEvent *event);
-	virtual void contextMenuEvent( QContextMenuEvent *event);
+    virtual void contextMenuEvent( QContextMenuEvent *event);
 
 private:
 
     void scroll_drag_handler( QMouseEvent *event);
     void zoom_drag_handler( QMouseEvent *event);
-	void scroll_zoom_release_handler( QMouseEvent *event);
+    void scroll_zoom_release_handler( QMouseEvent *event);
 
     void move_nodes_drag_handler( QMouseEvent *event);
     void center_selected_nodes( );
@@ -97,13 +94,11 @@ private:
     // util
     void bezier_edge( const Imath::V2f& p0, const Imath::V2f& p1, bezier::curve_t<Imath::V2f>& c) const;
 
-	void delete_selected_nodes();
+    void delete_selected_nodes();
 
-	Imath::Box2f nodes_bounding_box();
-	
-	
-	
-	composition_view_toolbar_t *toolbar_;
+    Imath::Box2f nodes_bounding_box();
+
+    composition_view_toolbar_t *toolbar_;
 
     bool first_resize_;
     viewport_t viewport_;
@@ -122,7 +117,7 @@ private:
     pick_result_t last_pick_;
     boost::function<void ( QMouseEvent *)> drag_handler_, release_handler_;
 
-	composition_view_layout_t layout_;
+    composition_view_layout_t layout_;
 };
 
 } // namespace

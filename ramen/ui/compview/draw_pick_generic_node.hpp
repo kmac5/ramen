@@ -20,6 +20,7 @@ class composition_view_t;
 
 int generic_node_width( const node_t *n);
 int generic_node_height();
+Imath::Box2f generic_node_bbox( const node_t *n);
 
 Imath::V2f generic_input_location( const node_t *n, std::size_t i);
 Imath::V2f generic_output_location( const node_t *n);

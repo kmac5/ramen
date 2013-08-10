@@ -48,6 +48,13 @@ int generic_node_width( const node_t *n)
 
 int generic_node_height() { return 20;}
 
+Imath::Box2f generic_node_bbox( const node_t *n)
+{
+    return Imath::Box2f( n->location(),
+                         n->location() + Imath::V2f( generic_node_width( n),
+                                                     generic_node_height()));
+}
+
 void draw_generic_node( QPainter& painter, const node_t *n)
 {
     Imath::V2f p = n->location();
@@ -80,13 +87,13 @@ void draw_generic_node( QPainter& painter, const node_t *n)
     }
 
     if( n->selected())
-		brush.setColor( palette_t::instance().qcolor( "node_picked_bg"));
+        brush.setColor( palette_t::instance().qcolor( "node_picked_bg"));
     else
     {
         if( n->plugin_error())
-			brush.setColor( palette_t::instance().qcolor( "node_error_bg"));
+            brush.setColor( palette_t::instance().qcolor( "node_error_bg"));
         else
-			brush.setColor( palette_t::instance().qcolor( "node_bg"));
+            brush.setColor( palette_t::instance().qcolor( "node_bg"));
     }
 
     painter.setBrush( brush);
@@ -95,13 +102,13 @@ void draw_generic_node( QPainter& painter, const node_t *n)
     painter.setBrush( Qt::NoBrush);
 
     if( app().ui()->active_node() == n)
-		pen.setColor( palette_t::instance().qcolor( "node_active_out"));
+        pen.setColor( palette_t::instance().qcolor( "node_active_out"));
     else
     {
         if( app().ui()->context_node() == n)
-			pen.setColor( palette_t::instance().qcolor( "node_context_out"));
+            pen.setColor( palette_t::instance().qcolor( "node_context_out"));
         else
-			pen.setColor( palette_t::instance().qcolor( "text"));
+            pen.setColor( palette_t::instance().qcolor( "text"));
     }
 
     painter.setPen( pen);
@@ -113,7 +120,7 @@ void draw_generic_node( QPainter& painter, const node_t *n)
 
     if( n->ignored())
     {
-		pen.setColor( palette_t::instance().qcolor( "box_pick"));
+        pen.setColor( palette_t::instance().qcolor( "box_pick"));
         pen.setWidth(2);
         painter.setPen( pen);
         painter.drawLine( QPointF( p.x - 3, p.y - 2), QPointF( p.x + generic_node_width( n) + 3, p.y + generic_node_height() + 2));
