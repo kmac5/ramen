@@ -37,6 +37,7 @@
 
 #include<ramen/ui/compview/composition_view_commands.hpp>
 #include<ramen/ui/compview/draw_pick_visitors.hpp>
+#include<ramen/ui/compview/draw_pick_generic_node.hpp>
 
 namespace ramen
 {
@@ -165,6 +166,22 @@ void composition_view_t::keyPressEvent( QKeyEvent *event)
 		}
 		break;
 	
+		case Qt::Key_C:
+		{
+			center_selected_nodes();
+			update();
+			event->accept();
+		}
+		break;
+
+		case Qt::Key_F:
+		{
+			frame_selected_nodes();
+			update();
+			event->accept();
+		}
+		break;
+	
 		default:
 			event->ignore();
     }
@@ -179,6 +196,8 @@ void composition_view_t::keyReleaseEvent( QKeyEvent *event)
 		case Qt::Key_Home:
 		case Qt::Key_Comma:
 		case Qt::Key_Period:
+		case Qt::Key_C:
+		case Qt::Key_F:
 			event->accept();
 		break;
 	
@@ -331,6 +350,18 @@ void composition_view_t::mouseReleaseEvent( QMouseEvent *event)
     event->accept();
 }
 
+void composition_view_t::wheelEvent( QWheelEvent *event)
+{
+	Imath::V2f wpos = screen_to_world( Imath::V2i( event->x(), event->y()));
+	layout_.set_interest_point( wpos);
+	if ( event->delta() > 0)
+		viewport().zoom( wpos, 1.10f);
+	else
+		viewport().zoom( wpos, (1.0/1.10f));
+    update();
+    event->accept();
+}
+
 void composition_view_t::scroll_drag_handler( QMouseEvent *event)
 {
     viewport().scroll( Imath::V2i( -(event->x() - last_x_), -(event->y() - last_y_)));
@@ -364,6 +395,29 @@ void composition_view_t::move_nodes_drag_handler( QMouseEvent *event)
     }
 
     update();
+}
+
+void composition_view_t::center_selected_nodes()
+{
+	Imath::Box2f box;
+
+	box = nodes_bounding_box();
+	viewport_.scroll_to_center_point( box.center());
+}
+
+void composition_view_t::frame_selected_nodes()
+{
+	Imath::Box2f box;
+	float edge_offset = 10.0; // keep nodes offset 5 pixels from edges
+
+	box = nodes_bounding_box();
+	viewport_.scroll_to_center_point( box.center());
+	float xzf = ( ( viewport().world().max.x - viewport().world().min.x)
+					/ ( box.max.x - box.min.x + edge_offset)); 
+	float yzf = ( ( viewport().world().max.y - viewport().world().min.y)
+					/ ( box.max.y - box.min.y + edge_offset)); 
+	float zf = ( ( xzf < yzf) ? xzf : yzf);
+	viewport().zoom( viewport().world().center(), ( 1.0/zf));
 }
 
 void composition_view_t::connect_drag_handler( QMouseEvent *event) { update();}
@@ -634,6 +688,26 @@ void composition_view_t::contextMenuEvent( QContextMenuEvent *event) { event->ac
 void composition_view_t::delete_selected_nodes()
 {
 	app().ui()->main_window()->delete_nodes();
+}
+
+Imath::Box2f composition_view_t::nodes_bounding_box()
+{
+	Imath::Box2f box;
+	float min_x, min_y, max_x, max_y;
+
+    for( composition_t::node_iterator it( app().document().composition().nodes().begin());
+		    it != app().document().composition().nodes().end(); ++it)
+    {
+        if( it->selected() || !app().document().composition().any_selected())
+		{
+			min_x = it->location()[0];
+			min_y = it->location()[1];
+			max_x = it->location()[0] + generic_node_width(&(*it));
+			max_y = it->location()[1] + generic_node_height();
+			box.extendBy(Imath::Box2f( Imath::V2f( min_x, min_y), Imath::V2f( max_x, max_y)));
+		}
+    }
+	return box;
 }
 
 } // namespace
