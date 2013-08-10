@@ -109,6 +109,8 @@ protected:
     virtual void mousePressEvent( QMouseEvent *event);
     virtual void mouseReleaseEvent( QMouseEvent *event);
 
+    virtual void wheelEvent( QWheelEvent *event);
+
 private:
 
     typedef boost::ptr_vector<viewer_strategy_t>::reverse_iterator strategy_iterator;
